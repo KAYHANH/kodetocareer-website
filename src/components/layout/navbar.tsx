@@ -4,28 +4,35 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { Menu, X, ChevronDown, ChevronRight, ArrowRight, BookOpen } from "lucide-react";
 
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Courses", href: "/courses" },
-  { label: "Placements", href: "https://devsunite.com/jobs" },
-  { label: "Career Services", href: "/career-services" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
-] as const;
+interface NavLink {
+  label: string;
+  href: string;
+  id: string;
+  hasDropdown?: boolean;
+}
+
+const NAV_LINKS: NavLink[] = [
+  { label: "Home", href: "/", id: "home" },
+  { label: "About", href: "/about", id: "about" },
+  { label: "Courses", href: "/courses", id: "courses", hasDropdown: true },
+  { label: "Placements", href: "https://devsunite.com/jobs", id: "placements" },
+  { label: "Career Solutions", href: "/career-services", id: "career-services", hasDropdown: true },
+  { label: "Blog", href: "/blog", id: "blog" },
+  { label: "Contact", href: "/contact", id: "contact" },
+];
 
 /* ───── overlay backdrop variants ───── */
-const overlayVariants = {
+const overlayVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
   exit: { opacity: 0 },
 };
 
 /* ───── drawer slide-in variants ───── */
-const drawerVariants = {
+const drawerVariants: Variants = {
   hidden: { x: "100%" },
   visible: {
     x: 0,
@@ -38,13 +45,14 @@ const drawerVariants = {
 };
 
 /* ───── stagger container for mobile links ───── */
-const linkListVariants = {
+const linkListVariants: Variants = {
+  hidden: {},
   visible: {
     transition: { staggerChildren: 0.04, delayChildren: 0.15 },
   },
 };
 
-const linkItemVariants = {
+const linkItemVariants: Variants = {
   hidden: { opacity: 0, x: 24 },
   visible: {
     opacity: 1,
@@ -57,6 +65,14 @@ export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  
+  // Track separate hover states for desktop dropdowns
+  const [coursesHovered, setCoursesHovered] = useState(false);
+  const [solutionsHovered, setSolutionsHovered] = useState(false);
+
+  // Track separate collapsible states for mobile drawer
+  const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
 
   /* ── scroll listener ── */
   const handleScroll = useCallback(() => {
@@ -111,24 +127,217 @@ export default function Navbar() {
           </Link>
 
           {/* ── Desktop Links ── */}
-          <ul className="hidden items-center gap-1 lg:flex">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={`relative rounded-[10px] px-3 py-2 text-sm font-medium transition-colors ${
-                    isActive(href)
-                      ? "text-primary font-bold"
-                      : "text-text-secondary hover:text-slate-900"
-                  }`}
+          <ul className="hidden items-center gap-1 lg:flex h-full">
+            {NAV_LINKS.map(({ label, href, id, hasDropdown }) => {
+              const isCourses = id === "courses";
+              const isSolutions = id === "career-services";
+              const currentHoverState = isCourses ? coursesHovered : isSolutions ? solutionsHovered : false;
+              const setHoverState = isCourses ? setCoursesHovered : isSolutions ? setSolutionsHovered : () => {};
+
+              return (
+                <li
+                  key={href}
+                  className="relative flex items-center h-full"
+                  onMouseEnter={hasDropdown ? () => setHoverState(true) : undefined}
+                  onMouseLeave={hasDropdown ? () => setHoverState(false) : undefined}
                 >
-                  {label}
-                  {isActive(href) && (
-                    <span className="absolute inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
+                  {hasDropdown ? (
+                    <div className="py-5">
+                      <button
+                        className={`relative rounded-[10px] px-3 py-2 text-sm font-medium transition-colors flex items-center gap-1 cursor-pointer outline-none ${
+                          isActive(href)
+                            ? "text-primary font-bold"
+                            : "text-text-secondary hover:text-slate-900"
+                        }`}
+                      >
+                        {label}
+                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${currentHoverState ? "rotate-180" : ""}`} />
+                        {isActive(href) && (
+                          <span className="absolute inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    <Link
+                      href={href}
+                      className={`relative rounded-[10px] px-3 py-2 text-sm font-medium transition-colors ${
+                        isActive(href)
+                          ? "text-primary font-bold"
+                          : "text-text-secondary hover:text-slate-900"
+                      }`}
+                    >
+                      {label}
+                      {isActive(href) && (
+                        <span className="absolute inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
+                      )}
+                    </Link>
                   )}
-                </Link>
-              </li>
-            ))}
+
+                  {/* ── 1. Mega Dropdown: Courses ── */}
+                  {hasDropdown && isCourses && (
+                    <AnimatePresence>
+                      {coursesHovered && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                          className="absolute top-[80%] left-0 mt-1 w-[720px] rounded-2xl border border-slate-150 bg-white p-6 shadow-2xl z-50 text-slate-800 text-left pointer-events-auto"
+                        >
+                          <div className="grid grid-cols-4 gap-6">
+                            {/* Column 1: Tech & Dev */}
+                            <div className="space-y-3">
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Software Engineering</h4>
+                              <div className="space-y-2">
+                                <Link href="/courses/1" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">MERN Stack</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months + AI integration</span>
+                                </Link>
+                                <Link href="/courses/5" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Java Full Stack</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Live Classes</span>
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* Column 2: Data & AI */}
+                            <div className="space-y-3">
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Data & AI</h4>
+                              <div className="space-y-2">
+                                <Link href="/courses/2" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Science & ML</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months Live Training</span>
+                                </Link>
+                                <Link href="/courses/4" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Analytics</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months BI Tools</span>
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* Column 3: Cloud & Cybersecurity */}
+                            <div className="space-y-3">
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud & Security</h4>
+                              <div className="space-y-2">
+                                <Link href="/courses/6" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cloud & DevOps</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Infrastructure</span>
+                                </Link>
+                                <Link href="/courses/7" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cyber Security</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Ethical Hacking</span>
+                                </Link>
+                              </div>
+                            </div>
+
+                            {/* Column 4: Design & Marketing */}
+                            <div className="space-y-3">
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Creative & Growth</h4>
+                              <div className="space-y-2">
+                                <Link href="/courses/3" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">UI/UX Product Design</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Design System</span>
+                                </Link>
+                                <Link href="/courses/8" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Digital Marketing</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">3 Months Growth Hacking</span>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="border-t border-slate-100 mt-6 pt-4 flex items-center justify-between bg-slate-50/50 -mx-6 -mb-6 p-4 rounded-b-2xl">
+                            <span className="text-[10px] text-slate-450 font-bold">Ready to check all programs?</span>
+                            <Link
+                              href="/courses"
+                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5"
+                              onClick={() => setCoursesHovered(false)}
+                            >
+                              Explore All 9 Courses <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+
+                  {/* ── 2. Mega Dropdown: Career Solutions ── */}
+                  {hasDropdown && isSolutions && (
+                    <AnimatePresence>
+                      {solutionsHovered && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                          className="absolute top-[80%] left-1/2 -translate-x-1/2 mt-1 w-[580px] rounded-2xl border border-slate-150 bg-white p-6 shadow-2xl z-50 text-slate-800 text-left pointer-events-auto"
+                        >
+                          <div className="grid grid-cols-2 gap-6">
+                            <div className="space-y-4">
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Career Growth</h4>
+                              <Link
+                                href="/career-services/placements"
+                                className="group/item flex gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+                                onClick={() => setSolutionsHovered(false)}
+                              >
+                                <span className="text-xl">🚀</span>
+                                <div>
+                                  <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
+                                    Placement Outcomes <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                                  </h5>
+                                  <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
+                                    Resume audits, mock interviews, and direct hiring partner referrals.
+                                  </p>
+                                </div>
+                              </Link>
+                              <div className="pl-9 space-y-1.5">
+                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 📄 Resume & ATS Review</Link>
+                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 🎤 Mock Interviews</Link>
+                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 🤝 Mentorship Support</Link>
+                              </div>
+                            </div>
+
+                            <div className="space-y-4">
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Academics</h4>
+                              <Link
+                                href="/career-services/admissions"
+                                className="group/item flex gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+                                onClick={() => setSolutionsHovered(false)}
+                              >
+                                <span className="text-xl">🎓</span>
+                                <div>
+                                  <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
+                                    College Admissions <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                                  </h5>
+                                  <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
+                                    Accredited Regular, Online, and Distance degrees from top universities.
+                                  </p>
+                                </div>
+                              </Link>
+                              <div className="pl-9 space-y-1.5">
+                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 💼 Career Counselling</Link>
+                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 🏫 UGC Approved Programs</Link>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="border-t border-slate-100 mt-6 pt-4 flex items-center justify-between bg-slate-50/50 -mx-6 -mb-6 p-4 rounded-b-2xl">
+                            <span className="text-[10px] text-slate-450 font-bold">Confused about your path?</span>
+                            <Link
+                              href="/contact"
+                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5"
+                              onClick={() => setSolutionsHovered(false)}
+                            >
+                              Book counselling session <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           {/* ── Desktop CTA Buttons ── */}
@@ -215,21 +424,65 @@ export default function Navbar() {
                 initial="hidden"
                 animate="visible"
               >
-                {NAV_LINKS.map(({ label, href }) => (
-                  <motion.li key={href} variants={linkItemVariants}>
-                    <Link
-                      href={href}
-                      onClick={() => setMobileOpen(false)}
-                      className={`flex rounded-[10px] px-4 py-3 text-base font-medium transition-colors ${
-                        isActive(href)
-                          ? "bg-black/[0.04] text-primary"
-                          : "text-text-secondary hover:bg-black/[0.02] hover:text-slate-900"
-                      }`}
-                    >
-                      {label}
-                    </Link>
-                  </motion.li>
-                ))}
+                {NAV_LINKS.map(({ label, href, id, hasDropdown }) => {
+                  const isCourses = id === "courses";
+                  const isSolutions = id === "career-services";
+                  const currentMobileOpen = isCourses ? mobileCoursesOpen : isSolutions ? mobileSolutionsOpen : false;
+                  const setMobileOpenState = isCourses ? setMobileCoursesOpen : isSolutions ? setMobileSolutionsOpen : () => {};
+
+                  return (
+                    <motion.li key={href} variants={linkItemVariants} className="space-y-1">
+                      {hasDropdown ? (
+                        <>
+                          <button
+                            onClick={() => setMobileOpenState(!currentMobileOpen)}
+                            className="flex w-full items-center justify-between rounded-[10px] px-4 py-3 text-base font-medium transition-colors text-text-secondary hover:bg-black/[0.02] hover:text-slate-900 outline-none"
+                          >
+                            <span>{label}</span>
+                            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${currentMobileOpen ? "rotate-180" : ""}`} />
+                          </button>
+                          <AnimatePresence>
+                            {currentMobileOpen && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="pl-6 space-y-1 overflow-hidden"
+                              >
+                                {isCourses ? (
+                                  <>
+                                    <Link href="/courses/1" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">🚀 MERN Stack + AI</Link>
+                                    <Link href="/courses/2" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">📊 Data Science & ML</Link>
+                                    <Link href="/courses/5" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">☕ Java Full Stack</Link>
+                                    <Link href="/courses" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-primary hover:underline">Explore All Courses →</Link>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Link href="/career-services/placements" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">🚀 Placement Outcomes</Link>
+                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">🎓 College Admissions</Link>
+                                    <Link href="/contact" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">💼 Career Counselling</Link>
+                                  </>
+                                )}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </>
+                      ) : (
+                        <Link
+                          href={href}
+                          onClick={() => setMobileOpen(false)}
+                          className={`flex rounded-[10px] px-4 py-3 text-base font-medium transition-colors ${
+                            isActive(href)
+                              ? "bg-black/[0.04] text-primary"
+                              : "text-text-secondary hover:bg-black/[0.02] hover:text-slate-900"
+                          }`}
+                        >
+                          {label}
+                        </Link>
+                      )}
+                    </motion.li>
+                  );
+                })}
               </motion.ul>
 
               {/* Drawer Footer */}
