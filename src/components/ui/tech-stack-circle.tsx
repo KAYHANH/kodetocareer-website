@@ -277,7 +277,7 @@ export default function TechStackCircle() {
           transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`,
           transition: "transform 0.15s ease-out",
         }}
-        className="scale-[0.55] sm:scale-[0.72] md:scale-[0.8] lg:scale-[0.85] xl:scale-95 transition-transform duration-500 origin-center flex items-center justify-center relative w-[680px] h-[680px]"
+        className="scale-[0.45] sm:scale-[0.6] md:scale-[0.7] lg:scale-[0.65] xl:scale-[0.8] 2xl:scale-95 transition-transform duration-500 origin-center flex items-center justify-center relative w-[680px] h-[680px]"
       >
         {/* Ring 4: Soft blurred outer glow */}
         <div className="absolute w-[700px] h-[700px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" />
