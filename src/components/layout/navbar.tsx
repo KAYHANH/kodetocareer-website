@@ -191,11 +191,15 @@ export default function Navbar() {
                               <div className="space-y-2">
                                 <Link href="/courses/1" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">MERN Stack</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months + AI integration</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months + AI Integration</span>
                                 </Link>
                                 <Link href="/courses/5" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Java Full Stack</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Live Classes</span>
+                                </Link>
+                                <Link href="/courses/8" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Python & Automation</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Scripting</span>
                                 </Link>
                               </div>
                             </div>
@@ -215,22 +219,18 @@ export default function Navbar() {
                               </div>
                             </div>
 
-                            {/* Column 3: Cloud & Cybersecurity */}
+                            {/* Column 3: Cloud & Security */}
                             <div className="space-y-3">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud & Security</h4>
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud Infrastructure</h4>
                               <div className="space-y-2">
                                 <Link href="/courses/6" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cloud & DevOps</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Infrastructure</span>
-                                </Link>
-                                <Link href="/courses/7" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cyber Security</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Ethical Hacking</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months DevOps/CI/CD</span>
                                 </Link>
                               </div>
                             </div>
 
-                            {/* Column 4: Design & Marketing */}
+                            {/* Column 4: Creative & Growth */}
                             <div className="space-y-3">
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Creative & Growth</h4>
                               <div className="space-y-2">
@@ -238,9 +238,13 @@ export default function Navbar() {
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">UI/UX Product Design</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Design System</span>
                                 </Link>
-                                <Link href="/courses/8" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/7" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Digital Marketing</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">3 Months Growth Hacking</span>
+                                </Link>
+                                <Link href="/courses/9" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Graphic & Video Editing</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Live Studio</span>
                                 </Link>
                               </div>
                             </div>
