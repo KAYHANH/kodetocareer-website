@@ -38,7 +38,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pt-24 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
       {/* Background Mesh */}
       <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-100/30 blur-[130px] pointer-events-none" />

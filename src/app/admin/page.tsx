@@ -28,7 +28,7 @@ export default function AdminDashboard() {
   const filteredLeads = LEADS.filter(l => leadFilter === 'All' || l.status === leadFilter);
 
   return (
-    <div className="min-h-screen bg-background pt-24 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-background pt-10 pb-20 relative overflow-hidden">
       {/* Background Orbs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />

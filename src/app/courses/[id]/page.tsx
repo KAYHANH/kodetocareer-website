@@ -332,7 +332,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pt-24 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
       {/* Background orbs */}
       <div className="absolute top-[10%] left-[-150px] w-[600px] h-[600px] rounded-full bg-blue-100/30 blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-150px] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-[130px] pointer-events-none" />

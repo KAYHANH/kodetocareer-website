@@ -3,7 +3,7 @@ import { Handshake, Building2, Users } from 'lucide-react';
 
 export default function PartnersPage() {
   return (
-    <div className="min-h-screen bg-background pt-24 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-background pt-10 pb-24 relative overflow-hidden">
       <div className="max-w-[800px] mx-auto px-6 relative z-10 text-center">
         <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6 border border-white/[0.04]">
           <Handshake className="w-8 h-8" />

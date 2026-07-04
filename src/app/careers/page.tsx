@@ -11,7 +11,7 @@ const JOBS = [
 
 export default function CareersPage() {
   return (
-    <div className="min-h-screen bg-background pt-24 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-background pt-10 pb-24 relative overflow-hidden">
       {/* Background Orbs */}
       <div className="absolute top-[10%] left-[-150px] w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
 
