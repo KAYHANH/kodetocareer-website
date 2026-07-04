@@ -49,6 +49,7 @@ interface Course {
   mentor: string;
   tools: string[];
   image: string;
+  bannerImage: string;
 }
 
 const COURSES: Course[] = [
@@ -76,7 +77,8 @@ const COURSES: Course[] = [
     liveClasses: "Daily Live",
     mentor: "Google & Meta Alumni",
     tools: ["React.svg", "Next.js.svg", "Node.js.svg", "Express.svg", "MongoDB.svg", "Git.svg"],
-    image: "from-blue-600 to-indigo-700"
+    image: "from-blue-600 to-indigo-700",
+    bannerImage: "/banners/mern.png"
   },
   {
     id: 2,
@@ -102,7 +104,8 @@ const COURSES: Course[] = [
     liveClasses: "Live Cohorts",
     mentor: "Data Architects",
     tools: ["Python.svg", "TensorFlow.svg", "PyTorch.svg", "PostgresSQL.svg", "Docker.svg", "Git.svg"],
-    image: "from-purple-600 to-pink-700"
+    image: "from-purple-600 to-pink-700",
+    bannerImage: "/banners/datascience.png"
   },
   {
     id: 3,
@@ -128,7 +131,8 @@ const COURSES: Course[] = [
     liveClasses: "Live Studio",
     mentor: "Senior Product Designers",
     tools: ["Figma.svg", "Photoshop.svg", "Sketch.svg", "Tailwind-CSS.svg", "Git.svg"],
-    image: "from-pink-600 to-rose-600"
+    image: "from-pink-600 to-rose-600",
+    bannerImage: "/banners/design.png"
   },
   {
     id: 4,
@@ -154,7 +158,8 @@ const COURSES: Course[] = [
     liveClasses: "Daily Live",
     mentor: "Business Analysts",
     tools: ["Python.svg", "PostgresSQL.svg", "Docker.svg", "Git.svg"],
-    image: "from-emerald-600 to-teal-700"
+    image: "from-emerald-600 to-teal-700",
+    bannerImage: "/banners/analytics.png"
   },
   {
     id: 5,
@@ -180,7 +185,8 @@ const COURSES: Course[] = [
     liveClasses: "Cohorts",
     mentor: "Spring Developers",
     tools: ["Java.svg", "Spring.svg", "React.svg", "Docker.svg", "Git.svg"],
-    image: "from-orange-600 to-red-700"
+    image: "from-orange-600 to-red-700",
+    bannerImage: "/banners/java.png"
   },
   {
     id: 6,
@@ -206,7 +212,8 @@ const COURSES: Course[] = [
     liveClasses: "Daily Cohorts",
     mentor: "SRE Engineers",
     tools: ["AWS.svg", "Docker.svg", "Git.svg"],
-    image: "from-sky-600 to-blue-700"
+    image: "from-sky-600 to-blue-700",
+    bannerImage: "/banners/cloud.png"
   },
   {
     id: 7,
@@ -232,7 +239,8 @@ const COURSES: Course[] = [
     liveClasses: "Live Sprints",
     mentor: "Growth Hackers",
     tools: ["Git.svg"],
-    image: "from-green-600 to-emerald-700"
+    image: "from-green-600 to-emerald-700",
+    bannerImage: "/banners/marketing.png"
   },
   {
     id: 8,
@@ -258,7 +266,8 @@ const COURSES: Course[] = [
     liveClasses: "Live Cohorts",
     mentor: "Python Devs",
     tools: ["Python.svg", "Django.svg", "Git.svg"],
-    image: "from-blue-600 to-teal-700"
+    image: "from-blue-600 to-teal-700",
+    bannerImage: "/banners/python.png"
   },
   {
     id: 9,
@@ -284,7 +293,8 @@ const COURSES: Course[] = [
     liveClasses: "Live Studio",
     mentor: "Cinematographers",
     tools: ["Figma.svg", "Photoshop.svg", "Git.svg"],
-    image: "from-orange-600 to-amber-700"
+    image: "from-orange-600 to-amber-700",
+    bannerImage: "/banners/video.png"
   },
   {
     id: 10,
@@ -310,7 +320,8 @@ const COURSES: Course[] = [
     liveClasses: "5 Days/Week",
     mentor: "ML Platform Engineers",
     tools: ["Docker.svg", "Kubernetes.svg", "AWS.svg", "Git.svg"],
-    image: "from-violet-600 to-indigo-700"
+    image: "from-violet-600 to-indigo-700",
+    bannerImage: "/banners/mlops.png"
   }
 ];
 
@@ -572,11 +583,21 @@ export default function CoursesClient() {
                 className="bg-white border border-slate-200 rounded-[28px] shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
               >
                 {/* Image Illustration Cover */}
-                <div className={`h-40 bg-gradient-to-br ${c.image} relative p-6 flex flex-col justify-between`}>
+                <div className="h-40 relative p-6 flex flex-col justify-between overflow-hidden group/banner rounded-t-[28px]">
+                  {/* Background Image Banner with Hover Zoom (1.05x), Transition 300ms */}
+                  <img
+                    src={c.bannerImage}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover/banner:scale-105 group-hover/banner:translate-y-[-2px] pointer-events-none"
+                  />
+                  {/* Subtle dark overlay for text contrast */}
+                  <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                  {/* Soft lighting glow on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover/banner:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-white/10 to-transparent pointer-events-none mix-blend-screen" />
+
                   <span className="absolute top-4 right-4 bg-white/95 backdrop-blur-[4px] border border-white/20 text-[9px] font-black uppercase text-slate-800 px-3 py-1 rounded-full tracking-wider shadow-sm z-10">
                     {c.badge}
                   </span>
-                  <div className="absolute inset-0 bg-black/15 pointer-events-none" />
                   
                   <div className="z-10">
                     <span className="text-[9px] font-black text-white/90 uppercase tracking-widest block">{c.category}</span>
