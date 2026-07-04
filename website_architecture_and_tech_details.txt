@@ -1,0 +1,143 @@
+================================================================================
+KODE TO CAREER — TECHNICAL ARCHITECTURE & WEBSITE DOCUMENTATION
+================================================================================
+Generated: July 2, 2026
+OS Platform: Windows
+Development Path: C:/kodetocareer
+================================================================================
+
+1. CORE SYSTEM ARCHITECTURE & BRAND GUIDELINES
+--------------------------------------------------------------------------------
+* Mission Statement: Empowering the next generation of tech professionals with 
+  industry-ready skills, global opportunities, and AI-driven career guidance.
+* Theme System: Premium SaaS aesthetics using light themes (Slate-50 bases), mesh 
+  gradients, large typography, Bento grids, and high-density content.
+* Main Brand Branding Colors: Royal blue and white (Kode To Career branding).
+* Layout Structure: Globally sticky Navbar header (z-50, glass blur transition 
+  on scroll) and dynamic directory Footer (social nodes, map grid, accreditations).
+* Global Floating CTA: Active WhatsApp direct trigger and booking audit options
+  present across all pages.
+
+2. TECH STACK & DEPENDENCY DIRECTORY
+--------------------------------------------------------------------------------
+The project is built on Next.js 16 (App Router) using React 19 and Tailwind CSS v4.
+
+* CORE FRAMEWORK:
+  - Next.js (version 16.2.9) - Server-Side Rendering (SSR) & Dynamic App Router.
+  - React / React DOM (version 19.2.4).
+  - TypeScript (version 5) - Strict type auditing.
+
+* CSS & UTILITY LIBRARIES:
+  - Tailwind CSS (version 4) - Style classes.
+  - @tailwindcss/postcss - PostCSS integrations.
+  - clsx & tailwind-merge - Dynamic conditional styling utilities.
+
+* VISUAL & ANIMATION LIBRARIES:
+  - framer-motion (version 12.42.2) - Bento transitions, scroll reveals, scale.
+  - gsap (version 3.15.0) - Micro-interactions and scrolling animations.
+  - lucide-react (version 1.22.0) - High-resolution vectors and social icons.
+  - embla-carousel-react & embla-carousel-autoplay (version 8.6.0) - testimonial 
+    scroll snaps and marquees.
+  - recharts (version 3.9.1) - SVG graphs, sales charts, and lead trackers.
+
+* FORM MANAGEMENT & DATA VALIDATION:
+  - react-hook-form (version 7.80.0).
+  - zod (version 4.4.3).
+  - @hookform/resolvers (version 5.4.0) - Form schema verification.
+
+3. FRONTEND ARCHITECTURE — PAGE-BY-PAGE DIRECTORY
+--------------------------------------------------------------------------------
+All client views reside under `src/app/`:
+
+* HOMEPAGE (/)
+  - File: `src/app/page.tsx`
+  - Core Sections (15 custom components):
+    1. Hero: Small animated AI badge, rotating typing header (MERN, Python, UI/UX,
+       AI), stats counter (Students, Placements, Rating, Partners).
+    2. Technology Stack Circle: Rotating orbit SVG displaying 16+ tech logos with
+       custom tooltips (salary ranges, projects built, durations).
+    3. Trusted By: Scrolling infinite marquee of global recruiters.
+    4. Technology Stack Grid: Categorized grid breakdown (Frontend, Backend, etc.).
+    5. Why Choose Us: Bento cards featuring live code console mockups.
+    6. Featured Programs: Quick course catalog cards.
+    7. Live Projects Browser: Interactive frame containing screenshots of student 
+       apps (Bip Health AI bot, Menonton movie list, LUU Checkout form).
+    8. Career Journey Roadmap: 5-step numbered connection timeline.
+    9. Success Stories: Carousel of graduates (names, targets, salaries, reviews).
+    10. Upcoming Workshops: Seat countdown metrics and interactive booking trigger.
+    11. Free Learning Resources: Ebook magnets with email modal downloads.
+    12. Founder Bio: Story of the ex-Google founder.
+    13. Live Pulsing Ticker: Real-time counter of active students.
+    14. Navigation Header.
+    15. Footer.
+
+* ABOUT US PAGE (/about)
+  - File: `src/app/about/page.tsx`
+  - Structure: Premium storytelling hero, 5 count-up stats, interactive year-by-year 
+    timeline tabs, values grid, ex-Google leadership profiles, campus galleries, 
+    and accreditation logs (ISO, Skill India, NSDC, MSME).
+
+* COURSES SEARCH DIRECTORY (/courses)
+  - File: `src/app/courses/page.tsx`
+  - Structure: Search Hero input, filter buttons (All, Data, Cloud, Software), 
+    detailed course cards (salaries, reviews, duration, difficulty), week-by-week 
+    curriculum roadmaps, outcome analytics, student project details, and FAQs.
+
+* DYNAMIC COURSE DETAIL PAGE (/courses/[id])
+  - File: `src/app/courses/[id]/page.tsx`
+  - Structure: Back navigation link, category badges, dynamic descriptions, specs 
+    grid, interactive upfront fee checkout cards, and modular registration forms.
+
+* CAREER SERVICES PAGE (/career-services)
+  - File: `src/app/career-services/page.tsx`
+  - Structure: ATS Resume Optimizer widget (interactive slider comparing 42% 
+    unoptimized resume with 98% passed template), active candidates CRM mockup, 
+    6-step stepper (Training, Projects, Internship, Resume, Interview, Offer), 
+    mock interview details, and mentor grids.
+
+* BLOG PUBLICATION (/blog)
+  - File: `src/app/blog/page.tsx`
+  - Structure: Dominant featured cover post, filterable tabs categories, popular 
+    tags list sidebar, author profile cards, and newsletter form.
+
+* CONTACT & SCHEDULER (/contact)
+  - File: `src/app/contact/page.tsx`
+  - Structure: Instant action cards (WhatsApp, Call, Mail, Campus Map), working 
+    hours desk, counsellor profiles, and a callback scheduling calendar.
+
+* ADMIN CONSOLE (/admin)
+  - File: `src/app/admin/page.tsx`
+  - Structure: Lead pipeline hot/warm/cold filtration, revenue counters, 
+    analytics graphs, and student management nodes.
+
+* ADDITIONAL UTILITY ROUTES:
+  - `/login` & `/signup` - Portal authentication.
+  - `/privacy`, `/terms`, `/cookies` - Legal agreements.
+  - `/careers`, `/partners`, `/placements`, `/start`.
+
+4. BACKEND ARCHITECTURE — API ENDPOINTS & LOGIC
+--------------------------------------------------------------------------------
+The backend is powered by Next.js Server Actions and Route Handlers:
+
+* LEAD CAPTURE ENDPOINT (`/api/enroll`):
+  - File: `src/app/api/enroll/route.ts`
+  - Logic: 
+    1. Receives data (name, phone, qualification, status, year, courseTitle).
+    2. Validates fields (checks if any required value is missing).
+    3. Backup: Reads and appends data to a local `enrollments.json` file.
+    4. Integration: Checks for `GOOGLE_SHEET_WEBAPP_URL` inside server variables.
+    5. Apps Script Integration: Forwards enrollment payloads directly via HTTP 
+       POST to Google Sheets for live sheet storage.
+    6. Returns JSON: `{ success: true }` or status 400/500 errors.
+
+5. REDIRECTS, STATES & NAVIGATION WORKFLOWS
+--------------------------------------------------------------------------------
+* Sticky Header: Transition state checks window scroll Y-axis. Opens overlay 
+  mobile drawer on mobile clicks.
+* Dynamic Deep Links: Explore links point to `/courses/[id]`.
+* Enrollment Trigger: Clicking "Enroll In Program" launches a modal overlay. 
+  Successful registration invokes the `/api/enroll` route and triggers the 
+  modal success screen, showing callback dates.
+* Search Filters: Query typing immediately filters course/blog arrays.
+* Contact Scheduler: Date tabs and time grid select slot callback states.
+================================================================================
