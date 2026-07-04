@@ -200,6 +200,30 @@ const COURSES = [
       'Week 11-16: Visual Effects & Motion Graphics: Build kinetic titles, intro templates, green screen keying, color grading, and rendering.'
     ],
     hiringCompanies: ['YouTube Studios', 'Netflix Vendors', 'Social Media Brands', 'Advertising Agencies']
+  },
+  {
+    id: 10,
+    title: 'Industry-Ready MLOps & AI Systems Engineering',
+    category: 'Cloud',
+    duration: '28 Weeks (6-7 Months)',
+    projects: '20+ Production Labs & 4 Capstones',
+    priceUpfront: '₹12,000',
+    pricePlaced: '₹8,000',
+    level: 'Advanced (Coding Prerequisite)',
+    tagline: 'Master Docker, Kubernetes, AWS, GitOps pipelines, and GPU infrastructure optimization to engineer production-ready AI systems.',
+    desc: 'Go beyond training models. Build, deploy, optimize, monitor, and scale enterprise AI systems and LLM inference clusters in production.',
+    skills: ['Docker', 'Kubernetes', 'AWS/EKS', 'CI/CD', 'vLLM', 'Triton Serving', 'LLMOps', 'GPU Infrastructure', 'Prometheus', 'Grafana'],
+    modules: [
+      'Module 0-1: Foundations & Python for AI (Week 1-3): ML/DL lifecycle, CRISP-DM, manual model deployments, API skeletons, OOP, and YAML/JSON packaging.',
+      'Module 2-3: Linux, Git & Software Engineering (Week 4-5): Bash scripting, systemd service management, NVIDIA drivers/toolkit, git branching, pre-commit, and uv/poetry packaging.',
+      'Module 4-5: ML & DL Fundamentals (Week 6-12): Data cleaning, regression/classification with Scikit-learn/XGBoost, neural networks, PyTorch/TensorFlow, Transformers, and transfer learning.',
+      'Module 6-7: Docker & Kubernetes for ML (Week 13-18): GPU containers, multi-stage builds, Kubernetes architecture, deployments, storage, autoscaling, Helm, and NVIDIA GPU operators.',
+      'Module 8-10: Cloud, CI/CD & ML Pipelines (Week 19-23): AWS/EKS/ECR/S3, GitHub Actions, Jenkins/ArgoCD, GitOps, model pipelines (MLflow, Kubeflow, Airflow, DVC).',
+      'Module 11-13: Data Engineering, Model Serving & LLMOps (Week 24-29): Kafka, Redis, feature stores, FastAPI, Triton Inference Server, Ray Serve, vLLM/Ollama, Qdrant/ChromaDB vector RAG system.',
+      'Module 14-17: GPU Infra, Optimization, Observability & Security (Week 30-33): Tensor/Pipeline Parallelism, paged attention, DCGM monitoring, AWQ/GPTQ quantization, TensorRT-LLM, OpenTelemetry, drift, evidently AI, RBAC, Vault.',
+      'Module 18-20 & Capstone: Troubleshooting, System Design & Career Prep (Week 34-36): CUDA OOM/pod crashes, ChatGPT/Netflix/Uber system designs, resume/LinkedIn portfolios, and 4 Weeks Capstone Projects (Fraud Detection, Enterprise LLM Cluster, Production RAG).'
+    ],
+    hiringCompanies: ['Stripe', 'Google', 'Meta', 'Microsoft', 'NVIDIA']
   }
 ];
 

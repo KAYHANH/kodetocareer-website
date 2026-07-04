@@ -219,13 +219,17 @@ export default function Navbar() {
                               </div>
                             </div>
 
-                            {/* Column 3: Cloud & Security */}
+                            {/* Column 3: Cloud & MLOps */}
                             <div className="space-y-3">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud Infrastructure</h4>
+                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud & MLOps</h4>
                               <div className="space-y-2">
                                 <Link href="/courses/6" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cloud & DevOps</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months DevOps/CI/CD</span>
+                                </Link>
+                                <Link href="/courses/10" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Industry MLOps</span>
+                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">28 Weeks AI Platforms</span>
                                 </Link>
                               </div>
                             </div>
@@ -457,7 +461,7 @@ export default function Navbar() {
                                   <>
                                     <Link href="/courses/1" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">🚀 MERN Stack + AI</Link>
                                     <Link href="/courses/2" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">📊 Data Science & ML</Link>
-                                    <Link href="/courses/5" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">☕ Java Full Stack</Link>
+                                    <Link href="/courses/10" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">⚙️ Industry MLOps</Link>
                                     <Link href="/courses" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-primary hover:underline">Explore All Courses →</Link>
                                   </>
                                 ) : (

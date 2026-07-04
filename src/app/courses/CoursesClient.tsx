@@ -285,6 +285,32 @@ const COURSES: Course[] = [
     mentor: "Cinematographers",
     tools: ["Figma.svg", "Photoshop.svg", "Git.svg"],
     image: "from-orange-600 to-amber-700"
+  },
+  {
+    id: 10,
+    title: "Industry-Ready MLOps & AI Systems Engineering",
+    category: "Cloud",
+    duration: "28 Weeks (6-7 Months)",
+    projects: "20+ Production Labs & 4 Capstone Options",
+    salary: "₹8.0 - 25 LPA",
+    level: "Advanced (Coding Prerequisite)",
+    rating: 4.9,
+    reviews: 48,
+    internship: "Available (Core Infrastructure Sprints)",
+    placement: "100% Placement Support",
+    skills: ["Docker", "Kubernetes", "AWS/EKS", "CI/CD", "vLLM", "Triton Serving", "LLMOps", "GPU Infrastructure", "Prometheus", "Grafana"],
+    difficulty: "Advanced",
+    tagline: "Master Docker, Kubernetes, AWS, GitOps pipelines, and GPU infrastructure optimization to engineer production-ready AI systems.",
+    desc: "Go beyond training models. Build, deploy, optimize, monitor, and scale enterprise AI systems and LLM inference clusters in production.",
+    color: "from-violet-500/10 to-indigo-500/10 border-violet-100",
+    priceUpfront: "₹12,000",
+    pricePlaced: "₹8,000",
+    oldPrice: "₹35,000",
+    badge: "Advanced Track",
+    liveClasses: "5 Days/Week",
+    mentor: "ML Platform Engineers",
+    tools: ["Docker.svg", "Kubernetes.svg", "AWS.svg", "Git.svg"],
+    image: "from-violet-600 to-indigo-700"
   }
 ];
 
