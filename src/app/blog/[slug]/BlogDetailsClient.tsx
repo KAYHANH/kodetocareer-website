@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { POSTS, BlogPost } from '../posts';
 import SchemaMarkup from '@/components/seo/schema-markup';
+import Image from 'next/image';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -114,8 +115,8 @@ export default function BlogDetailsClient({ params, initialPost }: PageProps) {
           </div>
 
           {/* Featured Cover Image */}
-          <div className="aspect-video w-full rounded-[24px] overflow-hidden bg-slate-100 shadow-sm">
-            <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+          <div className="aspect-video w-full rounded-[24px] overflow-hidden bg-slate-100 shadow-sm relative">
+            <Image src={post.image} alt={post.title} fill className="object-cover" unoptimized />
           </div>
 
           {/* Social Share Box */}

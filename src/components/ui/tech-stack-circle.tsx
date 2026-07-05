@@ -445,7 +445,7 @@ export default function TechStackCircle() {
                             </span>
                             <div>
                               <h4 className="text-sm font-heading font-bold text-slate-900 leading-none">{tech.name}</h4>
-                              <span className="text-[9px] text-accent block font-medium mt-0.5">Learn This Technology</span>
+                              <span className="text-[9px] text-primary block font-medium mt-0.5">Learn This Technology</span>
                             </div>
                           </div>
 

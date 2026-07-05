@@ -1,4 +1,6 @@
 import type { MetadataRoute } from 'next'
+import { getMergedPostsServer } from './blog/posts-loader'
+import { LEARN_HUBS } from './learn/learn-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://kodetocareer.com'
@@ -13,10 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/career-services/placements`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${baseUrl}/tools`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${baseUrl}/placements`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/partners`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
     { url: `${baseUrl}/careers`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${baseUrl}/start`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/cookies`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
@@ -42,5 +42,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...staticRoutes, ...courseRoutes]
+  const blogPosts = getMergedPostsServer()
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  const learnHubRoutes: MetadataRoute.Sitemap = Object.keys(LEARN_HUBS).map((slug) => ({
+    url: `${baseUrl}/learn/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  return [...staticRoutes, ...courseRoutes, ...blogRoutes, ...learnHubRoutes]
 }

@@ -8,24 +8,24 @@ export default function PartnersPage() {
         <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6 border border-white/[0.04]">
           <Handshake className="w-8 h-8" />
         </div>
-        <h1 className="text-4xl font-heading font-bold text-white mb-4">Corporate Partnerships</h1>
-        <p className="text-text-secondary text-lg max-w-xl mx-auto mb-12">
+        <h1 className="text-4xl font-heading font-black text-slate-900 mb-4">Corporate Partnerships</h1>
+        <p className="text-slate-500 text-lg max-w-xl mx-auto mb-12 font-semibold">
           Partner with KodeToCareer to source pre-vetted developer talent, design corporate training cohorts, or sponsor student hackathons.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-2xl mx-auto mb-12">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/[0.08] hover:border-primary/20 transition-all duration-300">
-            <Building2 className="w-6 h-6 text-accent mb-4" />
-            <h3 className="font-heading font-bold text-white mb-2">Talent Acquisition</h3>
-            <p className="text-xs text-text-secondary leading-relaxed">
+          <div className="p-6 rounded-2xl bg-white border border-slate-150 shadow-sm hover:border-primary/20 transition-all duration-300">
+            <Building2 className="w-6 h-6 text-primary mb-4" />
+            <h3 className="font-heading font-bold text-slate-800 mb-2">Talent Acquisition</h3>
+            <p className="text-xs text-slate-550 leading-relaxed font-semibold">
               Access our curated talent pool. Hire graduates trained in full-stack, data science, and AI workflows.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/[0.08] hover:border-primary/20 transition-all duration-300">
+          <div className="p-6 rounded-2xl bg-white border border-slate-150 shadow-sm hover:border-primary/20 transition-all duration-300">
             <Users className="w-6 h-6 text-secondary mb-4" />
-            <h3 className="font-heading font-bold text-white mb-2">Corporate Training</h3>
-            <p className="text-xs text-text-secondary leading-relaxed">
+            <h3 className="font-heading font-bold text-slate-800 mb-2">Corporate Training</h3>
+            <p className="text-xs text-slate-550 leading-relaxed font-semibold">
               Upskill your current workforce with modern, customized engineering and business intelligence tracks.
             </p>
           </div>
