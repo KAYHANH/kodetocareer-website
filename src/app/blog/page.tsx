@@ -56,8 +56,16 @@ export default function BlogPage() {
       }
     };
 
+    // Trigger initial sync after 1s
     const timer = setTimeout(syncLatestNews, 1000);
-    return () => clearTimeout(timer);
+
+    // Set interval to sync every 5 minutes (300,000 ms)
+    const interval = setInterval(syncLatestNews, 300000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
   }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
