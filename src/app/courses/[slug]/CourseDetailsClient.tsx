@@ -940,7 +940,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
           </div>
 
           {/* Right Column (Spans 4) */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-28">
             
             {/* Program Checkout Card */}
             <div className="rounded-[24px] bg-white border border-slate-150 p-8 shadow-sm relative overflow-hidden">

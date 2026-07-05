@@ -134,33 +134,22 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Meet Counselor cards */}
-            <div className="glass-premium border-glow-animate-light p-5 rounded-[24px] shadow-sm space-y-4">
+            {/* Campus Location Map */}
+            <div className="glass-premium border-glow-animate-light p-4 rounded-[24px] shadow-sm space-y-3">
               <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200/50 pb-2">
-                <Users className="w-4 h-4 text-secondary" /> Assigned Admissions Desk
+                <MapPin className="w-4 h-4 text-emerald-600" /> Noida Campus Locator
               </h4>
-              <div className="space-y-3">
-                {COUNSELLORS.map((c, idx) => (
-                  <div key={idx} className="flex items-center justify-between gap-3 bg-white/60 border border-slate-200/50 p-3 rounded-xl backdrop-blur-sm">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-[10px]">
-                        {c.avatar}
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold text-slate-800 leading-none">{c.name}</h5>
-                        <span className="text-[9px] text-slate-400 font-bold block mt-1">{c.role} • {c.exp}</span>
-                      </div>
-                    </div>
-                    <a
-                      href="https://wa.me/919667975616"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex h-8 px-3 items-center justify-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-[10px] font-bold transition-colors cursor-pointer shadow-sm shadow-emerald-500/10 shrink-0"
-                    >
-                      <MessageSquare className="w-3 h-3 fill-white text-emerald-500" /> Chat
-                    </a>
-                  </div>
-                ))}
+              <div className="w-full h-44 rounded-xl overflow-hidden border border-slate-100 relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.5815340620245!2d77.3072242150814!3d28.582329382436853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45f782f9d5b%3A0xa1ea141c2c8f6155!2sSector%2015%2C%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1688583492711!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="KodeToCareer Noida Sector 15 Campus Location"
+                ></iframe>
               </div>
             </div>
           </div>
