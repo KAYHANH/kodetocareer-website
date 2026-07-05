@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import FloatingCta from "@/components/ui/floating-cta";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
+import BackgroundOrbs from "@/components/ui/background-orbs";
 import "./globals.css";
 
 const sora = Sora({
@@ -57,10 +58,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
 
-      <body className="flex min-h-full flex-col bg-background text-text-primary font-body" suppressHydrationWarning>
+      <body className="flex min-h-full flex-col bg-background text-text-primary font-body relative" suppressHydrationWarning>
+        <BackgroundOrbs />
         <GoogleAnalytics />
         <Navbar />
-        <main className="flex-1 pt-20">{children}</main>
+        <main className="flex-1 pt-20 relative z-10">{children}</main>
         <Footer />
         <FloatingCta />
       </body>

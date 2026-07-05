@@ -58,10 +58,10 @@ const headerVariants: Variants = {
 export default function WhyChooseUs() {
   return (
     <section
-      className="bg-gradient-to-b from-[#F8FAFC] to-white py-24 border-y border-slate-100 relative overflow-hidden"
+      className="bg-transparent py-24 border-y border-slate-200/30 relative overflow-hidden"
       aria-labelledby="why-choose-us-heading"
     >
-      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
       <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] rounded-full bg-blue-300/5 blur-[100px] pointer-events-none" />
 
       <div className="mx-auto max-w-[1440px] px-6 relative z-10">
@@ -89,7 +89,7 @@ export default function WhyChooseUs() {
 
         {/* Bento Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -98,8 +98,8 @@ export default function WhyChooseUs() {
           {/* Card 1: Live Industry Projects (Double Column Span) */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] md:col-span-2 flex flex-col justify-between overflow-hidden relative min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light md:col-span-2 flex flex-col justify-between overflow-hidden relative min-h-[320px]"
           >
             <div className="absolute top-6 right-6 w-1/3 h-full hidden sm:block pointer-events-none opacity-90 group-hover:scale-105 transition-transform duration-300">
               {/* Visual Component: Terminal Mockup */}
@@ -140,8 +140,8 @@ export default function WhyChooseUs() {
           {/* Card 2: Top Tier Mentors */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] flex flex-col justify-between min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light flex flex-col justify-between min-h-[320px]"
           >
             <div>
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 border border-indigo-100">
@@ -164,8 +164,8 @@ export default function WhyChooseUs() {
           {/* Card 3: Dedicated Placement Cell */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] flex flex-col justify-between min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light flex flex-col justify-between min-h-[320px]"
           >
             <div>
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 border border-emerald-100">
@@ -188,8 +188,8 @@ export default function WhyChooseUs() {
           {/* Card 4: AI Career Guidance */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] flex flex-col justify-between min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light flex flex-col justify-between min-h-[320px]"
           >
             <div>
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 border border-violet-100">
@@ -211,8 +211,8 @@ export default function WhyChooseUs() {
           {/* Card 5: ATS Resume Builder */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] flex flex-col justify-between min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light flex flex-col justify-between min-h-[320px]"
           >
             <div>
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-50 border border-rose-100">
@@ -241,8 +241,8 @@ export default function WhyChooseUs() {
           {/* Card 6: Unlimited Mock Interviews */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] flex flex-col justify-between min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light flex flex-col justify-between min-h-[320px]"
           >
             <div>
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 border border-amber-100">
@@ -264,8 +264,8 @@ export default function WhyChooseUs() {
           {/* Card 7: Lifetime Support */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] flex flex-col justify-between min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light flex flex-col justify-between min-h-[320px]"
           >
             <div>
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-50 border border-cyan-100">
@@ -287,8 +287,8 @@ export default function WhyChooseUs() {
           {/* Card 8: Verified Credentials */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -5, scale: 1.01 }}
-            className="group rounded-[28px] border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(37,99,235,0.05)] flex flex-col justify-between min-h-[320px]"
+            whileHover={{ y: -6, scale: 1.015 }}
+            className="group rounded-[28px] border border-slate-200/60 bg-white/70 backdrop-blur-md p-8 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_25px_60px_-15px_rgba(37,99,235,0.08)] border-glow-animate-light flex flex-col justify-between min-h-[320px]"
           >
             <div>
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-50 border border-sky-100">

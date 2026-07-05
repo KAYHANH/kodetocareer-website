@@ -38,11 +38,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent text-slate-800 pt-10 pb-24 relative overflow-hidden">
       {/* Background Mesh */}
-      <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-100/30 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[20%] left-0 w-[500px] h-[500px] rounded-full bg-indigo-100/30 blur-[130px] pointer-events-none" />
+      <div className="absolute inset-0 bg-grid opacity-[0.015] pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-6 relative z-10 space-y-20">
 
@@ -72,63 +70,63 @@ export default function ContactPage() {
 
             {/* Quick Cards Stack */}
             <div className="space-y-4">
-              <div className="flex gap-4 items-center bg-white border border-slate-100 p-4 rounded-xl shadow-sm">
+              <div className="flex gap-4 items-center bg-white/70 backdrop-blur-sm border border-slate-200/50 p-4 rounded-xl shadow-sm hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-[9px] text-slate-400 font-bold block uppercase leading-none">Email Address</span>
-                  <a href="mailto:hello@kodetocareer.com" className="text-slate-800 hover:text-primary transition-colors text-xs font-bold mt-1 block">
-                    hello@kodetocareer.com
+                  <a href="mailto:info@kodetocareer.com" className="text-slate-800 hover:text-primary transition-colors text-xs font-bold mt-1 block">
+                    info@kodetocareer.com / kodetocareer@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex gap-4 items-center bg-white border border-slate-100 p-4 rounded-xl shadow-sm">
+              <div className="flex gap-4 items-center bg-white/70 backdrop-blur-sm border border-slate-200/50 p-4 rounded-xl shadow-sm hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300">
                 <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-[9px] text-slate-400 font-bold block uppercase leading-none">Call Admissions</span>
-                  <a href="tel:+919876543210" className="text-slate-800 hover:text-secondary transition-colors text-xs font-bold mt-1 block font-mono">
-                    +91 98765 43210
+                  <a href="tel:+919667975616" className="text-slate-800 hover:text-secondary transition-colors text-xs font-bold mt-1 block font-mono">
+                    +91 96679 75616 / +91 96679 15616
                   </a>
                 </div>
               </div>
 
-              <div className="flex gap-4 items-center bg-white border border-slate-100 p-4 rounded-xl shadow-sm">
+              <div className="flex gap-4 items-center bg-white/70 backdrop-blur-sm border border-slate-200/50 p-4 rounded-xl shadow-sm hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-[9px] text-slate-400 font-bold block uppercase leading-none">WhatsApp Support</span>
-                  <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-slate-800 hover:text-emerald-600 transition-colors text-xs font-bold mt-1 block">
+                  <a href="https://wa.me/919667975616" target="_blank" rel="noopener noreferrer" className="text-slate-800 hover:text-emerald-600 transition-colors text-xs font-bold mt-1 block">
                     Chat with Counselor
                   </a>
                 </div>
               </div>
 
-              <div className="flex gap-4 items-center bg-white border border-slate-100 p-4 rounded-xl shadow-sm">
+              <div className="flex gap-4 items-center bg-white/70 backdrop-blur-sm border border-slate-200/50 p-4 rounded-xl shadow-sm hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-600 shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-[9px] text-slate-400 font-bold block uppercase leading-none">Campus Address</span>
                   <span className="text-slate-800 text-xs font-bold mt-1 block leading-relaxed">
-                    123 Innovation Drive, Block C, Tech Park, Bangalore, India
+                    Sector 15, Noida, UP, India
                   </span>
                 </div>
               </div>
             </div>
 
             {/* Working Hours */}
-            <div className="bg-white border border-slate-150 p-5 rounded-[24px] shadow-sm">
-              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <div className="glass-premium border-glow-animate-light p-5 rounded-[24px] shadow-sm">
+              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-1.5 border-b border-slate-200/50 pb-2">
                 <Clock className="w-4 h-4 text-primary" /> Admissions Desk Hours
               </h4>
               <div className="space-y-2 text-xs font-semibold text-slate-700">
                 {WORKING_HOURS.map((h, idx) => (
-                  <div key={idx} className="flex justify-between border-b border-slate-50 pb-1.5 last:border-0 last:pb-0">
+                  <div key={idx} className="flex justify-between border-b border-slate-100 pb-1.5 last:border-0 last:pb-0">
                     <span className="text-slate-500">{h.days}</span>
                     <span className="font-mono text-slate-800">{h.hours}</span>
                   </div>
@@ -137,13 +135,13 @@ export default function ContactPage() {
             </div>
 
             {/* Meet Counselor cards */}
-            <div className="bg-white border border-slate-150 p-5 rounded-[24px] shadow-sm space-y-4">
-              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <div className="glass-premium border-glow-animate-light p-5 rounded-[24px] shadow-sm space-y-4">
+              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200/50 pb-2">
                 <Users className="w-4 h-4 text-secondary" /> Assigned Admissions Desk
               </h4>
               <div className="space-y-3">
                 {COUNSELLORS.map((c, idx) => (
-                  <div key={idx} className="flex items-center gap-3 bg-slate-50 border border-slate-150 p-3 rounded-xl">
+                  <div key={idx} className="flex items-center gap-3 bg-white/60 border border-slate-200/50 p-3 rounded-xl backdrop-blur-sm">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-[10px]">
                       {c.avatar}
                     </div>
@@ -159,7 +157,7 @@ export default function ContactPage() {
 
           {/* Contact & Calendar Form Right (Spans 7) */}
           <div className="lg:col-span-7">
-            <div className="bg-white border border-slate-150 rounded-[28px] p-6 md:p-8 shadow-sm relative overflow-hidden">
+            <div className="glass-premium border-glow-animate-light rounded-[28px] p-6 md:p-8 shadow-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
               
               <h2 className="text-xl font-heading font-extrabold text-slate-900 mb-2 flex items-center gap-1.5">
@@ -216,7 +214,7 @@ export default function ContactPage() {
                         required
                         value={formState.phone}
                         onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                        placeholder="+91 98765 43210"
+                        placeholder="e.g. +91 96679 75616"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50 focus:bg-white"
                       />
                     </div>

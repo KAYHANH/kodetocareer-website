@@ -23,7 +23,7 @@ export default function LearnHubClient({ params }: PageProps) {
 
   if (!hub) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-slate-800 p-6 text-center">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-transparent text-slate-800 p-6 text-center">
         <h1 className="text-3xl font-heading font-black text-slate-900 mb-4">Hub Not Found</h1>
         <p className="text-slate-500 mb-8 max-w-md">The requested technology learning hub could not be found.</p>
         <Link href="/courses" className="inline-flex h-11 items-center justify-center bg-primary text-white px-6 rounded-xl text-xs font-bold hover:bg-blue-700 transition-colors">
@@ -74,9 +74,9 @@ export default function LearnHubClient({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent text-slate-800 pb-24 relative overflow-hidden">
       {/* Background patterns */}
-      <div className="absolute inset-0 bg-grid opacity-[0.03] pointer-events-none" />
+      <div className="absolute inset-0 bg-grid opacity-[0.015] pointer-events-none" />
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[20%] left-0 w-[600px] h-[600px] rounded-full bg-secondary/5 blur-[120px] pointer-events-none" />
 
@@ -106,7 +106,7 @@ export default function LearnHubClient({ params }: PageProps) {
             </p>
             <div className="flex flex-wrap gap-3">
               {hub.whyLearn.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2 max-w-md bg-white border border-slate-150 p-3 rounded-xl shadow-sm text-xs text-slate-650 font-semibold leading-relaxed">
+                <div key={idx} className="flex items-start gap-2 max-w-md bg-white/70 border border-slate-200/50 p-3 rounded-xl shadow-sm text-xs text-slate-650 font-semibold leading-relaxed backdrop-blur-sm">
                   <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </div>
@@ -115,7 +115,7 @@ export default function LearnHubClient({ params }: PageProps) {
           </div>
 
           {/* Lead Capture Widget (Bento Style) */}
-          <div className="lg:col-span-5 bg-white border border-slate-150 rounded-[32px] p-8 shadow-md relative overflow-hidden flex flex-col justify-between h-full min-h-[350px]">
+          <div className="lg:col-span-5 glass-premium rounded-[32px] border-glow-animate-light p-8 shadow-sm relative overflow-hidden flex flex-col justify-between h-full min-h-[350px]">
             <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
             
             <div className="space-y-4">
@@ -165,7 +165,7 @@ export default function LearnHubClient({ params }: PageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             {/* Tutorials Box (Spans 7) */}
-            <div className="lg:col-span-7 bg-white border border-slate-150 rounded-[32px] p-8 shadow-sm space-y-6">
+            <div className="lg:col-span-7 glass-premium rounded-[32px] border-glow-animate-light p-8 shadow-sm space-y-6">
               <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-primary" /> Curated Tutorials
               </h3>
@@ -198,7 +198,7 @@ export default function LearnHubClient({ params }: PageProps) {
             </div>
 
             {/* Showcase Project Box (Spans 5) */}
-            <div className="lg:col-span-5 bg-white border border-slate-150 rounded-[32px] p-8 shadow-sm space-y-6 flex flex-col justify-between">
+            <div className="lg:col-span-5 glass-premium rounded-[32px] border-glow-animate-light p-8 shadow-sm space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <span className="text-[9px] font-black text-primary bg-primary/5 px-2.5 py-1 rounded border border-primary/10 uppercase tracking-widest inline-block">
                   Practice Project
@@ -231,8 +231,8 @@ export default function LearnHubClient({ params }: PageProps) {
         </section>
 
         {/* ── 3. Google Reviews Embed Section ── */}
-        <section className="bg-white border border-slate-150 rounded-[32px] p-8 shadow-sm space-y-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+        <section className="glass-premium rounded-[32px] border-glow-animate-light p-8 shadow-sm space-y-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200/50">
             <div>
               <h2 className="font-heading font-extrabold text-2xl text-slate-900">Verified Google Reviews</h2>
               <p className="text-xs text-slate-500 font-semibold mt-1">Real reviews and ratings left by alumni from our tech academy.</p>
@@ -250,7 +250,7 @@ export default function LearnHubClient({ params }: PageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {MOCK_REVIEWS.map((rev, rIdx) => (
-              <div key={rIdx} className="bg-slate-50/50 border border-slate-100 p-6 rounded-2xl space-y-4">
+              <div key={rIdx} className="bg-white/50 border border-slate-200/50 p-6 rounded-2xl space-y-4 backdrop-blur-sm">
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary/10 text-primary font-heading font-black text-sm flex items-center justify-center">

@@ -356,15 +356,11 @@ export default function ToolsHub() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pt-12 pb-24 relative overflow-hidden">
-      {/* Decorative Orbs */}
-      <div className="absolute top-[15%] left-[-150px] w-[500px] h-[500px] rounded-full bg-blue-100/35 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-150px] w-[500px] h-[500px] rounded-full bg-indigo-100/35 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+    <div className="min-h-screen bg-transparent text-slate-800 pt-12 pb-24 relative overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Title Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5" /> FREE AI-POWERED CAREER HUB
           </span>
@@ -376,61 +372,77 @@ export default function ToolsHub() {
           </p>
         </div>
 
-        {/* Tabs Switcher */}
-        <div className="flex bg-slate-100 border border-slate-200 p-1.5 rounded-2xl max-w-3xl mx-auto mb-10 shadow-inner overflow-x-auto whitespace-nowrap">
-          <button
-            onClick={() => setActiveTab('salary')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'salary' 
-                ? 'bg-white text-slate-900 shadow-md border border-slate-100' 
-                : 'text-slate-500 hover:text-slate-900'
-            }`}
-          >
-            <Calculator className="w-4 h-4 text-primary" /> Salary Matcher
-          </button>
-          <button
-            onClick={() => setActiveTab('resume')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'resume' 
-                ? 'bg-white text-slate-900 shadow-md border border-slate-100' 
-                : 'text-slate-500 hover:text-slate-900'
-            }`}
-          >
-            <FileText className="w-4 h-4 text-primary" /> ATS Resume Checker
-          </button>
-          <button
-            onClick={() => setActiveTab('roadmap')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'roadmap' 
-                ? 'bg-white text-slate-900 shadow-md border border-slate-100' 
-                : 'text-slate-500 hover:text-slate-900'
-            }`}
-          >
-            <Compass className="w-4 h-4 text-primary" /> AI Roadmap Builder
-          </button>
-          <button
-            onClick={() => setActiveTab('quiz')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'quiz' 
-                ? 'bg-white text-slate-900 shadow-md border border-slate-100' 
-                : 'text-slate-500 hover:text-slate-900'
-            }`}
-          >
-            <HelpCircle className="w-4 h-4 text-primary" /> Career Path Quiz
-          </button>
-        </div>
+        {/* 12-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Column - Sticky Vertical Tabs Selector & Info Panel */}
+          <aside className="lg:col-span-3 flex flex-col gap-6 sticky top-28">
+            <div className="flex flex-col bg-white/70 backdrop-blur-md border border-slate-200/50 p-3 rounded-2xl shadow-sm gap-1.5">
+              <button
+                onClick={() => setActiveTab('salary')}
+                className={`w-full flex items-center gap-3 py-3.5 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === 'salary' 
+                    ? 'bg-primary text-white shadow-lg shadow-primary/25' 
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                <Calculator className="w-4 h-4" /> Salary Matcher
+              </button>
+              <button
+                onClick={() => setActiveTab('resume')}
+                className={`w-full flex items-center gap-3 py-3.5 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === 'resume' 
+                    ? 'bg-primary text-white shadow-lg shadow-primary/25' 
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                <FileText className="w-4 h-4" /> ATS Resume Checker
+              </button>
+              <button
+                onClick={() => setActiveTab('roadmap')}
+                className={`w-full flex items-center gap-3 py-3.5 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === 'roadmap' 
+                    ? 'bg-primary text-white shadow-lg shadow-primary/25' 
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                <Compass className="w-4 h-4" /> AI Roadmap Builder
+              </button>
+              <button
+                onClick={() => setActiveTab('quiz')}
+                className={`w-full flex items-center gap-3 py-3.5 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === 'quiz' 
+                    ? 'bg-primary text-white shadow-lg shadow-primary/25' 
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                <HelpCircle className="w-4 h-4" /> Career Path Quiz
+              </button>
+            </div>
 
-        {/* Tab Contents */}
-        <AnimatePresence mode="wait">
-          {activeTab === 'salary' && (
-            <motion.div
-              key="salary-tab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.25 }}
-              className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
-            >
+            {/* Sidebar quick stat badge */}
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 text-xs font-semibold text-slate-500 space-y-4">
+              <h4 className="font-heading font-bold text-slate-800 text-sm">AI Career Audit Hub</h4>
+              <p className="leading-relaxed font-medium">All tools are 100% free and powered by our micro-cohort data and hiring placement benchmarks.</p>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <span>Instant verified results</span>
+              </div>
+            </div>
+          </aside>
+
+          {/* Right Column - Active Tool Container */}
+          <div className="lg:col-span-9">
+            <AnimatePresence mode="wait">
+              {activeTab === 'salary' && (
+                <motion.div
+                  key="salary-tab"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.25 }}
+                  className="glass-premium border-glow-animate-light p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
+                >
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
               
               <div>
@@ -563,7 +575,7 @@ export default function ToolsHub() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.25 }}
-              className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
+              className="glass-premium border-glow-animate-light p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
 
@@ -700,7 +712,7 @@ export default function ToolsHub() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.25 }}
-              className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
+              className="glass-premium border-glow-animate-light p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
 
@@ -816,7 +828,7 @@ export default function ToolsHub() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.25 }}
-              className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
+              className="glass-premium border-glow-animate-light p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
 
@@ -912,6 +924,9 @@ export default function ToolsHub() {
             </motion.div>
           )}
         </AnimatePresence>
+          </div>
+
+        </div>
 
       </div>
     </div>

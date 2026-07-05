@@ -2,13 +2,13 @@
 
 @theme inline {
   /* ── Colors ── */
-  --color-background: #ffffff;
+  --color-background: #fafbfe;
   --color-surface: #ffffff;
-  --color-card: #ffffff;
+  --color-card: rgba(255, 255, 255, 0.7);
   --color-primary: #2563EB;
-  --color-secondary: #3B82F6;
-  --color-accent: #EFF6FF;
-  --color-border: rgba(15, 23, 42, 0.08);
+  --color-secondary: #7C3AED;
+  --color-accent: #06B6D4;
+  --color-border: rgba(15, 23, 42, 0.06);
   --color-text-primary: #0F172A;
   --color-text-secondary: #475569;
 
@@ -23,6 +23,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-body);
+  overflow-x: hidden;
 }
 
 /* ── Gradient Text Utility ── */
@@ -43,16 +44,25 @@ body {
 
 .btn-primary-gradient:hover {
   box-shadow:
-    0 0 20px rgba(37, 99, 235, 0.4),
-    0 0 40px rgba(124, 58, 237, 0.2);
+    0 0 20px rgba(37, 99, 235, 0.25),
+    0 0 40px rgba(124, 58, 237, 0.15);
 }
 
 /* ── Glass Effect ── */
 .glass {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+/* ── Premium Light Glassmorphism Card ── */
+.glass-premium {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.02);
 }
 
 /* ── Scrollbar ── */
@@ -76,8 +86,8 @@ body {
 /* ── Grid Overlay ── */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(15, 23, 42, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.015) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -135,8 +145,17 @@ body {
   50% { border-color: rgba(37, 99, 235, 0.35); box-shadow: 0 0 25px rgba(37, 99, 235, 0.08); }
 }
 
+@keyframes border-glow-light {
+  0%, 100% { border-color: rgba(37, 99, 235, 0.08); box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.04); }
+  50% { border-color: rgba(124, 58, 237, 0.22); box-shadow: 0 15px 40px -10px rgba(124, 58, 237, 0.08); }
+}
+
 .border-glow-animate {
   animation: border-glow 4s ease-in-out infinite;
+}
+
+.border-glow-animate-light {
+  animation: border-glow-light 4s ease-in-out infinite;
 }
 
 @keyframes grid-drift {

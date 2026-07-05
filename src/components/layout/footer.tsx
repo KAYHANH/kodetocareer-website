@@ -182,19 +182,19 @@ export default function Footer() {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>
-                  EN-24, Salt Lake Sector V,<br />
-                  Kolkata, WB 700091, India
+                  Sector 15,<br />
+                  Noida, UP, India
                 </span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-secondary shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 96679 75616 / +91 96679 15616</span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>support@kodetocareer.com</span>
+                <span>info@kodetocareer.com / kodetocareer@gmail.com</span>
               </div>
             </div>
 

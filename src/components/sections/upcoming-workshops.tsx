@@ -34,7 +34,7 @@ const WORKSHOPS: Workshop[] = [
     category: "Full Stack Hackathon",
     date: "July 18-20, 2026",
     time: "48 Hours Continuous",
-    location: "Kolkata Campus & Discord",
+    location: "Noida Campus & Discord",
     host: "DevsUnite & Partner Sponsors",
     seatsLeft: 45,
     description: "Form teams, build functional SaaS products in 48 hours, and present to venture capitalists and recruiters.",

@@ -1128,7 +1128,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="e.g. +91 98765 43210"
+                        placeholder="e.g. +91 96679 75616"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50 focus:bg-white text-sm font-semibold"
                       />
                     </div>
