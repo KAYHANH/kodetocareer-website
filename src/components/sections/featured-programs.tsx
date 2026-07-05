@@ -38,7 +38,7 @@ const PROGRAMS: Program[] = [
     placement: '100% Placement Support',
     gradient: 'from-blue-400 to-indigo-600',
     hiringCompanies: ['Google', 'Stripe', 'Paytm', 'Deloitte'],
-    link: '/courses/1',
+    link: '/courses/mern-stack-development',
     bannerImage: '/banners/mern.png',
   },
   {
@@ -53,7 +53,7 @@ const PROGRAMS: Program[] = [
     placement: '100% Placement Support',
     gradient: 'from-rose-400 to-red-500',
     hiringCompanies: ['Amazon', 'Microsoft', 'EY', 'Fractal Analytics'],
-    link: '/courses/2',
+    link: '/courses/data-science-machine-learning',
     bannerImage: '/banners/datascience.png',
   },
   {
@@ -68,7 +68,7 @@ const PROGRAMS: Program[] = [
     placement: 'Placement Auditing',
     gradient: 'from-amber-400 to-orange-500',
     hiringCompanies: ['Adobe', 'Framer', 'Razorpay', 'Infosys'],
-    link: '/courses/3',
+    link: '/courses/graphic-design-ui-ux',
     bannerImage: '/banners/design.png',
   },
   {
@@ -83,7 +83,7 @@ const PROGRAMS: Program[] = [
     placement: '100% Placement Support',
     gradient: 'from-indigo-400 to-purple-600',
     hiringCompanies: ['TCS', 'Wipro', 'Cognizant', 'Deloitte'],
-    link: '/courses/4',
+    link: '/courses/data-analytics',
     bannerImage: '/banners/analytics.png',
   },
   {
@@ -98,7 +98,7 @@ const PROGRAMS: Program[] = [
     placement: '100% Placement Support',
     gradient: 'from-red-400 to-orange-600',
     hiringCompanies: ['Capgemini', 'IBM', 'Accenture', 'Oracle'],
-    link: '/courses/5',
+    link: '/courses/java-full-stack',
     bannerImage: '/banners/java.png',
   },
   {
@@ -113,7 +113,7 @@ const PROGRAMS: Program[] = [
     placement: '100% Placement Support',
     gradient: 'from-purple-400 to-indigo-600',
     hiringCompanies: ['Docker', 'Kubernetes', 'AWS', 'RedHat'],
-    link: '/courses/6',
+    link: '/courses/cloud-devops',
     bannerImage: '/banners/cloud.png',
   },
 ];

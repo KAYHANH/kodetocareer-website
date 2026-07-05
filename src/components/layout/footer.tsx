@@ -53,16 +53,17 @@ const SOCIAL_LINKS = [
 /* ------------------------------------------------------------------ */
 
 const PROGRAMS = [
-  { label: "MERN Stack Development", href: "/courses/1" },
-  { label: "Data Science & Machine Learning", href: "/courses/2" },
-  { label: "UI/UX Product Design", href: "/courses/3" },
-  { label: "Data Analytics & BI", href: "/courses/4" },
-  { label: "Java Full Stack Development", href: "/courses/5" },
-  { label: "DevOps Engineering & CI/CD", href: "/courses/6" },
+  { label: "MERN Stack Development", href: "/courses/mern-stack-development" },
+  { label: "Data Science & Machine Learning", href: "/courses/data-science-machine-learning" },
+  { label: "UI/UX Product Design", href: "/courses/graphic-design-ui-ux" },
+  { label: "Data Analytics & BI", href: "/courses/data-analytics" },
+  { label: "Java Full Stack Development", href: "/courses/java-full-stack" },
+  { label: "DevOps Engineering & CI/CD", href: "/courses/cloud-devops" },
 ] as const;
 
 const RESOURCES = [
   { label: "Blog", href: "/blog" },
+  { label: "Free AI Career Tools", href: "/tools" },
   { label: "Hackathons", href: "/events" },
   { label: "Career Roadmaps", href: "/career-roadmaps" },
   { label: "Placements Support", href: "https://devsunite.com/jobs" },

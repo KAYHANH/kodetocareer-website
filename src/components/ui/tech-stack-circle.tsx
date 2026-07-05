@@ -24,7 +24,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "React Dev, Frontend Engineer",
     salary: "₹6-15 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "Next.js",
@@ -33,7 +33,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "Full Stack Engineer",
     salary: "₹8-18 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "Node.js",
@@ -42,7 +42,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "Backend Developer",
     salary: "₹7-16 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "Express.js",
@@ -51,7 +51,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "API Systems Architect",
     salary: "₹6-12 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "MongoDB",
@@ -60,7 +60,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "Database Dev, MERN Dev",
     salary: "₹6-14 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "PostgreSQL",
@@ -69,7 +69,7 @@ const TECH_STACK: TechItem[] = [
     projects: 10,
     roles: "Backend Developer",
     salary: "₹7-15 LPA",
-    link: "/courses/5",
+    link: "/courses/java-full-stack",
   },
   {
     name: "Python",
@@ -78,7 +78,7 @@ const TECH_STACK: TechItem[] = [
     projects: 8,
     roles: "Automation Engineer",
     salary: "₹5-12 LPA",
-    link: "/courses/7",
+    link: "/courses/digital-marketing",
   },
   {
     name: "Java",
@@ -87,7 +87,7 @@ const TECH_STACK: TechItem[] = [
     projects: 10,
     roles: "Enterprise Developer",
     salary: "₹8-20 LPA",
-    link: "/courses/5",
+    link: "/courses/java-full-stack",
   },
   {
     name: "Docker",
@@ -96,7 +96,7 @@ const TECH_STACK: TechItem[] = [
     projects: 10,
     roles: "DevOps Engineer",
     salary: "₹9-18 LPA",
-    link: "/courses/5",
+    link: "/courses/java-full-stack",
   },
   {
     name: "Git",
@@ -114,7 +114,7 @@ const TECH_STACK: TechItem[] = [
     projects: 10,
     roles: "Cloud Solutions Architect",
     salary: "₹9-22 LPA",
-    link: "/courses/5",
+    link: "/courses/java-full-stack",
   },
   {
     name: "Firebase",
@@ -123,7 +123,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "Web & Mobile Dev",
     salary: "₹6-12 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "TensorFlow",
@@ -132,7 +132,7 @@ const TECH_STACK: TechItem[] = [
     projects: 12,
     roles: "Machine Learning Engineer",
     salary: "₹10-25 LPA",
-    link: "/courses/2",
+    link: "/courses/data-science-machine-learning",
   },
   {
     name: "Tailwind CSS",
@@ -141,7 +141,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "UI/UX Developer",
     salary: "₹6-11 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "TypeScript",
@@ -150,7 +150,7 @@ const TECH_STACK: TechItem[] = [
     projects: 15,
     roles: "TypeScript Architect",
     salary: "₹7-16 LPA",
-    link: "/courses/1",
+    link: "/courses/mern-stack-development",
   },
   {
     name: "PyTorch",
@@ -159,7 +159,7 @@ const TECH_STACK: TechItem[] = [
     projects: 12,
     roles: "Deep Learning Engineer",
     salary: "₹12-30 LPA",
-    link: "/courses/2",
+    link: "/courses/data-science-machine-learning",
   },
 ];
 

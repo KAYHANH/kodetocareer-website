@@ -9,7 +9,7 @@ import {
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const COURSES = [
+export const COURSES = [
   {
     id: 1,
     title: 'MERN Stack Development + AI Integration',
@@ -30,7 +30,8 @@ const COURSES = [
       'Month 5: The X-Factor - Integrating Artificial Intelligence|• Introduction to AI APIs: Understanding Large Language Models (LLMs) and how to communicate with them programmatically.\n• OpenAI/Gemini Integration: Injecting AI capabilities into Node.js backends.\n• Prompt Engineering for Developers: Structuring inputs to get predictable, JSON-formatted outputs from AI.\n• Building AI Features: Creating intelligent chatbots, automated text summarizers, dynamic content generators, and semantic search features within your React applications.',
       'Month 6: Capstone Projects & Deployment|• Real-World Projects: E-commerce platforms, AI-powered productivity dashboards, and social networking clones.\n• Version Control: Git, GitHub workflows, pull requests, and collaborative coding.\n• Cloud Deployment: Hosting frontends on Vercel/Netlify, backends on Render/Railway, and databases on MongoDB Atlas. Introduction to Docker.'
     ],
-    hiringCompanies: ['Google', 'Stripe', 'Paytm', 'Deloitte']
+    hiringCompanies: ['Google', 'Stripe', 'Paytm', 'Deloitte'],
+    slug: "mern-stack-development"
   },
   {
     id: 2,
@@ -55,7 +56,8 @@ const COURSES = [
       'Module 8: Generative AI & Large Language Models|• LLM Foundations: Understanding token limits, ChatGPT capabilities, and prompt engineering.\n• AI Integrations: Connecting OpenAI/Gemini APIs, configuring API parameters, and parsing outputs.\n• Retrieval-Augmented Generation (RAG): Building vector databases, document chunking, and LangChain loops.\n• AI Agent Architectures: Designing self-correcting agent chains and leveraging Hugging Face libraries.',
       'Module 9: Deployment & Cloud CI/CD|• Version Control: Git workflow commands, merge conflict resolution, and GitHub collaborations.\n• Web Frameworks: Creating analytical web user interfaces using Flask and Streamlit.\n• Containerization: Writing Dockerfiles, building container images, and running containers.\n• Cloud Deployments: Hosting services on cloud nodes, configuring APIs, and setting up CI/CD.'
     ],
-    hiringCompanies: ['Amazon', 'Microsoft', 'EY', 'Fractal Analytics']
+    hiringCompanies: ['Amazon', 'Microsoft', 'EY', 'Fractal Analytics'],
+    slug: "data-science-machine-learning"
   },
   {
     id: 3,
@@ -75,7 +77,8 @@ const COURSES = [
       'Week 7-10: Figma & Interactive UI: Construct high-fidelity mockups, responsive components, and micro-interactions.',
       'Week 11-16: Portfolio & Capstones: Build 3 comprehensive visual case studies and present to design recruiters.'
     ],
-    hiringCompanies: ['Adobe', 'Framer', 'Razorpay', 'Infosys']
+    hiringCompanies: ['Adobe', 'Framer', 'Razorpay', 'Infosys'],
+    slug: "graphic-design-ui-ux"
   },
   {
     id: 4,
@@ -98,7 +101,8 @@ const COURSES = [
       'Module 6: Power BI Desktop & Service|• Power Query: Data connectors, transformations, merging queries, and cleaning data.\n• Data Modeling: Defining star schemas, relationships, and active/inactive pathways.\n• DAX Language: Writing calculated columns, measures, and time-intelligence expressions.\n• Dashboard Sharing: Publishing reports to Power BI Service, scheduling automated refreshes.',
       'Module 7: Business Intelligence & KPI Design|• KPI Frameworks: Designing metrics for Sales, Finance, HR, and Marketing funnels.\n• Domain Dashboards: Building executive, cohort, customer segmentation, and supply chain reports.\n• End-to-End Capstone: Clean, analyze, and visualize a real-world corporate dataset from scratch.'
     ],
-    hiringCompanies: ['TCS', 'Wipro', 'Cognizant', 'Deloitte']
+    hiringCompanies: ['TCS', 'Wipro', 'Cognizant', 'Deloitte'],
+    slug: "data-analytics"
   },
   {
     id: 5,
@@ -119,7 +123,8 @@ const COURSES = [
       'Month 4: Frontend Development|• Web Foundations: Semantic HTML5, CSS3 styling, responsive layouts, and Bootstrap framework grids.\n• Modern JavaScript: ES6+ syntax (destructuring, arrow functions, promises), async/await requests, and DOM manipulation.\n• React.js Core: Reusable components, state hooks, effect hooks, layout state, and component hierarchies.\n• React Routing & Axios: Implementing client-side routing, navigation hooks, and fetching API payloads.',
       'Month 5: Full Stack Integration & Cloud|• Integration Tasks: Connecting React frontends with Spring Boot backends, implementing Auth and RBAC.\n• Containerization: Writing Dockerfiles, building container images, and running containers.\n• Cloud Deployments: Hosting applications on AWS cloud environments, Render, and setting up automated CI/CD.\n• Final Capstone & Readiness: Deploying a complete project portfolio, crafting ATS-friendly resumes, and optimizing LinkedIn profiles.'
     ],
-    hiringCompanies: ['Capgemini', 'IBM', 'Accenture', 'Oracle']
+    hiringCompanies: ['Capgemini', 'IBM', 'Accenture', 'Oracle'],
+    slug: "java-full-stack"
   },
   {
     id: 6,
@@ -141,7 +146,8 @@ const COURSES = [
       'Month 5: IaC, AWS Cloud Integration & Observability (Week 19-22)|• Infrastructure as Code: Terraform providers, modules, state management, Ansible playbooks.\n• AWS Production Deployment: EC2, VPC security, IAM roles, ALB load balancer, ECR, AWS EKS clusters.\n• Monitoring & Log Analytics: Prometheus metrics, Grafana dashboards, Loki log stack, Jaeger tracing.',
       'Month 6: DevSecOps, SRE, AI Infra & Capstones (Week 23-24)|• DevSecOps Security: Trivy scans, Checkov IaC scans, HashiCorp Vault secrets.\n• SRE & Incident Response: Capacity planning, Cost optimization, Chaos testing, SLA/SLOs.\n• Troubleshooting Broken Labs: Fixing CrashLoopBackOff, ImagePullBackOff, OOMKilled, Pod pending, DNS failures.\n• Modern AI Infrastructure: GPU drivers, Container toolkit, GPU scheduling, vLLM/Ollama servers.\n• 4-Weeks Final Capstone Sprints: E-commerce platform provisioning via Terraform on AWS EKS with ArgoCD GitOps pipelines.'
     ],
-    hiringCompanies: ['Docker', 'Kubernetes', 'AWS', 'RedHat']
+    hiringCompanies: ['Docker', 'Kubernetes', 'AWS', 'RedHat'],
+    slug: "cloud-devops"
   },
   {
     id: 7,
@@ -161,7 +167,8 @@ const COURSES = [
       'Week 7-9: Web Analytics & Tracking: Set up Google Analytics 4, Tag Manager tags, and analyze user conversion paths.',
       'Week 10-12: Growth Loops & Client Pitch: Develop viral growth loops, brand campaigns, and present growth blueprints to clients.'
     ],
-    hiringCompanies: ['Ogilvy', 'Dentsu', 'GroupM']
+    hiringCompanies: ['Ogilvy', 'Dentsu', 'GroupM'],
+    slug: "digital-marketing"
   },
   {
     id: 8,
@@ -181,7 +188,8 @@ const COURSES = [
       'Week 7-10: Database Integrations & Web Apps: Connect SQLite/PostgreSQL, and build lightweight web backends with Django.',
       'Week 11-16: Automation Tasks & ML Integrations: Orchestrate OS script tasks, scheduled tasks, and call OpenAI APIs.'
     ],
-    hiringCompanies: ['TechM', 'HCL', 'Wipro']
+    hiringCompanies: ['TechM', 'HCL', 'Wipro'],
+    slug: "python-programming"
   },
   {
     id: 9,
@@ -201,7 +209,8 @@ const COURSES = [
       'Week 7-10: Timeline Editing & Premiere Pro: Master timeline splicing, sound mixing, transitions, and audio sync templates.',
       'Week 11-16: Visual Effects & Motion Graphics: Build kinetic titles, intro templates, green screen keying, color grading, and rendering.'
     ],
-    hiringCompanies: ['YouTube Studios', 'Netflix Vendors', 'Social Media Brands', 'Advertising Agencies']
+    hiringCompanies: ['YouTube Studios', 'Netflix Vendors', 'Social Media Brands', 'Advertising Agencies'],
+    slug: "videography-video-editing"
   },
   {
     id: 10,
@@ -225,18 +234,48 @@ const COURSES = [
       'Module 14-17: GPU Infra, Optimization, Observability & Security (Week 30-33): Tensor/Pipeline Parallelism, paged attention, DCGM monitoring, AWQ/GPTQ quantization, TensorRT-LLM, OpenTelemetry, drift, evidently AI, RBAC, Vault.',
       'Module 18-20 & Capstone: Troubleshooting, System Design & Career Prep (Week 34-36): CUDA OOM/pod crashes, ChatGPT/Netflix/Uber system designs, resume/LinkedIn portfolios, and 4 Weeks Capstone Projects (Fraud Detection, Enterprise LLM Cluster, Production RAG).'
     ],
-    hiringCompanies: ['Stripe', 'Google', 'Meta', 'Microsoft', 'NVIDIA']
+    hiringCompanies: ['Stripe', 'Google', 'Meta', 'Microsoft', 'NVIDIA'],
+    slug: "mlops-ai-systems"
   }
 ];
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
+}
+
+
+function getCourseFAQs(course: any) {
+  return [
+    {
+      q: `What is ${course.title}?`,
+      a: `${course.title} is our comprehensive, industry-aligned training program designed to take you from beginner to job-ready. It focuses on hands-on practical skills, real-world projects, and theoretical depth necessary to excel in technical roles.`
+    },
+    {
+      q: `Who should enroll in this ${course.category} course?`,
+      a: `This course is ideal for college students (BCA, B.Tech, MCA, BSc), recent graduates, and working professionals looking to transition into high-growth ${course.category} roles.`
+    },
+    {
+      q: `What is the expected salary range in India after completion?`,
+      a: `Based on current market data and placement reports, the typical salary range for professionals in this domain is ${course.salary || '₹4.0 - 10 LPA'}. Our dedicated placement cell actively refers graduates to top companies to secure competitive offers.`
+    },
+    {
+      q: `Are there any coding prerequisites?`,
+      a: `For this course, the difficulty level is ${course.difficulty || course.level || 'Beginner'}. If it is a beginner-friendly course, no prior programming experience is required. For advanced courses, basic familiarity with scripting or logic is recommended.`
+    },
+    {
+      q: `Can freshers get hired after completing this program?`,
+      a: `Absolutely! The curriculum includes ${course.projects} and a guaranteed practical internship, which gives freshers the exact hands-on experience and portfolio needed to bypass traditional entry-level barriers.`
+    },
+    {
+      q: `What key tools and technologies will I master?`,
+      a: `You will gain deep practical expertise in: ${(course.skills || []).join(', ')}. In addition, you will build projects using tools like: ${(course.tools || []).join(', ')}.`
+    }
+  ];
 }
 
 export default function CourseDetailsPage({ params }: PageProps) {
   const resolvedParams = use(params);
-  const courseId = parseInt(resolvedParams.id, 10);
-  const course = COURSES.find((c) => c.id === courseId);
+  const course = COURSES.find((c) => c.slug === resolvedParams.slug);
 
   const [enrolled, setEnrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -252,6 +291,7 @@ export default function CourseDetailsPage({ params }: PageProps) {
 
   const [downloadingBrochure, setDownloadingBrochure] = useState(false);
   const [activeModuleIdx, setActiveModuleIdx] = useState<number | null>(0);
+  const [activeFaqIdx, setActiveFaqIdx] = useState<number | null>(null);
 
   if (!course) {
     return (
@@ -340,7 +380,7 @@ Salary Target Range: ${course.id === 1 ? '₹4.5 - 12 LPA' : course.id === 2 ? '
 Syllabus Curriculum Modules:
 ${course.modules.map((m, i) => `${i+1}. ${m}`).join('\n')}
 
-Target Recruiters: ${course.hiringCompanies.join(', ')}
+Target Recruiters: ${(course.hiringCompanies || []).join(', ')}
 Accredited by: ISO 9001:2015, Skill India Partners, NSDC
 ================================================================================`;
         const blob = new Blob([fileContent], { type: 'text/plain' });
@@ -471,6 +511,57 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                               <div className="pl-12 text-xs md:text-sm text-slate-650 leading-relaxed font-semibold whitespace-pre-line space-y-2">
                                 {content}
                               </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* FAQ Section */}
+            <div className="space-y-6 mt-12 pt-12 border-t border-slate-150">
+              <div className="space-y-2">
+                <h3 className="text-2xl font-heading font-extrabold text-slate-900">Frequently Asked Questions</h3>
+                <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Common queries about the {course.title} program</p>
+              </div>
+              <div className="space-y-4">
+                {getCourseFAQs(course).map((faq, idx) => {
+                  const isOpen = activeFaqIdx === idx;
+                  return (
+                    <div 
+                      key={idx}
+                      className="rounded-[20px] bg-white border border-slate-150 shadow-sm overflow-hidden hover:border-primary/20 transition-all duration-300"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setActiveFaqIdx(isOpen ? null : idx)}
+                        className="w-full flex items-center justify-between p-5 text-left font-heading font-bold text-slate-800 hover:text-primary transition-colors cursor-pointer"
+                      >
+                        <span className="text-sm md:text-base">{faq.q}</span>
+                        <motion.span
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="text-slate-400 shrink-0"
+                        >
+                          <ChevronDown className="w-5 h-5" />
+                        </motion.span>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: 'easeInOut' }}
+                          >
+                            <div className="px-5 pb-5 pt-1 border-t border-slate-100/50">
+                              <p className="text-xs md:text-sm text-slate-650 leading-relaxed font-semibold">
+                                {faq.a}
+                              </p>
                             </div>
                           </motion.div>
                         )}

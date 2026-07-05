@@ -50,6 +50,7 @@ interface Course {
   tools: string[];
   image: string;
   bannerImage: string;
+  slug: string;
 }
 
 const COURSES: Course[] = [
@@ -78,7 +79,8 @@ const COURSES: Course[] = [
     mentor: "Google & Meta Alumni",
     tools: ["React.svg", "Next.js.svg", "Node.js.svg", "Express.svg", "MongoDB.svg", "Git.svg"],
     image: "from-blue-600 to-indigo-700",
-    bannerImage: "/banners/mern.png"
+    bannerImage: "/banners/mern.png",
+    slug: "mern-stack-development"
   },
   {
     id: 8,
@@ -105,7 +107,8 @@ const COURSES: Course[] = [
     mentor: "Python Devs",
     tools: ["Python.svg", "Django.svg", "Git.svg"],
     image: "from-blue-600 to-teal-700",
-    bannerImage: "/banners/python.png"
+    bannerImage: "/banners/python.png",
+    slug: "python-programming"
   },
   {
     id: 2,
@@ -132,7 +135,8 @@ const COURSES: Course[] = [
     mentor: "Data Architects",
     tools: ["Python.svg", "TensorFlow.svg", "PyTorch.svg", "PostgresSQL.svg", "Docker.svg", "Git.svg"],
     image: "from-purple-600 to-pink-700",
-    bannerImage: "/banners/datascience.png"
+    bannerImage: "/banners/datascience.png",
+    slug: "data-science-machine-learning"
   },
   {
     id: 3,
@@ -159,7 +163,8 @@ const COURSES: Course[] = [
     mentor: "Senior Product Designers",
     tools: ["Figma.svg", "Photoshop.svg", "Sketch.svg", "Tailwind-CSS.svg", "Git.svg"],
     image: "from-pink-600 to-rose-600",
-    bannerImage: "/banners/design.png"
+    bannerImage: "/banners/design.png",
+    slug: "graphic-design-ui-ux"
   },
   {
     id: 4,
@@ -186,7 +191,8 @@ const COURSES: Course[] = [
     mentor: "Business Analysts",
     tools: ["Python.svg", "PostgresSQL.svg", "Docker.svg", "Git.svg"],
     image: "from-emerald-600 to-teal-700",
-    bannerImage: "/banners/analytics.png"
+    bannerImage: "/banners/analytics.png",
+    slug: "data-analytics"
   },
   {
     id: 5,
@@ -213,7 +219,8 @@ const COURSES: Course[] = [
     mentor: "Spring Developers",
     tools: ["Java.svg", "Spring.svg", "React.svg", "Docker.svg", "Git.svg"],
     image: "from-orange-600 to-red-700",
-    bannerImage: "/banners/java.png"
+    bannerImage: "/banners/java.png",
+    slug: "java-full-stack"
   },
   {
     id: 6,
@@ -240,7 +247,8 @@ const COURSES: Course[] = [
     mentor: "SRE Engineers",
     tools: ["AWS.svg", "Docker.svg", "Git.svg"],
     image: "from-sky-600 to-blue-700",
-    bannerImage: "/banners/cloud.png"
+    bannerImage: "/banners/cloud.png",
+    slug: "cloud-devops"
   },
   {
     id: 7,
@@ -267,7 +275,8 @@ const COURSES: Course[] = [
     mentor: "Growth Hackers",
     tools: ["Git.svg"],
     image: "from-green-600 to-emerald-700",
-    bannerImage: "/banners/marketing.png"
+    bannerImage: "/banners/marketing.png",
+    slug: "digital-marketing"
   },
   {
     id: 9,
@@ -294,7 +303,8 @@ const COURSES: Course[] = [
     mentor: "Cinematographers",
     tools: ["Figma.svg", "Photoshop.svg", "Git.svg"],
     image: "from-orange-600 to-amber-700",
-    bannerImage: "/banners/video.png"
+    bannerImage: "/banners/video.png",
+    slug: "videography-video-editing"
   },
   {
     id: 10,
@@ -321,7 +331,8 @@ const COURSES: Course[] = [
     mentor: "ML Platform Engineers",
     tools: ["Docker.svg", "Kubernetes.svg", "AWS.svg", "Git.svg"],
     image: "from-violet-600 to-indigo-700",
-    bannerImage: "/banners/mlops.png"
+    bannerImage: "/banners/mlops.png",
+    slug: "mlops-ai-systems"
   }
 ];
 
@@ -678,13 +689,13 @@ export default function CoursesClient() {
                     
                     <div className="flex gap-2">
                       <Link
-                        href={`/courses/${c.id}`}
+                        href={`/courses/${c.slug}`}
                         className="inline-flex h-10 items-center justify-center px-4 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors focus-visible:ring-2 focus-visible:ring-primary outline-none"
                       >
                         Curriculum
                       </Link>
                       <Link
-                        href={`/courses/${c.id}`}
+                        href={`/courses/${c.slug}`}
                         className="inline-flex h-10 items-center justify-center bg-primary text-white px-4 rounded-xl text-xs font-bold shadow-md hover:bg-blue-700 hover:shadow-lg transition-all focus-visible:ring-2 focus-visible:ring-primary outline-none"
                       >
                         Enroll Now
