@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, Calendar, User, Clock, ArrowRight, Sparkles, 
   TrendingUp, Award, Bookmark, ArrowUpRight, HelpCircle, CheckCircle 
 } from 'lucide-react';
 import Link from 'next/link';
-import { POSTS } from './posts';
+import { POSTS, BlogPost } from './posts';
 
 const CATEGORIES = [
   'All', 
@@ -23,10 +23,42 @@ const CATEGORIES = [
 const POPULAR_TAGS = ['React', 'Next.js', 'Python', 'Docker', 'AWS', 'Prompt Engineering', 'Figma', 'System Design'];
 
 export default function BlogPage() {
+  const [posts, setPosts] = useState<BlogPost[]>(POSTS);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [subscribeEmail, setSubscribeEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+
+  useEffect(() => {
+    const loadMergedPosts = async () => {
+      try {
+        const res = await fetch('/api/blog/posts');
+        const data = await res.json();
+        if (data.success && data.posts) {
+          setPosts(data.posts);
+        }
+      } catch (err) {
+        console.error('Failed to load merged posts:', err);
+      }
+    };
+
+    loadMergedPosts();
+
+    const syncLatestNews = async () => {
+      try {
+        const res = await fetch('/api/blog/sync');
+        const data = await res.json();
+        if (data.success && data.hasNewPosts) {
+          loadMergedPosts();
+        }
+      } catch (err) {
+        console.error('Failed to sync tech news:', err);
+      }
+    };
+
+    const timer = setTimeout(syncLatestNews, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +70,7 @@ export default function BlogPage() {
     }, 3000);
   };
 
-  const filteredPosts = POSTS.filter((post) => {
+  const filteredPosts = posts.filter((post) => {
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -48,7 +80,7 @@ export default function BlogPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const featuredPost = POSTS.find(p => p.featured) || POSTS[0];
+  const featuredPost = posts.find(p => p.featured) || posts[0] || POSTS[0];
   const recentPosts = filteredPosts.filter(p => !p.featured || selectedCategory !== 'All');
 
   return (

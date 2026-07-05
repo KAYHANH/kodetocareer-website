@@ -56,6 +56,14 @@ const ADMISSION_COURSES = [
     eligibility: "Open (Beginner Friendly)",
     admission: "AWS, Google, Microsoft Cloud",
     tags: ["Global Credentials", "Skills Certification"]
+  },
+  {
+    title: "Gap Year Degree Completion",
+    duration: "Fast-Track / Lateral",
+    mode: "Regular / Distance / Online",
+    eligibility: "Discontinued / Academic Gaps (12th, BCA, etc.)",
+    admission: "UGC / DEB Approved Universities Only",
+    tags: ["Lateral Entry", "Credit Transfer", "Degree Recovery"]
   }
 ];
 
@@ -312,6 +320,49 @@ export default function AdmissionsPage() {
                 </tr>
               </tbody>
             </table>
+          </div>
+        </section>
+
+        {/* ── 5b. Gap Year Degree Completion & Lateral Entries ── */}
+        <section className="space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-4">
+            <span className="text-xs font-black uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20 inline-block">
+              SPECIALIZED PATHWAYS
+            </span>
+            <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900 tracking-tight">
+              Gap Year Degree Support & Credit Transfers
+            </h2>
+            <p className="text-slate-500 font-semibold text-sm leading-relaxed">
+              If your education was discontinued due to financial, personal, or professional reasons, we help you leverage legal credit transfers and lateral entry schemes to recover lost time.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white border border-slate-150 rounded-[24px] p-6 shadow-sm space-y-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+                <Calendar className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-heading font-black text-slate-900">Education Gap Recovery</h3>
+              <p className="text-xs text-slate-550 leading-relaxed font-semibold">
+                Completed 12th in 2022 (or earlier) but couldn't join a regular degree? We work with top UGC-DEB accredited universities to enroll you in official programs aligning with your original graduation timeline (e.g., 2022 to 2026 B.Tech or BBA pathways).
+              </p>
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 text-[10px] text-slate-500 font-bold">
+                Example: 12th Pass (2022) → B.Tech / BBA Degree completion aligned for 2026 graduation.
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-150 rounded-[24px] p-6 shadow-sm space-y-4">
+              <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-heading font-black text-slate-900">Discontinued Degree / Lateral Entry</h3>
+              <p className="text-xs text-slate-550 leading-relaxed font-semibold">
+                Did you complete a BCA in 2018 but never enrolled for an MCA? Or dropped out of a course halfway? We assist with certified Credit Transfers and Lateral Entry admissions to fast-track your postgraduate degree completion legally.
+              </p>
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 text-[10px] text-slate-500 font-bold">
+                Example: BCA (2018) → Credit mapping for immediate admission & MCA degree completion.
+              </div>
+            </div>
           </div>
         </section>
 

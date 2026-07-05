@@ -7,16 +7,17 @@ import {
   Calendar, Clock, User, ArrowLeft, Share2, 
   Check, Sparkles
 } from 'lucide-react';
-import { POSTS } from '../posts';
+import { POSTS, BlogPost } from '../posts';
 import SchemaMarkup from '@/components/seo/schema-markup';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  initialPost?: BlogPost;
 }
 
-export default function BlogDetailsClient({ params }: PageProps) {
+export default function BlogDetailsClient({ params, initialPost }: PageProps) {
   const resolvedParams = use(params);
-  const post = POSTS.find((p) => p.slug === resolvedParams.slug);
+  const post = initialPost || POSTS.find((p) => p.slug === resolvedParams.slug);
 
   const [copied, setCopied] = useState(false);
 

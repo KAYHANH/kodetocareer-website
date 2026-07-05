@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import BlogDetailsClient from './BlogDetailsClient';
-import { POSTS } from '../posts';
+import { getMergedPostsServer } from '../posts-loader';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -8,7 +8,8 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const post = POSTS.find((p) => p.slug === resolvedParams.slug);
+  const posts = getMergedPostsServer();
+  const post = posts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) {
     return {
@@ -52,5 +53,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  return <BlogDetailsClient params={params} />;
+  const resolvedParams = await params;
+  const posts = getMergedPostsServer();
+  const post = posts.find((p) => p.slug === resolvedParams.slug);
+
+  return <BlogDetailsClient params={params} initialPost={post} />;
 }
