@@ -15,8 +15,10 @@ function formatDate(dateStr: string): string {
 
 export async function GET() {
   try {
-    // 1. Fetch recent dev.to programming articles
-    const devToResponse = await fetch('https://dev.to/api/articles?tag=programming&per_page=5', {
+    // 1. Fetch recent dev.to programming articles from a random tech tag to ensure fresh updates
+    const TAGS = ['programming', 'webdev', 'javascript', 'react', 'python', 'ai', 'devops', 'career', 'interview'];
+    const randomTag = TAGS[Math.floor(Math.random() * TAGS.length)];
+    const devToResponse = await fetch(`https://dev.to/api/articles?tag=${randomTag}&per_page=15`, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; KodeToCareerBot/1.0)',
       },
@@ -63,12 +65,25 @@ export async function GET() {
       const fullArticle = await detailsResponse.json();
       const contentMarkdown = fullArticle.body_markdown || fullArticle.description || '';
 
+      // Map dev.to tags to our local category filters
+      let category = 'Programming';
+      const itemTags = (article.tag_list || []).map((t: string) => t.toLowerCase());
+      if (itemTags.includes('ai') || itemTags.includes('machinelearning') || itemTags.includes('chatgpt') || itemTags.includes('openai') || itemTags.includes('llm')) {
+        category = 'AI';
+      } else if (itemTags.includes('datascience') || itemTags.includes('python') || itemTags.includes('pandas') || itemTags.includes('sql') || itemTags.includes('data')) {
+        category = 'Data Science';
+      } else if (itemTags.includes('webdev') || itemTags.includes('react') || itemTags.includes('javascript') || itemTags.includes('nextjs') || itemTags.includes('html') || itemTags.includes('css')) {
+        category = 'Web Development';
+      } else if (itemTags.includes('career') || itemTags.includes('jobs') || itemTags.includes('placement') || itemTags.includes('internship')) {
+        category = 'Career';
+      } else if (itemTags.includes('interview') || itemTags.includes('preparation') || itemTags.includes('questions')) {
+        category = 'Interview';
+      }
+
       const newPost: BlogPost = {
         id: 1000 + article.id,
         title: article.title,
-        category: article.tag_list && article.tag_list.length > 0 
-          ? article.tag_list[0].toUpperCase() 
-          : 'Technology',
+        category: category,
         date: formatDate(article.published_at),
         author: article.user.name,
         readTime: `${article.reading_time || 5} min read`,

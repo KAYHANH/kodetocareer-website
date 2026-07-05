@@ -106,8 +106,8 @@ export default function BlogPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const featuredPost = posts.find(p => p.featured) || posts[0] || POSTS[0];
-  const recentPosts = filteredPosts.filter(p => !p.featured || selectedCategory !== 'All');
+  const featuredPost = filteredPosts[0] || POSTS[0];
+  const recentPosts = filteredPosts.slice(1);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
