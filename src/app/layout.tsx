@@ -3,6 +3,7 @@ import { Sora, Inter, Space_Grotesk } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import FloatingCta from "@/components/ui/floating-cta";
+import GlobalAdmissionsPopup from "@/components/ui/global-admissions-popup";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
 import BackgroundOrbs from "@/components/ui/background-orbs";
 import "./globals.css";
@@ -65,6 +66,7 @@ export default function RootLayout({
         <main className="flex-1 pt-20 relative z-10">{children}</main>
         <Footer />
         <FloatingCta />
+        <GlobalAdmissionsPopup />
       </body>
     </html>
   );

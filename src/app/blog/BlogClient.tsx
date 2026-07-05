@@ -103,7 +103,9 @@ export default function BlogPage() {
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.category.toLowerCase().includes(searchQuery.toLowerCase());
+      post.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (post.content && post.content.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (post.tags && post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())));
     return matchesCategory && matchesSearch;
   });
 

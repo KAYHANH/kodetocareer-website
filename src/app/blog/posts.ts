@@ -10,6 +10,7 @@ export interface BlogPost {
   featured: boolean;
   slug: string;
   content: string;
+  tags?: string[];
 }
 
 export const POSTS: BlogPost[] = [
@@ -41,7 +42,8 @@ To remain highly competitive and drive Generative Engine Optimization (GEO) valu
 - **System Design & Architecture:** Understanding microservices, event-driven databases, and API gateways.
 - **AI Integration Protocols:** Leveraging vector search, embeddings, LLM orchestration frameworks, and secure API keys handling.
 - **Generative Engineering Principles:** Structuring clean, self-documenting codebases that automated tools can seamlessly read and refactor.
-`
+`,
+    tags: ['React', 'Next.js', 'Prompt Engineering']
   },
   {
     id: 2,
@@ -70,7 +72,8 @@ Most top tech companies use automated systems to filter out over 75% of resumes 
 - **Summary:** A 3-sentence profile highlighting years of experience and domain expertise.
 - **Technical Skills:** Grouped by category (Languages, Frameworks, Databases, Tools).
 - **Work History:** Reverse chronological order using the STAR method (Situation, Task, Action, Result) with measurable metrics.
-`
+`,
+    tags: ['React', 'Figma']
   },
   {
     id: 3,
@@ -99,7 +102,8 @@ System design interviews evaluate your ability to think at scale. Instead of ask
 - **High-Level Design:** Draw a block diagram showing client, load balancer, application servers, cache, and database.
 - **Deep Dive:** Discuss specific technical details such as indexes, database schemas, messaging queues, and consistency trade-offs.
 - **Identify Bottlenecks:** Explain how your design handles hardware failures, network partitions, or massive viral traffic surges.
-`
+`,
+    tags: ['System Design', 'Docker', 'AWS']
   },
   {
     id: 4,
@@ -127,7 +131,8 @@ Artificial Neural Networks (ANNs) form the core of deep learning systems. Inspir
 - **Weights & Biases:** Parameters adjusted during training to align predictions with actual targets.
 - **Activation Functions (ReLU, Sigmoid):** Add non-linearity so the network can fit non-linear complex functions.
 - **Backpropagation:** The process of computing gradients of loss relative to parameters, and using optimizers like Adam to adjust weights.
-`
+`,
+    tags: ['Python', 'Docker', 'Prompt Engineering']
   },
   {
     id: 5,
@@ -158,7 +163,8 @@ A common question among beginners is whether to learn JavaScript/Node.js (MERN) 
 Choose **MERN** if you want to build projects fast, work in modern product companies, or prefer a unified JavaScript development workflow.
 
 Choose **Java Full Stack** if you plan to work in large enterprise consulting companies, build financial/banking backends, or appreciate compile-time type-safety and structured frameworks.
-`
+`,
+    tags: ['React', 'Next.js', 'System Design']
   },
   {
     id: 6,
@@ -186,6 +192,7 @@ Writing code for college assignments is very different from managing production 
 - **Master Git & Version Control:** Understand rebase, cherry-pick, merge conflict resolution, and feature branching.
 - **Learn Clean Code Principles:** Write readable variable names, keep functions small, and write meaningful tests.
 - **Be Coachable:** Listen during code reviews, document what you learn, and ask questions after researching the code.
-`
+`,
+    tags: ['AWS', 'Docker']
   }
 ];

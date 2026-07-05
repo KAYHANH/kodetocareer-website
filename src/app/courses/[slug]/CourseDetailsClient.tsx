@@ -992,10 +992,6 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                   Enroll In Program <Play className="w-4.5 h-4.5 fill-white" />
                 </button>
               )}
-
-              <p className="text-[10px] text-slate-400 text-center leading-relaxed mt-4 font-bold">
-                100% Refund guarantee within 7 days of program commencement.
-              </p>
             </div>
 
             {/* Lead Capture & Free Career Guide Download Card */}
