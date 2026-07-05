@@ -144,24 +144,6 @@ export default function BlogPage() {
             />
           </div>
 
-          {/* New Blog / Sync Button */}
-          <div className="flex items-center justify-center gap-3 pt-2">
-            <button
-              onClick={handleManualSync}
-              disabled={syncing}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm ${
-                syncing
-                  ? 'bg-primary/10 text-primary border border-primary/20'
-                  : 'bg-primary text-white hover:bg-blue-700 shadow-md shadow-primary/20'
-              }`}
-            >
-              <RefreshCw className={`w-3.5 h-3.5 ${syncing ? 'animate-spin' : ''}`} />
-              {syncing ? 'Fetching New Blogs...' : 'New Blogs'}
-            </button>
-            {lastSynced && (
-              <span className="text-[10px] text-slate-400 font-semibold">Last updated: {lastSynced}</span>
-            )}
-          </div>
         </section>
 
         {/* ── 2. Category Filters ── */}
@@ -230,6 +212,25 @@ export default function BlogPage() {
             </div>
           </section>
         )}
+
+        {/* ── New Blog / Sync Button ── */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleManualSync}
+            disabled={syncing}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm ${
+              syncing
+                ? 'bg-primary/10 text-primary border border-primary/20'
+                : 'bg-primary text-white hover:bg-blue-700 shadow-md shadow-primary/20'
+            }`}
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${syncing ? 'animate-spin' : ''}`} />
+            {syncing ? 'Fetching New Blogs...' : 'New Blogs'}
+          </button>
+          {lastSynced && (
+            <span className="text-[10px] text-slate-400 font-semibold">Last updated: {lastSynced}</span>
+          )}
+        </div>
 
         {/* ── 4. Main Articles Grid & Sidebar ── */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
