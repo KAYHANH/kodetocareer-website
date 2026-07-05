@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   Sparkles, Calculator, Briefcase, FileText, ArrowRight, 
@@ -26,6 +26,16 @@ const COURSE_RECS = {
 
 export default function ToolsHub() {
   const [activeTab, setActiveTab] = useState<'salary' | 'resume' | 'roadmap' | 'quiz'>('salary');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+      if (tab === 'quiz' || tab === 'salary' || tab === 'resume' || tab === 'roadmap') {
+        setActiveTab(tab as any);
+      }
+    }
+  }, []);
 
   // Salary Calculator State
   const [specialization, setSpecialization] = useState('MERN Stack Development');

@@ -52,6 +52,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+export async function generateStaticParams() {
+  const posts = getMergedPostsServer();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 export default async function Page({ params }: PageProps) {
   const resolvedParams = await params;
   const posts = getMergedPostsServer();
