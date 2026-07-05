@@ -7,6 +7,7 @@ import {
   TrendingUp, Award, Bookmark, ArrowUpRight, HelpCircle, CheckCircle 
 } from 'lucide-react';
 import Link from 'next/link';
+import { POSTS } from './posts';
 
 const CATEGORIES = [
   'All', 
@@ -17,75 +18,6 @@ const CATEGORIES = [
   'Data Science', 
   'Web Development', 
   'Placement'
-];
-
-const POSTS = [
-  {
-    id: 1,
-    title: 'The Future of Web Development: Integrating AI Agents in 2026',
-    category: 'Web Development',
-    date: 'June 28, 2026',
-    author: 'Sarah Jenkins',
-    readTime: '6 min read',
-    desc: 'Explore how AI coding agents and tools are reshaping web development workflows and what skills developers need to stay ahead.',
-    image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'How to Build an ATS-Friendly Resume That Gets You Interviews',
-    category: 'Career',
-    date: 'June 22, 2026',
-    author: 'Rajesh Nair',
-    readTime: '5 min read',
-    desc: 'Step-by-step guide to structuring your tech resume, identifying missing keywords, and beating automated recruiter filters.',
-    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop',
-    featured: false
-  },
-  {
-    id: 3,
-    title: 'Cracking the System Design Interview: A Developer Protocol',
-    category: 'Interview',
-    date: 'June 18, 2026',
-    author: 'Dr. Vikram Aditya',
-    readTime: '8 min read',
-    desc: 'An in-depth look at load balancers, caching layers, database indexing, and scaling microservices during high traffic spikes.',
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop',
-    featured: false
-  },
-  {
-    id: 4,
-    title: 'Understanding Neural Networks: A Laymans Guide to Deep Learning',
-    category: 'AI',
-    date: 'June 12, 2026',
-    author: 'Sarah Jenkins',
-    readTime: '10 min read',
-    desc: 'Demystifying neural network layers, loss functions, optimization, and how weights adjust during backward propagation.',
-    image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=600&h=400&fit=crop',
-    featured: false
-  },
-  {
-    id: 5,
-    title: 'MERN vs Java Full Stack: Which Career Path to Choose?',
-    category: 'Programming',
-    date: 'June 05, 2026',
-    author: 'Dr. Vikram Aditya',
-    readTime: '7 min read',
-    desc: 'A comprehensive career roadmap comparison covering market demand, salary packages, learning curve, and tech stacks.',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop',
-    featured: false
-  },
-  {
-    id: 6,
-    title: 'Navigating the Transition from College to First Tech Job',
-    category: 'Placement',
-    date: 'May 28, 2026',
-    author: 'Rajesh Nair',
-    readTime: '6 min read',
-    desc: 'Tips for freshers on networking, preparing for coding rounds, handling behavioral interviews, and negotiating offers.',
-    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&h=400&fit=crop',
-    featured: false
-  }
 ];
 
 const POPULAR_TAGS = ['React', 'Next.js', 'Python', 'Docker', 'AWS', 'Prompt Engineering', 'Figma', 'System Design'];
@@ -209,11 +141,11 @@ export default function BlogPage() {
                       {featuredPost.author.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-800leading-none">{featuredPost.author}</h4>
+                      <h4 className="text-xs font-bold text-slate-800 leading-none">{featuredPost.author}</h4>
                       <span className="text-[9px] text-slate-400 font-bold block mt-0.5">Author</span>
                     </div>
                   </div>
-                  <Link href={`/blog/${featuredPost.id}`} className="text-primary hover:underline font-bold text-xs flex items-center gap-0.5">
+                  <Link href={`/blog/${featuredPost.slug}`} className="text-primary hover:underline font-bold text-xs flex items-center gap-0.5">
                     Read Article <ArrowUpRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -236,7 +168,7 @@ export default function BlogPage() {
                 <div key={post.id} className="bg-white border border-slate-150 rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col justify-between">
                   <div>
                     <div className="h-44 relative bg-slate-100 overflow-hidden shrink-0">
-                      <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-350" />
+                      <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-355" />
                       <span className="absolute top-3 left-3 bg-slate-900/80 text-white text-[8px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded backdrop-blur-sm">
                         {post.category}
                       </span>
@@ -264,7 +196,7 @@ export default function BlogPage() {
                       </div>
                       <span className="text-[10px] font-bold text-slate-700">{post.author}</span>
                     </div>
-                    <Link href={`/blog/${post.id}`} className="text-primary hover:underline font-bold text-[10px] flex items-center gap-0.5">
+                    <Link href={`/blog/${post.slug}`} className="text-primary hover:underline font-bold text-[10px] flex items-center gap-0.5">
                       Read <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>

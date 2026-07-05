@@ -286,10 +286,9 @@ export default function Navbar() {
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Career Growth</h4>
                               <Link
                                 href="/career-services/placements"
-                                className="group/item flex gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
                                 onClick={() => setSolutionsHovered(false)}
                               >
-                                <span className="text-xl">🚀</span>
                                 <div>
                                   <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
                                     Placement Outcomes <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
@@ -299,10 +298,10 @@ export default function Navbar() {
                                   </p>
                                 </div>
                               </Link>
-                              <div className="pl-9 space-y-1.5">
-                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 📄 Resume & ATS Review</Link>
-                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 🎤 Mock Interviews</Link>
-                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 🤝 Mentorship Support</Link>
+                              <div className="pl-2 space-y-1.5">
+                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Resume & ATS Review</Link>
+                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Mock Interviews</Link>
+                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Mentorship Support</Link>
                               </div>
                             </div>
 
@@ -310,10 +309,9 @@ export default function Navbar() {
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Academics</h4>
                               <Link
                                 href="/career-services/admissions"
-                                className="group/item flex gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
                                 onClick={() => setSolutionsHovered(false)}
                               >
-                                <span className="text-xl">🎓</span>
                                 <div>
                                   <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
                                     College Admissions <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
@@ -323,9 +321,9 @@ export default function Navbar() {
                                   </p>
                                 </div>
                               </Link>
-                              <div className="pl-9 space-y-1.5">
-                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 💼 Career Counselling</Link>
-                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• 🏫 UGC Approved Programs</Link>
+                              <div className="pl-2 space-y-1.5">
+                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Career Counselling</Link>
+                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• UGC Approved Programs</Link>
                               </div>
                             </div>
                           </div>
@@ -460,16 +458,16 @@ export default function Navbar() {
                               >
                                 {isCourses ? (
                                   <>
-                                    <Link href="/courses/mern-stack-development" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">🚀 MERN Stack + AI</Link>
-                                    <Link href="/courses/data-science-machine-learning" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">📊 Data Science & ML</Link>
-                                    <Link href="/courses/mlops-ai-systems" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">⚙️ Industry MLOps</Link>
+                                    <Link href="/courses/mern-stack-development" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">MERN Stack + AI</Link>
+                                    <Link href="/courses/data-science-machine-learning" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Data Science & ML</Link>
+                                    <Link href="/courses/mlops-ai-systems" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Industry MLOps</Link>
                                     <Link href="/courses" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-primary hover:underline">Explore All Courses →</Link>
                                   </>
                                 ) : (
                                   <>
-                                    <Link href="/career-services/placements" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">🚀 Placement Outcomes</Link>
-                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">🎓 College Admissions</Link>
-                                    <Link href="/contact" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">💼 Career Counselling</Link>
+                                    <Link href="/career-services/placements" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Placement Outcomes</Link>
+                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">College Admissions</Link>
+                                    <Link href="/contact" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Career Counselling</Link>
                                   </>
                                 )}
                               </motion.div>

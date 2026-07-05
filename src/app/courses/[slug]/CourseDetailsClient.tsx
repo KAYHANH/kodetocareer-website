@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import SchemaMarkup from '@/components/seo/schema-markup';
 
 export const COURSES = [
   {
@@ -397,8 +398,39 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
     }, 1200);
   };
 
+
+  const courseSchema = {
+    name: course.title,
+    description: course.tagline || course.desc,
+    provider: {
+      '@type': 'Organization',
+      name: 'Kode To Career',
+      sameAs: 'https://kodetocareer.com'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: course.priceUpfront.replace(/[^0-9]/g, ''),
+      priceCurrency: 'INR',
+      valueAddedTaxIncluded: 'true'
+    }
+  };
+
+  const faqSchema = {
+    mainEntity: getCourseFAQs(course).map(faq => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a
+      }
+    }))
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
+    <>
+      <SchemaMarkup type="Course" data={courseSchema} />
+      <SchemaMarkup type="FAQPage" data={faqSchema} />
+      <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
       {/* Background orbs */}
       <div className="absolute top-[10%] left-[-150px] w-[600px] h-[600px] rounded-full bg-blue-100/30 blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-150px] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-[130px] pointer-events-none" />
@@ -813,5 +845,6 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
         )}
       </AnimatePresence>
     </div>
+    </>
   );
 }
