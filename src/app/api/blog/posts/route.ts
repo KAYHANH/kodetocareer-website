@@ -3,6 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { POSTS, BlogPost } from '@/app/blog/posts';
 
+export const dynamic = 'force-dynamic';
+
 const DYNAMIC_POSTS_PATH = path.join(process.cwd(), 'src/app/blog/dynamic_posts.json');
 
 export async function GET() {
