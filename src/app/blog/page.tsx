@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, Calendar, User, Clock, ArrowRight, Sparkles, 
-  TrendingUp, Award, Bookmark, ArrowUpRight, HelpCircle, CheckCircle 
+  TrendingUp, Award, Bookmark, ArrowUpRight, HelpCircle, CheckCircle, RefreshCw 
 } from 'lucide-react';
 import Link from 'next/link';
 import { POSTS, BlogPost } from './posts';
@@ -28,11 +28,13 @@ export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [subscribeEmail, setSubscribeEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [syncing, setSyncing] = useState(false);
+  const [lastSynced, setLastSynced] = useState<string | null>(null);
 
   useEffect(() => {
     const loadMergedPosts = async () => {
       try {
-        const res = await fetch('/api/blog/posts');
+        const res = await fetch(`/api/blog/posts?t=${Date.now()}`);
         const data = await res.json();
         if (data.success && data.posts) {
           setPosts(data.posts);
@@ -46,11 +48,9 @@ export default function BlogPage() {
 
     const syncLatestNews = async () => {
       try {
-        const res = await fetch('/api/blog/sync');
+        const res = await fetch(`/api/blog/sync?t=${Date.now()}`);
         const data = await res.json();
-        if (data.success && data.hasNewPosts) {
-          loadMergedPosts();
-        }
+        loadMergedPosts();
       } catch (err) {
         console.error('Failed to sync tech news:', err);
       }
@@ -67,6 +67,24 @@ export default function BlogPage() {
       clearInterval(interval);
     };
   }, []);
+
+  const handleManualSync = async () => {
+    if (syncing) return;
+    setSyncing(true);
+    try {
+      await fetch(`/api/blog/sync?t=${Date.now()}`);
+      const res = await fetch(`/api/blog/posts?t=${Date.now()}`);
+      const data = await res.json();
+      if (data.success && data.posts) {
+        setPosts(data.posts);
+      }
+      setLastSynced(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+    } catch (err) {
+      console.error('Manual sync failed:', err);
+    } finally {
+      setSyncing(false);
+    }
+  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -124,6 +142,25 @@ export default function BlogPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50"
             />
+          </div>
+
+          {/* New Blog / Sync Button */}
+          <div className="flex items-center justify-center gap-3 pt-2">
+            <button
+              onClick={handleManualSync}
+              disabled={syncing}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm ${
+                syncing
+                  ? 'bg-primary/10 text-primary border border-primary/20'
+                  : 'bg-primary text-white hover:bg-blue-700 shadow-md shadow-primary/20'
+              }`}
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${syncing ? 'animate-spin' : ''}`} />
+              {syncing ? 'Fetching New Blogs...' : 'New Blogs'}
+            </button>
+            {lastSynced && (
+              <span className="text-[10px] text-slate-400 font-semibold">Last updated: {lastSynced}</span>
+            )}
           </div>
         </section>
 

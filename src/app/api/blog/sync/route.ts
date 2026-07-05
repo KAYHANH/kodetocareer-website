@@ -20,7 +20,7 @@ export async function GET() {
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; KodeToCareerBot/1.0)',
       },
-      next: { revalidate: 60 } // Cache for 60 seconds
+      cache: 'no-store'
     });
 
     if (!devToResponse.ok) {
