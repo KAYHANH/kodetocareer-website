@@ -22,6 +22,7 @@ interface Program {
   gradient: string;
   hiringCompanies: string[];
   link: string;
+  bannerImage: string;
 }
 
 const PROGRAMS: Program[] = [
@@ -38,6 +39,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-blue-400 to-indigo-600',
     hiringCompanies: ['Google', 'Stripe', 'Paytm', 'Deloitte'],
     link: '/courses/1',
+    bannerImage: '/banners/mern.png',
   },
   {
     id: "2",
@@ -52,6 +54,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-rose-400 to-red-500',
     hiringCompanies: ['Amazon', 'Microsoft', 'EY', 'Fractal Analytics'],
     link: '/courses/2',
+    bannerImage: '/banners/datascience.png',
   },
   {
     id: "3",
@@ -66,6 +69,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-amber-400 to-orange-500',
     hiringCompanies: ['Adobe', 'Framer', 'Razorpay', 'Infosys'],
     link: '/courses/3',
+    bannerImage: '/banners/design.png',
   },
   {
     id: "4",
@@ -80,6 +84,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-indigo-400 to-purple-600',
     hiringCompanies: ['TCS', 'Wipro', 'Cognizant', 'Deloitte'],
     link: '/courses/4',
+    bannerImage: '/banners/analytics.png',
   },
   {
     id: "5",
@@ -94,6 +99,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-red-400 to-orange-600',
     hiringCompanies: ['Capgemini', 'IBM', 'Accenture', 'Oracle'],
     link: '/courses/5',
+    bannerImage: '/banners/java.png',
   },
   {
     id: "6",
@@ -108,6 +114,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-purple-400 to-indigo-600',
     hiringCompanies: ['Docker', 'Kubernetes', 'AWS', 'RedHat'],
     link: '/courses/6',
+    bannerImage: '/banners/cloud.png',
   },
 ];
 
@@ -140,23 +147,26 @@ const headerVariants: Variants = {
 };
 
 function ProgramCard({ program }: { program: Program }) {
-  const Icon = program.icon;
-
   return (
     <MotionLink
       href={program.link}
       variants={cardVariants}
       whileHover={{ y: -8, scale: 1.015 }}
-      className="group relative rounded-[28px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-350 hover:shadow-[0_24px_60px_rgba(37,99,235,0.06)] hover:border-primary/20 flex flex-col justify-between cursor-pointer"
+      className="group relative rounded-[28px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-350 hover:shadow-[0_24px_60px_rgba(37,99,235,0.06)] hover:border-primary/20 flex flex-col justify-between cursor-pointer overflow-hidden"
     >
       <div>
         {/* Course Abstract Cover Image */}
-        <div className={`w-full h-40 rounded-2xl bg-gradient-to-br ${program.gradient} mb-6 overflow-hidden relative shadow-inner flex items-center justify-center`}>
-          <div className="absolute inset-0 bg-black/10 opacity-30 group-hover:opacity-10 transition-opacity duration-300" />
-          <Icon className="w-16 h-16 text-white drop-shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" />
-          
-          {/* Subtle Grid Overlay */}
-          <div className="absolute inset-0 bg-grid opacity-20" />
+        <div className="w-full h-40 rounded-2xl mb-6 overflow-hidden relative shadow-inner flex items-center justify-center group/banner">
+          {/* Background Image Banner with Hover Zoom (1.05x), Transition 300ms */}
+          <img
+            src={program.bannerImage}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105 group-hover:translate-y-[-2px] pointer-events-none"
+          />
+          {/* Subtle dark overlay for text contrast */}
+          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+          {/* Soft lighting glow on hover */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-white/10 to-transparent pointer-events-none mix-blend-screen" />
         </div>
 
         {/* Rating Stars & Duration Badge */}
