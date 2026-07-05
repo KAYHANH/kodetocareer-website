@@ -125,19 +125,21 @@ const COURSES = [
     id: 6,
     title: 'DevOps Engineering & CI/CD Sprints',
     category: 'Cloud',
-    duration: '5 Months',
-    projects: '8+ Projects',
+    duration: '6 Months (24 Weeks)',
+    projects: '12+ Projects & Capstone',
     priceUpfront: '₹24,999',
     pricePlaced: '₹4,999',
-    level: 'Intermediate',
+    level: 'Intermediate to Advanced',
     tagline: 'Become a professional DevOps & Cloud Engineer with our Terraform, Kubernetes, and AWS automation course.',
     desc: 'Learn infrastructure as code, container automation, configuration orchestration, and continuous deployment workflows.',
     skills: ['Docker', 'Kubernetes', 'Terraform', 'Jenkins', 'AWS', 'Git', 'Linux'],
     modules: [
-      'Week 1-3: Linux Shell & Scripting: Bash automation, user permissions, networking basics, and configuration.',
-      'Week 4-7: Cloud & AWS Deployments: Deploy EC2 nodes, configure VPC security, and manage IAM access controls.',
-      'Week 8-11: Container Orchestration: Write Kubernetes deployments, manage Docker containers, and build service pods.',
-      'Week 12-20: CI/CD Pipelines & Terraform: Write Terraform infrastructure-as-code files and build automated Jenkins pipelines.'
+      'Month 1: DevOps & Linux Foundations (Week 1-4)|• DevOps Fundamentals: What is DevOps, SDLC, 12 Factor Application, Agile & Scrum.\n• Linux & System Administration: Filesystem structures, SSH/SCP, Cron Jobs, Env Variables.\n• Bash & Shell Automation: Variables, loops, scripts, apt/yum package management.\n• Process & Networking Admin: systemctl, journalctl, ss, tcpdump, namespaces, cgroups, OOM Killer.',
+      'Month 2: Networking, Git & Python scripting (Week 5-8)|• Networking for DevOps: OSI Model, DNS, load balancers, reverse proxy (NGINX), TLS setups.\n• Git & Collaborative Flows: Branching, merging, rebasing, pull requests, semantic versioning.\n• Python for Infrastructure: File management, JSON/YAML, requests APIs, subprocess calls, automation scripts.',
+      'Month 3: Containerization & Kubernetes (Week 9-14)|• Docker Containers: Dockerfiles, volumes, networks, compose setups, multi-stage builds, scans.\n• Kubernetes Architecture: etcd, scheduler, API server, Pods, ReplicaSets, Deployments, Services.\n• Kubernetes Storage & Scheduling: PV, PVC, StorageClass, Affinity rules, Taints and Tolerations.',
+      'Month 4: Advanced K8s, CI/CD pipelines & GitOps (Week 15-18)|• K8s Management & Security: Ingress controllers, Helm charts, Kustomize configurations, RBAC.\n• Continuous Integration Sprints: GitHub Actions, Jenkins, GitLab CI pipelines, image scans.\n• GitOps Orchestrations: ArgoCD setups, blue-green deployment pipelines, canary releases.',
+      'Month 5: IaC, AWS Cloud Integration & Observability (Week 19-22)|• Infrastructure as Code: Terraform providers, modules, state management, Ansible playbooks.\n• AWS Production Deployment: EC2, VPC security, IAM roles, ALB load balancer, ECR, AWS EKS clusters.\n• Monitoring & Log Analytics: Prometheus metrics, Grafana dashboards, Loki log stack, Jaeger tracing.',
+      'Month 6: DevSecOps, SRE, AI Infra & Capstones (Week 23-24)|• DevSecOps Security: Trivy scans, Checkov IaC scans, HashiCorp Vault secrets.\n• SRE & Incident Response: Capacity planning, Cost optimization, Chaos testing, SLA/SLOs.\n• Troubleshooting Broken Labs: Fixing CrashLoopBackOff, ImagePullBackOff, OOMKilled, Pod pending, DNS failures.\n• Modern AI Infrastructure: GPU drivers, Container toolkit, GPU scheduling, vLLM/Ollama servers.\n• 4-Weeks Final Capstone Sprints: E-commerce platform provisioning via Terraform on AWS EKS with ArgoCD GitOps pipelines.'
     ],
     hiringCompanies: ['Docker', 'Kubernetes', 'AWS', 'RedHat']
   },
