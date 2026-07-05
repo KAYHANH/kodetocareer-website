@@ -524,6 +524,12 @@ export default function CoursesClient() {
                     <span className="text-slate-400">Guaranteed Internships</span>
                     <span className="text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">Included</span>
                   </div>
+                  <a
+                    href="#catalog"
+                    className="w-full mt-4 bg-gradient-to-r from-primary to-secondary text-white py-3.5 rounded-xl font-bold text-xs hover:opacity-95 transition-opacity flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-primary/10"
+                  >
+                    Enroll Now
+                  </a>
                 </div>
               </div>
             </div>
@@ -533,7 +539,7 @@ export default function CoursesClient() {
 
       {/* ── 2. Course Categories (Catalog start) ── */}
       <section id="catalog" className="py-12 bg-white border-y border-slate-100 z-10 relative" aria-labelledby="cat-title">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <h2 id="cat-title" className="font-heading font-extrabold text-2xl text-slate-900">Explore Specializations</h2>
@@ -575,7 +581,7 @@ export default function CoursesClient() {
 
       {/* ── 3. Featured Courses ── */}
       <section className="py-24 z-10 relative" aria-label="Course list">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCourses.map((c) => (
               <div

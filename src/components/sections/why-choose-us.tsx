@@ -117,7 +117,7 @@ export default function WhyChooseUs() {
               </div>
             </div>
             
-            <div className="max-w-[60%]">
+            <div className="w-full sm:max-w-[60%]">
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100">
                 <Rocket className="h-6 w-6 text-primary" />
               </div>

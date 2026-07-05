@@ -198,7 +198,7 @@ export default function Hero() {
 
             {/* Headline */}
             <motion.h1
-              className="mt-6 font-heading font-extrabold text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight"
+              className="mt-6 font-heading font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
@@ -274,7 +274,7 @@ export default function Hero() {
 
             {/* Real Stats Grid */}
             <motion.div
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-12 w-full max-w-2xl"
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-12 w-full max-w-4xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.75, ease: EASE }}
@@ -291,7 +291,7 @@ export default function Hero() {
           </div>
 
           {/* ── Right column (circular tech stack + floating cards) ── */}
-          <div className="w-full lg:w-[42%] flex justify-center items-center relative min-h-[500px] lg:min-h-[640px] overflow-visible">
+          <div className="w-full lg:w-[42%] flex justify-center items-center relative min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] overflow-hidden lg:overflow-visible">
             <TechStackCircle />
             
 
