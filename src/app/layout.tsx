@@ -3,6 +3,7 @@ import { Sora, Inter, Space_Grotesk } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import FloatingCta from "@/components/ui/floating-cta";
+import GoogleAnalytics from "@/components/analytics/google-analytics";
 import "./globals.css";
 
 const sora = Sora({
@@ -54,6 +55,7 @@ export default function RootLayout({
     >
 
       <body className="flex min-h-full flex-col bg-background text-text-primary font-body" suppressHydrationWarning>
+        <GoogleAnalytics />
         <Navbar />
         <main className="flex-1 pt-20">{children}</main>
         <Footer />
