@@ -24,9 +24,21 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kodetocareer.com'),
   title: "KodeToCareer — AI-Powered Career Hub",
   description:
     "Empowering the next generation of tech professionals with industry-ready skills, global opportunities, and AI-driven career guidance.",
+  openGraph: {
+    title: "KodeToCareer — AI-Powered Career Hub",
+    description:
+      "Empowering the next generation of tech professionals with industry-ready skills, global opportunities, and AI-driven career guidance.",
+    siteName: 'KodeToCareer',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
 };
 
 export default function RootLayout({
@@ -40,48 +52,7 @@ export default function RootLayout({
       className={`${sora.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const clean = (node) => {
-                  if (node && node.nodeType === 1) {
-                    if (node.hasAttribute('bis_skin_checked')) {
-                      node.removeAttribute('bis_skin_checked');
-                    }
-                    const kids = node.querySelectorAll('[bis_skin_checked]');
-                    for (let i = 0; i < kids.length; i++) {
-                      kids[i].removeAttribute('bis_skin_checked');
-                    }
-                  }
-                };
-                if (typeof document !== 'undefined' && document.documentElement) {
-                  clean(document.documentElement);
-                }
-                const observer = new MutationObserver((mutations) => {
-                  for (let i = 0; i < mutations.length; i++) {
-                    const m = mutations[i];
-                    if (m.type === 'attributes' && m.attributeName === 'bis_skin_checked') {
-                      m.target.removeAttribute('bis_skin_checked');
-                    } else if (m.type === 'childList') {
-                      for (let j = 0; j < m.addedNodes.length; j++) {
-                        clean(m.addedNodes[j]);
-                      }
-                    }
-                  }
-                });
-                observer.observe(document.documentElement, {
-                  childList: true,
-                  subtree: true,
-                  attributes: true,
-                  attributeFilter: ['bis_skin_checked']
-                });
-              })();
-            `,
-          }}
-        />
-      </head>
+
       <body className="flex min-h-full flex-col bg-background text-text-primary font-body" suppressHydrationWarning>
         <Navbar />
         <main className="flex-1 pt-20">{children}</main>
