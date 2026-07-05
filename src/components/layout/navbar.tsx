@@ -324,6 +324,7 @@ export default function Navbar() {
                               <div className="pl-2 space-y-1.5">
                                 <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Career Counselling</Link>
                                 <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• UGC Approved Programs</Link>
+                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Career Gap Support</Link>
                               </div>
                             </div>
                           </div>
@@ -467,6 +468,7 @@ export default function Navbar() {
                                   <>
                                     <Link href="/career-services/placements" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Placement Outcomes</Link>
                                     <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">College Admissions</Link>
+                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Career Gap Support</Link>
                                     <Link href="/contact" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Career Counselling</Link>
                                   </>
                                 )}
