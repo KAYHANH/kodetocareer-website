@@ -56,14 +56,6 @@ const ADMISSION_COURSES = [
     eligibility: "Open (Beginner Friendly)",
     admission: "AWS, Google, Microsoft Cloud",
     tags: ["Global Credentials", "Skills Certification"]
-  },
-  {
-    title: "Gap Year Degree Completion",
-    duration: "Fast-Track / Lateral",
-    mode: "Regular / Distance / Online",
-    eligibility: "Discontinued / Academic Gaps (12th, BCA, etc.)",
-    admission: "UGC / DEB Approved Universities Only",
-    tags: ["Lateral Entry", "Credit Transfer", "Degree Recovery"]
   }
 ];
 
@@ -323,45 +315,90 @@ export default function AdmissionsPage() {
           </div>
         </section>
 
-        {/* ── 5b. Gap Year Degree Completion & Lateral Entries ── */}
-        <section className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
+        {/* ── 5b. Gap Year Degree Completion Spotlight Section ── */}
+        <section className="space-y-8 max-w-3xl mx-auto">
+          <div className="text-center space-y-4">
             <span className="text-xs font-black uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20 inline-block">
-              SPECIALIZED PATHWAYS
+              ACADEMIC RECOVERY
             </span>
             <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900 tracking-tight">
-              Gap Year Degree Support & Credit Transfers
+              Gap Year Degree Support
             </h2>
-            <p className="text-slate-500 font-semibold text-sm leading-relaxed">
-              If your education was discontinued due to financial, personal, or professional reasons, we help you leverage legal credit transfers and lateral entry schemes to recover lost time.
+            <p className="text-slate-500 font-semibold text-sm leading-relaxed max-w-xl mx-auto">
+              Recover lost academic years legally. We help students with history of breaks or discontinued education secure valid degrees aligning with their original timelines.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-white border border-slate-150 rounded-[24px] p-6 shadow-sm space-y-4">
-              <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                <Calendar className="w-6 h-6" />
+          <div className="bg-white border border-slate-150 rounded-[32px] p-6 md:p-10 shadow-sm relative overflow-hidden space-y-8">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
+
+            {/* Badges */}
+            <div className="flex flex-wrap gap-2.5">
+              <span className="text-[9px] font-black uppercase tracking-wider px-3 py-1 rounded bg-blue-50 border border-blue-100 text-primary">
+                LATERAL ENTRY
+              </span>
+              <span className="text-[9px] font-black uppercase tracking-wider px-3 py-1 rounded bg-indigo-50 border border-indigo-100 text-indigo-650">
+                CREDIT TRANSFER
+              </span>
+              <span className="text-[9px] font-black uppercase tracking-wider px-3 py-1 rounded bg-emerald-50 border border-emerald-100 text-emerald-650">
+                DEGREE RECOVERY
+              </span>
+            </div>
+
+            {/* Title */}
+            <div>
+              <h3 className="text-2xl font-heading font-black text-slate-900">
+                Gap Year Degree Completion
+              </h3>
+              <div className="w-full h-px bg-slate-100 mt-4" />
+            </div>
+
+            {/* Parameters list */}
+            <div className="space-y-4 text-xs font-bold text-slate-700">
+              <div className="flex justify-between items-baseline gap-4">
+                <span className="text-slate-400 font-semibold shrink-0">Duration</span>
+                <span className="text-slate-900 text-right">Fast-Track / Lateral</span>
               </div>
-              <h3 className="text-lg font-heading font-black text-slate-900">Education Gap Recovery</h3>
-              <p className="text-xs text-slate-550 leading-relaxed font-semibold">
-                Completed 12th in 2022 (or earlier) but couldn't join a regular degree? We work with top UGC-DEB accredited universities to enroll you in official programs aligning with your original graduation timeline (e.g., 2022 to 2026 B.Tech or BBA pathways).
-              </p>
-              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 text-[10px] text-slate-500 font-bold">
-                Example: 12th Pass (2022) → B.Tech / BBA Degree completion aligned for 2026 graduation.
+              <div className="flex justify-between items-baseline gap-4 border-t border-slate-50 pt-3">
+                <span className="text-slate-400 font-semibold shrink-0">Mode</span>
+                <span className="text-slate-900 text-right">Regular / Distance / Online</span>
+              </div>
+              <div className="flex justify-between items-baseline gap-4 border-t border-slate-50 pt-3">
+                <span className="text-slate-400 font-semibold shrink-0">Eligibility</span>
+                <span className="text-slate-900 text-right">Discontinued / Academic Gaps (12th, BCA, etc.)</span>
+              </div>
+              <div className="flex justify-between items-baseline gap-4 border-t border-slate-50 pt-3">
+                <span className="text-slate-400 font-semibold shrink-0">Admission</span>
+                <span className="text-slate-900 text-right">UGC / DEB Approved Universities Only</span>
               </div>
             </div>
 
-            <div className="bg-white border border-slate-150 rounded-[24px] p-6 shadow-sm space-y-4">
-              <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
-                <GraduationCap className="w-6 h-6" />
+            <div className="w-full h-px bg-slate-100 my-4" />
+
+            {/* Visual Example Boxes */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4.5 space-y-2">
+                <span className="text-[9px] font-black uppercase text-primary bg-primary/10 px-2 py-0.5 rounded">Case Study 1: 12th Gap</span>
+                <p className="text-xs text-slate-550 leading-relaxed font-semibold">
+                  If someone completed their 12th in **2022** and has not done anything since, we will assist in obtaining a regular/online B.Tech or BBA degree for the **2022 to 2026** cycle.
+                </p>
               </div>
-              <h3 className="text-lg font-heading font-black text-slate-900">Discontinued Degree / Lateral Entry</h3>
-              <p className="text-xs text-slate-550 leading-relaxed font-semibold">
-                Did you complete a BCA in 2018 but never enrolled for an MCA? Or dropped out of a course halfway? We assist with certified Credit Transfers and Lateral Entry admissions to fast-track your postgraduate degree completion legally.
-              </p>
-              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 text-[10px] text-slate-500 font-bold">
-                Example: BCA (2018) → Credit mapping for immediate admission & MCA degree completion.
+              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4.5 space-y-2">
+                <span className="text-[9px] font-black uppercase text-secondary bg-secondary/10 px-2 py-0.5 rounded">Case Study 2: Postgraduate Gap</span>
+                <p className="text-xs text-slate-550 leading-relaxed font-semibold">
+                  If someone completed their BCA in **2018** but did not enroll in an MCA, we help map credits to legally fast-track their MCA degree completion.
+                </p>
               </div>
+            </div>
+
+            {/* Apply Button */}
+            <div className="pt-2">
+              <Link
+                href="/contact"
+                className="w-full bg-primary hover:bg-blue-600 text-white font-bold text-center py-4 rounded-2xl transition-colors shadow-md shadow-primary/10 cursor-pointer block text-sm"
+              >
+                Apply Now
+              </Link>
             </div>
           </div>
         </section>
