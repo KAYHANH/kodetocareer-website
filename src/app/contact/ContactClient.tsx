@@ -100,8 +100,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="text-[9px] text-slate-400 font-bold block uppercase leading-none">WhatsApp Support</span>
-                  <a href="https://wa.me/919667975616" target="_blank" rel="noopener noreferrer" className="text-slate-800 hover:text-emerald-600 transition-colors text-xs font-bold mt-1 block">
-                    Chat with Counselor
+                  <a href="https://wa.me/919667975616" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-[10px] font-bold mt-1.5 transition-colors cursor-pointer shadow-sm shadow-emerald-500/10">
+                    <MessageSquare className="w-3 h-3 fill-white text-emerald-500" /> Chat with Counselor
                   </a>
                 </div>
               </div>
@@ -141,14 +141,24 @@ export default function ContactPage() {
               </h4>
               <div className="space-y-3">
                 {COUNSELLORS.map((c, idx) => (
-                  <div key={idx} className="flex items-center gap-3 bg-white/60 border border-slate-200/50 p-3 rounded-xl backdrop-blur-sm">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-[10px]">
-                      {c.avatar}
+                  <div key={idx} className="flex items-center justify-between gap-3 bg-white/60 border border-slate-200/50 p-3 rounded-xl backdrop-blur-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-[10px]">
+                        {c.avatar}
+                      </div>
+                      <div>
+                        <h5 className="text-xs font-bold text-slate-800 leading-none">{c.name}</h5>
+                        <span className="text-[9px] text-slate-400 font-bold block mt-1">{c.role} • {c.exp}</span>
+                      </div>
                     </div>
-                    <div>
-                      <h5 className="text-xs font-bold text-slate-800 leading-none">{c.name}</h5>
-                      <span className="text-[9px] text-slate-400 font-bold block mt-1">{c.role} • {c.exp}</span>
-                    </div>
+                    <a
+                      href="https://wa.me/919667975616"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-8 px-3 items-center justify-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-[10px] font-bold transition-colors cursor-pointer shadow-sm shadow-emerald-500/10 shrink-0"
+                    >
+                      <MessageSquare className="w-3 h-3 fill-white text-emerald-500" /> Chat
+                    </a>
                   </div>
                 ))}
               </div>

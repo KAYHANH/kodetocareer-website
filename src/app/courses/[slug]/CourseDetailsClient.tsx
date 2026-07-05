@@ -243,7 +243,7 @@ export const COURSES = [
 ];
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  slug: string;
 }
 
 
@@ -276,9 +276,8 @@ function getCourseFAQs(course: any) {
   ];
 }
 
-export default function CourseDetailsPage({ params }: PageProps) {
-  const resolvedParams = use(params);
-  const course = COURSES.find((c) => c.slug === resolvedParams.slug);
+export default function CourseDetailsPage({ slug }: PageProps) {
+  const course = COURSES.find((c) => c.slug === slug);
 
   const [enrolled, setEnrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);

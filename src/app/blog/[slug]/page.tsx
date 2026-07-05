@@ -64,5 +64,5 @@ export default async function Page({ params }: PageProps) {
   const posts = getMergedPostsServer();
   const post = posts.find((p) => p.slug === resolvedParams.slug);
 
-  return <BlogDetailsClient params={params} initialPost={post} />;
+  return <BlogDetailsClient slug={resolvedParams.slug} initialPost={post} />;
 }

@@ -7,13 +7,13 @@ import Link from "next/link";
 
 export default function FloatingCta() {
   const [isOpen, setIsOpen] = useState(false);
-  const [emailInput, setEmailInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!emailInput) return;
+    if (!phoneInput) return;
     setLoading(true);
 
     setTimeout(() => {
@@ -22,7 +22,7 @@ export default function FloatingCta() {
       setTimeout(() => {
         setSuccess(false);
         setIsOpen(false);
-        setEmailInput("");
+        setPhoneInput("");
       }, 2000);
     }, 1500);
   };
@@ -62,13 +62,13 @@ export default function FloatingCta() {
                   <CheckCircle2 className="w-9 h-9 text-emerald-500 mx-auto mb-2" />
                   <h5 className="text-xs font-extrabold text-slate-950">Slot Booking Requested!</h5>
                   <p className="text-[10px] text-slate-500 mt-1 font-medium leading-relaxed">
-                    Our coordinator will reach out to you on email shortly.
+                    Our coordinator will call you shortly.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
-                    Select a date and leave your email to reserve a free live consultation.
+                    Select a date and leave your phone number to reserve a free live consultation.
                   </p>
                   
                   <div>
@@ -83,14 +83,14 @@ export default function FloatingCta() {
                   </div>
 
                   <div>
-                    <label htmlFor="float-email" className="sr-only">Email address</label>
+                    <label htmlFor="float-phone" className="sr-only">Phone number</label>
                     <input
-                      id="float-email"
-                      type="email"
+                      id="float-phone"
+                      type="tel"
                       required
-                      placeholder="Enter email to confirm"
-                      value={emailInput}
-                      onChange={(e) => setEmailInput(e.target.value)}
+                      placeholder="Enter phone number to confirm"
+                      value={phoneInput}
+                      onChange={(e) => setPhoneInput(e.target.value)}
                       className="w-full h-9 border border-slate-200 bg-slate-50 px-3 rounded-lg text-xs text-slate-700 outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary/20"
                     />
                   </div>

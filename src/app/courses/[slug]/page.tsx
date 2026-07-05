@@ -134,5 +134,6 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: PageProps) {
-  return <CourseDetailsClient params={params} />;
+  const resolvedParams = await params;
+  return <CourseDetailsClient slug={resolvedParams.slug} />;
 }

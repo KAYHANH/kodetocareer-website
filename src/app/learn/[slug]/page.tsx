@@ -58,5 +58,6 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: PageProps) {
-  return <LearnHubClient params={params} />;
+  const resolvedParams = await params;
+  return <LearnHubClient slug={resolvedParams.slug} />;
 }

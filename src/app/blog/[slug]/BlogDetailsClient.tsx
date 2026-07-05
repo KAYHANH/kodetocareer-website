@@ -12,13 +12,12 @@ import SchemaMarkup from '@/components/seo/schema-markup';
 import Image from 'next/image';
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  slug: string;
   initialPost?: BlogPost;
 }
 
-export default function BlogDetailsClient({ params, initialPost }: PageProps) {
-  const resolvedParams = use(params);
-  const post = initialPost || POSTS.find((p) => p.slug === resolvedParams.slug);
+export default function BlogDetailsClient({ slug, initialPost }: PageProps) {
+  const post = initialPost || POSTS.find((p) => p.slug === slug);
 
   const [copied, setCopied] = useState(false);
 

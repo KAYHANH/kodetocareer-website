@@ -9,12 +9,11 @@ import {
 import { LEARN_HUBS } from '../learn-data';
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  slug: string;
 }
 
-export default function LearnHubClient({ params }: PageProps) {
-  const resolvedParams = use(params);
-  const hub = LEARN_HUBS[resolvedParams.slug];
+export default function LearnHubClient({ slug }: PageProps) {
+  const hub = LEARN_HUBS[slug];
 
   // Lead capture states
   const [email, setEmail] = useState('');
