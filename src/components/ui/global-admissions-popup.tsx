@@ -20,22 +20,20 @@ export default function GlobalAdmissionsPopup() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    // Check if user has already submitted or dismissed the popup in the current session
-    const isDismissed = sessionStorage.getItem('global_popup_dismissed');
+    // Only check if they have successfully submitted the form in this session
     const isSubmitted = sessionStorage.getItem('global_popup_submitted');
 
-    if (!isDismissed && !isSubmitted) {
-      // Trigger popup after 5 seconds
+    if (!isSubmitted) {
+      // Trigger popup after 2 seconds instead of 5
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 5000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [pathname]); // Re-evaluate on route change in case they navigate without dismissing
+  }, [pathname]);
 
   const handleClose = () => {
     setIsOpen(false);
-    sessionStorage.setItem('global_popup_dismissed', 'true');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -76,7 +74,7 @@ export default function GlobalAdmissionsPopup() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
           {/* Backdrop overlay */}
           <motion.div
             initial={{ opacity: 0 }}
