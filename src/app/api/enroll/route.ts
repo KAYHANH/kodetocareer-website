@@ -40,7 +40,9 @@ export async function POST(request: Request) {
     fs.writeFileSync(BACKUP_FILE, JSON.stringify(enrollments, null, 2), 'utf-8');
 
     // ── Send to Google Sheets Apps Script Web App ──
-    const webAppUrl = process.env.GOOGLE_SHEET_WEBAPP_URL || process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBAPP_URL;
+    const webAppUrl = process.env.GOOGLE_SHEET_WEBAPP_URL || 
+                      process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBAPP_URL ||
+                      'https://script.google.com/macros/s/AKfycbxxCMbyVE8jl4iW2bJeu0NLfICWc3Skp2uVWA2bIXJOtdrReGrMYTETO1pgAfO1BX-e/exec';
     
     if (webAppUrl) {
       try {

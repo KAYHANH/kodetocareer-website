@@ -20,19 +20,30 @@ export default function GlobalAdmissionsPopup() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    // Only check if they have successfully submitted the form in this session
-    const isSubmitted = sessionStorage.getItem('global_popup_submitted');
+    console.log("GlobalAdmissionsPopup: Component mounted on path:", pathname);
+    let isSubmitted = false;
+    try {
+      if (typeof window !== 'undefined' && window.sessionStorage) {
+        isSubmitted = !!sessionStorage.getItem('global_popup_submitted');
+        console.log("GlobalAdmissionsPopup: sessionStorage check 'isSubmitted' =", isSubmitted);
+      }
+    } catch (e) {
+      console.warn("GlobalAdmissionsPopup: sessionStorage is blocked or unavailable:", e);
+    }
 
     if (!isSubmitted) {
-      // Trigger popup after 2 seconds instead of 5
+      // Trigger popup after 1.5 seconds for faster testing and display
+      console.log("GlobalAdmissionsPopup: Setting timer to display form in 1500ms");
       const timer = setTimeout(() => {
+        console.log("GlobalAdmissionsPopup: Timer triggered, opening form...");
         setIsOpen(true);
-      }, 2000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [pathname]);
 
   const handleClose = () => {
+    console.log("GlobalAdmissionsPopup: User clicked close button");
     setIsOpen(false);
   };
 
@@ -41,6 +52,7 @@ export default function GlobalAdmissionsPopup() {
     if (!name || !phone || !qualification || !year) return;
 
     setSubmitting(true);
+    console.log("GlobalAdmissionsPopup: Submitting lead details...", { name, phone, qualification, status, year });
     try {
       const res = await fetch('/api/enroll', {
         method: 'POST',
@@ -58,11 +70,20 @@ export default function GlobalAdmissionsPopup() {
       });
 
       if (res.ok) {
+        console.log("GlobalAdmissionsPopup: Lead submitted successfully!");
         setSubmitted(true);
-        sessionStorage.setItem('global_popup_submitted', 'true');
+        try {
+          if (typeof window !== 'undefined' && window.sessionStorage) {
+            sessionStorage.setItem('global_popup_submitted', 'true');
+          }
+        } catch (storageErr) {
+          console.warn("GlobalAdmissionsPopup: Could not write to sessionStorage:", storageErr);
+        }
         setTimeout(() => {
           setIsOpen(false);
         }, 2000);
+      } else {
+        console.error("GlobalAdmissionsPopup: Server returned error status:", res.status);
       }
     } catch (err) {
       console.error('Error submitting popup lead:', err);
