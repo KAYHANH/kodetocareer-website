@@ -6,7 +6,7 @@ import {
   Sparkles, Calculator, Briefcase, FileText, ArrowRight, 
   ChevronRight, Trophy, GraduationCap, DollarSign, Award, 
   CheckCircle2, AlertCircle, RefreshCw, Compass, HelpCircle, 
-  Target, Zap, Code
+  Target, Zap, Code, BarChart2, Database
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -60,49 +60,90 @@ export default function ToolsHub() {
   const [quizStep, setQuizStep] = useState(-1); // -1 = start, 0..4 = Qs, 5 = result
   const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
   const [quizResult, setQuizResult] = useState<any>(null);
+  const [quizCourse, setQuizCourse] = useState<'mern' | 'datascience' | null>(null);
 
-  const QUIZ_QUESTIONS = [
+  const MERN_QUIZ_QUESTIONS = [
     {
-      q: "What type of technical projects excite you most?",
+      q: "What is your current experience level with JavaScript or React?",
       options: [
-        "Building beautiful visual interfaces, pages, and interactive layouts.",
-        "Engineering APIs, server pipelines, and databases.",
-        "Building models, data visualization, and analyzing metrics.",
-        "Automating build pipelines, server environments, and containers."
+        "Absolute beginner (never written JavaScript, looking to start from scratch).",
+        "Familiar with basics (know variables, simple loops, basic HTML/CSS).",
+        "Intermediate/Advanced (comfortable with React or backend APIs, want to build full apps)."
       ]
     },
     {
-      q: "Which language do you prefer or want to master first?",
+      q: "Which database model interests you more for building applications?",
       options: [
-        "JavaScript / TypeScript (very flexible, powers web and UI).",
-        "Python (perfect for scripting, AI, data science, and automation).",
-        "Java (standard for enterprise, compile-time checks, banks).",
-        "SQL / Bash (for querying databases and managing server systems)."
+        "NoSQL document databases (like MongoDB - flexible, JSON-like, fast scaling).",
+        "SQL relational databases (like PostgreSQL/MySQL - structured tables, strict schemas).",
+        "I want to master both and understand the integration trade-offs."
       ]
     },
     {
-      q: "How do you feel about writing math & statistics?",
+      q: "What excites you most about building a web application?",
       options: [
-        "Prefer to avoid it completely (focus on clean design, logic, layout).",
-        "Okay with basic arithmetic, business KPIs, and SQL group queries.",
-        "Love it! Want to write neural networks and machine learning models."
+        "Designing beautiful, responsive user interfaces and micro-animations.",
+        "Developing backend APIs, authentication, and secure data routing.",
+        "Both! I want to master full-stack engineering from UI to deployment."
       ]
     },
     {
-      q: "What is your primary career goal?",
+      q: "How much time can you commit to live lectures and project building?",
       options: [
-        "Join high-growth startups, write code fast, or build SaaS products.",
-        "Secure a structured developer role in enterprise, finance, or consultancy.",
-        "Become a business data analyst, reporting lead, or analytics consultant.",
-        "Design cloud architecture, DevOps automation pipelines, or LLM serving systems."
+        "Part-time (less than 10 hours a week - need a highly structured roadmap).",
+        "Moderate (10 to 20 hours a week - want interactive projects and assignments).",
+        "Full-time (20+ hours a week - fully intensive boot camp pace)."
       ]
     },
     {
-      q: "What is your current programming experience level?",
+      q: "Which capstone project would you love to showcase to recruiters?",
       options: [
-        "Absolute beginner (never written code, looking for first steps).",
-        "Intermediate (know basic HTML/CSS, basic scripting, loops, variables).",
-        "Advanced (comfortable building full apps, looking to scale databases or systems)."
+        "AI-Powered Project Board with automated tasks (integrating OpenAI/Gemini APIs).",
+        "High-Performance E-Commerce platform with secure Stripe checkouts.",
+        "Realtime document collaboration space (like a Google Docs clone with socket.io)."
+      ]
+    }
+  ];
+
+  const DATASCIENCE_QUIZ_QUESTIONS = [
+    {
+      q: "What is your comfort level with Mathematics and Statistics?",
+      options: [
+        "Basic (know high-school algebra, prefer to learn stats from the ground up).",
+        "Intermediate (understand basic probability, graphs, and descriptive metrics).",
+        "Strong (enjoy linear algebra, matrix calculations, and inferential hypothesis testing)."
+      ]
+    },
+    {
+      q: "Which programming language or tool are you most eager to write?",
+      options: [
+        "Python (the universal standard for machine learning, AI, and scripts).",
+        "SQL (specifically for database querying, analytics aggregations, and data preparation).",
+        "BI Tools (like Power BI, Tableau, and DAX for business reporting dashboards)."
+      ]
+    },
+    {
+      q: "What area of Artificial Intelligence excites you most?",
+      options: [
+        "Predictive Analytics (building models to forecast sales, prices, or customer churn).",
+        "Computer Vision & Deep Learning (training neural networks to classify images).",
+        "Generative AI & LLMs (building custom document search agents using vector databases)."
+      ]
+    },
+    {
+      q: "Which specific domain are you looking to target?",
+      options: [
+        "Core Machine Learning Engineering & Deep Learning model training.",
+        "Business Intelligence Analyst & Corporate Reporting dashboard design.",
+        "MLOps & AI Systems Engineering (deploying and monitoring production AI nodes)."
+      ]
+    },
+    {
+      q: "Which capstone project would you love to build?",
+      options: [
+        "A Customer Segmentation system using unsupervised clustering (K-Means).",
+        "An Enterprise document Q&A engine powered by Retrieval-Augmented Generation (RAG).",
+        "A real-time Credit Card Fraud Detection system analyzing millions of entries."
       ]
     }
   ];
@@ -296,49 +337,39 @@ export default function ToolsHub() {
     const updatedAnswers = [...quizAnswers, answerIdx];
     setQuizAnswers(updatedAnswers);
 
-    if (quizStep < QUIZ_QUESTIONS.length - 1) {
+    const questions = quizCourse === 'datascience' ? DATASCIENCE_QUIZ_QUESTIONS : MERN_QUIZ_QUESTIONS;
+
+    if (quizStep < questions.length - 1) {
       setQuizStep(quizStep + 1);
     } else {
-      let uiScore = 0;
-      let devScore = 0;
-      let dataScore = 0;
-      let cloudScore = 0;
-
-      updatedAnswers.forEach((ans, qIdx) => {
-        if (qIdx === 0) {
-          if (ans === 0) uiScore += 3;
-          else if (ans === 1) devScore += 3;
-          else if (ans === 2) dataScore += 3;
-          else if (ans === 3) cloudScore += 3;
-        } else if (qIdx === 1) {
-          if (ans === 0) devScore += 2;
-          else if (ans === 1) dataScore += 2;
-          else if (ans === 2) devScore += 3;
-          else if (ans === 3) cloudScore += 3;
-        } else if (qIdx === 2) {
-          if (ans === 0) uiScore += 2;
-          else if (ans === 1) devScore += 1;
-          else if (ans === 2) dataScore += 3;
-        } else if (qIdx === 3) {
-          if (ans === 0) devScore += 2;
-          else if (ans === 1) devScore += 3;
-          else if (ans === 2) dataScore += 3;
-          else if (ans === 3) cloudScore += 3;
-        }
-      });
-
       let match = COURSE_RECS['MERN Stack Development'];
-      let description = "MERN Stack Development + AI Integration is your ideal fit. You love writing core web application logic, building frontends with React, and setting up servers with Node.js!";
+      let description = "";
 
-      if (uiScore > devScore && uiScore > dataScore && uiScore > cloudScore) {
-        match = COURSE_RECS['UI/UX Design'];
-        description = "Graphic Design & UI/UX Design is your top recommendation. You have a great eye for visual style, design systems, and client interfaces!";
-      } else if (dataScore > devScore && dataScore > cloudScore) {
-        match = COURSE_RECS['Data Science & ML'];
-        description = "Data Science & Machine Learning Core matches your interests. You enjoy analytics, coding with Python, and training intelligence pipelines!";
-      } else if (cloudScore > devScore && cloudScore > dataScore) {
-        match = COURSE_RECS['Cloud & DevOps'];
-        description = "Cloud Computing & DevOps infrastructure matches your style. You enjoy container orchestration, cloud hosting, and shell scripting automation!";
+      if (quizCourse === 'mern') {
+        const primaryInterest = updatedAnswers[2]; // Index 2 is "What excites you most"
+        if (primaryInterest === 0) {
+          match = COURSE_RECS['MERN Stack Development'];
+          description = "Your answers suggest a Frontend-focused Fullstack path. You enjoy designing beautiful, responsive user interfaces and React components, while having full stack knowledge of databases.";
+        } else if (primaryInterest === 1) {
+          match = COURSE_RECS['MERN Stack Development'];
+          description = "Your answers suggest a Backend-focused Fullstack path. You excel at server routing, APIs, databases (MongoDB), and secure authentication flows.";
+        } else {
+          match = COURSE_RECS['MERN Stack Development'];
+          description = "You are a perfect fit for a Complete Fullstack Developer. You want to master React frontends, Express/Node backends, MongoDB databases, and connect them to AI APIs!";
+        }
+      } else {
+        // Data Science path selection
+        const domainTarget = updatedAnswers[3]; // Index 3 is "Which domain are you looking to target"
+        if (domainTarget === 0) {
+          match = COURSE_RECS['Data Science & ML'];
+          description = "Data Science & Machine Learning Core matches your interests. You enjoy model training, coding in Python, and statistics.";
+        } else if (domainTarget === 1) {
+          match = COURSE_RECS['Data Analytics'];
+          description = "Data Analytics & Business Intelligence is your ideal path. You want to query databases with SQL, organize data, and build interactive executive dashboards using Power BI.";
+        } else {
+          match = COURSE_RECS['MLOps'];
+          description = "MLOps & AI Systems Engineering matches your advanced goals. You want to focus on deploying models, building production pipelines, containerization (Docker/K8s), and serving LLMs.";
+        }
       }
 
       setQuizResult({
@@ -353,6 +384,7 @@ export default function ToolsHub() {
     setQuizStep(-1);
     setQuizAnswers([]);
     setQuizResult(null);
+    setQuizCourse(null);
   };
 
   return (
@@ -821,108 +853,138 @@ export default function ToolsHub() {
             </motion.div>
           )}
 
-          {activeTab === 'quiz' && (
-            <motion.div
-              key="quiz-tab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.25 }}
-              className="glass-premium border-glow-animate-light p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
+          {activeTab === 'quiz' && (() => {
+            const questions = quizCourse === 'datascience' ? DATASCIENCE_QUIZ_QUESTIONS : MERN_QUIZ_QUESTIONS;
+            return (
+              <motion.div
+                key="quiz-tab"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.25 }}
+                className="glass-premium border-glow-animate-light p-6 md:p-8 rounded-[28px] shadow-sm relative overflow-hidden space-y-8"
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
 
-              <div>
-                <h2 className="text-xl font-heading font-extrabold text-slate-900 flex items-center gap-2">
-                  <HelpCircle className="w-5 h-5 text-primary" /> Tech Career Path Quiz
-                </h2>
-                <p className="text-xs text-slate-400 font-bold mt-1 uppercase tracking-wider">Uncover your ideal specialization in under 60 seconds</p>
-              </div>
-
-              {quizStep === -1 && (
-                <div className="text-center py-8 space-y-6">
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto text-primary">
-                    <Compass className="w-8 h-8" />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-base font-heading font-black text-slate-900">Which Career Stacks Match Your Logic?</h3>
-                    <p className="text-xs text-slate-500 font-semibold max-w-sm mx-auto leading-relaxed">
-                      Answer 5 quick multiple choice questions to match your problem-solving style to software, analytics, design, or infrastructure.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setQuizStep(0)}
-                    className="px-8 py-3 bg-primary hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer transition-colors"
-                  >
-                    Start Career Quiz
-                  </button>
+                <div>
+                  <h2 className="text-xl font-heading font-extrabold text-slate-900 flex items-center gap-2">
+                    <HelpCircle className="w-5 h-5 text-primary" /> Tech Career Path Quiz
+                  </h2>
+                  <p className="text-xs text-slate-400 font-bold mt-1 uppercase tracking-wider">Uncover your ideal specialization in under 60 seconds</p>
                 </div>
-              )}
 
-              {quizStep >= 0 && quizStep < 5 && (
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-[10px] font-black uppercase text-slate-455">
-                      <span>Question {quizStep + 1} of 5</span>
-                      <span>{Math.round(((quizStep) / 5) * 100)}% Complete</span>
+                {quizStep === -1 && (
+                  <div className="py-4 space-y-6">
+                    <div className="text-center space-y-2">
+                      <h3 className="text-base font-heading font-black text-slate-900">Choose Your Learning Track to Start</h3>
+                      <p className="text-xs text-slate-500 font-semibold max-w-sm mx-auto leading-relaxed">
+                        Select your target domain. We will customize the questions to test your affinity and recommend the perfect specialization.
+                      </p>
                     </div>
-                    <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-primary transition-all duration-300" style={{ width: `${((quizStep + 1) / 5) * 100}%` }} />
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto">
+                      {/* MERN Option */}
+                      <button
+                        onClick={() => {
+                          setQuizCourse('mern');
+                          setQuizStep(0);
+                        }}
+                        className="p-6 rounded-2xl border border-slate-200 hover:border-primary bg-white hover:bg-primary/5 text-left transition-all duration-300 shadow-sm cursor-pointer outline-none group flex flex-col justify-between h-40"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
+                          <Code className="w-5 h-5" />
+                        </div>
+                        <div className="space-y-1 mt-4">
+                          <h4 className="text-sm font-heading font-black text-slate-955">MERN Stack Web Dev</h4>
+                          <p className="text-[10px] text-slate-550 font-semibold leading-relaxed">React, Next.js, APIs, Backend Servers & AI Integration.</p>
+                        </div>
+                      </button>
+
+                      {/* Data Science Option */}
+                      <button
+                        onClick={() => {
+                          setQuizCourse('datascience');
+                          setQuizStep(0);
+                        }}
+                        className="p-6 rounded-2xl border border-slate-200 hover:border-secondary bg-white hover:bg-secondary/5 text-left transition-all duration-300 shadow-sm cursor-pointer outline-none group flex flex-col justify-between h-40"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors shrink-0">
+                          <Database className="w-5 h-5" />
+                        </div>
+                        <div className="space-y-1 mt-4">
+                          <h4 className="text-sm font-heading font-black text-slate-955">Data Science & AI</h4>
+                          <p className="text-[10px] text-slate-550 font-semibold leading-relaxed">Python, Machine Learning, Power BI, and Deep Learning.</p>
+                        </div>
+                      </button>
                     </div>
                   </div>
+                )}
 
-                  <div className="space-y-4">
-                    <h3 className="text-base font-heading font-black text-slate-900 leading-snug">{QUIZ_QUESTIONS[quizStep].q}</h3>
-                    <div className="grid grid-cols-1 gap-3">
-                      {QUIZ_QUESTIONS[quizStep].options.map((option, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => handleQuizAnswer(idx)}
-                          className="w-full text-left p-4 rounded-xl border border-slate-200 hover:border-primary hover:bg-primary/5 transition-all text-xs font-bold text-slate-700 cursor-pointer outline-none flex justify-between items-center group"
-                        >
-                          <span className="max-w-[90%] leading-relaxed">{option}</span>
-                          <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors shrink-0" />
-                        </button>
-                      ))}
+                {quizStep >= 0 && quizStep < 5 && (
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] font-black uppercase text-slate-455">
+                        <span>Question {quizStep + 1} of 5</span>
+                        <span>{Math.round(((quizStep) / 5) * 100)}% Complete</span>
+                      </div>
+                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-full bg-primary transition-all duration-300" style={{ width: `${((quizStep + 1) / 5) * 100}%` }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="text-base font-heading font-black text-slate-900 leading-snug">{questions[quizStep].q}</h3>
+                      <div className="grid grid-cols-1 gap-3">
+                        {questions[quizStep].options.map((option, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => handleQuizAnswer(idx)}
+                            className="w-full text-left p-4 rounded-xl border border-slate-200 hover:border-primary hover:bg-primary/5 transition-all text-xs font-bold text-slate-700 cursor-pointer outline-none flex justify-between items-center group"
+                          >
+                            <span className="max-w-[90%] leading-relaxed">{option}</span>
+                            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors shrink-0" />
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              {quizStep === 5 && quizResult && (
-                <div className="space-y-6 pt-2">
-                  <div className="text-center space-y-3">
-                    <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center mx-auto text-emerald-500">
-                      <Trophy className="w-6 h-6 animate-bounce" />
+                {quizStep === 5 && quizResult && (
+                  <div className="space-y-6 pt-2">
+                    <div className="text-center space-y-3">
+                      <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center mx-auto text-emerald-500">
+                        <Trophy className="w-6 h-6 animate-bounce" />
+                      </div>
+                      <span className="text-[10px] text-slate-450 uppercase font-black tracking-wider block">Recommended Path Identified</span>
+                      <h3 className="text-xl font-heading font-black text-slate-900">{quizResult.match.name}</h3>
                     </div>
-                    <span className="text-[10px] text-slate-450 uppercase font-black tracking-wider block">Recommended Path Identified</span>
-                    <h3 className="text-xl font-heading font-black text-slate-900">{quizResult.match.name}</h3>
-                  </div>
 
-                  <div className="bg-slate-50/50 border border-slate-150 p-5 rounded-2xl text-center space-y-2">
-                    <p className="text-xs text-slate-600 font-semibold leading-relaxed max-w-lg mx-auto">
-                      {quizResult.description}
-                    </p>
-                  </div>
+                    <div className="bg-slate-50/50 border border-slate-150 p-5 rounded-2xl text-center space-y-2">
+                      <p className="text-xs text-slate-600 font-semibold leading-relaxed max-w-lg mx-auto">
+                        {quizResult.description}
+                      </p>
+                    </div>
 
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                    <button
-                      onClick={resetQuiz}
-                      className="px-6 py-3 border border-slate-200 hover:bg-slate-50 text-slate-655 font-bold text-xs rounded-xl cursor-pointer transition-colors"
-                    >
-                      Retake Quiz
-                    </button>
-                    <Link
-                      href={`/courses/${quizResult.match.slug}`}
-                      className="inline-flex h-11 items-center justify-center px-6 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-xs font-black shadow-md hover:opacity-95 transition-opacity cursor-pointer"
-                    >
-                      View Syllabus & Enroll
-                    </Link>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                      <button
+                        onClick={resetQuiz}
+                        className="px-6 py-3 border border-slate-200 hover:bg-slate-50 text-slate-655 font-bold text-xs rounded-xl cursor-pointer transition-colors"
+                      >
+                        Retake Quiz
+                      </button>
+                      <Link
+                        href={`/courses/${quizResult.match.slug}`}
+                        className="inline-flex h-11 items-center justify-center px-6 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-xs font-black shadow-md hover:opacity-95 transition-opacity cursor-pointer"
+                      >
+                        View Syllabus & Enroll
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              )}
-            </motion.div>
-          )}
+                )}
+              </motion.div>
+            );
+          })()}
         </AnimatePresence>
           </div>
 
