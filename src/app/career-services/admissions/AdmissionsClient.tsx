@@ -4,7 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Calendar, Clock, BookOpen, Check, HelpCircle,
-  PhoneCall, ArrowRight, Building, Award, CheckCircle2, ChevronRight
+  PhoneCall, ArrowRight, Building, Award, CheckCircle2, ChevronRight,
+  X, Sparkles, User, Play
 } from "lucide-react";
 import Link from "next/link";
 
@@ -56,6 +57,15 @@ const ADMISSION_COURSES = [
     eligibility: "Open (Beginner Friendly)",
     admission: "AWS, Google, Microsoft Cloud",
     tags: ["Global Credentials", "Skills Certification"]
+  },
+  {
+    title: "Other UGC Approved Degrees",
+    duration: "Flexible",
+    mode: "Regular / Online / Distance",
+    eligibility: "UG / PG Requirements",
+    admission: "Custom Support Provided",
+    tags: ["Custom Option", "Any Degree"],
+    isCustom: true
   }
 ];
 
@@ -78,6 +88,76 @@ const TIMELINE_STEPS = [
 
 export default function AdmissionsPage() {
   const [selectedTimelineStep, setSelectedTimelineStep] = useState(1);
+
+  // Modal & Form States for College Admissions
+  const [showModal, setShowModal] = useState(false);
+  const [selectedDegree, setSelectedDegree] = useState("");
+  const [isCustomDegree, setIsCustomDegree] = useState(false);
+  const [customDegreeName, setCustomDegreeName] = useState("");
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [status, setStatus] = useState("Pursuing");
+  const [year, setYear] = useState("");
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleApplyClick = (courseTitle: string) => {
+    setSelectedDegree(courseTitle);
+    if (courseTitle.includes("Other")) {
+      setIsCustomDegree(true);
+    } else {
+      setIsCustomDegree(false);
+    }
+    setCustomDegreeName("");
+    setSubmitted(false);
+    setShowModal(true);
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !phone || !qualification || !year) return;
+
+    setSubmitting(true);
+    const finalCourseTitle = isCustomDegree 
+      ? `College Admission: ${customDegreeName || "Custom Degree Requested"}`
+      : `College Admission: ${selectedDegree}`;
+
+    try {
+      const res = await fetch("/api/enroll", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          qualification,
+          status,
+          year,
+          courseTitle: finalCourseTitle,
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setShowModal(false);
+          // Clear inputs
+          setName("");
+          setPhone("");
+          setQualification("");
+          setYear("");
+        }, 2000);
+      }
+    } catch (err) {
+      console.error("Error submitting admissions form:", err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
@@ -180,9 +260,12 @@ export default function AdmissionsPage() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-slate-100 flex gap-2">
-                  <Link href="/contact" className="flex-1 inline-flex h-10 items-center justify-center bg-primary text-white text-xs font-bold rounded-xl hover:bg-blue-700 shadow-sm transition-colors">
+                  <button
+                    onClick={() => handleApplyClick(c.title)}
+                    className="flex-1 inline-flex h-10 items-center justify-center bg-primary text-white text-xs font-bold rounded-xl hover:bg-blue-700 shadow-sm transition-colors cursor-pointer"
+                  >
                     Apply Now
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
@@ -393,12 +476,12 @@ export default function AdmissionsPage() {
 
             {/* Apply Button */}
             <div className="pt-2">
-              <Link
-                href="/contact"
-                className="w-full bg-primary hover:bg-blue-600 text-white font-bold text-center py-4 rounded-2xl transition-colors shadow-md shadow-primary/10 cursor-pointer block text-sm"
+              <button
+                onClick={() => handleApplyClick("Gap Year Degree Recovery")}
+                className="w-full bg-primary hover:bg-blue-600 text-white font-bold text-center py-4 rounded-2xl transition-colors shadow-md shadow-primary/10 cursor-pointer block text-sm border-0 outline-none"
               >
                 Apply Now
-              </Link>
+              </button>
             </div>
           </div>
         </section>
@@ -420,6 +503,173 @@ export default function AdmissionsPage() {
         </section>
 
       </div>
+
+      {/* ── College Admission Application Modal ── */}
+      <AnimatePresence>
+        {showModal && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowModal(false)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+            />
+
+            {/* Modal Box */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white rounded-[28px] border border-slate-150 shadow-2xl p-6 md:p-8 w-full max-w-lg relative z-10 overflow-hidden"
+            >
+              {/* Top Sparkle Banner decoration */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-indigo-500 to-secondary" />
+
+              <button
+                onClick={() => setShowModal(false)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="space-y-4 mb-6">
+                <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] text-primary font-bold uppercase tracking-wider">
+                  <GraduationCap className="w-3.5 h-3.5" /> Registry Application
+                </div>
+                <h3 className="text-xl font-heading font-extrabold text-slate-900 leading-tight">
+                  {isCustomDegree ? "Request Other College Degree" : `Apply for ${selectedDegree}`}
+                </h3>
+                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+                  Enter your contact and academic profile details. A university coordinator will call you back within 24 hours.
+                </p>
+              </div>
+
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="py-12 text-center space-y-4"
+                >
+                  <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center mx-auto text-emerald-500">
+                    <CheckCircle2 className="w-6 h-6 animate-bounce" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-base font-heading font-extrabold text-slate-900">Application Dispatch Success!</h4>
+                    <p className="text-xs text-slate-500 font-semibold">Your request has been filed in our master registry sheet.</p>
+                  </div>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  {/* Name Input */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-primary" /> Full Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Rahul Kumar"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-xs font-bold text-slate-800 placeholder-slate-400 bg-slate-50"
+                    />
+                  </div>
+
+                  {/* Phone Input */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
+                      <PhoneCall className="w-3.5 h-3.5 text-primary" /> Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      pattern="[0-9]{10}"
+                      maxLength={10}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="10-digit mobile number"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-xs font-bold text-slate-800 placeholder-slate-400 bg-slate-50"
+                    />
+                  </div>
+
+                  {/* Separate input if custom degree is requested */}
+                  {isCustomDegree && (
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Specify Required Degree / Course
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={customDegreeName}
+                        onChange={(e) => setCustomDegreeName(e.target.value)}
+                        placeholder="e.g. B.Sc Physics, B.Com, M.Sc IT"
+                        className="w-full px-4 py-3 rounded-xl border border-primary/40 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-xs font-bold text-slate-800 placeholder-slate-400 bg-white"
+                      />
+                    </div>
+                  )}
+
+                  {/* Current Qualification */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5 text-primary" /> Current Qualification
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={qualification}
+                      onChange={(e) => setQualification(e.target.value)}
+                      placeholder="e.g. 12th Pass, BCA Graduate, B.Com"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-xs font-bold text-slate-800 placeholder-slate-400 bg-slate-50"
+                    />
+                  </div>
+
+                  {/* Pursuing / Completed Status */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider">Status</label>
+                      <select
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-xs font-bold text-slate-800 bg-slate-50 cursor-pointer"
+                      >
+                        <option value="Pursuing">Pursuing</option>
+                        <option value="Completed">Completed</option>
+                      </select>
+                    </div>
+
+                    {/* Graduation Year */}
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider">Passing / Expected Year</label>
+                      <input
+                        type="number"
+                        required
+                        min="2010"
+                        max="2035"
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                        placeholder="e.g. 2026"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-xs font-bold text-slate-800 placeholder-slate-400 bg-slate-50"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full inline-flex h-12 items-center justify-center bg-gradient-to-r from-primary to-secondary text-white rounded-xl text-xs font-black shadow-md hover:opacity-95 transition-opacity disabled:opacity-50 cursor-pointer mt-2"
+                  >
+                    {submitting ? "Submitting Request..." : "Submit Application Registry"}
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
