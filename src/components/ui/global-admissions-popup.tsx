@@ -15,9 +15,23 @@ export default function GlobalAdmissionsPopup() {
   const [qualification, setQualification] = useState('');
   const [status, setStatus] = useState('Pursuing');
   const [year, setYear] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState('MERN Stack Development + AI Integration');
   
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const COURSE_OPTIONS = [
+    "MERN Stack Development + AI Integration",
+    "Python Programming & Automation",
+    "Data Science & Machine Learning Core",
+    "Data Analytics & Business Intelligence",
+    "Java Full Stack Developer Program",
+    "Cloud Computing & DevOps Infrastructure",
+    "Digital Marketing with AI & Growth Hacking",
+    "Graphic Design + UI/UX Product Design",
+    "Graphic Designing + Videography / Video Editing",
+    "Industry-Ready MLOps & AI Systems Engineering"
+  ];
 
   useEffect(() => {
     console.log("GlobalAdmissionsPopup: Component mounted on path:", pathname);
@@ -32,12 +46,12 @@ export default function GlobalAdmissionsPopup() {
     }
 
     if (!isSubmitted) {
-      // Trigger popup after 1.5 seconds for faster testing and display
-      console.log("GlobalAdmissionsPopup: Setting timer to display form in 1500ms");
+      // Trigger popup after 5 seconds (5000ms)
+      console.log("GlobalAdmissionsPopup: Setting timer to display form in 5000ms");
       const timer = setTimeout(() => {
         console.log("GlobalAdmissionsPopup: Timer triggered, opening form...");
         setIsOpen(true);
-      }, 1500);
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [pathname]);
@@ -52,7 +66,7 @@ export default function GlobalAdmissionsPopup() {
     if (!name || !phone || !qualification || !year) return;
 
     setSubmitting(true);
-    console.log("GlobalAdmissionsPopup: Submitting lead details...", { name, phone, qualification, status, year });
+    console.log("GlobalAdmissionsPopup: Submitting lead details...", { name, phone, qualification, status, year, selectedCourse });
     try {
       const res = await fetch('/api/enroll', {
         method: 'POST',
@@ -65,7 +79,7 @@ export default function GlobalAdmissionsPopup() {
           qualification,
           status,
           year,
-          courseTitle: `Global Popup Form (Page: ${pathname})`,
+          courseTitle: selectedCourse,
         }),
       });
 
@@ -149,9 +163,28 @@ export default function GlobalAdmissionsPopup() {
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-3.5">
+                  {/* Select Course Dropdown */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                      Select Preferred Course <span className="text-rose-500 font-extrabold">*</span>
+                    </label>
+                    <select
+                      required
+                      value={selectedCourse}
+                      onChange={(e) => setSelectedCourse(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-primary/50 focus:bg-white font-semibold transition-all cursor-pointer"
+                    >
+                      {COURSE_OPTIONS.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+
                   {/* Name Input */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">Full Name</label>
+                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                      Full Name <span className="text-rose-500 font-extrabold">*</span>
+                    </label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
@@ -167,16 +200,19 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Phone Input */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">Phone Number</label>
+                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                      Phone Number <span className="text-rose-500 font-extrabold">*</span>
+                    </label>
                     <div className="relative">
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
                         type="tel"
                         required
+                        maxLength={10}
                         pattern="[0-9]{10}"
                         placeholder="e.g. 9667975616"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-primary/50 focus:bg-white text-sm font-semibold transition-all"
                       />
                     </div>
@@ -184,7 +220,9 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Class / Graduation */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">Class / Graduation degree</label>
+                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                      Class / Graduation degree <span className="text-rose-500 font-extrabold">*</span>
+                    </label>
                     <div className="relative">
                       <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
@@ -200,7 +238,9 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Status Selection (Pursuing / Completed) */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">Academic Status</label>
+                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                      Academic Status <span className="text-rose-500 font-extrabold">*</span>
+                    </label>
                     <div className="grid grid-cols-2 gap-3">
                       <button
                         type="button"
@@ -229,15 +269,19 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Graduation Year */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">Graduation / Passing Year</label>
+                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                      Graduation / Passing Year <span className="text-rose-500 font-extrabold">*</span>
+                    </label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
                         type="text"
                         required
+                        maxLength={4}
+                        pattern="[0-9]{4}"
                         placeholder="e.g. 2026"
                         value={year}
-                        onChange={(e) => setYear(e.target.value)}
+                        onChange={(e) => setYear(e.target.value.replace(/\D/g, '').slice(0, 4))}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-primary/50 focus:bg-white text-sm font-semibold transition-all"
                       />
                     </div>

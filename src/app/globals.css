@@ -19,11 +19,13 @@
 }
 
 /* ── Base ── */
+html,
 body {
   background-color: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-body);
   overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* ── Gradient Text Utility ── */
@@ -104,10 +106,14 @@ body {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-float-delayed {
   animation: float-delayed 8s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ── Marquee Animation ── */
@@ -118,6 +124,8 @@ body {
 
 .animate-marquee {
   animation: marquee 35s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ── Spin and Counter-Spin Animations ── */
@@ -133,10 +141,14 @@ body {
 
 .animate-spin-slow {
   animation: spin-slow 40s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-counter-spin {
   animation: counter-spin 40s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ── Premium Border Glow & Particle Keyframes ── */

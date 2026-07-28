@@ -1,45 +1,47 @@
+import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
+import TrustStrip from '@/components/sections/trust-strip';
 import HiringPartners from '@/components/sections/hiring-partners';
 import TechnologyStack from '@/components/sections/technology-stack';
-import WhyChooseUs from '@/components/sections/why-choose-us';
-import FeaturedPrograms from '@/components/sections/featured-programs';
-import LiveProjects from '@/components/sections/live-projects';
-import CareerRoadmap from '@/components/sections/career-roadmap';
-import SuccessStories from '@/components/sections/success-stories';
-import FreeResources from '@/components/sections/free-resources';
-import Founder from '@/components/sections/founder';
-import LiveCounter from '@/components/sections/live-counter';
-
-import FAQ from '@/components/sections/faq';
-import Newsletter from '@/components/sections/newsletter';
-
 import SchemaMarkup from '@/components/seo/schema-markup';
+
+// Below-the-fold dynamic imports for route-level code splitting & optimal LCP/INP
+const WhyChooseUs = dynamic(() => import('@/components/sections/why-choose-us'));
+const FeaturedPrograms = dynamic(() => import('@/components/sections/featured-programs'));
+const LiveProjects = dynamic(() => import('@/components/sections/live-projects'));
+const CareerRoadmap = dynamic(() => import('@/components/sections/career-roadmap'));
+const FreeResources = dynamic(() => import('@/components/sections/free-resources'));
+const Founder = dynamic(() => import('@/components/sections/founder'));
+const LiveCounter = dynamic(() => import('@/components/sections/live-counter'));
+const FAQ = dynamic(() => import('@/components/sections/faq'));
+const Newsletter = dynamic(() => import('@/components/sections/newsletter'));
+
+export const metadata = {
+  title: 'KodeToCareer | AI, MERN Stack & Data Science Courses with Placement Assistance',
+  description: 'Master AI, MERN Stack, Java, Cloud DevOps, and Data Science with live cohorts, guaranteed internships, and 100% placement support in India. Join online or offline.',
+};
+
+
 
 export default function Home() {
   const orgSchema = {
-    name: 'Kode To Career',
+    name: 'KodeToCareer',
     url: 'https://kodetocareer.com',
     logo: 'https://kodetocareer.com/main-logo.png',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+91-9999999999',
-      contactType: 'Admissions'
-    },
     sameAs: [
-      'https://github.com/KAYHANH/kodetocareer-website',
-      'https://linkedin.com/company/kodetocareer'
+      'https://www.linkedin.com/company/kodetocareer',
+      'https://www.instagram.com/kodetocareer',
+      'https://www.youtube.com/@KodeToCareer',
+      'https://www.facebook.com/kodetocareer'
     ]
   };
 
   const websiteSchema = {
-    name: 'Kode To Career',
+    name: 'KodeToCareer',
     url: 'https://kodetocareer.com',
     potentialAction: {
       '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://kodetocareer.com/courses?search={search_term_string}'
-      },
+      target: 'https://kodetocareer.com/courses?search={search_term_string}',
       'query-input': 'required name=search_term_string'
     }
   };
@@ -50,26 +52,10 @@ export default function Home() {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'What courses does KodeToCareer offer?',
+        name: 'Do you offer direct placements?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'We offer courses in AI & Machine Learning, MERN Stack, Java Full Stack, Python, Data Analytics, and Digital Marketing. Each course is designed with industry-relevant curriculum and hands-on projects.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'Do I need prior coding experience?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Not at all! Our beginner programs start from scratch. We guide you from zero to job-ready with structured learning paths.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'What is the placement guarantee?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'We offer dedicated placement support with a 95% placement rate. Our placement cell works with 500+ hiring partners to connect you with opportunities.'
+          text: 'Yes, we coordinate directly with hiring managers across our 100+ partner network to dispatch audited portfolios and schedule mock interviews.'
         }
       },
       {
@@ -97,13 +83,13 @@ export default function Home() {
       <SchemaMarkup type="WebSite" data={websiteSchema} />
       <SchemaMarkup type="FAQPage" data={faqSchema} />
       <Hero />
+      <TrustStrip />
       <HiringPartners />
       <TechnologyStack />
       <WhyChooseUs />
       <FeaturedPrograms />
       <LiveProjects />
       <CareerRoadmap />
-      <SuccessStories />
       <FreeResources />
       <Founder />
       <LiveCounter />

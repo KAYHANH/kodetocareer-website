@@ -130,8 +130,8 @@ export default function UpcomingWorkshops() {
                   </h3>
 
                   {/* Host */}
-                  <p className="text-xs font-semibold text-slate-400 mt-2">
-                    Hosted by <span className="text-slate-700">{ws.host}</span>
+                  <p className="text-xs font-semibold text-slate-600 mt-2">
+                    Hosted by <span className="text-slate-800">{ws.host}</span>
                   </p>
 
                   {/* Description */}

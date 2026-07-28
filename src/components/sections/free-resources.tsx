@@ -2,16 +2,18 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Map, Sparkles, Code2, Database, Download, X, CheckCircle2 } from "lucide-react";
+import { FileText, Map, Sparkles, Code2, Database, Download, X, CheckCircle2, LucideIcon } from "lucide-react";
 
 interface Resource {
   id: string;
   title: string;
   category: string;
-  icon: any;
+  icon: LucideIcon;
   pages: number;
   downloads: string;
   colorClass: string;
+  downloadUrl: string;
+  fileName: string;
 }
 
 const RESOURCES: Resource[] = [
@@ -23,6 +25,8 @@ const RESOURCES: Resource[] = [
     pages: 2,
     downloads: "4.2k",
     colorClass: "from-blue-500/10 to-cyan-500/10 text-blue-600 border-blue-100",
+    downloadUrl: "/ats-software-developer-resume.pdf",
+    fileName: "ATS_Software_Developer_Resume.pdf"
   },
   {
     id: "roadmap-guide",
@@ -32,6 +36,8 @@ const RESOURCES: Resource[] = [
     pages: 42,
     downloads: "8.9k",
     colorClass: "from-violet-500/10 to-purple-500/10 text-violet-600 border-violet-100",
+    downloadUrl: "/developer-roadmap-2026.pdf",
+    fileName: "developer-roadmap-2026.pdf"
   },
   {
     id: "interview-prep",
@@ -41,6 +47,8 @@ const RESOURCES: Resource[] = [
     pages: 25,
     downloads: "6.1k",
     colorClass: "from-emerald-500/10 to-teal-500/10 text-emerald-600 border-emerald-100",
+    downloadUrl: "/top-100-system-design-interview-questions-2026.pdf",
+    fileName: "Top_100_System_Design_Questions_2026.pdf"
   },
   {
     id: "git-guide",
@@ -50,6 +58,8 @@ const RESOURCES: Resource[] = [
     pages: 5,
     downloads: "3.5k",
     colorClass: "from-amber-500/10 to-orange-500/10 text-amber-600 border-amber-100",
+    downloadUrl: "/git-github-guide.pdf",
+    fileName: "git_github_guide.pdf"
   },
   {
     id: "sql-cheat",
@@ -59,12 +69,15 @@ const RESOURCES: Resource[] = [
     pages: 6,
     downloads: "5.0k",
     colorClass: "from-rose-500/10 to-pink-500/10 text-rose-600 border-rose-100",
+    downloadUrl: "/sql-cheatsheet.pdf",
+    fileName: "sql_cheatsheet.pdf"
   },
 ];
 
 export default function FreeResources() {
   const [activeDownload, setActiveDownload] = useState<Resource | null>(null);
   const [emailInput, setEmailInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState("");
   const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -72,21 +85,48 @@ export default function FreeResources() {
     setActiveDownload(resource);
     setDownloadSuccess(false);
     setEmailInput("");
+    setPhoneInput("");
   };
 
-  const handleDownloadSubmit = (e: React.FormEvent) => {
+  const handleDownloadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!emailInput) return;
+    if (!emailInput || !phoneInput || !activeDownload) return;
     setSubmitting(true);
 
+      // POST to /api/enroll to capture the lead in Google Sheets
+      fetch("/api/enroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: `Download: ${emailInput}`,
+          phone: phoneInput,
+          qualification: "N/A",
+          status: "N/A",
+          year: "N/A",
+          courseTitle: `Free Resource: ${activeDownload.title}`
+        })
+      }).then(res => {
+        if (!res.ok) console.warn("Failed to submit lead to API");
+      }).catch(err => {
+        console.error("Error submitting lead:", err);
+      });
+
+    // Trigger local download in browser
+    const link = document.createElement("a");
+    link.href = activeDownload.downloadUrl;
+    link.download = activeDownload.fileName;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setSubmitting(false);
+    setDownloadSuccess(true);
     setTimeout(() => {
-      setSubmitting(false);
-      setDownloadSuccess(true);
-      setTimeout(() => {
-        setActiveDownload(null);
-        setDownloadSuccess(false);
-      }, 2000);
-    }, 1500);
+      setActiveDownload(null);
+      setDownloadSuccess(false);
+    }, 2000);
   };
 
   return (
@@ -130,7 +170,7 @@ export default function FreeResources() {
                     <Icon className="w-5 h-5" />
                   </div>
 
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                  <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider block mb-2">
                     {res.category}
                   </span>
 
@@ -140,7 +180,7 @@ export default function FreeResources() {
                 </div>
 
                 <div className="mt-6 border-t border-slate-50 pt-4 flex flex-col gap-3">
-                  <div className="flex justify-between text-[10px] font-bold text-slate-400">
+                  <div className="flex justify-between text-[10px] font-bold text-slate-600">
                     <span>{res.pages} Pages</span>
                     <span>{res.downloads} Downloads</span>
                   </div>
@@ -199,20 +239,35 @@ export default function FreeResources() {
               ) : (
                 <form onSubmit={handleDownloadSubmit} className="space-y-4">
                   <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                    Provide your professional email address to secure your free copies instantly.
+                    Provide your professional email and contact number to secure your free copies instantly.
                   </p>
 
-                  <div className="space-y-1">
-                    <label htmlFor="modal-email" className="sr-only">Email address</label>
-                    <input
-                      id="modal-email"
-                      type="email"
-                      required
-                      placeholder="name@company.com"
-                      value={emailInput}
-                      onChange={(e) => setEmailInput(e.target.value)}
-                      className="w-full h-11 border border-slate-200 bg-slate-50 px-4 rounded-xl text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/40"
-                    />
+                  <div className="space-y-3">
+                    <div>
+                      <label htmlFor="modal-email" className="sr-only">Email address</label>
+                      <input
+                        id="modal-email"
+                        type="email"
+                        required
+                        placeholder="Email"
+                        value={emailInput}
+                        onChange={(e) => setEmailInput(e.target.value)}
+                        className="w-full h-11 border border-slate-200 bg-slate-50 px-4 rounded-xl text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/40"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="modal-phone" className="sr-only">Contact Number</label>
+                      <input
+                        id="modal-phone"
+                        type="tel"
+                        required
+                        placeholder="Contact Number"
+                        value={phoneInput}
+                        onChange={(e) => setPhoneInput(e.target.value)}
+                        className="w-full h-11 border border-slate-200 bg-slate-50 px-4 rounded-xl text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/40"
+                      />
+                    </div>
                   </div>
 
                   <button

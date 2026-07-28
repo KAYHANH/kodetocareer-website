@@ -191,37 +191,14 @@ export default function TechStackCircle() {
       duration: Math.random() * 3 + 2,
       delay: Math.random() * 2,
     }));
-    setParticles(generated);
+    const t = setTimeout(() => setParticles(generated), 0);
+    return () => clearTimeout(t);
   }, []);
 
   // Animation Ref variables
   const orbitRef = useRef<HTMLDivElement>(null);
   const angleRef = useRef(0);
   const isHoveredRef = useRef(false);
-
-  // Smooth orbit animation loop (zero-re-render)
-  useEffect(() => {
-    let frameId: number;
-    const animate = () => {
-      if (!isHoveredRef.current) {
-        // ~35s per revolution (0.12 degree per frame at 60fps)
-        angleRef.current = (angleRef.current + 0.12) % 360;
-        
-        if (orbitRef.current) {
-          orbitRef.current.style.transform = `rotate(${angleRef.current}deg)`;
-        }
-        
-        // Counter rotate each icon to keep it upright
-        const counterIcons = document.querySelectorAll(".counter-rotate-icon");
-        counterIcons.forEach((el) => {
-          (el as HTMLElement).style.transform = `rotate(${-angleRef.current}deg)`;
-        });
-      }
-      frameId = requestAnimationFrame(animate);
-    };
-    frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
-  }, []);
 
   // Parallax mouse movements
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -251,7 +228,7 @@ export default function TechStackCircle() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative flex items-center justify-center w-full h-full min-h-[480px] lg:min-h-[640px] overflow-visible select-none"
+      className="relative flex items-center justify-center w-full h-full min-h-[320px] sm:min-h-[480px] lg:min-h-[640px] overflow-visible select-none"
     >
       {/* ── Background Moving Particles / Stars ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
@@ -277,7 +254,7 @@ export default function TechStackCircle() {
           transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`,
           transition: "transform 0.15s ease-out",
         }}
-        className="scale-[0.45] sm:scale-[0.6] md:scale-[0.7] lg:scale-[0.65] xl:scale-[0.8] 2xl:scale-95 transition-transform duration-500 origin-center flex items-center justify-center relative w-[680px] h-[680px]"
+        className="scale-[0.38] min-[400px]:scale-[0.45] sm:scale-[0.55] md:scale-[0.65] lg:scale-[0.6] xl:scale-[0.72] 2xl:scale-90 transition-transform duration-500 origin-center flex items-center justify-center relative w-[680px] h-[680px]"
       >
         {/* Ring 4: Soft blurred outer glow */}
         <div className="absolute w-[700px] h-[700px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" />
@@ -320,11 +297,30 @@ export default function TechStackCircle() {
         {/* ── Rotating Orbit Container ── */}
         <div
           ref={orbitRef}
-          className={`relative w-[620px] h-[620px] ${hoveredTech ? "z-30" : "z-10"}`}
+          className={`relative w-[620px] h-[620px] tech-orbit-active ${hoveredTech ? "tech-paused z-30" : "z-10"}`}
         >
           {/* Animated Network Connection Lines inside the rotating container */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
             <style dangerouslySetInnerHTML={{__html: `
+              @keyframes tech-orbit {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+              @keyframes tech-counter-orbit {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(-360deg); }
+              }
+              .tech-orbit-active {
+                animation: tech-orbit 45s linear infinite;
+                will-change: transform;
+              }
+              .tech-counter-active {
+                animation: tech-counter-orbit 45s linear infinite;
+                will-change: transform;
+              }
+              .tech-paused, .tech-paused .tech-counter-active {
+                animation-play-state: paused !important;
+              }
               @keyframes line-dash-anim-sub {
                 0% { stroke-dashoffset: 0; }
                 100% { stroke-dashoffset: -100; }
@@ -407,7 +403,7 @@ export default function TechStackCircle() {
                 <div
                   onMouseEnter={() => onIconHoverStart(tech)}
                   onMouseLeave={onIconHoverEnd}
-                  className="counter-rotate-icon relative flex items-center justify-center"
+                  className="counter-rotate-icon tech-counter-active relative flex items-center justify-center"
                 >
                   <div
                     className={`group flex items-center justify-center w-22 h-22 rounded-full border bg-white/95 shadow-md transition-all duration-300 cursor-pointer ${

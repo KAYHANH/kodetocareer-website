@@ -8,7 +8,8 @@ export default function HiringPartners() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const t = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(t);
   }, []);
 
   if (!mounted) {
@@ -73,22 +74,28 @@ export default function HiringPartners() {
           return (
             <div 
               key={rowIndex} 
-              className="flex overflow-hidden select-none w-full relative"
+              className={`overflow-hidden select-none w-full relative ${rowIndex >= 2 ? "hidden md:flex" : "flex"}`}
             >
               {/* Dynamic keyframe generation */}
               <style dangerouslySetInnerHTML={{__html: `
                 @keyframes ${animName} {
-                  0% { transform: translateX(${direction === "left" ? "0%" : "-50%"}); }
-                  100% { transform: translateX(${direction === "left" ? "-50%" : "0%"}); }
+                  0% { transform: translate3d(${direction === "left" ? "0,0,0" : "-50%,0,0"}); }
+                  100% { transform: translate3d(${direction === "left" ? "-50%,0,0" : "0,0,0"}); }
                 }
                 .${animName}-class {
                   animation: ${animName} ${speed}s linear infinite;
+                  will-change: transform;
+                  transform: translateZ(0);
+                  backface-visibility: hidden;
                 }
               `}} />
 
-              <div className={`flex gap-6 py-2 whitespace-nowrap min-w-full items-center ${animName}-class`}>
-                {rowItems.map((filename, idx) => {
-                  const displayName = filename.replace(".svg", "").replace(/-/g, " ");
+              <div className={`flex gap-4 md:gap-6 py-2 whitespace-nowrap min-w-full items-center ${animName}-class`}>
+                {/* Original items - visible to crawlers */}
+                {rowItems.slice(0, rowItems.length / 2).map((filename, idx) => {
+                  let displayName = filename.replace(".svg", "").replace(/-/g, " ");
+                  if (displayName.toLowerCase() === "dotnet") displayName = ".NET";
+                  if (displayName.toLowerCase() === "dotnet core") displayName = ".NET Core";
                   return (
                     <div
                       key={`${filename}-${idx}`}
@@ -110,6 +117,34 @@ export default function HiringPartners() {
                     </div>
                   );
                 })}
+                {/* Cloned items for seamless loop - hidden from crawlers & screen readers */}
+                <span aria-hidden="true" className="contents">
+                  {rowItems.slice(rowItems.length / 2).map((filename, idx) => {
+                    let displayName = filename.replace(".svg", "").replace(/-/g, " ");
+                    if (displayName.toLowerCase() === "dotnet") displayName = ".NET";
+                    if (displayName.toLowerCase() === "dotnet core") displayName = ".NET Core";
+                    return (
+                      <div
+                        key={`clone-${filename}-${idx}`}
+                        className="inline-flex items-center gap-2.5 px-4.5 py-2.5 rounded-full bg-white border border-blue-50/80 shadow-[0_4px_12px_rgba(37,99,235,0.02)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.06)] hover:border-primary/20 hover:scale-105 hover:z-30 transition-all duration-300 cursor-pointer group"
+                      >
+                        <span className="w-5.5 h-5.5 flex items-center justify-center flex-shrink-0 relative">
+                          <Image
+                            src={`/svg/${filename}`}
+                            width={22}
+                            height={22}
+                            alt=""
+                            className="object-contain w-full h-full transition-transform duration-300 group-hover:rotate-6"
+                            unoptimized
+                          />
+                        </span>
+                        <span className="text-xs font-semibold text-slate-700 group-hover:text-primary transition-colors">
+                          {displayName}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </span>
               </div>
             </div>
           );

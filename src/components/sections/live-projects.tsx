@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layout, Play, ExternalLink, GitBranch, Heart, Eye } from "lucide-react";
+import { Layout, Play, ExternalLink, GitBranch, Heart, Eye, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface StudentProject {
   title: string;
@@ -57,11 +58,11 @@ const PROJECTS: StudentProject[] = [
 
           {/* Quick replies */}
           <div className="flex gap-2 ml-1">
-            <span className="bg-white border border-slate-200 text-slate-400 px-3 py-1 rounded-xl text-[8px] font-bold shadow-sm cursor-pointer hover:bg-slate-50">
+            <span className="bg-white border border-slate-200 text-slate-600 px-3 py-1 rounded-xl text-[8px] font-bold shadow-sm cursor-pointer hover:bg-slate-50">
               Yes, please!
             </span>
             <span className="bg-white border border-slate-200 text-blue-500 px-3 py-1 rounded-xl text-[8px] font-bold shadow-sm cursor-pointer hover:bg-slate-50">
-              No, I've got this
+              No, I&apos;ve got this
             </span>
           </div>
 
@@ -78,7 +79,7 @@ const PROJECTS: StudentProject[] = [
 
           {/* Bip Health Message 2 */}
           <div className="bg-white text-slate-800 p-2.5 rounded-2xl rounded-tl-none shadow-sm max-w-[82%] self-start border border-slate-100 font-medium leading-relaxed">
-            Here's a list of recipes to try out this week, high in protein and low on carbs.
+            Here&apos;s a list of recipes to try out this week, high in protein and low on carbs.
           </div>
 
           {/* Weekly Recipes Button */}
@@ -722,7 +723,7 @@ export default function LiveProjects() {
             Built by Students, Trusted by Industry
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto text-base md:text-lg font-medium">
-            We don't build placeholder todo-apps. Explore actual production platforms architected and coded from scratch by students during their bootcamps.
+            We don&apos;t build placeholder todo-apps. Explore actual production platforms architected and coded from scratch by students during their bootcamps.
           </p>
         </div>
 
@@ -749,7 +750,7 @@ export default function LiveProjects() {
                       }`}>
                         {proj.category}
                       </span>
-                      <span className="text-[10px] font-semibold text-slate-400">
+                      <span className="text-[10px] font-semibold text-slate-600">
                         {proj.studentBatch.split(" (")[0]}
                       </span>
                     </div>
@@ -758,14 +759,14 @@ export default function LiveProjects() {
                     }`}>
                       {proj.title}
                     </h3>
-                    <p className="text-xs text-slate-500 mt-1 font-medium line-clamp-2">
+                    <p className="text-xs text-slate-600 mt-1 font-medium line-clamp-2">
                       {proj.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between border-t border-slate-100/50 mt-4 pt-3 text-[11px] font-semibold text-slate-400">
+                  <div className="flex items-center justify-between border-t border-slate-100/50 mt-4 pt-3 text-[11px] font-semibold text-slate-600">
                     <span>By {proj.studentName}</span>
-                    <span className="text-slate-500">{proj.studentBatch.includes("Placed") ? "✓ Placed" : ""}</span>
+                    <span className="text-slate-700">{proj.studentBatch.includes("Placed") ? "✓ Placed" : ""}</span>
                   </div>
                 </div>
               );
@@ -784,7 +785,7 @@ export default function LiveProjects() {
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
                   </div>
-                  <div className="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-1 text-[10px] text-slate-400 font-mono flex items-center justify-between truncate">
+                  <div className="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-1 text-[10px] text-slate-600 font-mono flex items-center justify-between truncate">
                     <span>https://localhost:3000/student-apps/{PROJECTS[activeIdx].title.toLowerCase().replace(/ /g, "-")}</span>
                     <Layout className="w-3 h-3 text-slate-300" />
                   </div>
@@ -813,13 +814,13 @@ export default function LiveProjects() {
                   <h4 className="text-sm font-extrabold text-slate-900 leading-none">
                     {PROJECTS[activeIdx].title}
                   </h4>
-                  <p className="text-xs font-semibold text-slate-400 mt-1.5">
+                  <p className="text-xs font-semibold text-slate-600 mt-1.5">
                     Coded by <strong className="text-slate-700">{PROJECTS[activeIdx].studentName}</strong> • {PROJECTS[activeIdx].studentBatch}
                   </p>
                 </div>
 
                 <div className="flex gap-2">
-                  <div className="flex items-center gap-1 text-[11px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
+                  <div className="flex items-center gap-1 text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
                     <Eye className="w-3.5 h-3.5" /> {PROJECTS[activeIdx].stats.views} Views
                   </div>
                   <div className="flex items-center gap-1 text-[11px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
@@ -830,6 +831,18 @@ export default function LiveProjects() {
             </div>
           </div>
         </div>
+
+        {/* View All Projects CTA */}
+        <div className="text-center mt-12">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[14px] bg-[#EFF6FF] border border-blue-200 text-primary font-bold text-xs hover:bg-blue-100 transition-all cursor-pointer"
+          >
+            Explore All Student Case Studies
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
       </div>
     </section>
   );

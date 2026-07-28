@@ -125,7 +125,7 @@ export default function WhyChooseUs() {
                 Live Industry Projects
               </h3>
               <p className="text-sm leading-relaxed text-slate-500 font-medium">
-                Work on actual commercial products deployed in production with real users, databases, and APIs. We don't just teach syntax—we teach product engineering.
+                Work on actual commercial products deployed in production with real users, databases, and APIs. We don&apos;t just teach syntax—we teach product engineering.
               </p>
             </div>
             

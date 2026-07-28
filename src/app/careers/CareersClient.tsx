@@ -70,7 +70,7 @@ export default function CareersPage() {
           {/* Right Column - Benefits & Culture (40% width span on desktop) */}
           <div className="lg:col-span-5 space-y-6">
             <h2 className="text-2xl font-heading font-bold text-slate-800 mb-2">
-              Why You'll Love It Here
+              Why You&apos;ll Love It Here
             </h2>
             <div className="p-8 rounded-[28px] border border-slate-200/50 bg-white/70 backdrop-blur-md shadow-sm space-y-6">
               {BENEFITS.map((benefit, idx) => {
@@ -89,7 +89,7 @@ export default function CareersPage() {
               })}
               
               <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-6 border border-primary/10 mt-4">
-                <h4 className="font-heading font-bold text-slate-800 text-sm">Don't see a matching role?</h4>
+                <h4 className="font-heading font-bold text-slate-800 text-sm">Don&apos;t see a matching role?</h4>
                 <p className="text-slate-500 text-xs mt-1 leading-relaxed font-medium">
                   We are always looking for smart, passionate builders. Drop your resume at{' '}
                   <a href="mailto:info@kodetocareer.com" className="text-primary font-bold hover:underline">

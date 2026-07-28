@@ -349,49 +349,51 @@ export default function AdmissionsPage() {
           <div className="text-center max-w-2xl mx-auto space-y-4">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">DEGREE MODES</span>
             <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900">Compare Study Modes</h2>
-            <p className="text-slate-500 font-medium">A metrics table comparing campus regular, online, and distance learning paths.</p>
+            <p className="text-slate-500 font-medium text-sm md:text-base px-4">
+              Compare key academic, scheduling, and placement parameters to select the right degree format for your goals.
+            </p>
           </div>
 
-          <div className="max-w-3xl mx-auto overflow-hidden border border-slate-200 rounded-2xl shadow-sm bg-white">
-            <table className="w-full text-left text-xs font-bold border-collapse">
+          <div className="max-w-3xl mx-auto overflow-x-auto border border-slate-200 rounded-2xl shadow-sm bg-white">
+            <table className="w-full text-left text-[10px] md:text-xs font-bold border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-450 uppercase tracking-wider text-[10px]">
-                  <th className="p-4">Criteria</th>
-                  <th className="p-4">Regular</th>
-                  <th className="p-4">Online</th>
-                  <th className="p-4">Distance</th>
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-450 uppercase tracking-wider text-[9px] md:text-[10px]">
+                  <th className="p-2.5 md:p-4">Criteria</th>
+                  <th className="p-2.5 md:p-4">Regular</th>
+                  <th className="p-2.5 md:p-4">Online</th>
+                  <th className="p-2.5 md:p-4">Distance</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-700">
                 <tr>
-                  <td className="p-4 text-slate-900 font-extrabold">Attend Campus</td>
-                  <td className="p-4 text-emerald-600">✓ Yes</td>
-                  <td className="p-4 text-slate-400">✗ No</td>
-                  <td className="p-4 text-slate-400">✗ No</td>
+                  <td className="p-2.5 md:p-4 text-slate-900 font-extrabold">Attend Campus</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Yes</td>
+                  <td className="p-2.5 md:p-4 text-slate-400">✗ No</td>
+                  <td className="p-2.5 md:p-4 text-slate-400">✗ No</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-slate-900 font-extrabold">Schedule Flexibility</td>
-                  <td className="p-4 text-slate-400">✗ Low</td>
-                  <td className="p-4 text-emerald-600">✓ 100% High</td>
-                  <td className="p-4 text-emerald-600">✓ 100% High</td>
+                  <td className="p-2.5 md:p-4 text-slate-900 font-extrabold">Schedule Flexibility</td>
+                  <td className="p-2.5 md:p-4 text-slate-400">✗ Low</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ High</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ High</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-slate-900 font-extrabold">UGC Approved Degree</td>
-                  <td className="p-4 text-emerald-600">✓ Yes</td>
-                  <td className="p-4 text-emerald-600">✓ Yes</td>
-                  <td className="p-4 text-emerald-600">✓ Yes</td>
+                  <td className="p-2.5 md:p-4 text-slate-900 font-extrabold">UGC Approved Degree</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Yes</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Yes</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Yes</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-slate-900 font-extrabold">Placement Cell Support</td>
-                  <td className="p-4 text-emerald-600">✓ Yes</td>
-                  <td className="p-4 text-emerald-600">✓ Yes</td>
-                  <td className="p-4 text-slate-500">Depends</td>
+                  <td className="p-2.5 md:p-4 text-slate-900 font-extrabold">Placement Support</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Yes</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Yes</td>
+                  <td className="p-2.5 md:p-4 text-slate-500">Depends</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-slate-900 font-extrabold">Affordable Pricing</td>
-                  <td className="p-4 text-slate-400">✗ Standard</td>
-                  <td className="p-4 text-emerald-600">✓ Cost-Effective</td>
-                  <td className="p-4 text-emerald-600">✓ Best Value</td>
+                  <td className="p-2.5 md:p-4 text-slate-900 font-extrabold">Affordable Pricing</td>
+                  <td className="p-2.5 md:p-4 text-slate-400">✗ Standard</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Low Cost</td>
+                  <td className="p-2.5 md:p-4 text-emerald-600">✓ Low Cost</td>
                 </tr>
               </tbody>
             </table>
@@ -565,7 +567,7 @@ export default function AdmissionsPage() {
                   {/* Name Input */}
                   <div className="space-y-1">
                     <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-primary" /> Full Name
+                      <User className="w-3.5 h-3.5 text-primary" /> Full Name <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <input
                       type="text"
@@ -580,7 +582,7 @@ export default function AdmissionsPage() {
                   {/* Phone Input */}
                   <div className="space-y-1">
                     <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
-                      <PhoneCall className="w-3.5 h-3.5 text-primary" /> Phone Number
+                      <PhoneCall className="w-3.5 h-3.5 text-primary" /> Phone Number <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <input
                       type="tel"
@@ -598,7 +600,7 @@ export default function AdmissionsPage() {
                   {isCustomDegree && (
                     <div className="space-y-1">
                       <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Specify Required Degree / Course
+                        <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Specify Required Degree / Course <span className="text-rose-500 font-extrabold">*</span>
                       </label>
                       <input
                         type="text"
@@ -614,7 +616,7 @@ export default function AdmissionsPage() {
                   {/* Current Qualification */}
                   <div className="space-y-1">
                     <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider flex items-center gap-1.5">
-                      <BookOpen className="w-3.5 h-3.5 text-primary" /> Current Qualification
+                      <BookOpen className="w-3.5 h-3.5 text-primary" /> Current Qualification <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <input
                       type="text"
@@ -629,8 +631,11 @@ export default function AdmissionsPage() {
                   {/* Pursuing / Completed Status */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider">Status</label>
+                      <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider">
+                        Status <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <select
+                        required
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-xs font-bold text-slate-800 bg-slate-50 cursor-pointer"
@@ -642,7 +647,9 @@ export default function AdmissionsPage() {
 
                     {/* Graduation Year */}
                     <div className="space-y-1">
-                      <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider">Passing / Expected Year</label>
+                      <label className="text-[10px] font-black uppercase text-slate-455 tracking-wider">
+                        Passing / Expected Year <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <input
                         type="number"
                         required

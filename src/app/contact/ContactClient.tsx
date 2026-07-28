@@ -27,9 +27,27 @@ export default function ContactPage() {
   const [selectedDate, setSelectedDate] = useState('Today');
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("10:00 AM");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name || !formState.email || !formState.phone) return;
+    try {
+      await fetch('/api/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formState.name,
+          phone: formState.phone,
+          email: formState.email,
+          courseTitle: formState.course || 'Contact Form Inquiry',
+          message: formState.message,
+          qualification: 'Contact Form Inquiry',
+          status: 'Inquiry',
+          year: new Date().getFullYear().toString(),
+        })
+      });
+    } catch (err) {
+      console.error('Contact form submission error:', err);
+    }
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -51,7 +69,7 @@ export default function ContactPage() {
             GET IN TOUCH
           </span>
           <h1 className="font-heading font-extrabold text-4xl md:text-6xl text-slate-900 leading-tight">
-            Let's Build Your <br />
+            Let&apos;s Build Your <br />
             <span className="gradient-text">Career Together</span>
           </h1>
           <p className="text-base md:text-lg text-slate-500 font-semibold leading-relaxed">
@@ -179,7 +197,9 @@ export default function ContactPage() {
                   {/* Form fields */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-bold text-slate-700">
                     <div className="space-y-1.5">
-                      <label htmlFor="name" className="block text-slate-500">Your Name</label>
+                      <label htmlFor="name" className="block text-slate-500">
+                        Your Name <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <input
                         type="text"
                         id="name"
@@ -191,7 +211,9 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label htmlFor="email" className="block text-slate-500">Email Address</label>
+                      <label htmlFor="email" className="block text-slate-500">
+                        Email Address <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <input
                         type="email"
                         id="email"
@@ -206,30 +228,42 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-bold text-slate-700">
                     <div className="space-y-1.5">
-                      <label htmlFor="phone" className="block text-slate-500">Phone Number</label>
+                      <label htmlFor="phone" className="block text-slate-500">
+                        Phone Number (10 digits) <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <input
                         type="tel"
                         id="phone"
                         required
+                        maxLength={10}
+                        pattern="[0-9]{10}"
                         value={formState.phone}
-                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                        placeholder="e.g. +91 96679 75616"
+                        onChange={(e) => setFormState({ ...formState, phone: e.target.value.replace(/\D/g, '').slice(0, 10) })}
+                        placeholder="e.g. 9667975616"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50 focus:bg-white"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label htmlFor="course" className="block text-slate-500">Program Track Interests</label>
+                      <label htmlFor="course" className="block text-slate-500">
+                        Program Track Interests <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <select
                         id="course"
+                        required
                         value={formState.course}
                         onChange={(e) => setFormState({ ...formState, course: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-primary/50 focus:bg-white"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-primary/50 focus:bg-white cursor-pointer"
                       >
                         <option value="MERN Stack Development">MERN Full Stack + AI</option>
                         <option value="Data Science & ML">Data Science & ML</option>
                         <option value="UI/UX Product Design">UI/UX Design Systems</option>
                         <option value="Data Analytics">Data Analytics & BI</option>
                         <option value="Cloud Computing & DevOps">Cloud & DevOps Architect</option>
+                        <option value="Python Programming">Python Programming</option>
+                        <option value="Java Full Stack">Java Full Stack Development</option>
+                        <option value="Cyber Security">Cyber Security Specialist</option>
+                        <option value="Digital Marketing">Digital Marketing</option>
+                        <option value="College/Gap/Admission">College Admission / Gap Year / Custom Degree</option>
                       </select>
                     </div>
                   </div>

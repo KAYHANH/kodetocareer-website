@@ -1,6 +1,9 @@
-'use client';
-
 import React from 'react';
+
+export const metadata = {
+  title: 'Terms of Service | KodeToCareer',
+  description: 'Read the terms and conditions governing the use of KodeToCareer bootcamps and dashboards.',
+};
 
 const SECTIONS = [
   { id: 'agreement', title: '1. Agreement to Terms' },

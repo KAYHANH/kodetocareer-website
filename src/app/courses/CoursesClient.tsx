@@ -71,22 +71,22 @@ const COURSES: Course[] = [
     tagline: "Become a professional Full Stack Developer & AI Engineer with our production-grade MERN Stack course.",
     desc: "Master full-stack web development and learn to build AI-powered features, chatbots, and automation workflows.",
     color: "from-blue-500/10 to-indigo-500/10 border-blue-100",
-    priceUpfront: "₹5,000",
-    pricePlaced: "₹3,000",
+    priceUpfront: "₹6,000",
+    pricePlaced: "₹4,000",
     oldPrice: "₹12,500",
     badge: "Best Seller",
     liveClasses: "Daily Live",
     mentor: "Google & Meta Alumni",
     tools: ["React.svg", "Next.js.svg", "Node.js.svg", "Express.svg", "MongoDB.svg", "Git.svg"],
     image: "from-blue-600 to-indigo-700",
-    bannerImage: "/banners/mern.png",
+    bannerImage: "/banners/mern.webp",
     slug: "mern-stack-development"
   },
   {
     id: 8,
     title: "Python Programming & Automation",
     category: "Software Engineering",
-    duration: "4 Months",
+    duration: "6 Months",
     projects: "8+ Projects",
     salary: "₹4.0 - 9 LPA",
     level: "Beginner to Intermediate",
@@ -99,15 +99,15 @@ const COURSES: Course[] = [
     tagline: "Become a professional Python & Automation Engineer with our scripting, web scraping, and Django course.",
     desc: "Learn core python scripting, database connections, automated workflows, scraping, and integrating AI endpoints.",
     color: "from-blue-500/10 to-teal-500/10 border-blue-100",
-    priceUpfront: "₹5,000",
-    pricePlaced: "₹3,000",
+    priceUpfront: "₹7,000",
+    pricePlaced: "₹5,000",
     oldPrice: "₹12,500",
     badge: "Automation Core",
     liveClasses: "Live Cohorts",
     mentor: "Python Devs",
     tools: ["Python.svg", "Django.svg", "Git.svg"],
     image: "from-blue-600 to-teal-700",
-    bannerImage: "/banners/python.png",
+    bannerImage: "/banners/python.webp",
     slug: "python-programming"
   },
   {
@@ -135,7 +135,7 @@ const COURSES: Course[] = [
     mentor: "Data Architects",
     tools: ["Python.svg", "TensorFlow.svg", "PyTorch.svg", "PostgresSQL.svg", "Docker.svg", "Git.svg"],
     image: "from-purple-600 to-pink-700",
-    bannerImage: "/banners/datascience.png",
+    bannerImage: "/banners/datascience.webp",
     slug: "data-science-machine-learning"
   },
   {
@@ -156,14 +156,14 @@ const COURSES: Course[] = [
     desc: "Master layout theory, user psychology, information hierarchy, wireframing, high-fidelity prototypes, and component design systems.",
     color: "from-purple-500/10 to-pink-500/10 border-purple-100",
     priceUpfront: "₹10,000",
-    pricePlaced: "₹0",
+    pricePlaced: "₹5,000",
     oldPrice: "₹20,000",
     badge: "Creative Core",
     liveClasses: "Live Studio",
     mentor: "Senior Product Designers",
     tools: ["Figma.svg", "Photoshop.svg", "Sketch.svg", "Tailwind-CSS.svg", "Git.svg"],
     image: "from-pink-600 to-rose-600",
-    bannerImage: "/banners/design.png",
+    bannerImage: "/banners/design.webp",
     slug: "graphic-design-ui-ux"
   },
   {
@@ -184,14 +184,14 @@ const COURSES: Course[] = [
     desc: "At KodeToCareer, we prepare you for high-demand analytics careers. No coding experience required. Master Microsoft Excel, SQL databases, Python analytics libraries, and Power BI dashboards through live, instructor-led sessions and hands-on case studies.",
     color: "from-emerald-500/10 to-teal-500/10 border-emerald-100",
     priceUpfront: "₹5,000",
-    pricePlaced: "₹0",
+    pricePlaced: "₹5,000",
     oldPrice: "₹10,000",
     badge: "No Coding Needed",
     liveClasses: "Daily Live",
     mentor: "Business Analysts",
     tools: ["Python.svg", "PostgresSQL.svg", "Docker.svg", "Git.svg"],
     image: "from-emerald-600 to-teal-700",
-    bannerImage: "/banners/analytics.png",
+    bannerImage: "/banners/analytics.webp",
     slug: "data-analytics"
   },
   {
@@ -212,14 +212,14 @@ const COURSES: Course[] = [
     desc: "Java powers millions of enterprise systems globally. Scale your backend development skills, write enterprise-grade spring microservices, and deploy multi-tiered web architectures.",
     color: "from-amber-500/10 to-orange-500/10 border-amber-100",
     priceUpfront: "₹10,000",
-    pricePlaced: "₹0",
+    pricePlaced: "₹10,000",
     oldPrice: "₹22,000",
     badge: "Enterprise Standard",
     liveClasses: "Cohorts",
     mentor: "Spring Developers",
     tools: ["Java.svg", "Spring.svg", "React.svg", "Docker.svg", "Git.svg"],
     image: "from-orange-600 to-red-700",
-    bannerImage: "/banners/java.png",
+    bannerImage: "/banners/java.webp",
     slug: "java-full-stack"
   },
   {
@@ -239,15 +239,15 @@ const COURSES: Course[] = [
     tagline: "Become a professional Cloud & DevOps Engineer with our AWS, Kubernetes, and CI/CD automation course.",
     desc: "Learn to design highly-scalable cloud architectures, write Infrastructure-as-Code scripts, compile containers, and launch pipelines.",
     color: "from-sky-500/10 to-blue-500/10 border-sky-100",
-    priceUpfront: "₹10,000",
-    pricePlaced: "₹0",
-    oldPrice: "₹20,000",
+    priceUpfront: "₹12,000",
+    pricePlaced: "₹8,000",
+    oldPrice: "₹35,000",
     badge: "High Growth",
     liveClasses: "Daily Cohorts",
     mentor: "SRE Engineers",
     tools: ["AWS.svg", "Docker.svg", "Git.svg"],
     image: "from-sky-600 to-blue-700",
-    bannerImage: "/banners/cloud.png",
+    bannerImage: "/banners/cloud.webp",
     slug: "cloud-devops"
   },
   {
@@ -267,15 +267,15 @@ const COURSES: Course[] = [
     tagline: "Become a professional Growth Marketer with our search ads, SEO, and copywriting AI course.",
     desc: "Master marketing fundamentals, manage paid campaigns on social sites, optimize organic rankings, and write AI-powered copy.",
     color: "from-green-500/10 to-emerald-500/10 border-green-100",
-    priceUpfront: "₹4,999",
-    pricePlaced: "₹0",
+    priceUpfront: "₹7,999",
+    pricePlaced: "₹5,000",
     oldPrice: "₹9,999",
     badge: "Short Cohort",
     liveClasses: "Live Sprints",
     mentor: "Growth Hackers",
     tools: ["Git.svg"],
     image: "from-green-600 to-emerald-700",
-    bannerImage: "/banners/marketing.png",
+    bannerImage: "/banners/marketing.webp",
     slug: "digital-marketing"
   },
   {
@@ -296,14 +296,14 @@ const COURSES: Course[] = [
     desc: "Learn professional graphic design, photography, cinematographic video capture, Premiere Pro editing, and After Effects motion graphics.",
     color: "from-orange-500/10 to-amber-500/10 border-orange-100",
     priceUpfront: "₹10,000",
-    pricePlaced: "₹0",
+    pricePlaced: "₹5,000",
     oldPrice: "₹20,000",
     badge: "Direct Creative",
     liveClasses: "Live Studio",
     mentor: "Cinematographers",
     tools: ["Figma.svg", "Photoshop.svg", "Git.svg"],
     image: "from-orange-600 to-amber-700",
-    bannerImage: "/banners/video.png",
+    bannerImage: "/banners/video.webp",
     slug: "videography-video-editing"
   },
   {
@@ -331,7 +331,7 @@ const COURSES: Course[] = [
     mentor: "ML Platform Engineers",
     tools: ["Docker.svg", "Kubernetes.svg", "AWS.svg", "Git.svg"],
     image: "from-violet-600 to-indigo-700",
-    bannerImage: "/banners/mlops.png",
+    bannerImage: "/banners/mlops.webp",
     slug: "mlops-ai-systems"
   }
 ];
@@ -371,11 +371,6 @@ const PLACEMENT_PROCESS = [
   { step: "5", title: "Offer Negotiation", desc: "Get support coordinating multiple job offers and negotiating compensation brackets." }
 ];
 
-const TRAINERS = [
-  { name: "Pankaj K.", role: "Lead Systems Mentor", prev: "Ex-Google, Ex-Oracle", image: "/founder.jpg" },
-  { name: "Arun S.", role: "Data Science Director", prev: "Ex-Fractal Analytics, IIT-B", image: "" },
-  { name: "Vikash M.", role: "DevOps & Cloud Lead", prev: "Senior SRE Partner, Ex-IBM", image: "" }
-];
 
 const FAQ_ITEMS = [
   { q: "Is coding experience required to join?", a: "No, our programs start from the absolute fundamentals. We provide initial basics modules for Git, command-line interfaces, and programming logic before proceeding to full stack and analytics workflows." },
@@ -602,9 +597,12 @@ export default function CoursesClient() {
                 {/* Image Illustration Cover */}
                 <div className="h-40 relative p-6 flex flex-col justify-between overflow-hidden group/banner rounded-t-[28px]">
                   {/* Background Image Banner with Hover Zoom (1.05x), Transition 300ms */}
-                  <img
+                  <Image
                     src={c.bannerImage}
-                    alt=""
+                    alt={c.title}
+                    width={400}
+                    height={160}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover/banner:scale-105 group-hover/banner:translate-y-[-2px] pointer-events-none"
                   />
                   {/* Subtle dark overlay for text contrast */}
@@ -787,7 +785,6 @@ export default function CoursesClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
             {STUDENT_PROJECTS.map((proj, idx) => (
               <div key={idx} className="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-3xl block" role="img" aria-label={proj.title}>{proj.emoji}</span>
                 <div>
                   <span className="text-[9px] font-black text-primary uppercase tracking-widest">{proj.course}</span>
                   <h3 className="font-heading font-extrabold text-slate-800 text-sm mt-1">{proj.title}</h3>
@@ -847,56 +844,6 @@ export default function CoursesClient() {
         </div>
       </section>
 
-      {/* ── 9. Certificates Showcase ── */}
-      <section className="py-24 z-10 relative" aria-labelledby="cert-title">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Description */}
-            <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
-              <h2 id="cert-title" className="font-heading font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight">
-                Accredited Course Certificates
-              </h2>
-              <p className="text-sm text-slate-500 font-semibold leading-relaxed">
-                Earn professional ISO 9001:2015 training credentials, specialized project execution reports, and internship confirmations recognized by hiring directors.
-              </p>
-              <ul className="space-y-3 text-xs font-bold text-slate-600 inline-block text-left">
-                <li className="flex items-center gap-2 text-emerald-600"><CheckCircle2 className="w-4.5 h-4.5 shrink-0" /> ISO Certified Training Validation</li>
-                <li className="flex items-center gap-2 text-emerald-600"><CheckCircle2 className="w-4.5 h-4.5 shrink-0" /> Verified GitHub Capstone Portfolio</li>
-                <li className="flex items-center gap-2 text-emerald-600"><CheckCircle2 className="w-4.5 h-4.5 shrink-0" /> Stipend Project Experience Letters</li>
-              </ul>
-            </div>
-
-            {/* Right Certificate Graphic mockup */}
-            <div className="lg:col-span-7">
-              <div className="bg-white border border-slate-200 p-8 rounded-[28px] shadow-xl relative aspect-video flex flex-col justify-between overflow-hidden">
-                {/* Decorative elements */}
-                <div className="absolute top-[-100px] right-[-100px] w-52 h-52 bg-primary/5 rounded-full blur-[80px]" />
-                
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded bg-primary text-white flex items-center justify-center font-heading font-black text-sm">K</div>
-                    <span className="font-heading font-extrabold text-slate-800 text-xs uppercase tracking-wider">KodeToCareer Academy</span>
-                  </div>
-                  <span className="text-[10px] text-slate-400 font-mono font-bold">Verification ID: K2C-90812</span>
-                </div>
-
-                <div className="text-center py-6 space-y-3">
-                  <p className="text-[10px] text-slate-400 uppercase font-black tracking-widest leading-none">Accredited Certificate of Excellence</p>
-                  <h4 className="font-heading font-extrabold text-slate-800 text-lg md:text-xl">Your Name Here</h4>
-                  <p className="text-xs text-slate-500 font-semibold leading-relaxed max-w-md mx-auto">
-                    has successfully completed the live specialization curriculum and project evaluation rounds in MERN Stack Development & AI Stacks.
-                  </p>
-                </div>
-
-                <div className="flex justify-between items-center border-t border-slate-100 pt-4 text-[10px] font-bold text-slate-400">
-                  <span>ISO 9001:2015 Certified</span>
-                  <span>Registrar Seal</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ── 10. Student Testimonials ── */}
       <section className="py-24 bg-white border-y border-slate-100 z-10 relative" aria-labelledby="test-title">
@@ -940,41 +887,6 @@ export default function CoursesClient() {
         </div>
       </section>
 
-      {/* ── 11. Trainers ── */}
-      <section className="py-24 z-10 relative" aria-labelledby="trainers-title">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 id="trainers-title" className="font-heading font-extrabold text-3xl md:text-4xl text-slate-900">Learn from Industry Mentors</h2>
-            <p className="text-slate-500 font-medium">Our cohort leaders are seasoned engineers bringing real production skills.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto">
-            {TRAINERS.map((t, idx) => (
-              <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-6 text-center space-y-4 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-20 h-20 rounded-full bg-slate-100 mx-auto overflow-hidden relative border border-slate-200 flex items-center justify-center text-slate-400">
-                  {t.image ? (
-                    <Image
-                      src={t.image}
-                      alt={t.name}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <Users className="w-8 h-8" />
-                  )}
-                </div>
-                <div>
-                  <h4 className="font-heading font-extrabold text-slate-800 text-sm">{t.name}</h4>
-                  <p className="text-[10px] text-slate-400 font-bold block mt-1">{t.role}</p>
-                </div>
-                <span className="inline-block text-[9px] bg-slate-50 border border-slate-150 text-slate-600 font-bold px-3 py-1 rounded-full">
-                  {t.prev}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── 12. Pricing Comparison ── */}
       <section className="py-24 bg-white border-y border-slate-100 z-10 relative" aria-labelledby="pricing-title">

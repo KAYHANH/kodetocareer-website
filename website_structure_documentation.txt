@@ -1,0 +1,260 @@
+================================================================================
+KODETOCAREER — COMPLETE DETAILED WEBSITE STRUCTURE & FUNCTIONAL DOCUMENTATION
+================================================================================
+This document provides a highly granular, section-by-section, page-by-page mapping 
+of the entire KodeToCareer web application. It specifies metadata, components, 
+layouts, visual details, interactive behaviors, forms, API calls, and redirects.
+
+--------------------------------------------------------------------------------
+PART 1: GLOBAL LAYOUTS & REUSABLE UTILITIES
+--------------------------------------------------------------------------------
+
+A. MAIN HEADER / NAVIGATION BAR (c:/kodetocareer/src/components/layout/navbar.tsx)
+   - Layout: Sticky top-0, z-50 fixed layout. Height is 80px (h-20). Solid white 
+     background (`bg-white`), bottom border (`border-b border-slate-100`), and a 
+     light drop shadow (`shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)]`) to block all 
+     overlapping text underneath from bleeding through.
+   - Elements & Interactions:
+     1. Brand Logo: Left-aligned, displays `/main-logo.png` (200x50px).
+        * Behavior: Clicking redirects to Home (`/`).
+     2. Desktop Nav Links (Centred):
+        * "Home" -> links to `/`
+        * "About" -> links to `/about`
+        * "Courses" -> Displays a hover dropdown menu. Clicking triggers:
+          - Shows a large 3-column Mega Menu displaying all 10 courses with 
+            custom badges, titles, descriptions, and taglines.
+          - Contains a bottom bar: "Explore All 10 Courses" -> links to `/courses`.
+          - Click on any course -> redirects to dynamic page `/courses/[slug]`.
+        * "Study Abroad" -> links to `/career-services/admissions#study-abroad`
+        * "Placements" -> links to `/placements`
+        * "Career Services" -> Hover triggers a custom dropdown:
+          - "Admissions Support" -> links to `/career-services/admissions`
+          - "Placement Services" -> links to `/career-services/placements`
+          - "Service Overview" -> links to `/career-services`
+        * "Blog" -> links to `/blog`
+        * "Contact" -> links to `/contact`
+     3. Action Buttons (Right-aligned):
+        * "Login" (Ghost style, grey border) -> redirects to `/login`
+        * "Start Learning" (Primary blue gradient) -> redirects to `/signup`
+     4. Mobile Hamburger Button (`lg:hidden`):
+        * Toggles a full-height slide-in drawer on mobile viewports.
+        * Mobile Drawer (`AnimatePresence` + Framer Motion slide-in from right):
+          - Solid dark background.
+          - Lists all navigation links, an accordion containing all 10 courses, 
+            and centered CTA buttons ("Login" and "Start Learning").
+
+B. SYSTEM FOOTER (c:/kodetocareer/src/components/layout/footer.tsx)
+   - Layout: Deep charcoal slate background (`bg-[#0F172A]`), light border top, 
+     2-column/4-column responsive grid layout (1 column on mobile, 4 columns on desktop).
+   - Elements & Interactions:
+     1. Column 1 (Brand Column):
+        - Logo display (`/main-logo.png`). Tagline: "AI-Powered Career Hub".
+        - Social icons list: LinkedIn, Instagram, YouTube, Facebook.
+          * LinkedIn links to: https://www.linkedin.com/company/kode2career/
+          * Facebook links to: https://www.facebook.com/profile.php?id=100009800075661
+          * YouTube links to: https://www.youtube.com/@KodeToCareer
+          * Instagram links to: https://www.instagram.com/kodetocareer
+          * Note: Twitter/X icon and link are fully removed from the layout.
+     2. Column 2 (Programs Column):
+        - Custom links to all 10 dynamic course pages (MERN, Python, Data Science, etc.).
+     3. Column 3 (Resources Column):
+        - Links to Blog (`/blog`), Events (`/contact`), Career Roadmaps (`/tools?tab=roadmap`), 
+          Study Abroad (`/career-services/admissions#study-abroad`), Placements (`/placements`), FAQ.
+     4. Column 4 (Company Column):
+        - Links to About, Contact, Privacy Policy, Terms, Careers, and Partners.
+     5. Campus Office / Map Section:
+        - Text block: "Sector 15, Noida, UP, India".
+        - Interactive mini-grid map preview box labeled "Sector 15 Noida Map View".
+        - Click Behavior: Opens Google Maps in a new browser tab:
+          `https://maps.google.com/?q=Sector+15+Noida`.
+     6. Bottom copyright row: Displays copyright and links to `/privacy`, `/terms`, `/cookies`.
+
+C. FLOATING ACTION BUTTONS (c:/kodetocareer/src/components/ui/floating-cta.tsx)
+   - Desktop/Tablet Behavior:
+     - Floats at bottom-right, fixed on top of page content.
+     - Button 1: "Book Counselling" (Dark blue pill, phone icon). Click opens an inline modal form:
+       * Inputs: Preferred Date (date selector), Phone number (tel).
+       * Click "Confirm Booking" -> Sends data to `/api/enroll` (name is "Booking", course is 
+         "Counselling Slot"), shows a success toast, and closes.
+     - Button 2: WhatsApp Icon (Green circle). Click redirects to WhatsApp live support:
+       `https://wa.me/919667975616`.
+   - Mobile Behavior (`hidden md:flex` on desktop layout):
+     - Hidden on mobile to avoid layout overlap.
+     - In its place, a fixed mobile sticky bottom bar renders at the very bottom:
+       * Left: Circular call icon -> triggers direct phone call `tel:+919667975616`
+       * Middle: Green WhatsApp icon -> redirects to WhatsApp live chat.
+       * Right: Blue button "Start Your Career" -> redirects to `/courses`.
+
+D. GLOBAL ADMISSIONS POPUP (c:/kodetocareer/src/components/ui/global-admissions-popup.tsx)
+   - Trigger: Shows up when mouse leaves viewport (exit-intent) or after 15 seconds of inactivity.
+   - Form Fields: Full Name, Email Address, Phone Number, Course preference, Qualification.
+   - Button: "Secure Admissions Counselling".
+   - Submission Behavior: Sends lead to `/api/enroll`, saves cookie `admissions_popup_seen` 
+     for 3 days to avoid showing again, and closes.
+
+--------------------------------------------------------------------------------
+PART 2: PAGE-BY-PAGE MAPPINGS & DETAILS
+--------------------------------------------------------------------------------
+
+1. HOME PAGE (/)
+   - Metadata: Title: "KodeToCareer — AI-Powered Career Hub", Description: "Empowering tech professionals..."
+   - Section 1: Hero Section (c:/kodetocareer/src/components/sections/hero.tsx)
+     * Content: Badge "AI-Powered Career Hub", headings ("Learn. Build. Get Hired."), 
+       typing word text cycle ("MERN Stack", "Data Science", "MLOps", "DevOps"), and 
+       counter stats block.
+     * Buttons:
+       - "Start Learning" -> redirects to `/courses`.
+       - "Book Free Counseling" -> toggles Floating CTA counselling modal.
+     * Graphic: Interactive orbiting `TechStackCircle` with 16 logos. Uses hardware-accelerated 
+       compositor CSS keyframe animations (will-change) for mobile smoothness, and handles hover 
+       states (pauses rotation, opens popover card details).
+       - Changed to `overflow-visible` and scaled down to `scale-[0.38]` on small screens (<400px) 
+         to prevent any icon cropping.
+   - Section 2: Trusted By (c:/kodetocareer/src/components/sections/trusted-by.tsx)
+     * Content: Logo marquee block showcasing logos of partner hiring companies.
+   - Section 3: Tech Stack Marquee (c:/kodetocareer/src/components/sections/hiring-partners.tsx)
+     * Content: Two scrolling rows showing technologies (React, Docker, Python). Optimized to 
+       only show 2 rows on mobile (hides remaining 3) and uses GPU-accelerated translateX transforms.
+   - Section 4: Popular Programs
+     * Content: Cards showing courses. Click on cards -> redirects to `/courses/[slug]`.
+     * Bottom Button: "Explore All 10 Courses" -> redirects to `/courses`.
+   - Section 5: Free Study Resources (c:/kodetocareer/src/components/sections/free-resources.tsx)
+     * Content: Ebook/Guide cards (SQL, Resume, Git).
+     * Button "Download Guide" -> toggles lead popup (Email, Phone).
+     * Form Submission: Background POSTs to `/api/enroll` (fire-and-forget, non-blocking), 
+       then triggers instant download of the PDF brochure (e.g. `/sql-cheatsheet.pdf`) to 
+       eliminate processing delays.
+   - Section 6: Newsletter (c:/kodetocareer/src/components/sections/newsletter.tsx)
+     * Content: "Stay Ahead of the Curve" sub-box. Input Email.
+     * Button "Subscribe" -> Submits lead info to `/api/enroll` via background POST (fire-and-forget), 
+       then instantly changes UI state to display "✓ Thank you for subscribing!".
+
+2. ABOUT PAGE (/about)
+   - Metadata: Title: "About Us | KodeToCareer", Description: "Learn about our mission..."
+   - Section 1: Hero Block
+     * Content: Large text and graphics detailing the origins and vision of KodeToCareer.
+   - Section 2: Story & Mission
+     * Content: Double column text detailing our student-centric teaching methodology.
+   - Section 3: Core Values
+     * Content: Grid of cards showing values (Student First, Quality, Industry-Aligned).
+   - Section 4: Leadership Team
+     * Content: Profile photos, names, and backgrounds of directors and instructors.
+   - Section 5: Accreditations & Partners
+     * Content: Logos of universities and certification boards.
+   - CTA Button: "Join Our Team" -> redirects to `/careers`.
+
+3. ADMISSIONS PAGE (/career-services/admissions)
+   - Metadata: Title: "Admissions & University Support | KodeToCareer"
+   - Section 1: Admissions Overview
+     * Content: Text describing academic pathways and career changes.
+   - Section 2: Admissions Process Timeline (Interactive)
+     * Content: Step buttons (1 to 4). Clicking updates the active step state showing 
+       detailed timeline guidance for step requirements.
+   - Section 3: Study Modes Comparison Table
+     * Content: Grid comparing Regular vs. Online vs. Distance.
+     * Mobile Optimization: Removed minimum width restrictions (`min-w-[600px]`), lowered cell 
+       padding to `p-2.5`, shortened text content (`✓ High`, `✓ Low Cost`), and made the table 
+       `overflow-visible` so that nothing is cropped on narrow mobile viewports.
+   - Section 4: Gap Year Academic Recovery
+     * Content: Support for students with discontinued education.
+     * Button "Get Guidance" -> redirects to `/contact`.
+
+4. PLACEMENTS PAGE (/placements)
+   - Metadata: Title: "Placement Services & Recruiter Network | KodeToCareer"
+   - Section 1: Statistics
+     * Content: Placement rate (95%), average package, list of hiring companies.
+   - Section 2: Placement Roadmap Steps
+     * Content: 5 steps (Resume building, Mock interviews, Job listings, HR rounds, Selection).
+   - Section 3: Recruiter enquiry form
+     * Fields: Name, Corporate Email, Phone, Requirements.
+     * Button: "Partner With Us" -> Submits lead data to `/api/enroll` and displays success.
+
+5. CAREER SERVICES PAGE (/career-services)
+   - Metadata: Title: "Career Services Hub | KodeToCareer"
+   - Sections: Detailed guides on mentorship, mock interviews, profile building, and placements.
+   - Buttons:
+     - "Book Consultation" -> opens the floating CTA counselling modal.
+     - "Explore Admissions" -> redirects to `/career-services/admissions`.
+
+6. COURSES OVERVIEW PAGE (/courses)
+   - Metadata: Title: "Industry-Aligned Tech Courses | KodeToCareer"
+   - Filters: Category selector tabs (All, Development, Data & AI, Design, Marketing).
+     - Clicking updates React active filter state, instantly updating card list visibility.
+   - Course Cards (10 Courses):
+     - Displays badge, course details, duration, modules, and pricing.
+     - Button "View Details" -> redirects to `/courses/[slug]`.
+     - Button "Download Syllabus" -> opens Lead Capture popup, then triggers instant download.
+
+7. DYNAMIC COURSE DETAIL PAGES (/courses/[slug])
+   - Dynamic Slugs (10 paths):
+     - `mern-stack-development` -> MERN Stack Development
+     - `python-programming` -> Python Programming
+     - `data-science-machine-learning` -> Data Science & ML
+     - `data-analytics` -> Data Analytics
+     - `java-full-stack` -> Java Full Stack
+     - `mlops-ai-systems` -> MLOps & AI Systems
+     - `digital-marketing` -> Digital Marketing
+     - `cyber-security` -> Cyber Security
+     - `ui-ux-design` -> UI/UX Design
+     - `cloud-computing-devops` -> Cloud & DevOps
+   - Hero Section: Course badge, Title, Tagline, Rating, Pricing.
+     - Button "Enroll Now" -> redirects to `/signup`.
+     - Button "Download Syllabus" -> triggers lead popup (Name, Email, Phone).
+       * Submission: Background POSTs lead data to `/api/enroll` (fire-and-forget) and 
+         instantly downloads the corresponding PDF brochure from the local server folder 
+         (e.g., `/python-brochure.pdf` or `/brochures/mern_stack.pdf`) without delay.
+   - Section 2: Key Curriculum Highlights
+     - Hours, projects, resume support, mock interviews.
+   - Section 3: Syllabus Curriculum (Accordion)
+     - Interactive rows showing modules. Clicking a row toggles visibility of module topics.
+   - Section 4: Projects Built
+     - Showcase of real-world capstone projects built in the program.
+   - Section 5: Salary Outlook
+     - Shows salary averages and companies hiring for this path.
+   - Section 6: FAQs (Accordion)
+
+8. INTERACTIVE TOOLS HUB (/tools)
+   - Metadata: Title: "Interactive Career Guidance Tools & Calculators"
+   - Tabs (Salary Calculator, Resume Analyzer, Roadmap Builder, Career Quiz).
+     - Clicking updates active tab state. URL query parameter (`?tab=`) updates selection.
+   - Tab 1: Salary Projection Calculator
+     - Inputs: Course field, Experience Level, City.
+     - Click "Calculate Projection" -> shows estimated salary, growth metrics, and 
+       links to recommended course.
+   - Tab 2: Resume ATS Analyzer
+     - Inputs: Resume text (textarea), Target Role.
+     - Click "Analyze Resume" -> returns score (0-100), key matching terms, and improvements.
+   - Tab 3: Custom Curriculum/Roadmap Builder
+     - Inputs: Current skills, Target Role.
+     - Click "Generate Roadmap" -> creates step-by-step modular learning timeline.
+   - Tab 4: Career Quiz
+     - Simple 5-step quiz. Recommends either MERN Full Stack or Data Science.
+
+9. LEARN HUB (/learn/[slug])
+   - Slugs: `react`, `python`, `sql`, etc.
+   - Left Sidebar: List of lessons/topics. Clicking updates lessons.
+   - Right Main Panel: Display lesson content, code snippets, and explanations.
+
+10. CAREERS PAGE (/careers)
+    - Content: Open positions at KodeToCareer.
+    - Button "Apply Now" -> toggles application form. Submits resume details.
+
+11. CONTACT PAGE (/contact)
+    - Left Panel: Contact info, phone, email, and Google map address wrapper.
+    - Right Panel: Contact Enquiry Form (Name, Email, Phone, Message).
+      * Submission: Sends enquiry to Google Sheets via `/api/enroll`, clears inputs, 
+        and displays success toast.
+
+12. BLOG HUB (/blog) & DYNAMIC BLOG DETAIL PAGES (/blog/[slug])
+    - Blog lists, search, tags. Dynamic detail pages show content and social share links.
+
+13. AUTHENTICATION PAGES (/login & /signup)
+    - Custom user entry/registration forms with redirects to Home/Courses page.
+
+14. ADMIN PANEL (/admin)
+    - Protected dashboard. Displays Leads pipeline table, Monthly revenue, and total counts.
+    - Contains filter tabs (All, Hot, Warm, Cold) to filter the lead pipeline rows.
+
+15. LEGAL PAGES (/privacy, /terms, /cookies)
+    - Custom terms, conditions, privacy policy, and cookie agreements.
+================================================================================

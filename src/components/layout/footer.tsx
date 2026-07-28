@@ -41,11 +41,27 @@ function IconInstagram(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+function IconYoutube(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.5 12 3.5 12 3.5s-7.518 0-9.388.553a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.553 9.388.553 9.388.553s7.518 0 9.388-.553a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z" />
+    </svg>
+  );
+}
+
+function IconFacebook(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1V12h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75Z" />
+    </svg>
+  );
+}
+
 const SOCIAL_LINKS = [
-  { icon: IconGithub, href: "https://github.com", label: "GitHub" },
-  { icon: IconX, href: "https://x.com", label: "X" },
-  { icon: IconLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: IconInstagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: IconLinkedin, href: "https://www.linkedin.com/company/kode2career/", label: "LinkedIn" },
+  { icon: IconInstagram, href: "https://www.instagram.com/kodetocareer", label: "Instagram" },
+  { icon: IconYoutube, href: "https://www.youtube.com/@KodeToCareer", label: "YouTube" },
+  { icon: IconFacebook, href: "https://www.facebook.com/profile.php?id=100009800075661", label: "Facebook" },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -54,16 +70,20 @@ const SOCIAL_LINKS = [
 
 const PROGRAMS = [
   { label: "MERN Stack Development", href: "/courses/mern-stack-development" },
-  { label: "Data Science & Machine Learning", href: "/courses/data-science-machine-learning" },
-  { label: "UI/UX Product Design", href: "/courses/graphic-design-ui-ux" },
-  { label: "Data Analytics & BI", href: "/courses/data-analytics" },
   { label: "Java Full Stack Development", href: "/courses/java-full-stack" },
+  { label: "Python Programming & Automation", href: "/courses/python-programming" },
+  { label: "Data Science & Machine Learning", href: "/courses/data-science-machine-learning" },
+  { label: "Data Analytics & BI", href: "/courses/data-analytics" },
   { label: "DevOps Engineering & CI/CD", href: "/courses/cloud-devops" },
+  { label: "Industry-Ready MLOps", href: "/courses/mlops-ai-systems" },
+  { label: "UI/UX Product Design", href: "/courses/graphic-design-ui-ux" },
+  { label: "Digital Marketing with AI", href: "/courses/digital-marketing" },
+  { label: "Graphic & Video Editing", href: "/courses/videography-video-editing" },
 ] as const;
 
 const RESOURCES = [
   { label: "Blog", href: "/blog" },
-  { label: "Free AI Career Tools", href: "/tools" },
+  { label: "Free AI Career Tools", href: "/free-tools" },
   { label: "Hackathons", href: "/events" },
   { label: "Career Roadmaps", href: "/career-roadmaps" },
   { label: "Placements Support", href: "https://devsunite.com/jobs" },
@@ -116,7 +136,7 @@ function FooterColumn({
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-100 bg-white relative overflow-hidden" role="contentinfo">
+    <footer className="border-t border-slate-100 bg-white relative overflow-hidden" role="contentinfo" suppressHydrationWarning>
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
       <div className="mx-auto max-w-[1440px] px-6 relative z-10">
@@ -132,6 +152,7 @@ export default function Footer() {
                 width={200}
                 height={50}
                 alt="KodeToCareer Logo"
+                sizes="200px"
                 className="h-10 w-auto object-contain"
               />
             </Link>
@@ -199,40 +220,28 @@ export default function Footer() {
             </div>
 
             {/* Campus Map Mini Placeholder */}
-            <div className="w-full h-24 rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden relative flex items-center justify-center shadow-inner group cursor-pointer hover:border-primary/20 transition-colors">
+            <a 
+              href="https://maps.google.com/?q=Sector+15+Noida"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full h-24 rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden relative flex items-center justify-center shadow-inner group cursor-pointer hover:border-primary/20 transition-colors"
+            >
               <div className="absolute inset-0 bg-grid opacity-30" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-100 to-transparent" />
               <span className="relative z-10 text-[9px] font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 group-hover:text-primary transition-colors">
-                <Map className="w-3.5 h-3.5" /> Sector V Map View
+                <Map className="w-3.5 h-3.5" /> Sector 15 Noida Map View
               </span>
-            </div>
+            </a>
           </div>
 
         </div>
 
-        {/* ── Certifications & Accreditations (NEW middle bar) ── */}
-        <div className="py-8 border-b border-slate-100 flex flex-wrap items-center justify-between gap-6">
-          <div className="flex flex-wrap items-center gap-6">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Affiliations & Accreditations:</span>
-            
-            <div className="flex items-center gap-1.5 text-slate-700 font-bold text-[11px] bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
-              <Award className="w-4 h-4 text-primary" /> ISO 9001:2015 Certified
-            </div>
-            
-            <div className="flex items-center gap-1.5 text-slate-700 font-bold text-[11px] bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" /> NSDC Partner Academy
-            </div>
-
-            <div className="flex items-center gap-1.5 text-slate-700 font-bold text-[11px] bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
-              <ShieldCheck className="w-4 h-4 text-secondary" /> Skill India Member
-            </div>
-          </div>
-
-          {/* Newsletter embed */}
+        {/* ── Newsletter Section ── */}
+        <div className="py-8 border-b border-slate-100 flex items-center justify-end">
           <form className="flex items-center gap-2 max-w-sm w-full" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="newsletter-email" className="sr-only">Newsletter email</label>
+            <label htmlFor="footer-newsletter-email" className="sr-only">Newsletter email</label>
             <input
-              id="newsletter-email"
+              id="footer-newsletter-email"
               type="email"
               placeholder="Newsletter email"
               className="h-10 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3.5 text-xs text-slate-800 placeholder:text-slate-400 outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/30"

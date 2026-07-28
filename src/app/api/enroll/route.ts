@@ -1,48 +1,33 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const BACKUP_FILE = path.join(process.cwd(), 'enrollments.json');
 
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { name, phone, qualification, status, year, courseTitle } = data;
+    const { name, phone, qualification, status, year, courseTitle, email, message } = data;
 
-    if (!name || !phone || !qualification || !status || !year || !courseTitle) {
+    if (!name || !phone) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Missing required fields: Name and Phone are required' },
         { status: 400 }
       );
     }
 
     const newEnrollment = {
-      timestamp: new Date().toISOString(),
-      courseTitle,
+      timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      courseTitle: courseTitle || 'General Inquiry',
       name,
       phone,
-      qualification,
-      status,
-      year,
+      email: email || '',
+      qualification: qualification || 'N/A',
+      status: status || 'N/A',
+      year: year || 'N/A',
+      message: message || '',
     };
-
-    // ── Save to local backup file ──
-    let enrollments = [];
-    if (fs.existsSync(BACKUP_FILE)) {
-      try {
-        const fileContent = fs.readFileSync(BACKUP_FILE, 'utf-8');
-        enrollments = JSON.parse(fileContent);
-      } catch (err) {
-        console.error('Error reading backup file:', err);
-      }
-    }
-    enrollments.push(newEnrollment);
-    fs.writeFileSync(BACKUP_FILE, JSON.stringify(enrollments, null, 2), 'utf-8');
 
     // ── Send to Google Sheets Apps Script Web App ──
     const webAppUrl = process.env.GOOGLE_SHEET_WEBAPP_URL || 
                       process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBAPP_URL ||
-                      'https://script.google.com/macros/s/AKfycbxxCMbyVE8jl4iW2bJeu0NLfICWc3Skp2uVWA2bIXJOtdrReGrMYTETO1pgAfO1BX-e/exec';
+                      'https://script.google.com/macros/s/AKfycbzQtu_7_zuaDWy1HAqra_J5IVUJfMXXza7JA2N7JFn7-u0BvIp3mKipo_FKd8PD1AM/exec';
     
     if (webAppUrl) {
       try {
@@ -61,7 +46,7 @@ export async function POST(request: Request) {
         console.error('Error forwarding data to Google Sheet:', sheetErr);
       }
     } else {
-      console.log('Google Sheets Webapp URL is not configured. Saved to local backup.');
+      console.warn('Google Sheets Webapp URL is not configured.');
     }
 
     return NextResponse.json({ success: true });

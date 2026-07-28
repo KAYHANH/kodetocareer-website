@@ -28,26 +28,20 @@ export default function Founder() {
               {/* Founder Photo Image */}
               <div className="w-full h-full rounded-[30px] overflow-hidden relative border border-white/10 shadow-inner">
                 <Image
-                  src="/founder.jpg"
+                  src="/founder-arbaaz-official.png"
                   fill
                   alt="Md Arbaaz - Founder & Director"
                   className="object-cover object-top scale-100 group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-w-768px) 100vw, 340px"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90" />
                 
-                <div className="absolute bottom-6 left-6 z-10">
-                  <h4 className="text-white font-extrabold text-xl leading-none">Md Arbaaz</h4>
-                  <p className="text-xs font-semibold text-slate-200 mt-1.5">Founder & Director, KodeToCareer</p>
-                  <p className="text-[10px] text-slate-300 font-bold mt-0.5">Software Engineer & Tech Educator</p>
+                <div className="absolute bottom-5 left-5 right-5 z-10">
+                  <h3 className="text-white font-extrabold text-xl leading-none drop-shadow-sm">Md Arbaaz</h3>
+                  <p className="text-xs font-semibold text-slate-200 mt-1.5 leading-tight drop-shadow-sm">Founder & Director</p>
+                  <p className="text-[10px] text-slate-300 font-bold mt-0.5 leading-tight drop-shadow-sm">Software Engineer & Tech Educator</p>
                 </div>
-              </div>
-
-              {/* Overlapping floating citation card */}
-              <div className="absolute -bottom-6 -right-6 bg-white/95 border border-slate-100 p-4 rounded-2xl shadow-xl backdrop-blur-md max-w-[220px] pointer-events-none hidden sm:block">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Our Milestone</p>
-                <p className="text-xs font-extrabold text-slate-800 mt-1.5 leading-snug">"Bridging the engineering talent gap at scale."</p>
               </div>
             </motion.div>
           </div>
@@ -60,18 +54,19 @@ export default function Founder() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-xs uppercase tracking-widest text-primary font-bold mb-3">
-                MEET THE FOUNDER
-              </p>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold text-primary mb-4">
+                <Sparkles className="w-3.5 h-3.5" /> Founder&apos;s Vision & Leadership
+              </div>
+
               <h2 
                 id="founder-heading"
-                className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 mb-6 tracking-tight leading-tight"
+                className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading leading-tight tracking-tight mb-6"
               >
-                Scaling High-Growth Technology Talent
+                &ldquo;Engineering education must evolve beyond textbook syntax.&rdquo;
               </h2>
             </motion.div>
 
-            <div className="space-y-6 text-sm text-slate-500 font-medium leading-relaxed">
+            <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
               <p>
                 As a Software Engineer and Tech Educator, I saw first-hand how legacy college curriculums failed to match the rapid advancements of commercial engineering stacks. Students were graduating with degrees, yet had zero knowledge of Docker pipelines, Next.js hydration, or LLM integrations.
               </p>
@@ -85,7 +80,7 @@ export default function Founder() {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Award className="w-5 h-5 text-primary" />
-                  <h4 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Our Mission</h4>
+                  <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Our Mission</h3>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed font-medium">
                   To train 10,000+ developers in Next.js, Cloud architectures, and AI integrations, turning beginners into highly-compensated tech talent.
@@ -95,7 +90,7 @@ export default function Founder() {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-secondary" />
-                  <h4 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Our Vision</h4>
+                  <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Our Vision</h3>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed font-medium">
                   To replace legacy training paradigms with micro-credentials, live client contract bootcamps, and direct job matchings.

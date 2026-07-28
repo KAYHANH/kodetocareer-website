@@ -91,7 +91,8 @@ export async function GET() {
         image: article.cover_image || article.social_image || 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=500&fit=crop',
         featured: false,
         slug: article.slug,
-        content: contentMarkdown
+        content: contentMarkdown,
+        tags: article.tag_list || []
       };
 
       dynamicPosts.unshift(newPost);

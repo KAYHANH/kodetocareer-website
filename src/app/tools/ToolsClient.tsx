@@ -32,7 +32,8 @@ export default function ToolsHub() {
       const params = new URLSearchParams(window.location.search);
       const tab = params.get('tab');
       if (tab === 'quiz' || tab === 'salary' || tab === 'resume' || tab === 'roadmap') {
-        setActiveTab(tab as any);
+        const t = setTimeout(() => setActiveTab(tab as any), 0);
+        return () => clearTimeout(t);
       }
     }
   }, []);

@@ -267,7 +267,7 @@ export default function LearnHubClient({ slug }: PageProps) {
                   </div>
                 </div>
                 <p className="text-xs text-slate-500 font-semibold leading-relaxed italic">
-                  "{rev.text}"
+                  &ldquo;{rev.text}&rdquo;
                 </p>
                 <span className="text-[9px] text-slate-400 font-bold block text-right">{rev.date}</span>
               </div>

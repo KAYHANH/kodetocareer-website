@@ -1,7 +1,18 @@
 import React from 'react';
 
+export type SchemaType = 
+  | 'Course' 
+  | 'FAQPage' 
+  | 'Organization' 
+  | 'EducationalOrganization'
+  | 'LocalBusiness'
+  | 'WebSite' 
+  | 'Article'
+  | 'JobPosting'
+  | 'BreadcrumbList';
+
 interface SchemaMarkupProps {
-  type: 'Course' | 'FAQPage' | 'Organization' | 'WebSite' | 'Article';
+  type: SchemaType;
   data: Record<string, any>;
 }
 
@@ -19,3 +30,4 @@ export default function SchemaMarkup({ type, data }: SchemaMarkupProps) {
     />
   );
 }
+

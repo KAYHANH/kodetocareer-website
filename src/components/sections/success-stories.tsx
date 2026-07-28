@@ -143,7 +143,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             <h4 className="text-base font-extrabold text-slate-900 leading-tight">
               {testimonial.name}
             </h4>
-            <p className="text-xs font-semibold text-slate-400 mt-0.5">{testimonial.role}</p>
+            <p className="text-xs font-semibold text-slate-600 mt-0.5">{testimonial.role}</p>
           </div>
 
           {/* LinkedIn Profile link */}
@@ -151,7 +151,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto flex items-center justify-center w-7 h-7 rounded-xl border border-slate-200 text-slate-400 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all"
+            className="ml-auto flex items-center justify-center w-7 h-7 rounded-xl border border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all"
             aria-label={`${testimonial.name} LinkedIn Profile`}
           >
             <ExternalLink className="w-3.5 h-3.5" />
@@ -168,7 +168,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           </div>
           
           <div className="text-right">
-            <span className="text-[9px] text-slate-400 font-bold block uppercase leading-none">Salary Package</span>
+            <span className="text-[9px] text-slate-600 font-bold block uppercase leading-none">Salary Package</span>
             <span className="font-heading text-sm font-extrabold text-slate-800 block mt-1">{testimonial.salary}</span>
           </div>
         </div>
@@ -177,7 +177,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <div className="relative mt-4 bg-slate-50 rounded-2xl p-4 border border-slate-100">
           <Quote className="absolute right-3 top-3 h-8 w-8 text-slate-200/50 pointer-events-none" aria-hidden="true" />
           <p className="text-[12px] leading-relaxed text-slate-500 font-medium italic relative z-10 pr-6">
-            "{testimonial.quote}"
+            &ldquo;{testimonial.quote}&rdquo;
           </p>
         </div>
       </div>

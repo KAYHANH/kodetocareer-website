@@ -30,7 +30,7 @@ export default function FloatingCta() {
   return (
     <>
       {/* ── Desktop/Tablet Floating Actions ── */}
-      <div className="fixed bottom-20 md:bottom-6 right-6 z-50 flex flex-col items-end gap-3.5 select-none pointer-events-none">
+      <div className="hidden md:flex fixed bottom-24 right-6 z-40 flex-col items-end gap-3.5 select-none pointer-events-none" suppressHydrationWarning>
         
         {/* Expanding Counselling Dialog Form */}
         <AnimatePresence>
@@ -138,7 +138,7 @@ export default function FloatingCta() {
       </div>
 
       {/* ── 2. Mobile Sticky Bottom CTA Bar (Only visible on screens < 768px) ── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-[8px] border-t border-slate-100 p-3.5 flex items-center gap-3.5 md:hidden shadow-[0_-8px_32px_rgba(0,0,0,0.06)] select-none">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-[8px] border-t border-slate-100 p-3.5 flex items-center gap-3.5 md:hidden shadow-[0_-8px_32px_rgba(0,0,0,0.06)] select-none" suppressHydrationWarning>
         {/* Mobile Call Button */}
         <a
           href="tel:+919667975616"

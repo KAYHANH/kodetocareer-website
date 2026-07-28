@@ -46,27 +46,6 @@ export default function BlogPage() {
     };
 
     loadMergedPosts();
-
-    const syncLatestNews = async () => {
-      try {
-        const res = await fetch(`/api/blog/sync?t=${Date.now()}`);
-        const data = await res.json();
-        loadMergedPosts();
-      } catch (err) {
-        console.error('Failed to sync tech news:', err);
-      }
-    };
-
-    // Trigger initial sync after 1s
-    const timer = setTimeout(syncLatestNews, 1000);
-
-    // Set interval to sync every 5 minutes (300,000 ms)
-    const interval = setInterval(syncLatestNews, 300000);
-
-    return () => {
-      clearTimeout(timer);
-      clearInterval(interval);
-    };
   }, []);
 
   const handleManualSync = async () => {
@@ -142,7 +121,12 @@ export default function BlogPage() {
               type="text"
               placeholder="Search articles, tags, authors..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                if (selectedCategory !== 'All') {
+                  setSelectedCategory('All');
+                }
+              }}
               className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50"
             />
           </div>
@@ -155,7 +139,10 @@ export default function BlogPage() {
             {CATEGORIES.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setSearchQuery('');
+                }}
                 className={`px-4.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   selectedCategory === category
                     ? 'bg-primary text-white shadow-md shadow-primary/10'
@@ -303,7 +290,10 @@ export default function BlogPage() {
                 {POPULAR_TAGS.map((t) => (
                   <span
                     key={t}
-                    onClick={() => setSearchQuery(t)}
+                    onClick={() => {
+                      setSelectedCategory('All');
+                      setSearchQuery(t);
+                    }}
                     className="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[9px] text-slate-600 font-bold px-2.5 py-1 rounded-lg cursor-pointer"
                   >
                     #{t}

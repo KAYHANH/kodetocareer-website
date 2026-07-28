@@ -86,7 +86,7 @@ export default function PlacementsPage() {
               Direct Placements Outcomes
             </span>
             <h1 className="font-heading font-extrabold text-5xl md:text-6xl text-slate-900 leading-tight">
-              We Don't Just Teach. <br />
+              We Don&apos;t Just Teach. <br />
               <span className="gradient-text">We Help You Get Hired.</span>
             </h1>
             <p className="text-base md:text-lg text-slate-500 font-semibold leading-relaxed max-w-xl">
@@ -363,7 +363,7 @@ export default function PlacementsPage() {
               { name: "Rahul Sharma", role: "Software Engineer", target: "Google", package: "₹12 LPA", text: "From local scripting to architecting production apps at Google. The resume workshops and mockup interviews were critical." }
             ].map((s, idx) => (
               <div key={idx} className="bg-white border border-slate-150 p-6 rounded-[24px] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-                <p className="text-slate-500 text-xs italic font-semibold leading-relaxed mb-6">"{s.text}"</p>
+                <p className="text-slate-500 text-xs italic font-semibold leading-relaxed mb-6">&ldquo;{s.text}&rdquo;</p>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-black text-xs">

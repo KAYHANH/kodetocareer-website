@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const MotionLink = motion(Link);
 
@@ -39,7 +40,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-blue-400 to-indigo-600',
     hiringCompanies: ['Google', 'Stripe', 'Paytm', 'Deloitte'],
     link: '/courses/mern-stack-development',
-    bannerImage: '/banners/mern.png',
+    bannerImage: '/banners/mern.webp',
   },
   {
     id: "2",
@@ -54,7 +55,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-rose-400 to-red-500',
     hiringCompanies: ['Amazon', 'Microsoft', 'EY', 'Fractal Analytics'],
     link: '/courses/data-science-machine-learning',
-    bannerImage: '/banners/datascience.png',
+    bannerImage: '/banners/datascience.webp',
   },
   {
     id: "3",
@@ -69,7 +70,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-amber-400 to-orange-500',
     hiringCompanies: ['Adobe', 'Framer', 'Razorpay', 'Infosys'],
     link: '/courses/graphic-design-ui-ux',
-    bannerImage: '/banners/design.png',
+    bannerImage: '/banners/design.webp',
   },
   {
     id: "4",
@@ -84,7 +85,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-indigo-400 to-purple-600',
     hiringCompanies: ['TCS', 'Wipro', 'Cognizant', 'Deloitte'],
     link: '/courses/data-analytics',
-    bannerImage: '/banners/analytics.png',
+    bannerImage: '/banners/analytics.webp',
   },
   {
     id: "5",
@@ -99,7 +100,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-red-400 to-orange-600',
     hiringCompanies: ['Capgemini', 'IBM', 'Accenture', 'Oracle'],
     link: '/courses/java-full-stack',
-    bannerImage: '/banners/java.png',
+    bannerImage: '/banners/java.webp',
   },
   {
     id: "6",
@@ -114,7 +115,7 @@ const PROGRAMS: Program[] = [
     gradient: 'from-purple-400 to-indigo-600',
     hiringCompanies: ['Docker', 'Kubernetes', 'AWS', 'RedHat'],
     link: '/courses/cloud-devops',
-    bannerImage: '/banners/cloud.png',
+    bannerImage: '/banners/cloud.webp',
   },
 ];
 
@@ -158,9 +159,12 @@ function ProgramCard({ program }: { program: Program }) {
         {/* Course Abstract Cover Image */}
         <div className="w-full h-40 rounded-2xl mb-6 overflow-hidden relative shadow-inner flex items-center justify-center group/banner">
           {/* Background Image Banner with Hover Zoom (1.05x), Transition 300ms */}
-          <img
+          <Image
             src={program.bannerImage}
-            alt=""
+            alt={program.title}
+            width={400}
+            height={160}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105 group-hover:translate-y-[-2px] pointer-events-none"
           />
           {/* Subtle dark overlay for text contrast */}
@@ -296,32 +300,7 @@ export default function FeaturedPrograms() {
             <ProgramCard key={program.title} program={program} />
           ))}
 
-          {/* 7th Bento Card: Spotlight CTA */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ y: -8, scale: 1.015 }}
-            className="rounded-[28px] bg-gradient-to-br from-primary via-blue-600 to-secondary p-6 text-white shadow-[0_8px_30px_rgba(37,99,235,0.15)] flex flex-col justify-between group min-h-[380px]"
-          >
-            <div>
-              <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white text-xs font-semibold backdrop-blur-md uppercase tracking-wider">
-                Custom Assessment
-              </span>
-              <h3 className="mt-6 font-heading text-2xl font-extrabold leading-tight">
-                Not sure which path to choose?
-              </h3>
-              <p className="mt-3 text-sm text-white/80 leading-relaxed font-medium">
-                Take our quick 2-minute skill analysis. Get matched with a customized learning path based on your background and target career goals.
-              </p>
-            </div>
 
-            <Link
-              href="/start"
-              className="flex items-center justify-between bg-white text-primary font-bold px-5 py-4 rounded-xl hover:bg-slate-50 transition-colors shadow-lg text-sm"
-            >
-              Start AI Skill Assessment
-              <ArrowRight className="w-4.5 h-4.5" />
-            </Link>
-          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -73,7 +73,7 @@ export default function CareerServicesPage() {
                     <Award className="w-3.5 h-3.5" /> Direct Placements
                   </span>
                   <h2 className="font-heading font-extrabold text-3xl md:text-4xl lg:text-5xl text-slate-900 leading-tight">
-                    We Don't Just Teach. <br />
+                    We Don&apos;t Just Teach. <br />
                     <span className="gradient-text">We Help You Get Hired.</span>
                   </h2>
                   <p className="text-sm text-slate-500 font-semibold leading-relaxed">

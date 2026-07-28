@@ -1,6 +1,9 @@
-'use client';
-
 import React from 'react';
+
+export const metadata = {
+  title: 'Privacy Policy | KodeToCareer',
+  description: 'Understand how KodeToCareer collects, uses, protects, and handles your personal information.',
+};
 
 const SECTIONS = [
   { id: 'collect', title: '1. Information We Collect' },

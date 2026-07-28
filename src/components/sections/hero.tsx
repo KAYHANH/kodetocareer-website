@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Phone, Award, Trophy } from 'lucide-react';
-import TechStackCircle from '@/components/ui/tech-stack-circle';
+import { Sparkles, ArrowRight, Award, Trophy, Phone, MapPin, Shield, GraduationCap, CheckCircle2, MessageSquare } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
+
+const TechStackCircle = dynamic(() => import('@/components/ui/tech-stack-circle'), { ssr: false });
 
 const MotionLink = motion(Link);
 
@@ -13,18 +15,19 @@ const MotionLink = motion(Link);
 /* ------------------------------------------------------------------ */
 
 const ROTATING_WORDS = [
-  'AI Integration',
-  'Full Stack Development',
-  'Data Science & Analytics',
-  'Digital Marketing Strategy',
+  'MERN Stack Developer',
+  'Data Scientist',
+  'Java Developer',
+  'Cloud & DevOps Engineer',
+  'UI/UX Designer',
 ];
 
 const STATS = [
   { value: 1200, suffix: '+', label: 'Students Enrolled' },
   { value: 500, suffix: '+', label: 'Career Placements' },
-  { value: 95, suffix: '%', label: 'Placement Rate' },
-  { value: 18, suffix: '+', label: 'Professional Courses' },
-  { value: 120, suffix: '+', label: 'Projects Built' },
+  { value: 95, suffix: '%', label: 'Success Rate' },
+  { value: 10, suffix: '+', label: 'Career Programs' },
+  { value: 300, suffix: '+', label: 'Hiring Partners' },
 ] as const;
 
 const EASE: [number, number, number, number] = [0.21, 0.47, 0.32, 0.98];
@@ -76,7 +79,7 @@ function useCountUp(
   duration = 2000,
 ): [React.RefObject<HTMLSpanElement | null>, string] {
   const ref = useRef<HTMLSpanElement>(null);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
@@ -87,6 +90,7 @@ function useCountUp(
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated.current) {
           hasAnimated.current = true;
+          setCount(0);
           const start = performance.now();
 
           const animate = (now: number) => {
@@ -125,15 +129,21 @@ function StatItem({
   suffix: string;
   label: string;
 }) {
+  const [mounted, setMounted] = useState(false);
   const [ref, formatted] = useCountUp(value, 2000);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="flex flex-col border-l-2 border-primary/10 pl-4 py-1">
+    <div className="flex flex-col border-l-2 border-primary/10 pl-4 py-1" suppressHydrationWarning>
       <span
         ref={ref}
+        suppressHydrationWarning
         className="text-2xl md:text-3xl font-extrabold font-heading text-slate-900 tracking-tight"
       >
-        {formatted}
+        {mounted ? formatted : value.toLocaleString()}
         {suffix}
       </span>
       <span className="text-xs font-semibold text-slate-500 mt-0.5 uppercase tracking-wider">{label}</span>
@@ -148,36 +158,46 @@ function StatItem({
 /* ------------------------------------------------------------------ */
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
   const typedWord = useTypingEffect(ROTATING_WORDS);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <section
+      suppressHydrationWarning
       className="min-h-screen flex items-center relative overflow-hidden -mt-20 pt-24 pb-16"
       aria-label="Hero"
     >
       {/* ── Background layers ── */}
-      <div className="absolute inset-0 bg-background" aria-hidden="true" />
+      <div className="absolute inset-0 bg-background" aria-hidden="true" suppressHydrationWarning />
 
       {/* Premium blurred light mesh gradient circles */}
       <div
-        className="absolute top-[-250px] left-[-150px] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-[130px] animate-float"
+        className="absolute top-[-250px] left-[-150px] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl transform-gpu animate-float"
         aria-hidden="true"
+        suppressHydrationWarning
       />
       <div
-        className="absolute top-[20%] right-[-200px] w-[700px] h-[700px] rounded-full bg-sky-100/40 blur-[130px] animate-float-delayed"
+        className="absolute top-[20%] right-[-200px] w-[700px] h-[700px] rounded-full bg-sky-100/40 blur-3xl transform-gpu animate-float-delayed"
         aria-hidden="true"
+        suppressHydrationWarning
       />
       <div
-        className="absolute bottom-[-250px] left-[20%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-[130px] animate-float"
+        className="absolute bottom-[-250px] left-[20%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl transform-gpu animate-float"
         aria-hidden="true"
+        suppressHydrationWarning
       />
       <div
-        className="absolute top-[50%] left-[50%] w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-[130px] animate-float-delayed"
+        className="absolute top-[50%] left-[50%] w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-3xl transform-gpu animate-float-delayed"
         aria-hidden="true"
+        suppressHydrationWarning
       />
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 bg-grid opacity-50" aria-hidden="true" />
+      <div className="absolute inset-0 bg-grid opacity-50" aria-hidden="true" suppressHydrationWarning />
 
       {/* ── Content ── */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 w-full">
@@ -192,7 +212,7 @@ export default function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
-                AI-Powered Career & Engineering Academy
+                India&apos;s Career-First Tech Academy
               </span>
             </motion.div>
 
@@ -203,9 +223,9 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
             >
-              <span className="block text-slate-900">Learn.</span>
-              <span className="block gradient-text">Build.</span>
-              <span className="block text-slate-900">Get Hired.</span>
+              <span className="block text-slate-900">Become</span>
+              <span className="block gradient-text">Job-Ready</span>
+              <span className="block text-slate-900">in 4–6 Months</span>
             </motion.h1>
 
             {/* Typing line */}
@@ -216,9 +236,9 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
               aria-live="polite"
             >
-              Master{' '}
-              <span className="text-primary font-bold">
-                {typedWord}
+              Become a{' '}
+              <span className="text-primary font-bold" suppressHydrationWarning>
+                {mounted ? typedWord : ROTATING_WORDS[0]}
                 <span className="animate-pulse ml-0.5 text-primary">|</span>
               </span>
             </motion.p>
@@ -230,7 +250,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
             >
-              We are an AI-powered technology academy training the next generation of software engineers, data analysts, and AI experts. Get real production experience and direct hiring outcomes.
+              Live projects. Industry internships. Placement assistance. Career mentorship. Join 1,200+ students who transformed their careers — starting from just ₹5,000/month.
             </motion.p>
 
             {/* CTA buttons */}
@@ -241,23 +261,25 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
             >
               <MotionLink
-                href="/courses"
+                href="/contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/35 transition-all cursor-pointer"
               >
-                Explore Programs
-                <ArrowRight className="w-5 h-5" />
+                <Phone className="w-5 h-5" />
+                Book Free Career Counselling
               </MotionLink>
-              <MotionLink
-                href="/contact"
+              <motion.a
+                href="https://wa.me/919667975616?text=Hi%2C%20I%20want%20to%20attend%20a%20free%20demo%20class"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 bg-[#EFF6FF] border border-blue-200 text-primary px-8 py-4 rounded-[14px] font-bold text-lg hover:bg-blue-100 transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-emerald-600/20 hover:shadow-xl transition-all cursor-pointer"
               >
-                <Phone className="w-5 h-5" />
-                Book Counselling
-              </MotionLink>
+                <MessageSquare className="w-5 h-5" />
+                Attend Free Demo Class
+              </motion.a>
             </motion.div>
 
             {/* Small trust badges */}
@@ -267,9 +289,11 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
-              <span className="flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5 text-primary" /> AI-Driven Learning</span>
-              <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-secondary" /> ISO 9001:2015 Training</span>
-              <span className="flex items-center gap-1.5"><Trophy className="w-3.5 h-3.5 text-emerald-500" /> 100% Placement Support</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> Live Projects</span>
+              <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-secondary" /> Internship Included</span>
+              <span className="flex items-center gap-1.5"><Trophy className="w-3.5 h-3.5 text-primary" /> Placement Assistance</span>
+              <span className="flex items-center gap-1.5"><GraduationCap className="w-3.5 h-3.5 text-indigo-500" /> Career Mentorship</span>
+              <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-amber-500" /> Starting ₹5,000</span>
             </motion.div>
 
             {/* Real Stats Grid */}
@@ -291,7 +315,7 @@ export default function Hero() {
           </div>
 
           {/* ── Right column (circular tech stack + floating cards) ── */}
-          <div className="w-full lg:w-[42%] flex justify-center items-center relative min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] overflow-hidden lg:overflow-visible">
+          <div className="w-full lg:w-[42%] flex justify-center items-center relative min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] overflow-visible">
             <TechStackCircle />
             
 

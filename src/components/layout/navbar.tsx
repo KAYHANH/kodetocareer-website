@@ -21,7 +21,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Placements", href: "https://devsunite.com/jobs", id: "placements" },
   { label: "Career Solutions", href: "/career-services", id: "career-services", hasDropdown: true },
   { label: "Blog", href: "/blog", id: "blog" },
-  { label: "Free Tools", href: "/tools", id: "tools" },
+  { label: "Free Tools", href: "/free-tools", id: "free-tools" },
   { label: "Contact", href: "/contact", id: "contact" },
 ];
 
@@ -82,8 +82,11 @@ export default function Navbar() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // check on mount
-    return () => window.removeEventListener("scroll", handleScroll);
+    const t = setTimeout(handleScroll, 0);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(t);
+    };
   }, [handleScroll]);
 
   /* ── lock body scroll when mobile menu is open ── */
@@ -100,11 +103,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-out ${
-          scrolled
-            ? "glass"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-out bg-white border-b border-slate-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)]"
         role="banner"
       >
         <nav
@@ -122,6 +121,7 @@ export default function Navbar() {
               width={200}
               height={50}
               alt="KodeToCareer Logo"
+              sizes="(max-width: 768px) 160px, 208px"
               className="h-10 md:h-11 w-auto object-contain"
               priority
             />
@@ -262,7 +262,7 @@ export default function Navbar() {
                               className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5"
                               onClick={() => setCoursesHovered(false)}
                             >
-                              Explore All 9 Courses <ArrowRight className="w-3.5 h-3.5" />
+                              Explore All 10 Courses <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
                           </div>
                         </motion.div>
@@ -354,7 +354,7 @@ export default function Navbar() {
               href="/start"
               className="btn-primary-gradient px-5 py-2.5 text-sm font-semibold text-white"
             >
-              Start Learning
+              Enroll Now
             </Link>
           </div>
 
@@ -458,12 +458,19 @@ export default function Navbar() {
                                 className="pl-6 space-y-1 overflow-hidden"
                               >
                                 {isCourses ? (
-                                  <>
-                                    <Link href="/courses/mern-stack-development" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">MERN Stack + AI</Link>
-                                    <Link href="/courses/data-science-machine-learning" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Data Science & ML</Link>
-                                    <Link href="/courses/mlops-ai-systems" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Industry MLOps</Link>
-                                    <Link href="/courses" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-primary hover:underline">Explore All Courses →</Link>
-                                  </>
+                                   <>
+                                     <Link href="/courses/mern-stack-development" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">MERN Stack</Link>
+                                     <Link href="/courses/java-full-stack" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Java Full Stack</Link>
+                                     <Link href="/courses/python-programming" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Python & Automation</Link>
+                                     <Link href="/courses/data-science-machine-learning" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Data Science & ML</Link>
+                                     <Link href="/courses/data-analytics" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Data Analytics</Link>
+                                     <Link href="/courses/cloud-devops" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Cloud & DevOps</Link>
+                                     <Link href="/courses/mlops-ai-systems" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Industry MLOps</Link>
+                                     <Link href="/courses/graphic-design-ui-ux" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">UI/UX Product Design</Link>
+                                     <Link href="/courses/digital-marketing" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Digital Marketing</Link>
+                                     <Link href="/courses/videography-video-editing" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Graphic & Video Editing</Link>
+                                     <Link href="/courses" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-primary hover:underline">Explore All 10 Courses →</Link>
+                                   </>
                                 ) : (
                                   <>
                                     <Link href="/career-services/placements" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Placement Outcomes</Link>
@@ -501,7 +508,7 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="btn-primary-gradient flex w-full items-center justify-center py-3 text-sm font-semibold text-white"
                 >
-                  Start Learning
+                  Enroll Now
                 </Link>
               </div>
             </motion.div>

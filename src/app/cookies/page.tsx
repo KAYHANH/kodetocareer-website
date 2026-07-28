@@ -1,6 +1,9 @@
-'use client';
-
 import React from 'react';
+
+export const metadata = {
+  title: 'Cookie Policy | KodeToCareer',
+  description: 'Learn how KodeToCareer uses cookies and tracking technologies to optimize your experience.',
+};
 
 const SECTIONS = [
   { id: 'definition', title: '1. What Are Cookies' },

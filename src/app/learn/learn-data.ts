@@ -288,5 +288,210 @@ export const LEARN_HUBS: Record<string, TechHub> = {
       slug: 'cloud-devops',
       description: 'Master cloud architecture, Docker containers, Kubernetes clusters, and automated Terraform CI/CD pipelines.'
     }
+  },
+  'node': {
+    title: 'Node.js',
+    slug: 'node',
+    tagline: 'Build fast, scalable network applications using JavaScript on the server.',
+    overview: 'What is Node.js? Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside a web browser, enabling backend server development. It uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.',
+    whyLearn: [
+      'Allows you to write full stack applications using JavaScript on both client and server.',
+      'Extremely high performance for real-time web applications (chat, streaming, gaming).',
+      'Supported by npm, the largest package manager and open-source library ecosystem in the world.'
+    ],
+    tutorials: [
+      {
+        title: 'HTTP Servers & Routing',
+        duration: '20 Mins',
+        level: 'Beginner',
+        description: 'Understand Node\'s core HTTP module, process requests, send responses, and handle URL routing.',
+        steps: [
+          'Use require("http") to spin up a local development web server.',
+          'Read URL pathways and method verbs to route client requests.',
+          'Format and return HTML or JSON content blocks with correct status codes.'
+        ]
+      }
+    ],
+    projects: [
+      {
+        title: 'Real-time Chat Server API',
+        difficulty: 'Intermediate',
+        description: 'Design a local Node.js API with custom routers, file system audit loggers, and connection managers.',
+        objectives: [
+          'Implement event listeners coordinating stream reading operations.',
+          'Write custom routing logic to parse dynamic payloads.',
+          'Save audit logs asynchronously to the local file system.'
+        ]
+      }
+    ],
+    relatedCourse: {
+      name: 'MERN Stack Development + AI Integration',
+      slug: 'mern-stack-development',
+      description: 'Go from absolute zero to advanced React, Node.js, and AI API hosting with placement backing.'
+    }
+  },
+  'power-bi': {
+    title: 'Power BI',
+    slug: 'power-bi',
+    tagline: 'Create interactive dashboards and convert data into actionable business intelligence.',
+    overview: 'What is Power BI? Power BI is a business analytics service by Microsoft that provides interactive visualizations and business intelligence capabilities with an interface simple enough for end users. It allows you to connect to hundreds of data sources and simplify data preparation.',
+    whyLearn: [
+      'The leading tool in the market for business intelligence and data visualization.',
+      'Enables non-technical stakeholders to understand complex business metrics instantly.',
+      'Integrates seamlessly with Excel, Azure, SQL Server, and other corporate data warehouses.'
+    ],
+    tutorials: [
+      {
+        title: 'Data Modeling & DAX Formulas',
+        duration: '25 Mins',
+        level: 'Beginner',
+        description: 'Import data, define relationships, and write custom DAX expressions for business intelligence.',
+        steps: [
+          'Clean and shape data using Power Query Editor.',
+          'Establish one-to-many relationship models between data tables.',
+          'Write custom metrics using DAX formulas (CALCULATE, SUM, RELATED).'
+        ]
+      }
+    ],
+    projects: [
+      {
+        title: 'Corporate Sales & Profitability Dashboard',
+        difficulty: 'Intermediate',
+        description: 'Build an interactive dashboard showcasing monthly sales performance, cohort retention, and product category trends.',
+        objectives: [
+          'Connect to a SQL database containing raw sales tables.',
+          'Design interactive filtering visualizations (slicers) for region and dates.',
+          'Expose KPI metrics comparing monthly profit margins.'
+        ]
+      }
+    ],
+    relatedCourse: {
+      name: 'Data Analytics & Business Intelligence',
+      slug: 'data-analytics',
+      description: 'Master advanced SQL, Excel, Power BI dashboards, and Python data analysis with interview training.'
+    }
+  },
+  'mongodb': {
+    title: 'MongoDB',
+    slug: 'mongodb',
+    tagline: 'Master modern NoSQL document databases for high-speed dynamic scaling.',
+    overview: 'What is MongoDB? MongoDB is a source-available, cross-platform, document-oriented NoSQL database program that uses JSON-like documents with optional schemas. It is designed for developer productivity, flexible data modeling, and high scalability.',
+    whyLearn: [
+      'The database choice of MERN developers for storing application collections.',
+      'No complex SQL table joins needed — data is stored naturally in readable documents.',
+      'Supports horizontal scaling via sharding and replication out-of-the-box.'
+    ],
+    tutorials: [
+      {
+        title: 'CRUD Operations & Schemas',
+        duration: '15 Mins',
+        level: 'Beginner',
+        description: 'Learn to write MongoDB queries, insert records, filter collections, and use Mongoose validation.',
+        steps: [
+          'Connect to local or Atlas MongoDB instances from Node.js.',
+          'Perform insert, find, update, and delete operations on database collections.',
+          'Define Mongoose schema fields with strict type validations.'
+        ]
+      }
+    ],
+    projects: [
+      {
+        title: 'Custom Content Management Database',
+        difficulty: 'Intermediate',
+        description: 'Model a relational blog database schema with authors, comments, and post tags, optimizing read performance.',
+        objectives: [
+          'Design embedded vs. referenced document data structures.',
+          'Enforce strict index constraints on email and username values.',
+          'Wrote optimized projection queries returning subset data.'
+        ]
+      }
+    ],
+    relatedCourse: {
+      name: 'MERN Stack Development + AI Integration',
+      slug: 'mern-stack-development',
+      description: 'Go from absolute zero to advanced React, Node.js, and AI API hosting with placement backing.'
+    }
+  },
+  'git': {
+    title: 'Git & GitHub',
+    slug: 'git',
+    tagline: 'Track code changes, coordinate with teams, and host repositories.',
+    overview: 'What is Git? Git is a distributed version control system that tracks changes in software source code during development, allowing multiple developers to coordinate work. GitHub is the cloud platform hosting these code repositories.',
+    whyLearn: [
+      'Essential baseline skill for every developer role in the modern software industry.',
+      'Keeps complete historical records of code changes, enabling instant bug reverts.',
+      'Enables collaborative developer flows using pull requests and code reviews.'
+    ],
+    tutorials: [
+      {
+        title: 'Branching & Merge Conflict Resolution',
+        duration: '20 Mins',
+        level: 'Beginner',
+        description: 'Create code branches, merge feature work, and handle merge conflicts in Git.',
+        steps: [
+          'Create and switch branches using git checkout -b or git switch.',
+          'Understand git commit history and push code commits to remote repositories.',
+          'Resolve file conflicts manually and complete merges.'
+        ]
+      }
+    ],
+    projects: [
+      {
+        title: 'Collaborative Open Source Pipeline',
+        difficulty: 'Intermediate',
+        description: 'Simulate team development workflows: branch features, write code commits, and submit review pull requests.',
+        objectives: [
+          'Fork and clone public repositories to local development workspaces.',
+          'Coordinate branch merges with master branch rules.',
+          'Deploy code changes using automated GitHub actions pipelines.'
+        ]
+      }
+    ],
+    relatedCourse: {
+      name: 'Enterprise Java Full Stack Developer',
+      slug: 'java-full-stack',
+      description: 'Master Core Java, Spring Boot, Hibernate, microservices, databases, and modern React hostings.'
+    }
+  },
+  'css': {
+    title: 'CSS & Tailwind',
+    slug: 'css',
+    tagline: 'Create beautiful, responsive layout designs using Tailwind and raw CSS variables.',
+    overview: 'What is CSS? Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML. Tailwind CSS is a utility-first CSS framework that speeds up styling workflows.',
+    whyLearn: [
+      'Enables you to transform raw HTML layouts into beautiful, responsive web pages.',
+      'Tailwind CSS lets you style components directly inside JSX without writing raw CSS files.',
+      'Highly valued skill for crafting pixel-perfect interfaces that match Figma designs.'
+    ],
+    tutorials: [
+      {
+        title: 'Responsive Flexbox & Grid Layouts',
+        duration: '15 Mins',
+        level: 'Beginner',
+        description: 'Learn how to create responsive layouts that shift cleanly between mobile and desktop using CSS grids.',
+        steps: [
+          'Define rows and columns using CSS grid-template-columns.',
+          'Center items both vertically and horizontally using Flexbox rules.',
+          'Use Tailwind breakpoint prefixes (sm:, md:, lg:) to adapt UI components.'
+        ]
+      }
+    ],
+    projects: [
+      {
+        title: 'Responsive Glassmorphic Portfolio Landing',
+        difficulty: 'Intermediate',
+        description: 'Design a pixel-perfect, responsive developer landing page featuring glassmorphism and hover animations.',
+        objectives: [
+          'Apply custom backdrop blur styles to create premium glass layers.',
+          'Enforce responsive grids shifting columns based on screen width.',
+          'Animate hover state transitions using CSS transition rules.'
+        ]
+      }
+    ],
+    relatedCourse: {
+      name: 'Graphic Design + UI/UX Product Design Systems',
+      slug: 'graphic-design-ui-ux',
+      description: 'Master vector illustrations, design guidelines, accessible color choices, and interactive Figma prototyping.'
+    }
   }
 };

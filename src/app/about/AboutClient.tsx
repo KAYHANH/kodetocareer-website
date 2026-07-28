@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { 
   Target, Eye, Users, Shield, Globe, Award, Sparkles, 
   Heart, Rocket, BookOpen, Clock, ArrowRight, 
-  ChevronRight, Building2, CheckCircle2 
+  ChevronRight, Building2, CheckCircle2, ExternalLink 
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -60,11 +60,17 @@ function useCountUp(target: number, duration = 2000): [React.RefObject<HTMLSpanE
 }
 
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
+  const [mounted, setMounted] = useState(false);
   const [ref, formatted] = useCountUp(value);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-      <span ref={ref} className="text-4xl md:text-5xl font-black font-heading text-primary font-mono leading-none">
-        {formatted}{suffix}
+    <div className="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow" suppressHydrationWarning>
+      <span ref={ref} className="text-4xl md:text-5xl font-black font-heading text-primary font-mono leading-none" suppressHydrationWarning>
+        {mounted ? formatted : 0}{suffix}
       </span>
       <span className="text-sm font-semibold text-slate-500 mt-2.5 uppercase tracking-wider">{label}</span>
     </div>
@@ -75,7 +81,12 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 /*  Main Component                                                     */
 /* ------------------------------------------------------------------ */
 export default function AboutPage() {
+  const [mounted, setMounted] = useState(false);
   const [activeStoryIdx, setActiveStoryIdx] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const stats = [
     { value: 1200, suffix: "+", label: "Students Trained" },
@@ -100,42 +111,47 @@ export default function AboutPage() {
     { icon: Users, title: "Excellence", desc: "Pursuing elite performance across instruction, project work, and support.", bg: "from-purple-50 to-purple-100/10" }
   ];
 
-  const leaders = [
+  const teamMembers = [
     {
-      name: "Dr. Vikram Aditya",
-      role: "Co-Founder & CEO",
-      bio: "Ex-Google Staff Engineer, passionate about building the next generation of global tech talent.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
-      exp: "12+ Yrs Experience"
+      name: "Md Arbaaz",
+      role: "Founder & Director",
+      specialization: "Software Architect & Tech Educator",
+      image: "/team/arbaaz-official.png",
+      bio: "Passionate software engineer and tech educator with over 7+ years of experience. Dedicated to empowering students through hands-on full-stack development, modern cloud architectures, and career mentorship.",
+      highlights: ["Ex-Senior Tech Lead", "1,200+ Mentored Graduates", "Full-Stack & Cloud Specialist"]
     },
     {
-      name: "Sarah Jenkins",
-      role: "Head of AI & Curriculum",
-      bio: "Former AI Research Scientist at Stanford. Expert in machine learning and NLP education.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
-      exp: "8+ Yrs Experience"
+      name: "Mohd Kaunain",
+      role: "Managing Director & Co-Founder",
+      specialization: "Strategic Operations & Business Growth",
+      image: "/team/kaunain-new-2026.jpg",
+      bio: "Strategic business leader overseeing institutional partnerships, student operations, and corporate placement alliances. Committed to building scalable pathways for aspiring software engineers.",
+      highlights: ["Operations & Expansion", "300+ Corporate Hiring Partners", "Strategic Alliances Lead"]
     },
     {
-      name: "Rajesh Nair",
-      role: "Director of Placements",
-      bio: "15+ years of recruitment leadership at Infosys and Accenture. Dedicated to student placement.",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
-      exp: "15+ Yrs Experience"
+      name: "Farhan",
+      role: "Full Stack + AI Mentor",
+      specialization: "Full Stack Developer & Tech Educator (Python)",
+      image: "/team/team-1.jpg",
+      bio: "Full Stack Developer and Python Tech Educator specializing in scalable backend architectures, Django/FastAPI, and automated pipelines. Oversees student lab sprints and placement drive preparation.",
+      highlights: ["Python & Full-Stack Educator", "Backend Systems Lead", "Live Codebase Mentor"]
+    },
+    {
+      name: "Ayesha Kamal",
+      role: "Learning & Design Specialist",
+      specialization: "Instructional Design & Pedagogy",
+      image: "/team/ayesha-official.png",
+      bio: "Learning & Design Specialist dedicated to crafting interactive curriculum structures, student learning paths, and engaging educational materials tailored for modern tech education.",
+      highlights: ["Curriculum & Pedagogy Specialist", "Interactive Learning Paths", "Student Experience Lead"]
+    },
+    {
+      name: "Md Faiz",
+      role: "Brand & Content Lead",
+      specialization: "Creative Strategy & Digital Storytelling",
+      image: "/team/faiz-official.png",
+      bio: "Brand & Content Lead overseeing creative strategy, brand identity, and student engagement campaigns to communicate KodeToCareer's mission across global digital channels.",
+      highlights: ["Brand Strategy & Identity", "Digital Storytelling", "Content Marketing Lead"]
     }
-  ];
-
-  const campus = [
-    { title: "Smart Lecture Hall", img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&h=400&fit=crop" },
-    { title: "Collaborative Labs", img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" },
-    { title: "Interactive Workshop Hub", img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop" }
-  ];
-
-  const accreditations = [
-    { name: "ISO 9001:2015 Certified", desc: "Quality Management Standard" },
-    { name: "Skill India Partner", desc: "National Skills Development Initiative" },
-    { name: "NSDC Aligned", desc: "Curriculum matches industry standards" },
-    { name: "MSME Registered", desc: "Recognized Enterprise Entity" },
-    { name: "Startup India", desc: "Department of Industrial Promotion" }
   ];
 
   const testimonials = [
@@ -144,11 +160,11 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden" suppressHydrationWarning>
       {/* Background Mesh */}
       <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blue-100/40 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[20%] left-0 w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-[130px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blue-100/40 blur-3xl pointer-events-none transform-gpu" />
+      <div className="absolute bottom-[20%] left-0 w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl pointer-events-none transform-gpu" />
 
       <div className="max-w-[1440px] mx-auto px-6 relative z-10 space-y-28">
         
@@ -231,7 +247,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-heading font-extrabold text-slate-900 mb-4">Our Vision</h3>
               <p className="text-slate-500 leading-relaxed font-medium">
-                To stand as the world's most trusted career transformation hub, enabling students to conquer complex programming barriers, launch scalable applications, and achieve elite placements at top global corporations.
+                To stand as the world&apos;s most trusted career transformation hub, enabling students to conquer complex programming barriers, launch scalable applications, and achieve elite placements at top global corporations.
               </p>
             </div>
           </div>
@@ -319,93 +335,99 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── 6. Meet Leadership ── */}
-        <section className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900">Our Leadership</h2>
-            <p className="text-slate-500 font-medium">Led by tech veterans dedicated to engineering talent growth.</p>
+        {/* ── 6. Meet Our Team Section ── */}
+        <section className="space-y-12 py-4">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider">
+              <Users className="w-4 h-4" />
+              LEADERSHIP & MENTORS
+            </span>
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 tracking-tight">
+              Meet Our Team
+            </h2>
+            <p className="text-slate-500 font-medium text-base leading-relaxed">
+              Experienced tech leaders, software architects, and career strategists committed to empowering the next generation of global engineering talent.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {leaders.map((l, idx) => (
-              <div key={idx} className="bg-white border border-slate-100 rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col">
-                <div className="h-64 relative bg-slate-100 overflow-hidden shrink-0">
-                  <Image src={l.image} alt={l.name} fill className="object-cover group-hover:scale-103 transition-transform duration-350" unoptimized />
-                  <span className="absolute bottom-4 left-4 bg-slate-900/80 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-md backdrop-blur-sm">
-                    {l.exp}
-                  </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto" suppressHydrationWarning>
+            {teamMembers.map((member, idx) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.15 }}
+                className="bg-white border border-slate-200/80 rounded-[32px] p-6 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group relative overflow-hidden space-y-5"
+                suppressHydrationWarning
+              >
+                {/* Background Accent */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-full blur-2xl pointer-events-none" />
+
+                {/* Team Member Photo */}
+                <div className="relative w-full aspect-[4/4.8] rounded-[24px] overflow-hidden shrink-0 border border-slate-100 shadow-md group-hover:scale-[1.01] transition-transform duration-300">
+                  <Image
+                    src={member.image}
+                    alt={`${member.name} - ${member.role}`}
+                    fill
+                    priority={idx === 0}
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 380px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60" />
                 </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-heading font-extrabold text-slate-900">{l.name}</h3>
-                    <span className="text-xs text-primary font-bold uppercase block mt-1 tracking-wide">{l.role}</span>
-                    <p className="text-xs text-slate-500 mt-4 leading-relaxed font-medium">{l.bio}</p>
+
+                {/* Member Details */}
+                <div className="space-y-3 flex-1 flex flex-col justify-between pt-1">
+                  <div className="space-y-2">
+                    <div>
+                      <h3 className="text-xl font-heading font-extrabold text-slate-900 leading-tight">
+                        {member.name}
+                      </h3>
+                      <span className="inline-block mt-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-extrabold font-mono uppercase tracking-wider">
+                        {member.role}
+                      </span>
+                    </div>
+                    <p className="text-[11px] font-bold text-slate-600 font-mono pt-1">
+                      {member.specialization}
+                    </p>
+                    <p className="text-xs text-slate-500 font-medium leading-relaxed pt-0.5">
+                      {member.bio}
+                    </p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center">
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-                      <LinkedinIcon className="w-5 h-5" />
-                    </a>
-                    <span className="text-[10px] font-bold text-slate-400 flex items-center gap-0.5 uppercase tracking-wider">
-                      Connect <ChevronRight className="w-3 h-3" />
-                    </span>
+
+                  {/* Highlights Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-2" suppressHydrationWarning>
+                    {member.highlights.map((h, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 text-[10px] font-semibold flex items-center gap-1"
+                      >
+                        <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
+                        <span>{h}</span>
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ── 7. Office Gallery ── */}
-        <section className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900">Campus & Collaboration Labs</h2>
-            <p className="text-slate-500 font-medium">Take a look inside our collaborative workspaces and design studios.</p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {campus.map((c, idx) => (
-              <div key={idx} className="group relative rounded-[24px] overflow-hidden shadow-sm aspect-video bg-slate-100 border border-slate-100">
-                <Image src={c.img} alt={c.title} fill className="object-cover group-hover:scale-103 transition-transform duration-350" unoptimized />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6 z-10">
-                  <span className="text-white text-sm font-bold">{c.title}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── 8. Awards & Certifications ── */}
-        <section className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-2xl md:text-3xl font-heading font-extrabold text-slate-900">Accreditations & Partner Trust</h2>
-            <p className="text-slate-500 font-medium">Authorized by leading national departments and quality standards organizations.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {accreditations.map((a, idx) => (
-              <div key={idx} className="bg-white border border-slate-100 p-5 rounded-2xl flex flex-col justify-between shadow-sm">
-                <Building2 className="w-6 h-6 text-primary mb-3 shrink-0" />
-                <div>
-                  <h4 className="text-xs font-bold text-slate-800">{a.name}</h4>
-                  <p className="text-[10px] text-slate-400 mt-1 font-semibold leading-relaxed">{a.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* ── 9. Testimonials ── */}
-        <section className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
+        <section className="space-y-12" suppressHydrationWarning>
+          <div className="text-center max-w-2xl mx-auto space-y-4" suppressHydrationWarning>
             <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900">Alumni Voice</h2>
             <p className="text-slate-500 font-medium">How our educational rigor translate to successful employment careers.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" suppressHydrationWarning>
             {testimonials.map((t, idx) => (
-              <div key={idx} className="bg-white border border-slate-150 rounded-[24px] p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+              <div key={idx} className="bg-white border border-slate-150 rounded-[24px] p-6 shadow-sm flex flex-col justify-between relative overflow-hidden" suppressHydrationWarning>
                 <p className="text-slate-600 text-sm leading-relaxed font-semibold italic mb-6">
-                  "{t.quote}"
+                  &ldquo;{t.quote}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-xs">

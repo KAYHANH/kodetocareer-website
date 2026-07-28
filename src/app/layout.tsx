@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Sora, Inter, Space_Grotesk } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import FloatingCta from "@/components/ui/floating-cta";
-import GlobalAdmissionsPopup from "@/components/ui/global-admissions-popup";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
 import BackgroundOrbs from "@/components/ui/background-orbs";
+import ClientWidgets from "@/components/layout/client-widgets";
 import "./globals.css";
 
 const sora = Sora({
@@ -17,6 +16,7 @@ const sora = Sora({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
@@ -58,6 +58,13 @@ export default function RootLayout({
       className={`${sora.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://script.google.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preload" href="/main-logo.png" as="image" type="image/png" />
+      </head>
 
       <body className="flex min-h-full flex-col bg-background text-text-primary font-body relative" suppressHydrationWarning>
         <BackgroundOrbs />
@@ -65,9 +72,9 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1 pt-20 relative z-10">{children}</main>
         <Footer />
-        <FloatingCta />
-        <GlobalAdmissionsPopup />
+        <ClientWidgets />
       </body>
     </html>
   );
 }
+

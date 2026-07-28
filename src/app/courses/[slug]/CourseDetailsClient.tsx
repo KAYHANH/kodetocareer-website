@@ -19,8 +19,8 @@ export const COURSES = [
     category: 'Software Engineering',
     duration: '6 Months',
     projects: '15+ Projects',
-    priceUpfront: '₹5,000',
-    pricePlaced: '₹3,000',
+    priceUpfront: '₹6,000',
+    pricePlaced: '₹4,000',
     level: 'Beginner to Advanced',
     tagline: 'Become a professional Full Stack Developer & AI Engineer with our production-grade MERN Stack course.',
     desc: 'At KodeToCareer, we don’t just teach coding; we engineer careers. Our cutting-edge MERN Stack with AI program is meticulously designed to take you from an absolute beginner to an advanced, AI-empowered software developer. Whether you are writing your first line of HTML or integrating complex Large Language Models (LLMs) into your web apps, KodeToCareer is your launchpad.',
@@ -69,7 +69,7 @@ export const COURSES = [
     duration: '4 Months',
     projects: '8+ Projects',
     priceUpfront: '₹10,000',
-    pricePlaced: '₹0',
+    pricePlaced: '₹5,000',
     level: 'Beginner to Advanced',
     tagline: 'Become a professional Brand Designer & UI/UX Specialist with our Figma & creative asset design course.',
     desc: 'Learn professional graphic design, typography, brand identity, wireframing, high-fidelity prototyping, and design systems.',
@@ -90,7 +90,7 @@ export const COURSES = [
     duration: '4 Months',
     projects: '10+ Projects',
     priceUpfront: '₹5,000',
-    pricePlaced: '₹0',
+    pricePlaced: '₹5,000',
     level: 'Beginner',
     tagline: 'Turn data into business decisions. Master industry-standard tools through a 4-month intensive program designed to prepare you for high-demand analytics careers.',
     desc: 'At KodeToCareer, we prepare you for high-demand analytics careers. No coding experience required. Master Microsoft Excel, SQL databases, Python analytics libraries, and Power BI dashboards through live, instructor-led sessions and hands-on case studies.',
@@ -114,7 +114,7 @@ export const COURSES = [
     duration: '5 Months',
     projects: '15+ Projects',
     priceUpfront: '₹10,000',
-    pricePlaced: '₹0',
+    pricePlaced: '₹10,000',
     level: 'Advanced',
     tagline: 'Master Java, Spring Boot, React, MySQL, REST APIs, Git, Docker, and Cloud Deployment through live classes and hands-on projects.',
     desc: 'Java powers millions of enterprise applications worldwide, from banking systems and e-commerce platforms to healthcare solutions and government services. Learning Java Full Stack Development opens doors to a versatile career where you can work on both server-side logic and user-facing interfaces.',
@@ -135,8 +135,8 @@ export const COURSES = [
     category: 'Cloud',
     duration: '6 Months (24 Weeks)',
     projects: '12+ Projects & Capstone',
-    priceUpfront: '₹24,999',
-    pricePlaced: '₹4,999',
+    priceUpfront: '₹12,000',
+    pricePlaced: '₹8,000',
     level: 'Intermediate to Advanced',
     tagline: 'Become a professional DevOps & Cloud Engineer with our Terraform, Kubernetes, and AWS automation course.',
     desc: 'Learn infrastructure as code, container automation, configuration orchestration, and continuous deployment workflows.',
@@ -158,8 +158,8 @@ export const COURSES = [
     category: 'Digital Marketing',
     duration: '3 Months',
     projects: '8+ Campaigns',
-    priceUpfront: '₹4,999',
-    pricePlaced: '₹0',
+    priceUpfront: '₹7,999',
+    pricePlaced: '₹5,000',
     level: 'Beginner',
     tagline: 'Become a professional Growth Marketer & Digital AI Specialist with our campaign optimization course.',
     desc: 'Master user acquisition funnel optimization, search ranking metrics, copywriting, and paid advertising campaigns.',
@@ -177,10 +177,10 @@ export const COURSES = [
     id: 8,
     title: 'Python Programming & Automation',
     category: 'Software Engineering',
-    duration: '4 Months',
+    duration: '6 Months',
     projects: '8+ Projects',
-    priceUpfront: '₹5,000',
-    pricePlaced: '₹3,000',
+    priceUpfront: '₹7,000',
+    pricePlaced: '₹5,000',
     level: 'Beginner to Intermediate',
     tagline: 'Become a professional Python & Automation Engineer with our scripting, web scraping, and Django course.',
     desc: 'Learn core python scripting, database connections, automated workflows, scraping, and integrating AI endpoints.',
@@ -201,7 +201,7 @@ export const COURSES = [
     duration: '4 Months',
     projects: '10+ Projects',
     priceUpfront: '₹10,000',
-    pricePlaced: '₹0',
+    pricePlaced: '₹5,000',
     level: 'Beginner to Intermediate',
     tagline: 'Become a professional Video Editor & Content Designer with our Premiere Pro, After Effects, and design course.',
     desc: 'Learn professional graphic design, photography, cinematographic video capture, Premiere Pro editing, and After Effects motion graphics.',
@@ -288,8 +288,22 @@ export default function CourseDetailsPage({ slug }: PageProps) {
   const [qualification, setQualification] = useState('');
   const [status, setStatus] = useState('Pursuing');
   const [year, setYear] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState(course ? course.title : 'MERN Stack Development + AI Integration');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const COURSE_OPTIONS = [
+    "MERN Stack Development + AI Integration",
+    "Python Programming & Automation",
+    "Data Science & Machine Learning Core",
+    "Data Analytics & Business Intelligence",
+    "Java Full Stack Developer Program",
+    "Cloud Computing & DevOps Infrastructure",
+    "Digital Marketing with AI & Growth Hacking",
+    "Graphic Design + UI/UX Product Design",
+    "Graphic Designing + Videography / Video Editing",
+    "Industry-Ready MLOps & AI Systems Engineering"
+  ];
 
   const [downloadingBrochure, setDownloadingBrochure] = useState(false);
   const [activeModuleIdx, setActiveModuleIdx] = useState<number | null>(0);
@@ -297,6 +311,7 @@ export default function CourseDetailsPage({ slug }: PageProps) {
 
   // Lead capture states for the free guide/roadmap
   const [guideEmail, setGuideEmail] = useState('');
+  const [guidePhone, setGuidePhone] = useState('');
   const [downloadedGuide, setDownloadedGuide] = useState(false);
   const [seoTab, setSeoTab] = useState<'whatIs' | 'roadmap' | 'projects' | 'interviews' | 'salary'>('whatIs');
 
@@ -332,7 +347,7 @@ export default function CourseDetailsPage({ slug }: PageProps) {
           qualification,
           status,
           year,
-          courseTitle: course.title,
+          courseTitle: selectedCourse,
         }),
       });
 
@@ -352,27 +367,70 @@ export default function CourseDetailsPage({ slug }: PageProps) {
 
   const handleGuideDownloadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!guideEmail) return;
+    if (!guideEmail || !guidePhone) return;
     setDownloadingBrochure(true);
     try {
-      await fetch('/api/enroll', {
+      fetch('/api/enroll', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: 'Guide Downloader',
-          phone: '0000000000',
+          name: `Guide Download: ${guideEmail}`,
+          phone: guidePhone,
           qualification: 'N/A',
           status: 'Completed',
           year: '2026',
-          courseTitle: `${course.title} (Roadmap Guide Lead)`,
-          email: guideEmail
+          courseTitle: `${course.title} (Roadmap Guide Lead)`
         })
-      });
+      }).catch(err => console.error("Lead capture failed:", err));
       setDownloadedGuide(true);
       
-      const fileContent = `================================================================================
+      let pdfUrl = '';
+      let pdfName = '';
+      if (course.slug === "data-science-machine-learning") {
+        pdfUrl = '/datascience-brochure.pdf';
+        pdfName = 'data-science-machine-learning-brochure.pdf';
+      } else if (course.slug === "mlops-ai-systems") {
+        pdfUrl = '/mlops-brochure.pdf';
+        pdfName = 'mlops-ai-systems-brochure.pdf';
+      } else if (course.slug === "python-programming") {
+        pdfUrl = '/python-brochure.pdf';
+        pdfName = 'python-programming-brochure.pdf';
+      } else if (course.slug === "data-analytics") {
+        pdfUrl = '/data-analytics-brochure.pdf';
+        pdfName = 'data-analytics-brochure.pdf';
+      } else if (course.slug === "java-full-stack") {
+        pdfUrl = '/java-brochure.pdf';
+        pdfName = 'java-full-stack-brochure.pdf';
+      } else if (course.slug === "mern-stack-development") {
+        pdfUrl = '/brochures/mern_stack.pdf';
+        pdfName = 'mern-stack-development-brochure.pdf';
+      } else if (course.slug === "cloud-devops") {
+        pdfUrl = '/devops-brochure.pdf';
+        pdfName = 'cloud-devops-brochure.pdf';
+      } else if (course.slug === "graphic-design-ui-ux") {
+        pdfUrl = '/graphic-design-brochure.pdf';
+        pdfName = 'graphic-design-ui-ux-brochure.pdf';
+      } else if (course.slug === "videography-video-editing") {
+        pdfUrl = '/video-editing-brochure.pdf';
+        pdfName = 'videography-video-editing-brochure.pdf';
+      } else if (course.slug === "digital-marketing") {
+        pdfUrl = '/data-analytics-brochure.pdf';
+        pdfName = 'digital-marketing-growth-hacking-brochure.pdf';
+      }
+
+      if (pdfUrl) {
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = pdfName;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        const fileContent = `================================================================================
 KODE TO CAREER — FREE ${course.title.toUpperCase()} ROADMAP & GUIDE
 ================================================================================
 Overview:
@@ -393,15 +451,16 @@ ${(COURSES_SEO[course.slug]?.salary || []).map(s => `- ${s.role}: ${s.range}`).j
 ================================================================================
 Reinforce your learning: Visit https://kodetocareer.com
 ================================================================================`;
-      const blob = new Blob([fileContent], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${course.slug}_career_roadmap.txt`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+        const blob = new Blob([fileContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${course.slug}_career_roadmap.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -415,12 +474,24 @@ Reinforce your learning: Visit https://kodetocareer.com
     // Check for actual PDF brochures
     let pdfUrl = '';
     let pdfName = '';
-    if (course.id === 1) {
+    if (course.slug === 'mern-stack-development') {
       pdfUrl = '/brochures/mern_stack.pdf';
       pdfName = 'mern_stack_brochure.pdf';
-    } else if (course.id === 4) {
-      pdfUrl = '/brochures/data_analytics.pdf';
-      pdfName = 'data_analytics_brochure.pdf';
+    } else if (course.slug === 'data-analytics') {
+      pdfUrl = '/data-analytics-brochure.pdf';
+      pdfName = 'data-analytics-brochure.pdf';
+    } else if (course.slug === 'data-science-machine-learning') {
+      pdfUrl = '/datascience-brochure.pdf';
+      pdfName = 'data-science-machine-learning-brochure.pdf';
+    } else if (course.slug === 'mlops-ai-systems') {
+      pdfUrl = '/mlops-brochure.pdf';
+      pdfName = 'mlops-ai-systems-brochure.pdf';
+    } else if (course.slug === 'python-programming') {
+      pdfUrl = '/python-brochure.pdf';
+      pdfName = 'python-programming-brochure.pdf';
+    } else if (course.slug === 'java-full-stack') {
+      pdfUrl = '/java-brochure.pdf';
+      pdfName = 'java-full-stack-brochure.pdf';
     }
 
     setTimeout(() => {
@@ -509,7 +580,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
       <div className="absolute top-[10%] left-[-150px] w-[600px] h-[600px] rounded-full bg-blue-100/30 blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-150px] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-[130px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Link
           href="/courses"
           className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-8 transition-colors text-sm font-semibold"
@@ -518,10 +589,10 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
         </Link>
 
         {/* ── 2. Upgraded Bento Details Layout ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 lg:gap-10 items-start">
           
-          {/* Left Column (Spans 8) */}
-          <div className="lg:col-span-8 space-y-12">
+          {/* Left Column (Spans 7) */}
+          <div className="lg:col-span-7 space-y-9">
             
             {/* 1. Header Overview Info */}
             <div className="space-y-4">
@@ -562,7 +633,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
             </div>
 
             {/* 3. Core Technologies Bento */}
-            <div className="bg-white border border-slate-150 p-8 rounded-[28px] shadow-sm space-y-6">
+            <div className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm space-y-6">
               <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
                 <Sparkle className="w-5 h-5 text-primary" /> Technologies You Will Master
               </h3>
@@ -571,119 +642,6 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                   <span key={skill} className="bg-slate-50 border border-slate-200 text-xs font-bold text-slate-650 px-4 py-2.5 rounded-xl hover:border-primary/20 hover:bg-white hover:text-primary transition-all">
                     {skill}
                   </span>
-                ))}
-              </div>
-            </div>
-
-            {/* 4. Career Outcomes & Salary Ranges */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              
-              {/* Target Job Roles */}
-              <div className="bg-white border border-slate-150 p-8 rounded-[28px] shadow-sm space-y-4">
-                <h4 className="text-base font-heading font-bold text-slate-800 flex items-center gap-2">
-                  <Briefcase className="w-5 h-5 text-primary" /> Career Outcomes
-                </h4>
-                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                  Prepare for highly compensated corporate roles across the technology spectrum:
-                </p>
-                <div className="space-y-3">
-                  {(COURSES_SEO[course.slug]?.jobs || ['Software Engineer', 'Technical Lead']).map((job: string) => (
-                    <div key={job} className="flex items-center gap-2.5 text-xs text-slate-650 font-bold">
-                      <CheckCircle2 className="w-4.5 h-4.5 text-emerald-500" />
-                      <span>{job}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Salary Tiers */}
-              <div className="bg-white border border-slate-150 p-8 rounded-[28px] shadow-sm space-y-4">
-                <h4 className="text-base font-heading font-bold text-slate-800 flex items-center gap-2">
-                  <Coins className="w-5 h-5 text-primary" /> Target Salary Bands
-                </h4>
-                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                  Typical CTC packages verified for candidates across career levels:
-                </p>
-                <div className="space-y-3 font-semibold">
-                  {(COURSES_SEO[course.slug]?.salary || [
-                    { role: 'Associate Engineer', range: '₹4.0 - 7.5 LPA' },
-                    { role: 'Technical Lead', range: '₹12.0 - 20.0 LPA' }
-                  ]).map((sal: any) => (
-                    <div key={sal.role} className="flex justify-between items-center text-xs border-b border-slate-100 last:border-0 pb-2 last:pb-0">
-                      <span className="text-slate-500">{sal.role}</span>
-                      <span className="text-slate-800 font-black">{sal.range}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-            {/* 5. 15-20 Live Projects Showcase */}
-            <div className="bg-white border border-slate-150 p-8 rounded-[28px] shadow-sm space-y-6">
-              <div>
-                <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
-                  <Laptop className="w-5 h-5 text-primary" /> 15-20 Production-Grade Live Projects
-                </h3>
-                <p className="text-xs text-slate-500 font-semibold mt-1">Build concrete, recruiter-ready portfolios to verify your technical skills.</p>
-              </div>
-
-              {/* Main Capstone Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {(COURSES_SEO[course.slug]?.projects || [
-                  { title: 'Full Stack Service Deployment', desc: 'Secure backend microservice linked to database clusters.' },
-                  { title: 'Analytical Business Portal', desc: 'Interactive operational dashboards monitoring real transactions.' }
-                ]).map((proj: any, pIdx: number) => (
-                  <div key={pIdx} className="bg-slate-50/50 border border-slate-100 p-6 rounded-2xl space-y-3">
-                    <span className="text-[9px] font-black text-primary bg-primary/5 border border-primary/10 px-2 py-0.5 rounded uppercase tracking-wider inline-block">
-                      Capstone {pIdx + 1}
-                    </span>
-                    <h4 className="text-sm font-bold text-slate-800">{proj.title}</h4>
-                    <p className="text-xs text-slate-550 leading-relaxed font-semibold">
-                      {proj.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Additional Practice Projects list */}
-              <div className="border-t border-slate-100 pt-6">
-                <h4 className="text-xs font-black text-slate-800 mb-3 uppercase tracking-wider">12+ Additional Practice Sprints Include:</h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[11px] text-slate-500 font-bold">
-                  <div>• Database schema model builds</div>
-                  <div>• JWT authorization logic integrations</div>
-                  <div>• Git pull request sprints</div>
-                  <div>• Cloud container docker packaging</div>
-                  <div>• Analytic window functions query scripts</div>
-                  <div>• API middleware error handlers</div>
-                </div>
-              </div>
-            </div>
-
-            {/* 6. Internship & Placement Timeline Roadmap */}
-            <div className="bg-white border border-slate-150 p-8 rounded-[28px] shadow-sm space-y-6">
-              <div>
-                <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-primary animate-pulse" /> Internship & Placement Roadmap
-                </h3>
-                <p className="text-xs text-slate-500 font-semibold mt-1">Timeline to get you hired as a professional engineer.</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4">
-                {[
-                  { step: '01', title: 'Month 1-2', label: 'Core Skill Sprint', desc: 'Master syntax, logic loops, database designs, and project sprints.' },
-                  { step: '02', title: 'Month 3-4', label: 'Paid Internship', desc: 'Secure stipend-based client projects at partner tech businesses.' },
-                  { step: '03', title: 'Month 5', label: 'ATS Profile Tuning', desc: 'Complete resume audits, mock interview rounds, and portfolio updates.' },
-                  { step: '04', title: 'Month 6+', label: 'Hiring Referral', desc: 'Get direct references to hiring managers from our 500+ partners.' }
-                ].map((roadmapStep) => (
-                  <div key={roadmapStep.step} className="bg-slate-50/50 border border-slate-100 p-5 rounded-2xl space-y-3 relative">
-                    <span className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-primary text-white font-heading font-black text-[10px] flex items-center justify-center leading-none border-4 border-white shadow-sm">
-                      {roadmapStep.step}
-                    </span>
-                    <h4 className="text-xs font-black text-slate-450 uppercase tracking-widest">{roadmapStep.title}</h4>
-                    <h5 className="text-xs font-bold text-slate-800 leading-none">{roadmapStep.label}</h5>
-                    <p className="text-[10px] text-slate-500 leading-relaxed font-semibold">{roadmapStep.desc}</p>
-                  </div>
                 ))}
               </div>
             </div>
@@ -758,7 +716,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
             </div>
 
             {/* 8. Google Reviews Mockup Embed */}
-            <div className="bg-white border border-slate-150 rounded-[32px] p-8 shadow-sm space-y-6">
+            <div className="bg-white border border-slate-150 rounded-[32px] p-6 md:p-8 shadow-sm space-y-6">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                 <div>
                   <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
@@ -787,8 +745,8 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                       <span className="text-slate-400">{reviewItem.date}</span>
                     </div>
                     <span className="text-[10px] text-slate-400 block font-semibold leading-none">{reviewItem.role}</span>
-                    <p className="text-xs text-slate-550 leading-relaxed font-semibold italic">
-                      "{reviewItem.text}"
+                    <p className="text-xs text-slate-555 leading-relaxed font-semibold italic">
+                      &ldquo;{reviewItem.text}&rdquo;
                     </p>
                   </div>
                 ))}
@@ -796,7 +754,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
             </div>
 
             {/* 9. SEO & Career Resource Center (Tabbed) */}
-            <div className="bg-white border border-slate-150 rounded-[32px] p-8 shadow-sm space-y-6">
+            <div className="bg-white border border-slate-150 rounded-[32px] p-6 md:p-8 shadow-sm space-y-6">
               <div>
                 <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
                   <FileText className="w-5 h-5 text-primary" /> SEO & Career Resource Center
@@ -887,7 +845,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
             </div>
 
             {/* 10. FAQ Accordions */}
-            <div className="space-y-6 mt-12 pt-12 border-t border-slate-150">
+            <div className="space-y-6 mt-10 pt-10 border-t border-slate-150">
               <div className="space-y-2">
                 <h3 className="text-2xl font-heading font-extrabold text-slate-900">Frequently Asked Questions</h3>
                 <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Common queries about the {course.title} program</p>
@@ -939,11 +897,57 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
 
           </div>
 
-          {/* Right Column (Spans 4) */}
-          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-28">
+          {/* Right Column (Spans 3 - Sidebar) */}
+          <div className="lg:col-span-3 space-y-6">
             
+            {/* Lead Capture & Free Career Guide Download Card */}
+            <div className="rounded-[24px] bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 p-6 shadow-sm relative overflow-hidden space-y-4">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full blur-2xl" />
+              <div className="space-y-1">
+                <span className="text-[9px] font-black text-primary uppercase tracking-widest block">Free Download</span>
+                <h4 className="text-sm font-heading font-extrabold text-slate-900">Free Career Roadmap PDF</h4>
+                <p className="text-xs text-slate-500 leading-relaxed font-semibold">
+                  Get the complete {course.title} career guide, ATS-optimized resume template, and interview prep guides.
+                </p>
+              </div>
+              
+              {downloadedGuide ? (
+                <div className="bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl p-3 text-center font-bold text-xs">
+                  Sent! Check your email for download link.
+                </div>
+              ) : (
+                <form onSubmit={handleGuideDownloadSubmit} className="space-y-2">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Email"
+                    value={guideEmail}
+                    onChange={(e) => setGuideEmail(e.target.value)}
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-primary/50 text-sm font-semibold"
+                  />
+                  <input
+                    type="tel"
+                    required
+                    maxLength={10}
+                    pattern="[0-9]{10}"
+                    placeholder="Contact Number (10 digits)"
+                    value={guidePhone}
+                    onChange={(e) => setGuidePhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-855 focus:outline-none focus:border-primary/50 text-sm font-semibold"
+                  />
+                  <button
+                    type="submit"
+                    disabled={downloadingBrochure}
+                    className="w-full py-2.5 bg-primary hover:bg-blue-700 text-white font-bold text-xs rounded-lg shadow-sm flex items-center justify-center gap-1.5 cursor-pointer outline-none"
+                  >
+                    <Download className="w-4 h-4" /> {downloadingBrochure ? 'Processing...' : 'Download Free Guide'}
+                  </button>
+                </form>
+              )}
+            </div>
+
             {/* Program Checkout Card */}
-            <div className="rounded-[24px] bg-white border border-slate-150 p-8 shadow-sm relative overflow-hidden">
+            <div className="rounded-[24px] bg-white border border-slate-150 p-6 md:p-8 shadow-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
 
               <span className="text-[10px] text-slate-450 uppercase font-bold tracking-wider block mb-2">Program Registration</span>
@@ -994,41 +998,119 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
               )}
             </div>
 
-            {/* Lead Capture & Free Career Guide Download Card */}
-            <div className="rounded-[24px] bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 p-6 shadow-sm relative overflow-hidden space-y-4">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full blur-2xl" />
-              <div className="space-y-1">
-                <span className="text-[9px] font-black text-primary uppercase tracking-widest block">Free Download</span>
-                <h4 className="text-sm font-heading font-extrabold text-slate-900">Free Career Roadmap PDF</h4>
-                <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                  Get the complete {course.title} career guide, ATS-optimized resume template, and interview prep guides.
-                </p>
+            {/* Internship & Placement Timeline Roadmap */}
+            <div className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm space-y-6">
+              <div>
+                <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-primary animate-pulse" /> Internship & Placement Roadmap
+                </h3>
+                <p className="text-xs text-slate-500 font-semibold mt-1">Timeline to get you hired as a professional engineer.</p>
               </div>
-              
-              {downloadedGuide ? (
-                <div className="bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl p-3 text-center font-bold text-xs">
-                  Sent! Check your email for download link.
-                </div>
-              ) : (
-                <form onSubmit={handleGuideDownloadSubmit} className="space-y-2">
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your professional email"
-                    value={guideEmail}
-                    onChange={(e) => setGuideEmail(e.target.value)}
-                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-primary/50 text-sm font-semibold"
-                  />
-                  <button
-                    type="submit"
-                    disabled={downloadingBrochure}
-                    className="w-full py-2.5 bg-primary hover:bg-blue-700 text-white font-bold text-xs rounded-lg shadow-sm flex items-center justify-center gap-1.5 cursor-pointer outline-none"
-                  >
-                    <Download className="w-4 h-4" /> {downloadingBrochure ? 'Processing...' : 'Download Free Guide'}
-                  </button>
-                </form>
-              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 pt-4">
+                {[
+                  { step: '01', title: 'Month 1-2', label: 'Core Skill Sprint', desc: 'Master syntax, logic loops, database designs, and project sprints.' },
+                  { step: '02', title: 'Month 3-4', label: 'Paid Internship', desc: 'Secure stipend-based client projects at partner tech businesses.' },
+                  { step: '03', title: 'Month 5', label: 'ATS Profile Tuning', desc: 'Complete resume audits, mock interview rounds, and portfolio updates.' },
+                  { step: '04', title: 'Month 6+', label: 'Hiring Referral', desc: 'Get direct references to hiring managers from our 500+ partners.' }
+                ].map((roadmapStep) => (
+                  <div key={roadmapStep.step} className="bg-slate-50/50 border border-slate-100 p-5 rounded-2xl space-y-3 relative">
+                    <span className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-primary text-white font-heading font-black text-[10px] flex items-center justify-center leading-none border-4 border-white shadow-sm">
+                      {roadmapStep.step}
+                    </span>
+                    <h4 className="text-xs font-black text-slate-450 uppercase tracking-widest">{roadmapStep.title}</h4>
+                    <h5 className="text-xs font-bold text-slate-800 leading-none">{roadmapStep.label}</h5>
+                    <p className="text-[10px] text-slate-500 leading-relaxed font-semibold">{roadmapStep.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            {/* Career Outcomes & Salary Ranges */}
+            <div className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm space-y-6">
+              
+              {/* Target Job Roles */}
+              <div className="space-y-4">
+                <h4 className="text-base font-heading font-bold text-slate-800 flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-primary" /> Career Outcomes
+                </h4>
+                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+                  Prepare for highly compensated corporate roles across the technology spectrum:
+                </p>
+                <div className="space-y-3">
+                  {(COURSES_SEO[course.slug]?.jobs || ['Software Engineer', 'Technical Lead']).map((job: string) => (
+                    <div key={job} className="flex items-center gap-2.5 text-xs text-slate-655 font-bold">
+                      <CheckCircle2 className="w-4.5 h-4.5 text-emerald-500" />
+                      <span>{job}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Salary Tiers */}
+              <div className="space-y-4 pt-6 border-t border-slate-100">
+                <h4 className="text-base font-heading font-bold text-slate-800 flex items-center gap-2">
+                  <Coins className="w-5 h-5 text-primary" /> Target Salary Bands
+                </h4>
+                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+                  Typical CTC packages verified for candidates across career levels:
+                </p>
+                <div className="space-y-3 font-semibold">
+                  {(COURSES_SEO[course.slug]?.salary || [
+                    { role: 'Associate Engineer', range: '₹4.0 - 7.5 LPA' },
+                    { role: 'Technical Lead', range: '₹12.0 - 20.0 LPA' }
+                  ]).map((sal: any) => (
+                    <div key={sal.role} className="flex justify-between items-center text-xs border-b border-slate-100 last:border-0 pb-2 last:pb-0">
+                      <span className="text-slate-500">{sal.role}</span>
+                      <span className="text-slate-855 font-black">{sal.range}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* 15-20 Live Projects Showcase */}
+            <div className="bg-white border border-slate-150 p-6 md:p-8 rounded-[28px] shadow-sm space-y-6">
+              <div>
+                <h3 className="text-lg font-heading font-bold text-slate-800 flex items-center gap-2">
+                  <Laptop className="w-5 h-5 text-primary" /> 15-20 Production-Grade Live Projects
+                </h3>
+                <p className="text-xs text-slate-500 font-semibold mt-1">Build concrete, recruiter-ready portfolios to verify your technical skills.</p>
+              </div>
+
+              {/* Main Capstone Grid */}
+              <div className="grid grid-cols-1 gap-4">
+                {(COURSES_SEO[course.slug]?.projects || [
+                  { title: 'Full Stack Service Deployment', desc: 'Secure backend microservice linked to database clusters.' },
+                  { title: 'Analytical Business Portal', desc: 'Interactive operational dashboards monitoring real transactions.' }
+                ]).map((proj: any, pIdx: number) => (
+                  <div key={pIdx} className="bg-slate-50/50 border border-slate-100 p-6 rounded-2xl space-y-3">
+                    <span className="text-[9px] font-black text-primary bg-primary/5 border border-primary/10 px-2 py-0.5 rounded uppercase tracking-wider inline-block">
+                      Capstone {pIdx + 1}
+                    </span>
+                    <h4 className="text-sm font-bold text-slate-800">{proj.title}</h4>
+                    <p className="text-xs text-slate-555 leading-relaxed font-semibold">
+                      {proj.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Additional Practice Projects list */}
+              <div className="border-t border-slate-100 pt-6">
+                <h4 className="text-xs font-black text-slate-800 mb-3 uppercase tracking-wider">12+ Additional Practice Sprints Include:</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[11px] text-slate-500 font-bold">
+                  <div>• Database schema model builds</div>
+                  <div>• JWT authorization logic integrations</div>
+                  <div>• Git pull request sprints</div>
+                  <div>• Cloud container docker packaging</div>
+                  <div>• Analytic window functions query scripts</div>
+                  <div>• API middleware error handlers</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -1103,7 +1185,26 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                   {/* Form */}
                   <form onSubmit={handleFormSubmit} className="space-y-4 text-xs font-bold text-slate-700">
                     <div>
-                      <label htmlFor="modal-name" className="text-slate-500 block mb-2">Full Name</label>
+                      <label htmlFor="modal-course" className="text-slate-500 block mb-2">
+                        Select Preferred Course <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
+                      <select
+                        id="modal-course"
+                        required
+                        value={selectedCourse}
+                        onChange={(e) => setSelectedCourse(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-primary/50 focus:bg-white text-sm font-semibold cursor-pointer"
+                      >
+                        {COURSE_OPTIONS.map((c) => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="modal-name" className="text-slate-500 block mb-2">
+                        Full Name <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <input
                         type="text"
                         id="modal-name"
@@ -1116,20 +1217,26 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                     </div>
 
                     <div>
-                      <label htmlFor="modal-phone" className="text-slate-500 block mb-2">Phone Number</label>
+                      <label htmlFor="modal-phone" className="text-slate-500 block mb-2">
+                        Phone Number (10 digits) <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <input
                         type="tel"
                         id="modal-phone"
                         required
+                        maxLength={10}
+                        pattern="[0-9]{10}"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="e.g. +91 96679 75616"
+                        onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                        placeholder="e.g. 9667975616"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50 focus:bg-white text-sm font-semibold"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="modal-qualification" className="text-slate-500 block mb-2">Highest Qualification</label>
+                      <label htmlFor="modal-qualification" className="text-slate-500 block mb-2">
+                        Highest Qualification <span className="text-rose-500 font-extrabold">*</span>
+                      </label>
                       <input
                         type="text"
                         id="modal-qualification"
@@ -1143,9 +1250,12 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="modal-status" className="text-slate-500 block mb-2">Status</label>
+                        <label htmlFor="modal-status" className="text-slate-500 block mb-2">
+                          Status <span className="text-rose-500 font-extrabold">*</span>
+                        </label>
                         <select
                           id="modal-status"
+                          required
                           value={status}
                           onChange={(e) => setStatus(e.target.value)}
                           className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-primary/50 focus:bg-white text-sm font-semibold"
@@ -1156,14 +1266,18 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                       </div>
 
                       <div>
-                        <label htmlFor="modal-year" className="text-slate-500 block mb-2">Which Year?</label>
+                        <label htmlFor="modal-year" className="text-slate-500 block mb-2">
+                          Graduation Year (4 digits) <span className="text-rose-500 font-extrabold">*</span>
+                        </label>
                         <input
                           type="text"
                           id="modal-year"
                           required
+                          maxLength={4}
+                          pattern="[0-9]{4}"
                           value={year}
-                          onChange={(e) => setYear(e.target.value)}
-                          placeholder="e.g. 2026 / 3rd Year"
+                          onChange={(e) => setYear(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                          placeholder="e.g. 2026"
                           className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50 focus:bg-white text-sm font-semibold"
                         />
                       </div>

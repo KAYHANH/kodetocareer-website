@@ -135,7 +135,7 @@ export default function TechnologyStack() {
             Master the Modern Tech Stack
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto text-base md:text-lg font-medium">
-            We don't teach legacy tools. Learn the exact categorized ecosystems demanded by engineering teams at high-growth startups and tech giants.
+            We don&apos;t teach legacy tools. Learn the exact categorized ecosystems demanded by engineering teams at high-growth startups and tech giants.
           </p>
         </div>
 

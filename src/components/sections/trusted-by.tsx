@@ -36,7 +36,8 @@ export default function TrustedBy() {
       {/* Marquee container */}
       <div className="flex overflow-hidden select-none w-full">
         <div className="flex gap-6 py-2 px-4 animate-marquee whitespace-nowrap min-w-full">
-          {marqueeItems.map((company, index) => (
+          {/* Original set - visible to crawlers */}
+          {COMPANIES.map((company, index) => (
             <div
               key={`${company}-${index}`}
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/[0.08] text-text-secondary font-medium text-base hover:border-primary/30 hover:text-white transition-colors duration-300"
@@ -44,6 +45,17 @@ export default function TrustedBy() {
               {company}
             </div>
           ))}
+          {/* Cloned sets for seamless loop - hidden from crawlers */}
+          <span aria-hidden="true" className="contents">
+            {[...COMPANIES, ...COMPANIES].map((company, index) => (
+              <div
+                key={`clone-${company}-${index}`}
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/[0.08] text-text-secondary font-medium text-base hover:border-primary/30 hover:text-white transition-colors duration-300"
+              >
+                {company}
+              </div>
+            ))}
+          </span>
         </div>
       </div>
     </section>
