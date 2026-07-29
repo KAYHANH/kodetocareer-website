@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCertificateById } from "@/lib/certificates-store";
 import { generateCertificatePDF } from "@/lib/pdf-generator";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -32,6 +35,7 @@ export async function GET(
       skills: cert.skills,
       durationHours: cert.durationHours,
       rollNumber: cert.rollNumber,
+      certificationText: cert.certificationText,
       verificationUrl,
     });
 
@@ -42,7 +46,7 @@ export async function GET(
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `inline; filename="${filename}"`,
-        "Cache-Control": "public, max-age=86400, s-maxage=86400",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
       },
     });
   } catch (error) {
