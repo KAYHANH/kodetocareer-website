@@ -349,10 +349,18 @@ export default function Navbar() {
           </ul>
 
           {/* ── Desktop CTA Buttons ── */}
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-3 lg:flex" suppressHydrationWarning>
+            <Link
+              href="/login"
+              className="px-4 py-2 text-xs font-extrabold text-slate-700 hover:text-primary transition-colors border border-slate-200 hover:border-primary/30 rounded-xl bg-slate-50/80"
+              suppressHydrationWarning
+            >
+              Sign In
+            </Link>
             <Link
               href="/start"
               className="btn-primary-gradient px-5 py-2.5 text-sm font-semibold text-white"
+              suppressHydrationWarning
             >
               Enroll Now
             </Link>
@@ -503,6 +511,13 @@ export default function Navbar() {
 
               {/* Drawer Footer */}
               <div className="border-t border-white/[0.08] p-6 space-y-3">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex w-full items-center justify-center py-3 text-sm font-bold text-slate-800 bg-slate-100 rounded-xl hover:bg-slate-200 transition-colors"
+                >
+                  Portal Sign In
+                </Link>
                 <Link
                   href="/start"
                   onClick={() => setMobileOpen(false)}

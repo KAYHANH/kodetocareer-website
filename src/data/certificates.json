@@ -1,0 +1,47 @@
+[
+  {
+    "id": "KTC-MERN-2026-1001",
+    "studentName": "Aditya Roy",
+    "studentEmail": "aditya.roy@example.com",
+    "courseTitle": "Full Stack MERN Web Development",
+    "issueDate": "January 15, 2026",
+    "grade": "Pass with Distinction (96%)",
+    "trainerName": "Md Arbaaz",
+    "trainerDesignation": "Founder & Lead Tech Instructor",
+    "registrarName": "Dr. S. K. Verma (Academic Registrar)",
+    "skills": "React 19, Next.js, Node.js, Express, MongoDB, Tailwind CSS v4, System Design",
+    "durationHours": "480+ Hours of Practical Training & Real-world Capstones",
+    "rollNumber": "KTC-REG-2026-8812",
+    "status": "LIVE"
+  },
+  {
+    "id": "KTC-DATA-2026-1002",
+    "studentName": "Ananya Sharma",
+    "studentEmail": "ananya.sharma@example.com",
+    "courseTitle": "Data Science & Machine Learning",
+    "issueDate": "February 10, 2026",
+    "grade": "Pass with Honors (94%)",
+    "trainerName": "Aditya Roy",
+    "trainerDesignation": "Head of AI & Data Science",
+    "registrarName": "Dr. S. K. Verma (Academic Registrar)",
+    "skills": "Python, Pandas, Scikit-Learn, PyTorch, SQL, Computer Vision, MLOps",
+    "durationHours": "520+ Hours of Applied Machine Learning",
+    "rollNumber": "KTC-REG-2026-8815",
+    "status": "LIVE"
+  },
+  {
+    "id": "KTC-JAVA-2026-1003",
+    "studentName": "Rahul Kumar",
+    "studentEmail": "rahul.kumar@example.com",
+    "courseTitle": "Java Full Stack Enterprise Development",
+    "issueDate": "March 01, 2026",
+    "grade": "Pass (88%)",
+    "trainerName": "Md Arbaaz",
+    "trainerDesignation": "Founder & Lead Tech Instructor",
+    "registrarName": "Dr. S. K. Verma (Academic Registrar)",
+    "skills": "Java 21, Spring Boot, Microservices, PostgreSQL, Angular, Docker",
+    "durationHours": "450+ Hours of Enterprise Java Architecture",
+    "rollNumber": "KTC-REG-2026-8819",
+    "status": "LIVE"
+  }
+]

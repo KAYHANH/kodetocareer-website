@@ -83,6 +83,8 @@ const PROGRAMS = [
 
 const RESOURCES = [
   { label: "Blog", href: "/blog" },
+  { label: "Verify Certificate", href: "/verify/KTC-MERN-2026-1001" },
+  { label: "Admin Certificate Portal", href: "/admin/certificates" },
   { label: "Free AI Career Tools", href: "/free-tools" },
   { label: "Hackathons", href: "/events" },
   { label: "Career Roadmaps", href: "/career-roadmaps" },
