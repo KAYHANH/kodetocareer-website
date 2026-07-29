@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Menu, X, ChevronDown, ChevronRight, ArrowRight, BookOpen } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, ArrowRight, BookOpen, User } from "lucide-react";
 
 interface NavLink {
   label: string;
@@ -349,32 +349,37 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* ── Desktop CTA Buttons ── */}
-          <div className="hidden items-center gap-2 xl:gap-3 lg:flex shrink-0" suppressHydrationWarning>
+          {/* ── Navbar Right Action Buttons (Sign In + Enroll + Hamburger) ── */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0" suppressHydrationWarning>
+            {/* Sign In Button - ALWAYS VISIBLE across desktop, tablet, and mobile */}
             <Link
               href="/login"
-              className="inline-flex items-center gap-1.5 px-3.5 xl:px-4 py-2 text-xs xl:text-sm font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl transition-all shrink-0 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 text-xs sm:text-sm font-extrabold text-slate-900 bg-slate-100 hover:bg-slate-200 border-2 border-slate-200 hover:border-slate-300 rounded-xl transition-all shrink-0 shadow-sm"
+              title="Sign In to Student, Trainer, or Admin Portal"
             >
+              <User className="w-3.5 h-3.5 text-primary shrink-0" />
               <span>Sign In</span>
             </Link>
+
+            {/* Enroll Now Button - Desktop & Tablet */}
             <Link
               href="/start"
-              className="btn-primary-gradient inline-flex items-center justify-center px-4 xl:px-5 py-2 xl:py-2.5 text-xs xl:text-sm font-bold text-white shrink-0 shadow-md shadow-primary/20"
+              className="btn-primary-gradient hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shrink-0 shadow-md shadow-primary/20"
             >
               Enroll Now
             </Link>
-          </div>
 
-          {/* ── Mobile Hamburger ── */}
-          <button
-            type="button"
-            className="flex items-center justify-center rounded-[10px] p-2 text-text-secondary transition-colors hover:text-slate-900 lg:hidden"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open navigation menu"
-            aria-expanded={mobileOpen}
-          >
-            <Menu className="h-6 w-6" />
-          </button>
+            {/* Mobile Hamburger Menu */}
+            <button
+              type="button"
+              className="flex items-center justify-center rounded-[10px] p-2 text-text-secondary transition-colors hover:text-slate-900 lg:hidden shrink-0"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={mobileOpen}
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+          </div>
         </nav>
       </header>
 
