@@ -213,6 +213,16 @@ export default function VerifyClient({ cert }: { cert: StoredCertificate | null 
                   </div>
                 </div>
 
+                {/* Official Certification Citation */}
+                <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-5 border-l-4 border-l-primary">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                    Official Certification Statement
+                  </p>
+                  <p className="text-xs text-slate-700 font-medium leading-relaxed italic">
+                    "{cert.certificationText || `This is to certify that ${cert.studentName} has successfully completed the ${cert.courseTitle} at Kode To Career. During the program, the student demonstrated proficiency in full-stack web development, AI-assisted development, and successfully completed practical assignments and projects. We congratulate them and wish them success in their future career.`}"
+                  </p>
+                </div>
+
                 {/* Course & Mastered Skills */}
                 <div className="flex items-start gap-4 border-t border-slate-100 pt-6">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
@@ -257,11 +267,6 @@ export default function VerifyClient({ cert }: { cert: StoredCertificate | null 
                       <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Authorized Signatories</p>
                       <p className="text-sm font-extrabold text-slate-800 mt-0.5">{cert.trainerName || "Md Arbaaz"}</p>
                       <p className="text-[11px] text-slate-500 font-medium">{cert.trainerDesignation || "Head of Academics"}</p>
-                      {cert.registrarName && (
-                        <p className="text-[10px] text-slate-400 font-semibold mt-1">
-                          Co-signed: {cert.registrarName}
-                        </p>
-                      )}
                     </div>
                   </div>
                 </div>

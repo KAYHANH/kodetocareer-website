@@ -23,6 +23,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Blog", href: "/blog", id: "blog" },
   { label: "Free Tools", href: "/free-tools", id: "free-tools" },
   { label: "Contact", href: "/contact", id: "contact" },
+  { label: "Sign In", href: "/login", id: "login" },
 ];
 
 /* ───── overlay backdrop variants ───── */
@@ -349,18 +350,10 @@ export default function Navbar() {
           </ul>
 
           {/* ── Desktop CTA Buttons ── */}
-          <div className="hidden items-center gap-3 lg:flex" suppressHydrationWarning>
-            <Link
-              href="/login"
-              className="px-4 py-2 text-xs font-extrabold text-slate-700 hover:text-primary transition-colors border border-slate-200 hover:border-primary/30 rounded-xl bg-slate-50/80"
-              suppressHydrationWarning
-            >
-              Sign In
-            </Link>
+          <div className="hidden items-center gap-3 lg:flex">
             <Link
               href="/start"
               className="btn-primary-gradient px-5 py-2.5 text-sm font-semibold text-white"
-              suppressHydrationWarning
             >
               Enroll Now
             </Link>

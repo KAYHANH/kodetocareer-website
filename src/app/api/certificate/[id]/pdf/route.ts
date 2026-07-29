@@ -29,7 +29,6 @@ export async function GET(
       grade: cert.grade,
       trainerName: cert.trainerName,
       trainerDesignation: cert.trainerDesignation,
-      registrarName: cert.registrarName,
       skills: cert.skills,
       durationHours: cert.durationHours,
       rollNumber: cert.rollNumber,

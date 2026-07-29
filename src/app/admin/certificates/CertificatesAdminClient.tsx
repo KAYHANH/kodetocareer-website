@@ -8,15 +8,10 @@ import {
   Search,
   ExternalLink,
   Download,
-  CheckCircle2,
-  Copy,
   Check,
+  Copy,
   ToggleLeft,
   ToggleRight,
-  Sparkles,
-  Layers,
-  Clock,
-  Code,
 } from "lucide-react";
 import { StoredCertificate } from "@/lib/certificates-store";
 
@@ -38,7 +33,6 @@ export default function CertificatesAdminClient({
   const [grade, setGrade] = useState("Pass with Distinction (94%)");
   const [trainerName, setTrainerName] = useState("Md Arbaaz");
   const [trainerDesignation, setTrainerDesignation] = useState("Founder & Lead Tech Instructor");
-  const [registrarName, setRegistrarName] = useState("Dr. S. K. Verma (Academic Registrar)");
   const [skills, setSkills] = useState("React 19, Next.js, Node.js, Express, MongoDB, Tailwind CSS, REST APIs");
   const [durationHours, setDurationHours] = useState("480+ Hours of Practical Industry Capstones");
   const [rollNumber, setRollNumber] = useState(`KTC-REG-2026-${Math.floor(1000 + Math.random() * 9000)}`);
@@ -68,7 +62,6 @@ export default function CertificatesAdminClient({
           grade,
           trainerName,
           trainerDesignation,
-          registrarName,
           skills,
           durationHours,
           rollNumber,
@@ -403,30 +396,16 @@ export default function CertificatesAdminClient({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-slate-700 font-extrabold mb-1.5">
-                      Authorized Instructor Signature
-                    </label>
-                    <input
-                      type="text"
-                      value={trainerName}
-                      onChange={(e) => setTrainerName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-slate-700 font-extrabold mb-1.5">
-                      Academic Registrar Signature
-                    </label>
-                    <input
-                      type="text"
-                      value={registrarName}
-                      onChange={(e) => setRegistrarName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-slate-700 font-extrabold mb-1.5">
+                    Authorized Instructor Signature
+                  </label>
+                  <input
+                    type="text"
+                    value={trainerName}
+                    onChange={(e) => setTrainerName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
+                  />
                 </div>
 
                 <div className="pt-4 flex gap-3">

@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
       grade,
       trainerName,
       trainerDesignation,
-      registrarName,
       skills,
       durationHours,
       rollNumber,
@@ -32,11 +31,10 @@ export async function POST(request: NextRequest) {
       grade,
       trainerName,
       trainerDesignation,
-      registrarName,
       skills,
       durationHours,
       rollNumber,
-      isLive: isLive !== false, // default true / LIVE
+      isLive: isLive !== false,
     });
 
     return NextResponse.json(

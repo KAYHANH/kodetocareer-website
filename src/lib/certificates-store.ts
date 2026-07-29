@@ -10,10 +10,10 @@ export interface StoredCertificate {
   grade?: string;
   trainerName?: string;
   trainerDesignation?: string;
-  registrarName?: string;
   skills?: string;
   durationHours?: string;
   rollNumber?: string;
+  certificationText?: string;
   status: "LIVE" | "DRAFT" | "REVOKED" | "EXPIRED";
 }
 
@@ -45,10 +45,10 @@ export function issueNewCertificate(data: {
   grade?: string;
   trainerName?: string;
   trainerDesignation?: string;
-  registrarName?: string;
   skills?: string;
   durationHours?: string;
   rollNumber?: string;
+  certificationText?: string;
   isLive?: boolean;
 }): StoredCertificate {
   const all = getAllCertificates();
@@ -72,6 +72,8 @@ export function issueNewCertificate(data: {
     year: "numeric",
   });
 
+  const defaultCitation = `This is to certify that ${data.studentName} has successfully completed the ${data.durationHours || "4-Month"} ${data.courseTitle} at KodeToCareer. During the program, the student demonstrated proficiency in full-stack web development, AI-assisted development, and successfully completed practical assignments and capstone projects. We congratulate them and wish them success in their future career.`;
+
   const newCert: StoredCertificate = {
     id: certificateId,
     studentName: data.studentName,
@@ -81,10 +83,10 @@ export function issueNewCertificate(data: {
     grade: data.grade || "Pass with Distinction (94%)",
     trainerName: data.trainerName || "Md Arbaaz",
     trainerDesignation: data.trainerDesignation || "Founder & Lead Tech Instructor",
-    registrarName: data.registrarName || "Dr. S. K. Verma (Academic Registrar)",
-    skills: data.skills || "React.js, Node.js, Express, MongoDB, Tailwind CSS, REST APIs",
-    durationHours: data.durationHours || "480+ Hours of Practical Industry Training",
+    skills: data.skills || "React 19, Next.js, Node.js, Express, MongoDB, Tailwind CSS, REST APIs",
+    durationHours: data.durationHours || "4-Month MERN Stack Development with AI Training Program",
     rollNumber: data.rollNumber || `KTC-REG-${year}-${Math.floor(1000 + Math.random() * 9000)}`,
+    certificationText: data.certificationText || defaultCitation,
     status: data.isLive === false ? "DRAFT" : "LIVE",
   };
 

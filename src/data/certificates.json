@@ -1,5 +1,20 @@
 [
   {
+    "id": "KTC-MERN-2026-1000",
+    "studentName": "Piyush Sharma",
+    "studentEmail": "piyush.sharma@example.com",
+    "courseTitle": "MERN Stack Development with AI Training Program",
+    "issueDate": "January 20, 2026",
+    "grade": "Pass with Distinction (98%)",
+    "trainerName": "Md Arbaaz",
+    "trainerDesignation": "Founder & Lead Tech Instructor",
+    "skills": "React 19, Next.js, Node.js, Express, MongoDB, Tailwind CSS v4, AI Integration",
+    "durationHours": "4-Month Intensive Program",
+    "rollNumber": "KTC-REG-2026-9901",
+    "certificationText": "This is to certify that Piyush Sharma has successfully completed the 4-Month MERN Stack Development with AI Training Program at Kode To Career. During the program, the student demonstrated proficiency in full-stack web development, AI-assisted development, and successfully completed practical assignments and projects. We congratulate them and wish them success in their future career.",
+    "status": "LIVE"
+  },
+  {
     "id": "KTC-MERN-2026-1001",
     "studentName": "Aditya Roy",
     "studentEmail": "aditya.roy@example.com",
@@ -8,10 +23,10 @@
     "grade": "Pass with Distinction (96%)",
     "trainerName": "Md Arbaaz",
     "trainerDesignation": "Founder & Lead Tech Instructor",
-    "registrarName": "Dr. S. K. Verma (Academic Registrar)",
     "skills": "React 19, Next.js, Node.js, Express, MongoDB, Tailwind CSS v4, System Design",
-    "durationHours": "480+ Hours of Practical Training & Real-world Capstones",
+    "durationHours": "4-Month Intensive Program",
     "rollNumber": "KTC-REG-2026-8812",
+    "certificationText": "This is to certify that Aditya Roy has successfully completed the 4-Month MERN Stack Development with AI Training Program at Kode To Career. During the program, the student demonstrated proficiency in full-stack web development, AI-assisted development, and successfully completed practical assignments and projects. We congratulate them and wish them success in their future career.",
     "status": "LIVE"
   },
   {
@@ -23,25 +38,10 @@
     "grade": "Pass with Honors (94%)",
     "trainerName": "Aditya Roy",
     "trainerDesignation": "Head of AI & Data Science",
-    "registrarName": "Dr. S. K. Verma (Academic Registrar)",
     "skills": "Python, Pandas, Scikit-Learn, PyTorch, SQL, Computer Vision, MLOps",
-    "durationHours": "520+ Hours of Applied Machine Learning",
+    "durationHours": "5-Month Intensive Program",
     "rollNumber": "KTC-REG-2026-8815",
-    "status": "LIVE"
-  },
-  {
-    "id": "KTC-JAVA-2026-1003",
-    "studentName": "Rahul Kumar",
-    "studentEmail": "rahul.kumar@example.com",
-    "courseTitle": "Java Full Stack Enterprise Development",
-    "issueDate": "March 01, 2026",
-    "grade": "Pass (88%)",
-    "trainerName": "Md Arbaaz",
-    "trainerDesignation": "Founder & Lead Tech Instructor",
-    "registrarName": "Dr. S. K. Verma (Academic Registrar)",
-    "skills": "Java 21, Spring Boot, Microservices, PostgreSQL, Angular, Docker",
-    "durationHours": "450+ Hours of Enterprise Java Architecture",
-    "rollNumber": "KTC-REG-2026-8819",
+    "certificationText": "This is to certify that Ananya Sharma has successfully completed the Data Science & Machine Learning Training Program at Kode To Career. During the program, the student demonstrated proficiency in applied AI, data analysis, and successfully completed practical assignments and projects. We congratulate them and wish them success in their future career.",
     "status": "LIVE"
   }
 ]

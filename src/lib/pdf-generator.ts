@@ -10,10 +10,10 @@ export interface CertificateData {
   grade?: string;
   trainerName?: string;
   trainerDesignation?: string;
-  registrarName?: string;
   skills?: string;
   durationHours?: string;
   rollNumber?: string;
+  certificationText?: string;
   verificationUrl: string;
 }
 
@@ -46,7 +46,7 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Buf
   const bgRgb = rgb(0.98, 0.99, 1.0); // Slate 50
   const primaryRgb = rgb(0.0, 0.45, 1.0); // Electric Blue #0072FF
   const secondaryRgb = rgb(0.06, 0.09, 0.16); // Slate 900
-  const textMutedRgb = rgb(0.4, 0.45, 0.55); // Slate 500
+  const textMutedRgb = rgb(0.35, 0.4, 0.5); // Slate 500
   const goldRgb = rgb(0.85, 0.65, 0.15); // Gold Accent
 
   // 1. Background Fill
@@ -82,7 +82,7 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Buf
   const headerWidth = helveticaBold.widthOfTextAtSize(headerText, 11);
   page.drawText(headerText, {
     x: width / 2 - headerWidth / 2,
-    y: height - 60,
+    y: height - 55,
     size: 11,
     font: helveticaBold,
     color: primaryRgb,
@@ -93,7 +93,7 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Buf
     const rollWidth = helveticaBold.widthOfTextAtSize(rollText, 8);
     page.drawText(rollText, {
       x: width / 2 - rollWidth / 2,
-      y: height - 76,
+      y: height - 70,
       size: 8,
       font: helveticaBold,
       color: textMutedRgb,
@@ -101,169 +101,156 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Buf
   }
 
   const titleText = "CERTIFICATE OF COMPLETION";
-  const titleWidth = helveticaBold.widthOfTextAtSize(titleText, 26);
+  const titleWidth = helveticaBold.widthOfTextAtSize(titleText, 25);
   page.drawText(titleText, {
     x: width / 2 - titleWidth / 2,
-    y: height - 120,
-    size: 26,
+    y: height - 110,
+    size: 25,
     font: helveticaBold,
     color: secondaryRgb,
   });
 
   // 4. Subtitle Presentation
   const presentText = "This official credential is proudly awarded to";
-  const presentWidth = timesItalic.widthOfTextAtSize(presentText, 15);
+  const presentWidth = timesItalic.widthOfTextAtSize(presentText, 14);
   page.drawText(presentText, {
     x: width / 2 - presentWidth / 2,
-    y: height - 160,
-    size: 15,
+    y: height - 145,
+    size: 14,
     font: timesItalic,
     color: textMutedRgb,
   });
 
   // 5. Student Name (Primary Focus)
   const nameText = data.studentName;
-  const nameWidth = helveticaBold.widthOfTextAtSize(nameText, 30);
+  const nameWidth = helveticaBold.widthOfTextAtSize(nameText, 28);
   page.drawText(nameText, {
     x: width / 2 - nameWidth / 2,
-    y: height - 210,
-    size: 30,
+    y: height - 190,
+    size: 28,
     font: helveticaBold,
     color: primaryRgb,
   });
 
   // Divider Line below student name
   page.drawLine({
-    start: { x: width / 2 - 140, y: height - 225 },
-    end: { x: width / 2 + 140, y: height - 225 },
+    start: { x: width / 2 - 140, y: height - 202 },
+    end: { x: width / 2 + 140, y: height - 202 },
     color: primaryRgb,
     thickness: 1.5,
   });
 
-  // 6. Completion Sentence
-  const completionText = "for successfully completing all rigorous coursework, industry project requirements, and technical evaluations in";
-  const completionWidth = helvetica.widthOfTextAtSize(completionText, 10.5);
-  page.drawText(completionText, {
-    x: width / 2 - completionWidth / 2,
-    y: height - 255,
-    size: 10.5,
-    font: helvetica,
-    color: textMutedRgb,
-  });
+  // 6. Official Paragraph Citation (User Requested Format)
+  const defaultCitation = `This is to certify that ${data.studentName} has successfully completed the ${data.durationHours || "4-Month"} ${data.courseTitle} at Kode To Career.\nDuring the program, the student demonstrated proficiency in full-stack web development, AI-assisted development, and successfully completed practical assignments and projects.\nWe congratulate them and wish them success in their future career.`;
 
-  // 7. Course Title
-  const courseText = data.courseTitle;
-  const courseWidth = helveticaBold.widthOfTextAtSize(courseText, 21);
-  page.drawText(courseText, {
-    x: width / 2 - courseWidth / 2,
-    y: height - 290,
-    size: 21,
-    font: helveticaBold,
-    color: secondaryRgb,
-  });
+  const citationToUse = data.certificationText || defaultCitation;
+  const citationLines = citationToUse.split("\n");
+
+  let currentY = height - 230;
+  for (const line of citationLines) {
+    if (!line.trim()) continue;
+    // Word wrap line for PDF width
+    const words = line.split(" ");
+    let currentLine = "";
+    const maxWidth = width - 180;
+
+    for (const word of words) {
+      const testLine = currentLine ? `${currentLine} ${word}` : word;
+      const testWidth = helvetica.widthOfTextAtSize(testLine, 10);
+      if (testWidth > maxWidth && currentLine) {
+        const lineW = helvetica.widthOfTextAtSize(currentLine, 10);
+        page.drawText(currentLine, {
+          x: width / 2 - lineW / 2,
+          y: currentY,
+          size: 10,
+          font: helvetica,
+          color: secondaryRgb,
+        });
+        currentY -= 15;
+        currentLine = word;
+      } else {
+        currentLine = testLine;
+      }
+    }
+    if (currentLine) {
+      const lineW = helvetica.widthOfTextAtSize(currentLine, 10);
+      page.drawText(currentLine, {
+        x: width / 2 - lineW / 2,
+        y: currentY,
+        size: 10,
+        font: helvetica,
+        color: secondaryRgb,
+      });
+      currentY -= 16;
+    }
+  }
 
   // Additional Details: Skills & Duration
   if (data.skills) {
     const skillsText = `Technologies & Skills Mastered: ${data.skills}`;
-    const skillsWidth = helvetica.widthOfTextAtSize(skillsText, 8.5);
+    const skillsWidth = helveticaBold.widthOfTextAtSize(skillsText, 8.5);
     page.drawText(skillsText, {
       x: width / 2 - skillsWidth / 2,
-      y: height - 315,
+      y: currentY - 10,
       size: 8.5,
-      font: helvetica,
-      color: textMutedRgb,
+      font: helveticaBold,
+      color: primaryRgb,
     });
+    currentY -= 20;
   }
 
-  if (data.durationHours || data.grade) {
-    const metaParts = [];
-    if (data.durationHours) metaParts.push(`Duration: ${data.durationHours}`);
-    if (data.grade) metaParts.push(`Honors: ${data.grade}`);
-    const metaText = metaParts.join("  •  ");
-    const metaWidth = helveticaBold.widthOfTextAtSize(metaText, 9.5);
-    page.drawText(metaText, {
-      x: width / 2 - metaWidth / 2,
-      y: height - 338,
-      size: 9.5,
+  if (data.grade) {
+    const gradeText = `Honors & Assessment Grade: ${data.grade}`;
+    const gradeWidth = helveticaBold.widthOfTextAtSize(gradeText, 9);
+    page.drawText(gradeText, {
+      x: width / 2 - gradeWidth / 2,
+      y: currentY - 5,
+      size: 9,
       font: helveticaBold,
       color: goldRgb,
     });
   }
 
-  // 8. Footer Section (Signatures, Issue Date, QR Code)
-  const footerY = 90;
+  // 8. Footer Section (Authorized Instructor, Issue Date, QR Code)
+  const footerY = 85;
 
   // Left: Authorized Instructor Signature
   const trainerName = data.trainerName || "Md Arbaaz";
-  const trainerRole = data.trainerDesignation || "Head of Academics & Founder";
+  const trainerRole = data.trainerDesignation || "Founder & Lead Tech Instructor";
 
   page.drawText(trainerName, {
-    x: 60,
+    x: 90,
     y: footerY + 20,
-    size: 15,
+    size: 16,
     font: timesItalic,
     color: secondaryRgb,
   });
 
   page.drawLine({
-    start: { x: 55, y: footerY + 5 },
-    end: { x: 210, y: footerY + 5 },
+    start: { x: 80, y: footerY + 5 },
+    end: { x: 260, y: footerY + 5 },
     color: textMutedRgb,
     thickness: 1,
   });
 
   page.drawText(trainerName, {
-    x: 55,
+    x: 80,
     y: footerY - 12,
-    size: 9.5,
+    size: 10,
     font: helveticaBold,
     color: secondaryRgb,
   });
 
   page.drawText(trainerRole, {
-    x: 55,
+    x: 80,
     y: footerY - 24,
-    size: 7.5,
-    font: helvetica,
-    color: textMutedRgb,
-  });
-
-  // Center-Right: Academic Registrar Signature
-  const registrarName = data.registrarName || "Dr. S. K. Verma (Academic Registrar)";
-
-  page.drawText(registrarName.split("(")[0].trim(), {
-    x: 255,
-    y: footerY + 20,
-    size: 15,
-    font: timesItalic,
-    color: secondaryRgb,
-  });
-
-  page.drawLine({
-    start: { x: 250, y: footerY + 5 },
-    end: { x: 405, y: footerY + 5 },
-    color: textMutedRgb,
-    thickness: 1,
-  });
-
-  page.drawText("Dr. S. K. Verma", {
-    x: 250,
-    y: footerY - 12,
-    size: 9.5,
-    font: helveticaBold,
-    color: secondaryRgb,
-  });
-
-  page.drawText("Academic Registrar", {
-    x: 250,
-    y: footerY - 24,
-    size: 7.5,
+    size: 8,
     font: helvetica,
     color: textMutedRgb,
   });
 
   // Center: Issue Date
-  const dateX = 440;
+  const dateX = width / 2 - 50;
   page.drawLine({
     start: { x: dateX, y: footerY + 5 },
     end: { x: dateX + 110, y: footerY + 5 },
@@ -289,7 +276,7 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Buf
 
   // Right: QR Code & Certificate Number
   const qrX = width - 150;
-  const qrY = 50;
+  const qrY = 45;
   const qrSize = 75;
 
   const qrBase64 = qrCodeDataUrl.split(",")[1];
