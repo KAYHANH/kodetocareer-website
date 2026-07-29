@@ -144,7 +144,7 @@ export default function Navbar() {
                   onMouseLeave={hasDropdown ? () => setHoverState(false) : undefined}
                 >
                   {hasDropdown ? (
-                    <div className="py-5">
+                    <div className="py-5" suppressHydrationWarning>
                       <button
                         className={`relative rounded-[10px] px-3 py-2 text-sm font-medium transition-colors flex items-center gap-1 cursor-pointer outline-none ${
                           isActive(href)
@@ -350,7 +350,7 @@ export default function Navbar() {
           </ul>
 
           {/* ── Desktop CTA Buttons ── */}
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-3 lg:flex" suppressHydrationWarning>
             <Link
               href="/login"
               className="px-5 py-2.5 text-sm font-semibold text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all"
