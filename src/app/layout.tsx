@@ -70,7 +70,7 @@ export default function RootLayout({
         <BackgroundOrbs />
         <GoogleAnalytics />
         <Navbar />
-        <main className="flex-1 pt-20 relative z-10">{children}</main>
+        <main className="flex-1 pt-20 relative z-10" suppressHydrationWarning>{children}</main>
         <Footer />
         <ClientWidgets />
       </body>

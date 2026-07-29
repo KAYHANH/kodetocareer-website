@@ -60,6 +60,7 @@ export default function WhyChooseUs() {
     <section
       className="bg-transparent py-24 border-y border-slate-200/30 relative overflow-hidden"
       aria-labelledby="why-choose-us-heading"
+      suppressHydrationWarning
     >
       <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
       <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] rounded-full bg-blue-300/5 blur-[100px] pointer-events-none" />

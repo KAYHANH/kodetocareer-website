@@ -105,10 +105,12 @@ export default function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-out bg-white border-b border-slate-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)]"
         role="banner"
+        suppressHydrationWarning
       >
         <nav
           className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6"
           aria-label="Main navigation"
+          suppressHydrationWarning
         >
           {/* ── Logo ── */}
           <Link
