@@ -128,7 +128,7 @@ export default function Navbar() {
           </Link>
 
           {/* ── Desktop Links ── */}
-          <ul className="hidden items-center gap-1 lg:flex h-full">
+          <ul className="hidden items-center gap-0.5 xl:gap-1 lg:flex h-full">
             {NAV_LINKS.map(({ label, href, id, hasDropdown }) => {
               const isCourses = id === "courses";
               const isSolutions = id === "career-services";
@@ -146,7 +146,7 @@ export default function Navbar() {
                   {hasDropdown ? (
                     <div className="py-5" suppressHydrationWarning>
                       <button
-                        className={`relative rounded-[10px] px-3 py-2 text-sm font-medium transition-colors flex items-center gap-1 cursor-pointer outline-none ${
+                        className={`relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors flex items-center gap-1 cursor-pointer outline-none ${
                           isActive(href)
                             ? "text-primary font-bold"
                             : "text-text-secondary hover:text-slate-900"
@@ -155,14 +155,14 @@ export default function Navbar() {
                         {label}
                         <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${currentHoverState ? "rotate-180" : ""}`} />
                         {isActive(href) && (
-                          <span className="absolute inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
+                          <span className="absolute inset-x-2.5 xl:inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
                         )}
                       </button>
                     </div>
                   ) : (
                     <Link
                       href={href}
-                      className={`relative rounded-[10px] px-3 py-2 text-sm font-medium transition-colors ${
+                      className={`relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors ${
                         isActive(href)
                           ? "text-primary font-bold"
                           : "text-text-secondary hover:text-slate-900"
@@ -170,7 +170,7 @@ export default function Navbar() {
                     >
                       {label}
                       {isActive(href) && (
-                        <span className="absolute inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
+                        <span className="absolute inset-x-2.5 xl:inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
                       )}
                     </Link>
                   )}
@@ -350,16 +350,16 @@ export default function Navbar() {
           </ul>
 
           {/* ── Desktop CTA Buttons ── */}
-          <div className="hidden items-center gap-3 lg:flex" suppressHydrationWarning>
+          <div className="hidden items-center gap-2 xl:gap-3 lg:flex shrink-0" suppressHydrationWarning>
             <Link
               href="/login"
-              className="px-5 py-2.5 text-sm font-semibold text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all"
+              className="inline-flex items-center gap-1.5 px-3.5 xl:px-4 py-2 text-xs xl:text-sm font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl transition-all shrink-0 shadow-sm"
             >
-              Sign In
+              <span>Sign In</span>
             </Link>
             <Link
               href="/start"
-              className="btn-primary-gradient px-5 py-2.5 text-sm font-semibold text-white"
+              className="btn-primary-gradient inline-flex items-center justify-center px-4 xl:px-5 py-2 xl:py-2.5 text-xs xl:text-sm font-bold text-white shrink-0 shadow-md shadow-primary/20"
             >
               Enroll Now
             </Link>
