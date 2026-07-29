@@ -2,6 +2,9 @@ import { Metadata } from "next";
 import { getAllCertificates } from "@/lib/certificates-store";
 import CertificatesAdminClient from "./CertificatesAdminClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Admin Certificate Portal | KodeToCareer",
   description: "Issue, manage, and verify student certificates.",

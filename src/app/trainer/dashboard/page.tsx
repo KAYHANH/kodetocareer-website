@@ -2,9 +2,12 @@ import { Metadata } from "next";
 import { getAllCertificates } from "@/lib/certificates-store";
 import TrainerClient from "./TrainerClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
-  title: "Trainer Dashboard | KodeToCareer",
-  description: "Trainer portal for managing student rosters and course certificates.",
+  title: "Trainer Console | KodeToCareer",
+  description: "Manage student certificates and class progress.",
 };
 
 export default function TrainerDashboardPage() {

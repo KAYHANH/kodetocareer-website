@@ -2,6 +2,9 @@ import { Metadata } from "next";
 import { getCertificateById } from "@/lib/certificates-store";
 import VerifyClient from "./VerifyClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function generateMetadata({
   params,
 }: {
