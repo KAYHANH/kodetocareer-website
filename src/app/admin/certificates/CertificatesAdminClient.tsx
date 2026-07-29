@@ -35,7 +35,7 @@ export default function CertificatesAdminClient({
   const [trainerDesignation, setTrainerDesignation] = useState("Founder & Lead Tech Instructor");
   const [skills, setSkills] = useState("React 19, Next.js, Node.js, Express, MongoDB, Tailwind CSS, REST APIs");
   const [durationHours, setDurationHours] = useState("480+ Hours of Practical Industry Capstones");
-  const [rollNumber, setRollNumber] = useState(`KTC-REG-2026-${Math.floor(1000 + Math.random() * 9000)}`);
+  const [rollNumber, setRollNumber] = useState(() => `KTC-REG-2026-${Math.floor(1000 + Math.random() * 9000)}`);
   const [isLive, setIsLive] = useState(true);
 
   const filtered = certificates.filter(

@@ -23,11 +23,9 @@ export default function VerifyClient({ cert }: { cert: StoredCertificate | null 
   const [copied, setCopied] = useState(false);
 
   const handleCopyLink = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    }
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
   };
 
   const [postCopied, setPostCopied] = useState(false);
@@ -219,7 +217,7 @@ export default function VerifyClient({ cert }: { cert: StoredCertificate | null 
                     Official Certification Statement
                   </p>
                   <p className="text-xs text-slate-700 font-medium leading-relaxed italic">
-                    "{cert.certificationText || `This is to certify that ${cert.studentName} has successfully completed the ${cert.courseTitle} at Kode To Career. During the program, the student demonstrated proficiency in full-stack web development, AI-assisted development, and successfully completed practical assignments and projects. We congratulate them and wish them success in their future career.`}"
+                    {cert.certificationText || `This is to certify that ${cert.studentName} has successfully completed the ${cert.courseTitle} at Kode To Career. During the program, the student demonstrated proficiency in full-stack web development, AI-assisted development, and successfully completed practical assignments and projects. We congratulate them and wish them success in their future career.`}
                   </p>
                 </div>
 

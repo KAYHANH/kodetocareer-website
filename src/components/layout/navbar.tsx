@@ -23,7 +23,6 @@ const NAV_LINKS: NavLink[] = [
   { label: "Blog", href: "/blog", id: "blog" },
   { label: "Free Tools", href: "/free-tools", id: "free-tools" },
   { label: "Contact", href: "/contact", id: "contact" },
-  { label: "Sign In", href: "/login", id: "login" },
 ];
 
 /* ───── overlay backdrop variants ───── */
@@ -138,8 +137,9 @@ export default function Navbar() {
 
               return (
                 <li
-                  key={href}
+                  key={id}
                   className="relative flex items-center h-full"
+                  suppressHydrationWarning
                   onMouseEnter={hasDropdown ? () => setHoverState(true) : undefined}
                   onMouseLeave={hasDropdown ? () => setHoverState(false) : undefined}
                 >
@@ -351,6 +351,12 @@ export default function Navbar() {
 
           {/* ── Desktop CTA Buttons ── */}
           <div className="hidden items-center gap-3 lg:flex">
+            <Link
+              href="/login"
+              className="px-5 py-2.5 text-sm font-semibold text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all"
+            >
+              Sign In
+            </Link>
             <Link
               href="/start"
               className="btn-primary-gradient px-5 py-2.5 text-sm font-semibold text-white"
