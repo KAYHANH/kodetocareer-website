@@ -159,7 +159,7 @@ export default function LoginClient() {
             </p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form action="https://kodetocareer.com/login" method="POST" onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1.5">
                 Email Address

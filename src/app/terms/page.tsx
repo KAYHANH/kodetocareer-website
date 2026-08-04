@@ -2,7 +2,7 @@ import React from 'react';
 
 export const metadata = {
   title: 'Terms of Service | KodeToCareer',
-  description: 'Read the terms and conditions governing the use of KodeToCareer bootcamps and dashboards.',
+  description: 'Read the official terms and conditions governing enrollment, bootcamp access, student conduct, and digital credential verification at KodeToCareer.',
 };
 
 const SECTIONS = [

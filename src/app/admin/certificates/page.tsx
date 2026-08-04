@@ -7,7 +7,7 @@ export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Admin Certificate Portal | KodeToCareer",
-  description: "Issue, manage, and verify student certificates.",
+  description: "Official KodeToCareer administrative portal to issue, manage, audit, and securely verify student graduation certificates and academic credentials.",
 };
 
 export default function CertificatesAdminPage() {

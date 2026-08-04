@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*\\.(pdf|woff2|woff|ttf|eot)",
         headers: [
+          ...securityHeaders,
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
@@ -43,11 +44,21 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*\\.(png|jpg|jpeg|svg|gif|webp|avif|ico)",
         headers: [
+          ...securityHeaders,
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
         ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/start",
+        destination: "/courses",
+        permanent: true,
       },
     ];
   },

@@ -8,7 +8,31 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/admin', '/api/', '/login', '/signup'],
       },
+      {
+        userAgent: [
+          'GPTBot',
+          'ChatGPT-User',
+          'OAI-SearchBot',
+          'ClaudeBot',
+          'Claude-User',
+          'Claude-SearchBot',
+          'PerplexityBot',
+          'Perplexity-User',
+          'Google-Extended',
+          'GoogleOther',
+          'Applebot-Extended',
+          'Meta-ExternalAgent',
+          'Facebookbot',
+          'Amazonbot',
+          'Bytespider',
+          'CCBot'
+        ],
+        allow: '/',
+      }
     ],
-    sitemap: 'https://kodetocareer.com/sitemap.xml',
+    sitemap: [
+      'https://kodetocareer.com/sitemap.xml',
+      'https://www.kodetocareer.com/sitemap.xml'
+    ],
   }
 }

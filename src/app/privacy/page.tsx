@@ -2,7 +2,7 @@ import React from 'react';
 
 export const metadata = {
   title: 'Privacy Policy | KodeToCareer',
-  description: 'Understand how KodeToCareer collects, uses, protects, and handles your personal information.',
+  description: 'Understand how KodeToCareer collects, uses, protects, and handles your personal information, privacy preferences, and student data rights.',
 };
 
 const SECTIONS = [

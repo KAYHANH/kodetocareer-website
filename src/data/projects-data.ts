@@ -29,7 +29,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     studentName: 'Rohan Sharma',
     difficulty: 'Advanced',
     tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Gemini AI API', 'Tailwind CSS'],
-    tagline: 'An automated platform conducting realistic developer technical interviews with AI evaluation.',
+    tagline: 'An automated platform conducting realistic developer technical interviews with instant AI evaluation and resume feedback.',
     overview: 'This capstone project simulates real-world developer hiring rounds. It generates contextual technical questions based on the candidate\'s resume, records audio/text responses, and provides comprehensive feedback on code performance, communication skills, and architectural knowledge using the Gemini API.',
     outcomes: [
       'Implemented real-time speech-to-text response capturing.',
@@ -52,7 +52,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     studentName: 'Priya Iyer',
     difficulty: 'Advanced',
     tags: ['Python', 'TensorFlow', 'Keras', 'OpenCV', 'Streamlit', 'ResNet50'],
-    tagline: 'A CNN computer vision model detecting pneumonia indicators from chest X-Ray image uploads.',
+    tagline: 'A CNN computer vision deep learning model detecting pneumonia indicators from chest X-Ray image uploads with Grad-CAM.',
     overview: 'This project utilizes deep convolutional neural networks (CNNs) trained on chest X-Ray datasets. It classifies images into normal or bacterial/viral pneumonia indicators, showing heatmaps of detected anomaly areas to assist medical analysts.',
     outcomes: [
       'Achieved 96.2% diagnostic accuracy on the validation dataset.',
@@ -75,7 +75,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     studentName: 'Abhishek Patel',
     difficulty: 'Advanced',
     tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Docker', 'ThymeLeaf', 'Spring Security'],
-    tagline: 'Secure transaction processing engine with threshold alert rules protecting account ledgers.',
+    tagline: 'Secure double-entry transaction engine with threshold alert rules protecting account ledgers under heavy load.',
     overview: 'A robust double-entry transaction engine enforcing strict ACID consistency for user transactions. Features transaction volume rate-limiting and location mismatch alerts to flag anomalous account activity.',
     outcomes: [
       'Designed double-entry schema preserving balance consistency under heavy load concurrent tests.',
@@ -98,7 +98,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     studentName: 'Sneha Verma',
     difficulty: 'Intermediate',
     tags: ['Figma', 'UI Design', 'UX Research', 'Design Systems', 'Interactive Prototyping'],
-    tagline: 'A comprehensive mobile app case study streamlining telemedicine bookings and digital prescriptions.',
+    tagline: 'A comprehensive mobile app UI/UX case study streamlining telemedicine bookings, digital prescriptions, and user flows.',
     overview: 'This UI/UX project resolves friction points in patient-doctor communications. Features appointment booking flows, medical history uploads, secure messaging, and clear digital prescription dashboards.',
     outcomes: [
       'Conducted user interviews with 15 patients to identify onboarding bottlenecks.',
@@ -120,7 +120,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     studentName: 'Karan Malhotra',
     difficulty: 'Intermediate',
     tags: ['SQL', 'Python', 'Pandas', 'Power BI', 'Google Looker Studio'],
-    tagline: 'Cohort analysis and customer lifetime value mapping extracting sales indicators from raw datasets.',
+    tagline: 'Cohort analysis and customer lifetime value mapping extracting sales retention indicators from raw e-commerce datasets.',
     overview: 'This data analytics project structures over 500,000 transaction rows. It extracts user signup cohorts, maps month-on-month retention rates, and flags categories showing higher churn risk.',
     outcomes: [
       'Wrote optimized SQL window queries performing cohort grouping calculations.',

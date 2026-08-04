@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return {};
 
   return {
-    title: `${project.title} — Student Project Case Study | KodeToCareer`,
+    title: `${project.title} | KodeToCareer Case Study`,
     description: project.tagline,
     alternates: {
       canonical: `https://kodetocareer.com/projects/${slug}`,

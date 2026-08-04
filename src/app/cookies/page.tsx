@@ -2,7 +2,7 @@ import React from 'react';
 
 export const metadata = {
   title: 'Cookie Policy | KodeToCareer',
-  description: 'Learn how KodeToCareer uses cookies and tracking technologies to optimize your experience.',
+  description: 'Learn how KodeToCareer uses cookies, web beacons, and tracking technologies to personalize your learning experience and optimize website performance.',
 };
 
 const SECTIONS = [
