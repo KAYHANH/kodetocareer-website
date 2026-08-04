@@ -442,13 +442,27 @@ export default function CoursesClient() {
               },
               ...COURSES.map((c) => ({
                 "@type": "Course",
-                "@id": `https://www.kodetocareer.com/courses/${c.id}`,
+                "@id": `https://kodetocareer.com/courses/${c.slug}`,
                 "name": c.title,
-                "description": c.desc,
+                "description": c.desc || c.tagline,
                 "provider": {
                   "@type": "Organization",
                   "name": "KodeToCareer",
-                  "sameAs": "https://www.kodetocareer.com"
+                  "url": "https://kodetocareer.com",
+                  "sameAs": "https://kodetocareer.com"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": c.priceUpfront.replace(/[^0-9]/g, ''),
+                  "priceCurrency": "INR",
+                  "availability": "https://schema.org/InStock",
+                  "url": `https://kodetocareer.com/courses/${c.slug}`
+                },
+                "hasCourseInstance": {
+                  "@type": "CourseInstance",
+                  "courseMode": "Blended",
+                  "duration": c.duration,
+                  "courseWorkload": "PT15H"
                 }
               }))
             ]
