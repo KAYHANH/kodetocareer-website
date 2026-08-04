@@ -194,5 +194,63 @@ export const COMPARISONS_DATA: Record<string, ComparisonData> = {
     courseAName: 'MERN Stack Development + AI Integration',
     courseBSlug: 'data-science-machine-learning',
     courseBName: 'Data Science & Machine Learning Core'
+  },
+  'scaler-academy-vs-kodetocareer': {
+    title: 'Scaler Academy vs KodeToCareer',
+    slug: 'scaler-academy-vs-kodetocareer',
+    tagline: 'Compare fees, batch sizes, live mentorship, and placement assistance between Scaler Academy and KodeToCareer.',
+    introduction: 'What is the difference between Scaler Academy and KodeToCareer? Scaler Academy charges ₹2.5 - 3 Lakhs for large-batch DSA and system design courses tailored primarily for software engineers with prior coding experience. KodeToCareer provides affordable 100% live cohorts, small batch sizes (max 25), beginner-to-advanced curriculum, guaranteed paid internships, and direct placement support in Noida & India.',
+    table: [
+      { feature: 'Course Fee', itemA: '₹2.5 Lakhs - ₹3.5 Lakhs', itemB: 'Affordable Upfront & Flexible EMI' },
+      { feature: 'Target Audience', itemA: 'Experienced Engineers / Working Pros', itemB: 'Beginners, Graduates & Career Changers' },
+      { feature: 'Batch Size', itemA: 'Large Batches (150+ students)', itemB: 'Focused Cohorts (Max 25 students)' },
+      { feature: 'Practical Internships', itemA: 'Theoretical System Design', itemB: 'Guaranteed Live Industry Internships' },
+      { feature: 'Placement Guidance', itemA: 'Job Board Referrals', itemB: '1-on-1 Mock Interviews & Direct Hiring' }
+    ],
+    chooseA: [
+      'You are an experienced software developer preparing specifically for FAANG System Design interviews.',
+      'You have a large budget (₹2.5L+) for computer science theory.',
+      'You do not need foundational programming or beginner-level guidance.'
+    ],
+    chooseB: [
+      'You want an affordable, practical bootcamp that builds real AI and web applications.',
+      'You want small batch sizes where mentors review your code line-by-line.',
+      'You want guaranteed paid internships and hands-on career placement assistance.'
+    ],
+    salaryCompare: 'KodeToCareer graduates achieve average salary packages of ₹4.5 - 18 LPA without incurring heavy student debt or expensive ISA obligations.',
+    demandCompare: 'Both platforms serve tech aspiring candidates. Scaler focuses heavily on competitive DSA and system design for mid-senior engineers, while KodeToCareer excels at taking freshers and career switchers to job-ready production standards.',
+    courseASlug: 'mern-stack-development',
+    courseAName: 'MERN Stack Development + AI Integration',
+    courseBSlug: 'java-full-stack',
+    courseBName: 'Java Full Stack Developer Program'
+  },
+  'simplilearn-vs-kodetocareer': {
+    title: 'Simplilearn vs KodeToCareer',
+    slug: 'simplilearn-vs-kodetocareer',
+    tagline: 'Compare self-paced certificates vs live cohort bootcamps with placement support.',
+    introduction: 'What is the difference between Simplilearn and KodeToCareer? Simplilearn operates primarily as an online e-learning platform providing self-paced video modules and recorded certification courses. KodeToCareer is an intensive career academy delivering live interactive training, 15+ capstone projects, guaranteed live internships, and active 1-on-1 placement support.',
+    table: [
+      { feature: 'Delivery Mode', itemA: 'Pre-recorded Video Lectures', itemB: '100% Live Instructor-Led Classes' },
+      { feature: 'Mentorship Access', itemA: 'Recorded Q&A Sessions', itemB: '1-on-1 Live Senior Developer Mentors' },
+      { feature: 'Portfolio Projects', itemA: 'Standard Lab Assignments', itemB: '15+ Production Capstone Projects' },
+      { feature: 'Internship Guarantee', itemA: 'Not Provided', itemB: 'Guaranteed Live Industry Internships' },
+      { feature: 'Placement Auditing', itemA: 'General Resume Tips', itemB: '1-on-1 Mock Interviews & Recruiter Referrals' }
+    ],
+    chooseA: [
+      'You want self-paced online video modules for passive self-study.',
+      'You only need a generic certificate of completion without live interaction.',
+      'You do not require active placement support or live internship experience.'
+    ],
+    chooseB: [
+      'You want live interactive classes with instant instructor feedback.',
+      'You want a verified internship experience to display on your resume.',
+      'You want dedicated placement mentorship to clear job interviews.'
+    ],
+    salaryCompare: 'Live interactive cohort graduates consistently outperform self-paced video learners in technical interviews due to real hands-on debugging and live mock interview practice.',
+    demandCompare: 'Employers prioritize candidates who have built real production-grade web applications and machine learning models over those holding passive online video certificates.',
+    courseASlug: 'data-science-machine-learning',
+    courseAName: 'Data Science & Machine Learning Core',
+    courseBSlug: 'data-analytics',
+    courseBName: 'Data Analytics & Business Intelligence'
   }
 };
