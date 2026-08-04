@@ -18,10 +18,12 @@ interface SchemaMarkupProps {
 }
 
 export default function SchemaMarkup({ type, data }: SchemaMarkupProps) {
+  const { '@context': _ctx, '@type': _type, ...cleanData } = data || {};
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': type,
-    ...data,
+    ...cleanData,
   };
 
   return (

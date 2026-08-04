@@ -537,27 +537,27 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
 
 
   const courseSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
     name: course.title,
     description: course.tagline || course.desc,
     provider: {
       '@type': 'Organization',
-      name: 'Kode To Career',
+      name: 'KodeToCareer',
+      url: 'https://kodetocareer.com',
       sameAs: 'https://kodetocareer.com'
     },
     offers: {
       '@type': 'Offer',
       price: course.priceUpfront.replace(/[^0-9]/g, ''),
       priceCurrency: 'INR',
-      valueAddedTaxIncluded: 'true'
+      availability: 'https://schema.org/InStock',
+      url: `https://kodetocareer.com/courses/${course.slug}`
     },
-    educationalCredentialAwarded: 'ISO 9001:2015 Training Certificate & NSDC Skill Partner Credentials',
+    educationalCredentialAwarded: 'ISO 9001:2015 Training Certificate',
     hasCourseInstance: {
       '@type': 'CourseInstance',
-      courseMode: 'Blended Online Live Classes & On-Site Practice Labs',
+      courseMode: 'Blended',
       duration: course.duration,
-      courseWorkload: '15-20 hours per week'
+      courseWorkload: 'PT15H'
     }
   };
 
