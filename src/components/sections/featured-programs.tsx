@@ -1,8 +1,8 @@
 'use client';
 
 import { 
-  Brain, Code, Coffee, Terminal, BarChart3, TrendingUp, Clock, 
-  Layers, ArrowRight, Sparkles, Star, DollarSign, Trophy 
+  Brain, Code, Coffee, Terminal, BarChart3, Clock, 
+  Layers, ArrowRight, Star, DollarSign, Trophy 
 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import Link from 'next/link';
@@ -164,6 +164,7 @@ function ProgramCard({ program }: { program: Program }) {
             alt={program.title}
             width={400}
             height={160}
+            unoptimized
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105 group-hover:translate-y-[-2px] pointer-events-none"
           />

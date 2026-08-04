@@ -131,7 +131,8 @@ export default function ContactPage() {
                 <div>
                   <span className="text-[9px] text-slate-400 font-bold block uppercase leading-none">Campus Address</span>
                   <span className="text-slate-800 text-xs font-bold mt-1 block leading-relaxed">
-                    Sector 15, Noida, UP, India
+                    A-48, Basement, Sector 2, Noida<br />
+                    (Near Sector 15 Metro Station), UP 201301
                   </span>
                 </div>
               </div>
@@ -155,18 +156,18 @@ export default function ContactPage() {
             {/* Campus Location Map */}
             <div className="glass-premium border-glow-animate-light p-4 rounded-[24px] shadow-sm space-y-3">
               <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200/50 pb-2">
-                <MapPin className="w-4 h-4 text-emerald-600" /> Noida Campus Locator
+                <MapPin className="w-4 h-4 text-emerald-600" /> Noida Sector 2 Campus Locator
               </h4>
               <div className="w-full h-44 rounded-xl overflow-hidden border border-slate-100 relative">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.5815340620245!2d77.3072242150814!3d28.582329382436853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45f782f9d5b%3A0xa1ea141c2c8f6155!2sSector%2015%2C%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1688583492711!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.5815340620245!2d77.3072242150814!3d28.582329382436853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45f782f9d5b%3A0xa1ea141c2c8f6155!2sSector%202%2C%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1688583492711!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen={false}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="KodeToCareer Noida Sector 15 Campus Location"
+                  title="KodeToCareer Noida Sector 2 Campus Location"
                 ></iframe>
               </div>
             </div>

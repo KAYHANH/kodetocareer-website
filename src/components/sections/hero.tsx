@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Award, Trophy, Phone, MapPin, Shield, GraduationCap, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Sparkles, Award, Trophy, Phone, Shield, GraduationCap, CheckCircle2, MessageSquare } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -133,7 +133,8 @@ function StatItem({
   const [ref, formatted] = useCountUp(value, 2000);
 
   useEffect(() => {
-    setMounted(true);
+    const t = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -162,7 +163,8 @@ export default function Hero() {
   const typedWord = useTypingEffect(ROTATING_WORDS);
 
   useEffect(() => {
-    setMounted(true);
+    const t = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -212,7 +214,7 @@ export default function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
-                India&apos;s Career-First Tech Academy
+                AI-Powered Software Training Institute
               </span>
             </motion.div>
 
@@ -223,9 +225,9 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
             >
-              <span className="block text-slate-900">Become</span>
-              <span className="block gradient-text">Job-Ready</span>
-              <span className="block text-slate-900">in 4–6 Months</span>
+              <span className="block text-slate-900">AI-Powered</span>
+              <span className="block gradient-text">Software Engineering</span>
+              <span className="block text-slate-900">Bootcamp</span>
             </motion.h1>
 
             {/* Typing line */}
@@ -236,7 +238,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
               aria-live="polite"
             >
-              Become a{' '}
+              Master{' '}
               <span className="text-primary font-bold" suppressHydrationWarning>
                 {mounted ? typedWord : ROTATING_WORDS[0]}
                 <span className="animate-pulse ml-0.5 text-primary">|</span>
@@ -250,7 +252,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
             >
-              Live projects. Industry internships. Placement assistance. Career mentorship. Join 1,200+ students who transformed their careers — starting from just ₹5,000/month.
+              Master Full Stack Development, Data Science, AI Engineering, and Cloud DevOps with live industry projects, guaranteed internships, and 100% placement support.
             </motion.p>
 
             {/* CTA buttons */}

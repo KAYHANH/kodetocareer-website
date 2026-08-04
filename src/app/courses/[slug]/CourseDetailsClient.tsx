@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import SchemaMarkup from '@/components/seo/schema-markup';
+import { openEnrollmentModal } from '@/lib/events';
 import { COURSES_SEO } from '../courses-seo-data';
 
 export const COURSES = [
@@ -327,7 +328,7 @@ export default function CourseDetailsPage({ slug }: PageProps) {
   }
 
   const handleEnrollClick = () => {
-    setShowModal(true);
+    openEnrollmentModal(course.title);
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {

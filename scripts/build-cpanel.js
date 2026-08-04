@@ -11,7 +11,11 @@ execSync('npm run build', { stdio: 'inherit' });
 // 2. Prepare cpanel-deploy directory
 const distDir = path.join(__dirname, '../cpanel-deploy');
 if (fs.existsSync(distDir)) {
-  fs.rmSync(distDir, { recursive: true, force: true });
+  try {
+    fs.rmSync(distDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+  } catch (e) {
+    console.warn('Warning removing distDir:', e.message);
+  }
 }
 fs.mkdirSync(distDir, { recursive: true });
 
@@ -31,6 +35,14 @@ if (fs.existsSync(standaloneDir)) {
   const publicSrc = path.join(__dirname, '../public');
   const publicDest = path.join(distDir, 'public');
   fs.cpSync(publicSrc, publicDest, { recursive: true });
+
+  // Copy dynamic_posts.json
+  const blogJsonSrc = path.join(__dirname, '../src/app/blog/dynamic_posts.json');
+  const blogJsonDest = path.join(distDir, 'src/app/blog/dynamic_posts.json');
+  if (fs.existsSync(blogJsonSrc)) {
+    fs.mkdirSync(path.dirname(blogJsonDest), { recursive: true });
+    fs.copyFileSync(blogJsonSrc, blogJsonDest);
+  }
 } else {
   // Standard copy
   ['.next', 'public', 'package.json', 'server.js', '.htaccess'].forEach(item => {
@@ -42,28 +54,50 @@ if (fs.existsSync(standaloneDir)) {
   });
 }
 
-// Copy .htaccess and server.js
-const htaccessSrc = path.join(__dirname, '../.htaccess');
-if (fs.existsSync(htaccessSrc)) {
-  fs.copyFileSync(htaccessSrc, path.join(distDir, '.htaccess'));
-}
-
 const serverSrc = path.join(__dirname, '../server.js');
 if (fs.existsSync(serverSrc)) {
   fs.copyFileSync(serverSrc, path.join(distDir, 'server.js'));
 }
 
-console.log('✅ cpanel-deploy folder created successfully!');
+// Sanitize hardcoded Windows paths in server.js and configuration files for Linux cPanel compatibility
+const filesToSanitize = [
+  path.join(distDir, 'server.js'),
+  path.join(distDir, '.next/standalone/server.js'),
+  path.join(distDir, '.next/required-server-files.json')
+];
 
-// 3. Zip for cPanel upload using bsdtar (handles long paths natively)
+filesToSanitize.forEach(filePath => {
+  if (fs.existsSync(filePath)) {
+    let content = fs.readFileSync(filePath, 'utf8');
+    content = content.replace(/C:\\\\KodeToCareer/gi, '.');
+    content = content.replace(/C:\\\\kodetocareer/gi, '.');
+    content = content.replace(/C:\\KodeToCareer/gi, '.');
+    content = content.replace(/C:\\kodetocareer/gi, '.');
+    fs.writeFileSync(filePath, content, 'utf8');
+  }
+});
+
+console.log('✅ cpanel-deploy folder created and sanitized for Linux!');
+
+// 3. Zip for cPanel upload using native tar (handles Windows long paths cleanly)
 try {
   const zipPath = path.join(__dirname, '../cpanel-deploy.zip');
   if (fs.existsSync(zipPath)) {
-    fs.unlinkSync(zipPath);
+    try {
+      fs.unlinkSync(zipPath);
+    } catch (e) {
+      console.warn('Existing zip locked, attempting overwrite:', e.message);
+    }
   }
-  console.log('🤐 Step 3: Compressing into cpanel-deploy.zip via tar...');
-  execSync('tar -a -c -f cpanel-deploy.zip cpanel-deploy', { cwd: path.join(__dirname, '..'), stdio: 'inherit' });
-  console.log('\n🎉 SUCCESS! cpanel-deploy.zip created in project root!');
+  console.log('🤐 Step 3: Compressing into cpanel-deploy.zip...');
+  try {
+    execSync(`tar -a -cf "${zipPath}" -C "${distDir}" .`, { stdio: 'inherit' });
+  } catch (tarErr) {
+    console.warn('Tar failed, falling back to Compress-Archive:', tarErr.message);
+    const psCmd = `powershell -Command "Compress-Archive -Path '${distDir}\\*' -DestinationPath '${zipPath}' -Force"`;
+    execSync(psCmd, { stdio: 'inherit' });
+  }
+  console.log('\n🎉 SUCCESS! Standard PKZIP cpanel-deploy.zip created in project root!');
   console.log('👉 Upload cpanel-deploy.zip to your cPanel File Manager & Extract!');
 } catch (err) {
   console.error('Packaging error:', err);

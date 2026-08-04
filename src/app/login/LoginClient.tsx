@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -11,34 +11,27 @@ import {
   Mail,
   ArrowRight,
   Sparkles,
-  CheckCircle2,
   AlertCircle,
-  KeyRound,
 } from "lucide-react";
-
-type Role = "super_admin" | "trainer" | "student";
+import { authenticateUser, RoleType } from "@/lib/user-store";
 
 export default function LoginClient() {
   const router = useRouter();
-  const [activeRole, setActiveRole] = useState<Role>("super_admin");
-  const [email, setEmail] = useState("admin@kodetocareer.com");
-  const [password, setPassword] = useState("admin123");
+  const [activeRole, setActiveRole] = useState<RoleType>("super_admin");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleRoleSwitch = (role: Role) => {
-    setActiveRole(role);
+  useEffect(() => {
+    // Reset credentials when switching active role
+    setEmail("");
+    setPassword("");
     setError("");
-    if (role === "super_admin") {
-      setEmail("admin@kodetocareer.com");
-      setPassword("admin123");
-    } else if (role === "trainer") {
-      setEmail("trainer@kodetocareer.com");
-      setPassword("trainer123");
-    } else {
-      setEmail("aditya.roy@example.com");
-      setPassword("student123");
-    }
+  }, [activeRole]);
+
+  const handleRoleSwitch = (role: RoleType) => {
+    setActiveRole(role);
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -48,6 +41,18 @@ export default function LoginClient() {
 
     setTimeout(() => {
       setLoading(false);
+      const user = authenticateUser(email, password, activeRole);
+      
+      if (!user) {
+        setError(`Invalid email address or password for ${activeRole.replace("_", " ")} access.`);
+        return;
+      }
+
+      // Store current user session
+      if (typeof window !== "undefined") {
+        localStorage.setItem("ktc_active_user", JSON.stringify(user));
+      }
+
       if (activeRole === "super_admin") {
         router.push("/admin/certificates");
       } else if (activeRole === "trainer") {
@@ -55,7 +60,7 @@ export default function LoginClient() {
       } else {
         router.push("/student/dashboard");
       }
-    }, 600);
+    }, 400);
   };
 
   return (
@@ -84,7 +89,7 @@ export default function LoginClient() {
           <button
             type="button"
             onClick={() => handleRoleSwitch("super_admin")}
-            className={`flex flex-col items-center py-3 px-2 rounded-xl text-xs font-bold transition-all ${
+            className={`flex flex-col items-center py-3 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeRole === "super_admin"
                 ? "bg-slate-900 text-white shadow-md"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -97,7 +102,7 @@ export default function LoginClient() {
           <button
             type="button"
             onClick={() => handleRoleSwitch("trainer")}
-            className={`flex flex-col items-center py-3 px-2 rounded-xl text-xs font-bold transition-all ${
+            className={`flex flex-col items-center py-3 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeRole === "trainer"
                 ? "bg-primary text-white shadow-md"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -110,7 +115,7 @@ export default function LoginClient() {
           <button
             type="button"
             onClick={() => handleRoleSwitch("student")}
-            className={`flex flex-col items-center py-3 px-2 rounded-xl text-xs font-bold transition-all ${
+            className={`flex flex-col items-center py-3 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeRole === "student"
                 ? "bg-emerald-600 text-white shadow-md"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -125,7 +130,7 @@ export default function LoginClient() {
         <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-xl relative overflow-hidden">
           {error && (
             <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0" />
+              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
               {error}
             </div>
           )}
@@ -148,7 +153,7 @@ export default function LoginClient() {
               </span>
             </div>
             <p className="text-sm font-extrabold text-slate-900 mt-1">
-              {activeRole === "super_admin" && "Certificate Issuance & Admin Console"}
+              {activeRole === "super_admin" && "Super Admin Portal & User Management"}
               {activeRole === "trainer" && "Trainer Roster & Student Assessment"}
               {activeRole === "student" && "Student Certificate Showcase & Portfolio"}
             </p>
@@ -157,13 +162,14 @@ export default function LoginClient() {
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                Work Email Address
+                Email Address
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   required
+                  placeholder="Enter registered email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
@@ -180,6 +186,7 @@ export default function LoginClient() {
                 <input
                   type="password"
                   required
+                  placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
@@ -190,7 +197,7 @@ export default function LoginClient() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3.5 rounded-xl font-bold text-sm text-white transition-all shadow-md flex items-center justify-center gap-2 ${
+              className={`w-full py-3.5 rounded-xl font-bold text-sm text-white transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer ${
                 activeRole === "super_admin"
                   ? "bg-slate-900 hover:bg-slate-800 shadow-slate-900/20"
                   : activeRole === "trainer"
@@ -202,16 +209,6 @@ export default function LoginClient() {
               {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
           </form>
-
-          {/* Quick Demo Credentials Info */}
-          <div className="mt-6 pt-4 border-t border-slate-100 text-center">
-            <div className="flex items-center justify-center gap-1 text-[11px] font-bold text-slate-500 mb-1">
-              <KeyRound className="w-3.5 h-3.5 text-primary" /> Auto-filled Demo Access
-            </div>
-            <p className="text-[10px] text-slate-400">
-              Click any role tab above to instantly test credentials for that role.
-            </p>
-          </div>
         </div>
 
         {/* Footer Quick Links */}

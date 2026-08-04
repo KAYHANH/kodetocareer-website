@@ -34,6 +34,20 @@ export default function GlobalAdmissionsPopup() {
   ];
 
   useEffect(() => {
+    const handleOpenEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ courseTitle?: string }>;
+      if (customEvent.detail?.courseTitle) {
+        setSelectedCourse(customEvent.detail.courseTitle);
+      }
+      setSubmitted(false);
+      setIsOpen(true);
+    };
+
+    window.addEventListener('open-admissions-popup', handleOpenEvent);
+    return () => window.removeEventListener('open-admissions-popup', handleOpenEvent);
+  }, []);
+
+  useEffect(() => {
     console.log("GlobalAdmissionsPopup: Component mounted on path:", pathname);
     let isSubmitted = false;
     try {
@@ -109,14 +123,17 @@ export default function GlobalAdmissionsPopup() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4">
           {/* Backdrop overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={handleClose}
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-md"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClose();
+            }}
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-md cursor-pointer"
           />
 
           {/* Modal Container */}
@@ -125,15 +142,19 @@ export default function GlobalAdmissionsPopup() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: 'spring', duration: 0.5 }}
-            className="relative w-full max-w-md bg-white border border-slate-200 rounded-[28px] shadow-2xl p-7 z-10 overflow-hidden text-slate-800"
+            className="relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-white border border-slate-200 rounded-[28px] shadow-2xl p-6 sm:p-7 z-20 text-slate-800 scrollbar-thin"
           >
             {/* Top right close button */}
             <button
-              onClick={handleClose}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-150 flex items-center justify-center text-slate-450 hover:text-slate-700 transition-colors cursor-pointer outline-none"
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClose();
+              }}
+              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200 active:scale-95 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all cursor-pointer outline-none z-30 pointer-events-auto shadow-sm"
               aria-label="Close form"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5 stroke-[2.5]" />
             </button>
 
             {submitted ? (

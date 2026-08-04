@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, MapPin, Users, CheckCircle2, ArrowRight } from "lucide-react";
+import { Calendar, Clock, MapPin, CheckCircle2, ArrowRight } from "lucide-react";
 
 interface Workshop {
   id: string;

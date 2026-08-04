@@ -148,6 +148,9 @@ export default function Navbar() {
                   {hasDropdown ? (
                     <div className="py-5" suppressHydrationWarning>
                       <button
+                        type="button"
+                        aria-expanded={currentHoverState}
+                        aria-haspopup="true"
                         className={`relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors flex items-center gap-1 cursor-pointer outline-none ${
                           isActive(href)
                             ? "text-primary font-bold"
@@ -155,7 +158,7 @@ export default function Navbar() {
                         }`}
                       >
                         {label}
-                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${currentHoverState ? "rotate-180" : ""}`} />
+                        <ChevronDown aria-hidden="true" className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${currentHoverState ? "rotate-180" : ""}`} />
                         {isActive(href) && (
                           <span className="absolute inset-x-2.5 xl:inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
                         )}
@@ -457,11 +460,13 @@ export default function Navbar() {
                       {hasDropdown ? (
                         <>
                           <button
+                            type="button"
+                            aria-expanded={currentMobileOpen}
                             onClick={() => setMobileOpenState(!currentMobileOpen)}
                             className="flex w-full items-center justify-between rounded-[10px] px-4 py-3 text-base font-medium transition-colors text-text-secondary hover:bg-black/[0.02] hover:text-slate-900 outline-none"
                           >
                             <span>{label}</span>
-                            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${currentMobileOpen ? "rotate-180" : ""}`} />
+                            <ChevronDown aria-hidden="true" className={`w-4 h-4 transition-transform duration-200 ${currentMobileOpen ? "rotate-180" : ""}`} />
                           </button>
                           <AnimatePresence>
                             {currentMobileOpen && (

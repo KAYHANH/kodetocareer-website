@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layout, Play, ExternalLink, GitBranch, Heart, Eye, ArrowRight } from "lucide-react";
+import { Layout, Heart, Eye, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 interface StudentProject {

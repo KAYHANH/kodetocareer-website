@@ -1,7 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
 const COMPANIES = [
   'Google',
   'Microsoft',
@@ -18,9 +14,6 @@ const COMPANIES = [
 ];
 
 export default function TrustedBy() {
-  // Duplicate list to ensure smooth infinite marquee scroll
-  const marqueeItems = [...COMPANIES, ...COMPANIES, ...COMPANIES];
-
   return (
     <section className="py-16 border-y border-white/[0.08] relative bg-background overflow-hidden">
       {/* Gradient Fade Masks for smooth fading edges */}

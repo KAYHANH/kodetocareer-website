@@ -167,8 +167,8 @@ export default function TechStackCircle() {
   const [hoveredTech, setHoveredTech] = useState<TechItem | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   
-  // Parallax state
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // Parallax ref & handler
+  const rafRef = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Particle state for hydration safety
@@ -183,7 +183,7 @@ export default function TechStackCircle() {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const generated = [...Array(20)].map(() => ({
+    const generated = [...Array(12)].map(() => ({
       width: Math.random() * 4 + 2,
       height: Math.random() * 4 + 2,
       top: Math.random() * 100,
@@ -200,17 +200,29 @@ export default function TechStackCircle() {
   const angleRef = useRef(0);
   const isHoveredRef = useRef(false);
 
-  // Parallax mouse movements
+  // High-performance Parallax mouse movements via CSS variables & RAF
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / 30; // parallax factor
-    const y = (e.clientY - rect.top - rect.height / 2) / 30;
-    setMousePos({ x, y });
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    if (rafRef.current) return;
+
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = (clientX - rect.left - rect.width / 2) / 30; // parallax factor
+      const y = (clientY - rect.top - rect.height / 2) / 30;
+      containerRef.current.style.setProperty('--mouse-x', `${x}px`);
+      containerRef.current.style.setProperty('--mouse-y', `${y}px`);
+    });
   };
 
   const handleMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
+    if (!containerRef.current) return;
+    containerRef.current.style.setProperty('--mouse-x', '0px');
+    containerRef.current.style.setProperty('--mouse-y', '0px');
   };
 
   const onIconHoverStart = (tech: TechItem) => {
@@ -251,7 +263,7 @@ export default function TechStackCircle() {
       {/* ── Parallax Wrapper ── */}
       <div
         style={{
-          transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`,
+          transform: `translate3d(var(--mouse-x, 0px), var(--mouse-y, 0px), 0)`,
           transition: "transform 0.15s ease-out",
         }}
         className="scale-[0.38] min-[400px]:scale-[0.45] sm:scale-[0.55] md:scale-[0.65] lg:scale-[0.6] xl:scale-[0.72] 2xl:scale-90 transition-transform duration-500 origin-center flex items-center justify-center relative w-[680px] h-[680px]"
@@ -271,7 +283,7 @@ export default function TechStackCircle() {
         {/* AI Chip Illustration behind the central K logo card */}
         <div
           style={{
-            transform: `translate3d(${-mousePos.x * 0.25}px, ${-mousePos.y * 0.25}px, 0)`,
+            transform: `translate3d(calc(var(--mouse-x, 0px) * -0.25), calc(var(--mouse-y, 0px) * -0.25), 0)`,
             transition: "transform 0.2s ease-out",
           }}
           className="absolute z-10 w-[300px] h-[300px] rounded-full border border-blue-100 bg-blue-50/50 flex items-center justify-center pointer-events-none animate-spin-slow duration-[120s] shadow-inner"
@@ -490,7 +502,7 @@ export default function TechStackCircle() {
         <div
           onClick={() => setIsCollapsed(!isCollapsed)}
           style={{
-            transform: `translate3d(${-mousePos.x * 0.4}px, ${-mousePos.y * 0.4}px, 0)`,
+            transform: `translate3d(calc(var(--mouse-x, 0px) * -0.4), calc(var(--mouse-y, 0px) * -0.4), 0)`,
             transition: "transform 0.2s ease-out",
           }}
           className="absolute z-20 flex items-center justify-center w-56 h-56 rounded-full bg-gradient-to-br from-surface to-background border border-black/[0.06] shadow-[0_0_80px_rgba(144,213,255,0.45)] overflow-hidden animate-float-delayed cursor-pointer hover:scale-105 transition-all duration-300"

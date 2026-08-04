@@ -123,7 +123,7 @@ export default function LaptopProjectShowcase3D() {
 
     // Animation Loop
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -157,7 +157,7 @@ export default function LaptopProjectShowcase3D() {
       }
       renderer.dispose();
     };
-  }, [activeProjectIndex]);
+  }, [activeProjectIndex, currentProject.screenColor]);
 
   return (
     <section className="py-24 bg-[#050816] text-white relative overflow-hidden">

@@ -105,6 +105,10 @@ export async function GET() {
       if (dynamicPosts.length > 25) {
         dynamicPosts = dynamicPosts.slice(0, 25);
       }
+      const dir = path.dirname(DYNAMIC_POSTS_PATH);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
       fs.writeFileSync(DYNAMIC_POSTS_PATH, JSON.stringify(dynamicPosts, null, 2), 'utf8');
     }
 

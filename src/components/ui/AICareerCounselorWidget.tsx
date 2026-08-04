@@ -41,7 +41,7 @@ export function AICareerCounselorWidget() {
     if (!query || loading) return;
 
     const userMsg: Message = {
-      id: Date.now().toString(),
+      id: `user-${performance.now()}`,
       role: 'user',
       content: query,
     };
@@ -62,7 +62,7 @@ export function AICareerCounselorWidget() {
       const data = await res.json();
 
       const botMsg: Message = {
-        id: (Date.now() + 1).toString(),
+        id: `bot-${performance.now()}`,
         role: 'assistant',
         content: data.reply || 'Thank you for reaching out! Let me know if you would like specific course details.',
         recommendations: data.recommendations,
@@ -94,7 +94,7 @@ export function AICareerCounselorWidget() {
   return (
     <>
       {/* Floating Trigger Button */}
-      <div className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-50 flex items-center gap-3" suppressHydrationWarning>
+      <div className="fixed bottom-24 md:bottom-6 right-4 sm:right-6 z-50 flex items-center gap-3" suppressHydrationWarning>
         <AnimatePresence>
           {!isOpen && (
             <motion.div
@@ -171,8 +171,10 @@ export function AICareerCounselorWidget() {
                   <RotateCcw className="w-4 h-4" />
                 </button>
                 <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 rounded-lg hover:bg-white/15 text-white/80 hover:text-white transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-white/15 text-white/80 hover:text-white transition-colors cursor-pointer outline-none"
+                  aria-label="Close counselor chat"
                 >
                   <X className="w-4 h-4" />
                 </button>

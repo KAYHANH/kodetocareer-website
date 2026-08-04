@@ -28,19 +28,35 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kodetocareer.com'),
-  title: "KodeToCareer — AI-Powered Career Hub",
+  title: "AI-Powered Software Training Institute | Full Stack, Data Science & Placement | KodeToCareer",
   description:
-    "Empowering the next generation of tech professionals with industry-ready skills, global opportunities, and AI-driven career guidance.",
+    "Master Full Stack Development, Data Science, AI, and DevOps through live industry projects. Join KodeToCareer for placement-focused training with 100% career support.",
   openGraph: {
-    title: "KodeToCareer — AI-Powered Career Hub",
+    title: "AI-Powered Software Training Institute | Full Stack, Data Science & Placement | KodeToCareer",
     description:
-      "Empowering the next generation of tech professionals with industry-ready skills, global opportunities, and AI-driven career guidance.",
+      "Master Full Stack Development, Data Science, AI, and DevOps through live industry projects. Join KodeToCareer for placement-focused training with 100% career support.",
+    url: 'https://kodetocareer.com',
     siteName: 'KodeToCareer',
+    images: [
+      {
+        url: '/main-logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'KodeToCareer AI-Powered Software Training Institute',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
+    title: "AI-Powered Software Training Institute | KodeToCareer",
+    description: "Master Full Stack Development, Data Science, AI, and DevOps through live industry projects with 100% placement support.",
+    images: ['/main-logo.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   alternates: {
     canonical: 'https://kodetocareer.com',
@@ -70,7 +86,7 @@ export default function RootLayout({
         <BackgroundOrbs />
         <GoogleAnalytics />
         <Navbar />
-        <main className="flex-1 pt-20 relative z-10" suppressHydrationWarning>{children}</main>
+        <main className="flex-1 pt-20 pb-20 md:pb-0 relative z-10" suppressHydrationWarning>{children}</main>
         <Footer />
         <ClientWidgets />
       </body>

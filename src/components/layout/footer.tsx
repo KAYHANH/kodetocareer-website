@@ -86,8 +86,8 @@ const RESOURCES = [
   { label: "Verify Certificate", href: "/verify/KTC-MERN-2026-1001" },
   { label: "Admin Certificate Portal", href: "/admin/certificates" },
   { label: "Free AI Career Tools", href: "/free-tools" },
-  { label: "Hackathons", href: "/events" },
-  { label: "Career Roadmaps", href: "/career-roadmaps" },
+  { label: "AI Resume Grader", href: "/free-tools/resume-grader" },
+  { label: "AI Mock Interview", href: "/free-tools/mock-interview" },
   { label: "Placements Support", href: "https://devsunite.com/jobs" },
   { label: "SQL Cheat Sheet", href: "/courses" },
 ] as const;
@@ -205,8 +205,9 @@ export default function Footer() {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>
-                  Sector 15,<br />
-                  Noida, UP, India
+                  A-48 Basement, Sector 2,<br />
+                  Near Sector 15 Metro Station,<br />
+                  Noida, UP 201301, India
                 </span>
               </div>
 
@@ -223,7 +224,7 @@ export default function Footer() {
 
             {/* Campus Map Mini Placeholder */}
             <a 
-              href="https://maps.google.com/?q=Sector+15+Noida"
+              href="https://maps.google.com/?q=A-48+Basement+Sector+2+Noida+Near+Sector+15+Metro"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full h-24 rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden relative flex items-center justify-center shadow-inner group cursor-pointer hover:border-primary/20 transition-colors"
@@ -231,7 +232,7 @@ export default function Footer() {
               <div className="absolute inset-0 bg-grid opacity-30" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-100 to-transparent" />
               <span className="relative z-10 text-[9px] font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 group-hover:text-primary transition-colors">
-                <Map className="w-3.5 h-3.5" /> Sector 15 Noida Map View
+                <Map className="w-3.5 h-3.5" /> Sector 2 Noida Campus Map View
               </span>
             </a>
           </div>

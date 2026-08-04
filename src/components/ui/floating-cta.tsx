@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MessageSquare, Phone, X, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { openEnrollmentModal } from "@/lib/events";
 
 export default function FloatingCta() {
   const [isOpen, setIsOpen] = useState(false);
@@ -160,12 +161,12 @@ export default function FloatingCta() {
         </a>
 
         {/* Mobile Enroll Primary Button */}
-        <Link
-          href="/courses"
-          className="flex-1 h-11 bg-primary text-white font-extrabold text-xs rounded-xl shadow-md flex items-center justify-center hover:bg-blue-700 outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        <button
+          onClick={() => openEnrollmentModal()}
+          className="flex-1 h-11 bg-primary text-white font-extrabold text-xs rounded-xl shadow-md flex items-center justify-center hover:bg-blue-700 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
         >
           Start Your Career
-        </Link>
+        </button>
       </div>
     </>
   );

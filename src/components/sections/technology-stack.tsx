@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Layout, Server, Database, Brain, Sparkles, Terminal, Code2 } from "lucide-react";
+import { Layout, Server, Database, Brain } from "lucide-react";
 
 interface TechTool {
   name: string;

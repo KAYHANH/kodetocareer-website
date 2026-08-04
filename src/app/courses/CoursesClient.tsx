@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { openEnrollmentModal } from "@/lib/events";
 import {
   Search, BookOpen, Clock, Award, Shield, CheckCircle,
   ArrowRight, Sparkles, Star, ChevronDown, CheckCircle2,
@@ -692,12 +693,12 @@ export default function CoursesClient() {
                       >
                         Curriculum
                       </Link>
-                      <Link
-                        href={`/courses/${c.slug}`}
-                        className="inline-flex h-10 items-center justify-center bg-primary text-white px-4 rounded-xl text-xs font-bold shadow-md hover:bg-blue-700 hover:shadow-lg transition-all focus-visible:ring-2 focus-visible:ring-primary outline-none"
+                      <button
+                        onClick={() => openEnrollmentModal(c.title)}
+                        className="inline-flex h-10 items-center justify-center bg-primary text-white px-4 rounded-xl text-xs font-bold shadow-md hover:bg-blue-700 hover:shadow-lg transition-all focus-visible:ring-2 focus-visible:ring-primary outline-none cursor-pointer"
                       >
                         Enroll Now
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>

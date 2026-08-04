@@ -17,23 +17,51 @@ const FAQ = dynamic(() => import('@/components/sections/faq'));
 const Newsletter = dynamic(() => import('@/components/sections/newsletter'));
 
 export const metadata = {
-  title: 'KodeToCareer | AI, MERN Stack & Data Science Courses with Placement Assistance',
-  description: 'Master AI, MERN Stack, Java, Cloud DevOps, and Data Science with live cohorts, guaranteed internships, and 100% placement support in India. Join online or offline.',
+  title: 'AI-Powered Software Training Institute | Full Stack, Data Science & Placement | KodeToCareer',
+  description: 'Master Full Stack Development, Data Science, AI, and Cloud DevOps through live industry projects. Join KodeToCareer for placement-focused software training in India.',
 };
 
-
-
 export default function Home() {
-  const orgSchema = {
+  const eduOrgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
     name: 'KodeToCareer',
     url: 'https://kodetocareer.com',
     logo: 'https://kodetocareer.com/main-logo.png',
+    description: 'Premier AI-powered software training institute specializing in Full Stack Web Development, Data Science, AI Engineering, and Cloud DevOps with 100% placement support.',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'A-48 Basement, Sector 2, Near Sector 15 Metro Station',
+      addressLocality: 'Noida',
+      addressRegion: 'Uttar Pradesh',
+      postalCode: '201301',
+      addressCountry: 'IN'
+    },
     sameAs: [
       'https://www.linkedin.com/company/kodetocareer',
       'https://www.instagram.com/kodetocareer',
       'https://www.youtube.com/@KodeToCareer',
       'https://www.facebook.com/kodetocareer'
-    ]
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '1240',
+      bestRating: '5',
+      worstRating: '1'
+    }
+  };
+
+  const founderSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Md Arbaaz',
+    jobTitle: 'Founder & Lead Tech Instructor',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'KodeToCareer'
+    },
+    url: 'https://kodetocareer.com/about'
   };
 
   const websiteSchema = {
@@ -52,7 +80,7 @@ export default function Home() {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'Do you offer direct placements?',
+        name: 'Do you offer direct placements for software development courses?',
         acceptedAnswer: {
           '@type': 'Answer',
           text: 'Yes, we coordinate directly with hiring managers across our 100+ partner network to dispatch audited portfolios and schedule mock interviews.'
@@ -60,18 +88,18 @@ export default function Home() {
       },
       {
         '@type': 'Question',
-        name: 'How long are the programs?',
+        name: 'How long are the software engineering and AI training programs?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Programs range from 3 to 6 months depending on the specialization. Each includes training, projects, internship, and placement preparation.'
+          text: 'Programs range from 3 to 6 months depending on the specialization. Each includes live training, projects, internship, and placement preparation.'
         }
       },
       {
         '@type': 'Question',
-        name: 'Are the certificates recognized by industry?',
+        name: 'Are the KodeToCareer certificates recognized by IT companies?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes, our certificates are recognized by leading tech companies and can be verified online. They add significant value to your resume.'
+          text: 'Yes, our certificates are recognized by leading tech companies, accredited under ISO 9001:2015 standards, and can be verified online instantly.'
         }
       }
     ]
@@ -79,7 +107,8 @@ export default function Home() {
 
   return (
     <>
-      <SchemaMarkup type="Organization" data={orgSchema} />
+      <SchemaMarkup type="EducationalOrganization" data={eduOrgSchema} />
+      <SchemaMarkup type="Person" data={founderSchema} />
       <SchemaMarkup type="WebSite" data={websiteSchema} />
       <SchemaMarkup type="FAQPage" data={faqSchema} />
       <Hero />
