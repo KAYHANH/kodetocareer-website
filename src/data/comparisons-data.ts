@@ -165,5 +165,34 @@ export const COMPARISONS_DATA: Record<string, ComparisonData> = {
     courseAName: 'Graphic Design + UI/UX Product Design Systems',
     courseBSlug: 'videography-video-editing',
     courseBName: 'Graphic Design + Videography Course'
+  },
+  'coding-ninjas-vs-kodetocareer': {
+    title: 'Coding Ninjas vs KodeToCareer',
+    slug: 'coding-ninjas-vs-kodetocareer',
+    tagline: 'Compare course structures, live mentorship, batch sizes, and placement support between Coding Ninjas and KodeToCareer.',
+    introduction: 'What is the difference between Coding Ninjas and KodeToCareer? Coding Ninjas primarily offers self-paced video modules with pre-recorded video lectures and automated coding problem sets. KodeToCareer delivers 100% live instructor-led cohorts, small batch sizes (max 25 students), 1-on-1 career counseling, guaranteed paid internships, and direct recruiter referrals.',
+    table: [
+      { feature: 'Class Format', itemA: 'Self-Paced Recorded Videos', itemB: '100% Live Interactive Cohorts' },
+      { feature: 'Batch Size', itemA: 'Large Uncapped Batches (100+)', itemB: 'Small Focused Batches (Max 25)' },
+      { feature: 'Mentorship', itemA: 'Doubt Support TAs via Chat', itemB: '1-on-1 Live Senior Developer Mentors' },
+      { feature: 'Practical Internships', itemA: 'Pre-recorded Projects', itemB: 'Guaranteed Live Industry Internships' },
+      { feature: 'Fee Structure', itemA: 'High Upfront / Expensive ISA', itemB: 'Affordable Upfront & Transparent Pricing' }
+    ],
+    chooseA: [
+      'You prefer learning independently through pre-recorded video modules at your own pace.',
+      'You want a platform focused primarily on solving DSA problem sets.',
+      'You do not require direct live instructor interaction during class hours.'
+    ],
+    chooseB: [
+      'You learn best in live interactive classes with instant instructor doubt resolution.',
+      'You want small batch sizes where your mentor knows your name and progress.',
+      'You want guaranteed live industry internships and direct placement referrals in Noida / India.'
+    ],
+    salaryCompare: 'KodeToCareer graduates secure competitive salary packages (₹4.5 - 18 LPA) by building real production-grade AI and full-stack applications with verified internship credentials.',
+    demandCompare: 'While traditional bootcamps focus heavily on competitive coding algorithms, top hiring managers increasingly demand candidates with real production projects, AI API integrations, and live internship experience.',
+    courseASlug: 'mern-stack-development',
+    courseAName: 'MERN Stack Development + AI Integration',
+    courseBSlug: 'data-science-machine-learning',
+    courseBName: 'Data Science & Machine Learning Core'
   }
 };
