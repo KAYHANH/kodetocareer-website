@@ -28,13 +28,13 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kodetocareer.com'),
-  title: "AI-Powered Software Training Institute | Full Stack, Data Science & Placement | KodeToCareer",
+  title: "KodeToCareer | Live Coding & AI Placement Institute",
   description:
-    "Master Full Stack Development, Data Science, AI, and DevOps through live industry projects. Join KodeToCareer for placement-focused training with 100% career support.",
+    "Master Full Stack, Data Science, AI & DevOps with 100% live cohorts, guaranteed paid internships, and dedicated placement support in Noida & online.",
   openGraph: {
-    title: "AI-Powered Software Training Institute | Full Stack, Data Science & Placement | KodeToCareer",
+    title: "KodeToCareer | Live Coding & AI Placement Institute",
     description:
-      "Master Full Stack Development, Data Science, AI, and DevOps through live industry projects. Join KodeToCareer for placement-focused training with 100% career support.",
+      "Master Full Stack, Data Science, AI & DevOps with 100% live cohorts, guaranteed paid internships, and dedicated placement support in Noida & online.",
     url: 'https://kodetocareer.com',
     siteName: 'KodeToCareer',
     images: [
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "AI-Powered Software Training Institute | KodeToCareer",
-    description: "Master Full Stack Development, Data Science, AI, and DevOps through live industry projects with 100% placement support.",
+    title: "KodeToCareer | Live Coding & AI Placement Institute",
+    description: "Master Full Stack, Data Science, AI & DevOps with 100% live cohorts, guaranteed paid internships, and dedicated placement support.",
     images: ['/main-logo.png'],
   },
   robots: {
