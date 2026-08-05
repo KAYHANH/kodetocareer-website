@@ -79,15 +79,25 @@ filesToSanitize.forEach(filePath => {
 
 console.log('✅ cpanel-deploy folder created and sanitized for Linux!');
 
-// 3. Zip for cPanel upload using Compress-Archive
+// 3. Zip for cPanel upload using native tar
 try {
   const zipPath = path.join(__dirname, '../cpanel-deploy.zip');
   console.log('🤐 Step 3: Compressing into cpanel-deploy.zip...');
-  const psCmd = `powershell -Command "Compress-Archive -Path '${distDir}\\*' -DestinationPath '${zipPath}' -Force"`;
-  execSync(psCmd, { stdio: 'inherit' });
-  console.log('\n🎉 SUCCESS! Full 40MB Zip created at: cpanel-deploy.zip');
-  console.log('👉 Upload cpanel-deploy.zip to your cPanel File Manager & Extract!');
+  if (fs.existsSync(zipPath)) {
+    fs.unlinkSync(zipPath);
+  }
+  execSync(`tar -a -cf "${zipPath}" -C "${distDir}" .`, { stdio: 'inherit' });
+  const desktopDir = path.join(process.env.USERPROFILE || 'C:\\Users\\Asus', 'Desktop');
+  const desktopZip = path.join(desktopDir, 'kodetocareer-deploy.zip');
+  if (fs.existsSync(desktopZip)) {
+    fs.unlinkSync(desktopZip);
+  }
+  fs.copyFileSync(zipPath, desktopZip);
+  const stats = fs.statSync(desktopZip);
+  const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);
+  console.log(`\n🎉 SUCCESS! Deploy Zip created (${sizeMB} MB) at: ${desktopZip}`);
+  console.log('👉 Upload kodetocareer-deploy.zip to your cPanel File Manager & Extract!');
 } catch (err) {
-  console.error('Packaging error:', err);
-  console.log('Folder cpanel-deploy ready for manual zip upload.');
+  console.error('Packaging error:', err.message);
+  console.log('Folder cpanel-deploy ready for manual upload.');
 }
