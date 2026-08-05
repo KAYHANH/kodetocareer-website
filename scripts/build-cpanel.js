@@ -81,12 +81,12 @@ console.log('✅ cpanel-deploy folder created and sanitized for Linux!');
 
 // 3. Zip for cPanel upload using Compress-Archive
 try {
-  const zipPath = path.join(__dirname, '../kodetocareer-deploy-v1.zip');
-  console.log('🤐 Step 3: Compressing into kodetocareer-deploy-v1.zip...');
+  const zipPath = path.join(__dirname, '../kodetocareer_final.zip');
+  console.log('🤐 Step 3: Compressing into kodetocareer_final.zip...');
   const psCmd = `powershell -Command "Compress-Archive -Path '${distDir}\\*' -DestinationPath '${zipPath}' -Force"`;
   execSync(psCmd, { stdio: 'inherit' });
-  console.log('\n🎉 SUCCESS! Full 37MB Zip created at: kodetocareer-deploy-v1.zip');
-  console.log('👉 Upload kodetocareer-deploy-v1.zip to your cPanel File Manager & Extract!');
+  console.log('\n🎉 SUCCESS! Full 37MB Zip created at: kodetocareer_final.zip');
+  console.log('👉 Upload kodetocareer_final.zip to your cPanel File Manager & Extract!');
 } catch (err) {
   console.error('Packaging error:', err);
   console.log('Folder cpanel-deploy ready for manual zip upload.');
