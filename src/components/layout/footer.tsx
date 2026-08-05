@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Send, MapPin, Phone, Mail, Award, ShieldCheck, Map } from "lucide-react";
