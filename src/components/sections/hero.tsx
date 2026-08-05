@@ -202,10 +202,10 @@ export default function Hero() {
       <div className="absolute inset-0 bg-grid opacity-50" aria-hidden="true" suppressHydrationWarning />
 
       {/* ── Content ── */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 w-full">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-8">
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 w-full" suppressHydrationWarning>
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-8" suppressHydrationWarning>
           {/* ── Left column ── */}
-          <div className="w-full lg:w-[58%] flex flex-col items-center lg:items-start text-center lg:text-left">
+          <div className="w-full lg:w-[58%] flex flex-col items-center lg:items-start text-center lg:text-left" suppressHydrationWarning>
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -225,8 +225,8 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
             >
-              <span className="block text-slate-900">AI-Powered</span>
-              <span className="block gradient-text">Software Engineering</span>
+              <span className="block text-slate-900">AI-Powered </span>
+              <span className="block gradient-text">Software Engineering </span>
               <span className="block text-slate-900">Bootcamp</span>
             </motion.h1>
 
@@ -317,7 +317,7 @@ export default function Hero() {
           </div>
 
           {/* ── Right column (circular tech stack + floating cards) ── */}
-          <div className="w-full lg:w-[42%] flex justify-center items-center relative min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] overflow-visible">
+          <div className="w-full lg:w-[42%] flex justify-center items-center relative min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] overflow-visible" suppressHydrationWarning>
             <TechStackCircle />
             
 

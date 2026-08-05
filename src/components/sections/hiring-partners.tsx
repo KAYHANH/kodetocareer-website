@@ -2,7 +2,30 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { SVG_ICONS } from "@/data/svgList";
+import Link from "next/link";
+import { ArrowRight, Sparkles } from "lucide-react";
+
+// Top 18 recognizable industry ecosystems for homepage (reduces 848 DOM nodes to 36 for 60fps mobile speed)
+const FEATURED_TECH = [
+  { filename: "React.svg", name: "React" },
+  { filename: "NextJS.svg", name: "Next.js" },
+  { filename: "NodeJS.svg", name: "Node.js" },
+  { filename: "Python.svg", name: "Python" },
+  { filename: "Java.svg", name: "Java" },
+  { filename: "AWS.svg", name: "AWS Cloud" },
+  { filename: "Docker.svg", name: "Docker" },
+  { filename: "PostgresSQL.svg", name: "PostgreSQL" },
+  { filename: "MongoDB.svg", name: "MongoDB" },
+  { filename: "TensorFlow.svg", name: "TensorFlow" },
+  { filename: "Tailwind-CSS.svg", name: "Tailwind CSS" },
+  { filename: "TypeScript.svg", name: "TypeScript" },
+  { filename: "Git.svg", name: "Git" },
+  { filename: "MySQL.svg", name: "MySQL" },
+  { filename: "GraphQL.svg", name: "GraphQL" },
+  { filename: "PyTorch.svg", name: "PyTorch" },
+  { filename: "Kubernetes.svg", name: "Kubernetes" },
+  { filename: "Figma.svg", name: "Figma" },
+];
 
 export default function HiringPartners() {
   const [mounted, setMounted] = useState(false);
@@ -14,141 +37,138 @@ export default function HiringPartners() {
 
   if (!mounted) {
     return (
-      <section className="py-24 bg-[#EFF6FF] border-y border-blue-100 overflow-hidden relative min-h-[600px]">
+      <section className="py-20 bg-[#EFF6FF] border-y border-blue-100 overflow-hidden relative min-h-[400px]">
         <div className="max-w-[1440px] mx-auto px-6 text-center">
-
-          <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 mb-6">
-            Master 400+ Technologies
+          <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 mb-4">
+            Master High-Demand Tech Stacks
           </h2>
         </div>
       </section>
     );
   }
 
-  // Split all 424+ icons into 5 rows
-  const rowCount = 5;
-  const itemsPerRow = Math.ceil(SVG_ICONS.length / rowCount);
-  
-  const rows = Array.from({ length: rowCount }, (_, rowIndex) => {
-    const start = rowIndex * itemsPerRow;
-    const end = start + itemsPerRow;
-    const items = SVG_ICONS.slice(start, end);
-    // Duplicate the row to ensure seamless infinite scroll
-    return [...items, ...items];
-  });
-
-  // Speeds for each row (s slower makes it feel premium)
-  const rowSpeeds = [80, 100, 90, 110, 95];
-  const rowDirections = ["left", "right", "left", "right", "left"];
+  // Split into 2 rows of 9 items each
+  const row1 = FEATURED_TECH.slice(0, 9);
+  const row2 = FEATURED_TECH.slice(9, 18);
 
   return (
-    <section className="py-24 bg-[#EFF6FF] border-y border-blue-100 overflow-hidden relative" aria-label="Hiring Partners & Technologies">
+    <section className="py-20 bg-[#EFF6FF] border-y border-blue-100 overflow-hidden relative" aria-label="Hiring Partners & Core Tech Stacks">
       {/* Grid Overlay */}
       <div className="absolute inset-0 bg-grid opacity-35 pointer-events-none" />
       
       {/* Decorative blurred background */}
-      <div className="absolute top-0 left-1/4 w-[400px] h-[400px] rounded-full bg-blue-300/10 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-indigo-300/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[350px] h-[350px] rounded-full bg-blue-300/10 blur-[90px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] rounded-full bg-indigo-300/10 blur-[90px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-6 text-center relative z-10 mb-16">
-
-        <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 mb-4">
-          Master 400+ Technologies & Tools
+      <div className="max-w-[1440px] mx-auto px-6 text-center relative z-10 mb-12">
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider mb-3">
+          <Sparkles className="w-3.5 h-3.5" />
+          Industry Core Ecosystems
+        </span>
+        <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 mb-4 tracking-tight">
+          Master Industry-Standard Tech Stacks
         </h2>
-        <p className="text-text-secondary max-w-2xl mx-auto text-sm md:text-base font-medium">
-          Our comprehensive curriculum covers the entire modern development ecosystem. Learn, build, and deploy with the tools used by world-class engineering teams.
+        <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base font-medium leading-relaxed">
+          Learn, build, and deploy production projects using the exact toolchains used by tier-1 engineering teams and high-growth tech startups.
         </p>
       </div>
 
       {/* Mask overlays for fade-out edges */}
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#EFF6FF] via-[#EFF6FF]/70 to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#EFF6FF] via-[#EFF6FF]/70 to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#EFF6FF] via-[#EFF6FF]/80 to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#EFF6FF] via-[#EFF6FF]/80 to-transparent z-20 pointer-events-none" />
 
-      {/* Marquee Rows Container */}
-      <div className="flex flex-col gap-6 w-full relative z-10 overflow-visible">
-        {rows.map((rowItems, rowIndex) => {
-          const speed = rowSpeeds[rowIndex];
-          const direction = rowDirections[rowIndex];
-          const animName = `marquee-${rowIndex}`;
+      {/* Hardware-Accelerated Marquee Rows Container */}
+      <div className="flex flex-col gap-5 w-full relative z-10 overflow-hidden">
+        {/* Inline CSS Keyframe definitions for GPU hardware acceleration */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes marquee-left-gpu {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+          }
+          @keyframes marquee-right-gpu {
+            0% { transform: translate3d(-50%, 0, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+          }
+          .marquee-left-track {
+            animation: marquee-left-gpu 35s linear infinite;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+          }
+          .marquee-right-track {
+            animation: marquee-right-gpu 40s linear infinite;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+          }
+          .marquee-container:hover .marquee-left-track,
+          .marquee-container:hover .marquee-right-track {
+            animation-play-state: paused;
+          }
+        `}} />
 
-          return (
-            <div 
-              key={rowIndex} 
-              className={`overflow-hidden select-none w-full relative ${rowIndex >= 2 ? "hidden md:flex" : "flex"}`}
-            >
-              {/* Dynamic keyframe generation */}
-              <style dangerouslySetInnerHTML={{__html: `
-                @keyframes ${animName} {
-                  0% { transform: translate3d(${direction === "left" ? "0,0,0" : "-50%,0,0"}); }
-                  100% { transform: translate3d(${direction === "left" ? "-50%,0,0" : "0,0,0"}); }
-                }
-                .${animName}-class {
-                  animation: ${animName} ${speed}s linear infinite;
-                  will-change: transform;
-                  transform: translateZ(0);
-                  backface-visibility: hidden;
-                }
-              `}} />
-
-              <div className={`flex gap-4 md:gap-6 py-2 whitespace-nowrap min-w-full items-center ${animName}-class`}>
-                {/* Original items - visible to crawlers */}
-                {rowItems.slice(0, rowItems.length / 2).map((filename, idx) => {
-                  let displayName = filename.replace(".svg", "").replace(/-/g, " ");
-                  if (displayName.toLowerCase() === "dotnet") displayName = ".NET";
-                  if (displayName.toLowerCase() === "dotnet core") displayName = ".NET Core";
-                  return (
-                    <div
-                      key={`${filename}-${idx}`}
-                      className="inline-flex items-center gap-2.5 px-4.5 py-2.5 rounded-full bg-white border border-blue-50/80 shadow-[0_4px_12px_rgba(37,99,235,0.02)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.06)] hover:border-primary/20 hover:scale-105 hover:z-30 transition-all duration-300 cursor-pointer group"
-                    >
-                      <span className="w-5.5 h-5.5 flex items-center justify-center flex-shrink-0 relative">
-                        <Image
-                          src={`/svg/${filename}`}
-                          width={22}
-                          height={22}
-                          alt={displayName}
-                          className="object-contain w-full h-full transition-transform duration-300 group-hover:rotate-6"
-                          unoptimized
-                        />
-                      </span>
-                      <span className="text-xs font-semibold text-slate-700 group-hover:text-primary transition-colors">
-                        {displayName}
-                      </span>
-                    </div>
-                  );
-                })}
-                {/* Cloned items for seamless loop - hidden from crawlers & screen readers */}
-                <span aria-hidden="true" className="contents">
-                  {rowItems.slice(rowItems.length / 2).map((filename, idx) => {
-                    let displayName = filename.replace(".svg", "").replace(/-/g, " ");
-                    if (displayName.toLowerCase() === "dotnet") displayName = ".NET";
-                    if (displayName.toLowerCase() === "dotnet core") displayName = ".NET Core";
-                    return (
-                      <div
-                        key={`clone-${filename}-${idx}`}
-                        className="inline-flex items-center gap-2.5 px-4.5 py-2.5 rounded-full bg-white border border-blue-50/80 shadow-[0_4px_12px_rgba(37,99,235,0.02)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.06)] hover:border-primary/20 hover:scale-105 hover:z-30 transition-all duration-300 cursor-pointer group"
-                      >
-                        <span className="w-5.5 h-5.5 flex items-center justify-center flex-shrink-0 relative">
-                          <Image
-                            src={`/svg/${filename}`}
-                            width={22}
-                            height={22}
-                            alt=""
-                            className="object-contain w-full h-full transition-transform duration-300 group-hover:rotate-6"
-                            unoptimized
-                          />
-                        </span>
-                        <span className="text-xs font-semibold text-slate-700 group-hover:text-primary transition-colors">
-                          {displayName}
-                        </span>
-                      </div>
-                    );
-                  })}
+        {/* Row 1: Moving Left */}
+        <div className="overflow-hidden select-none w-full relative marquee-container">
+          <div className="flex gap-4 md:gap-6 py-1 whitespace-nowrap min-w-full items-center marquee-left-track">
+            {[...row1, ...row1].map((item, idx) => (
+              <div
+                key={`r1-${item.filename}-${idx}`}
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-blue-100/80 shadow-sm hover:border-primary/30 hover:scale-105 transition-all duration-200 cursor-pointer group shrink-0"
+              >
+                <span className="w-6 h-6 flex items-center justify-center shrink-0 relative">
+                  <Image
+                    src={`/svg/${item.filename}`}
+                    width={24}
+                    height={24}
+                    alt={item.name}
+                    className="object-contain w-full h-full transition-transform duration-200 group-hover:rotate-6"
+                    unoptimized
+                  />
+                </span>
+                <span className="text-xs font-bold text-slate-800 group-hover:text-primary transition-colors">
+                  {item.name}
                 </span>
               </div>
-            </div>
-          );
-        })}
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2: Moving Right */}
+        <div className="overflow-hidden select-none w-full relative marquee-container">
+          <div className="flex gap-4 md:gap-6 py-1 whitespace-nowrap min-w-full items-center marquee-right-track">
+            {[...row2, ...row2].map((item, idx) => (
+              <div
+                key={`r2-${item.filename}-${idx}`}
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-blue-100/80 shadow-sm hover:border-primary/30 hover:scale-105 transition-all duration-200 cursor-pointer group shrink-0"
+              >
+                <span className="w-6 h-6 flex items-center justify-center shrink-0 relative">
+                  <Image
+                    src={`/svg/${item.filename}`}
+                    width={24}
+                    height={24}
+                    alt={item.name}
+                    className="object-contain w-full h-full transition-transform duration-200 group-hover:rotate-6"
+                    unoptimized
+                  />
+                </span>
+                <span className="text-xs font-bold text-slate-800 group-hover:text-primary transition-colors">
+                  {item.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Directory Link CTA */}
+      <div className="mt-10 text-center relative z-10">
+        <Link
+          href="/courses"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-primary hover:border-primary/40 shadow-sm transition-all cursor-pointer"
+        >
+          Explore All Course Curriculum & Tech Directories
+          <ArrowRight className="w-4 h-4 text-primary" />
+        </Link>
       </div>
     </section>
   );

@@ -83,13 +83,12 @@ const PROGRAMS = [
 
 const RESOURCES = [
   { label: "Blog", href: "/blog" },
-  { label: "Verify Certificate", href: "/verify/KTC-MERN-2026-1001" },
-  { label: "Admin Certificate Portal", href: "/admin/certificates" },
+  { label: "Verify Certificate", href: "/verify" },
   { label: "Free AI Career Tools", href: "/free-tools" },
   { label: "AI Resume Grader", href: "/free-tools/resume-grader" },
   { label: "AI Mock Interview", href: "/free-tools/mock-interview" },
-  { label: "Placements Support", href: "https://devsunite.com/jobs" },
-  { label: "SQL Cheat Sheet", href: "/courses" },
+  { label: "Placements Support", href: "/placements" },
+  { label: "SQL Cheat Sheet", href: "/learn/sql" },
 ] as const;
 
 const COMPANY = [

@@ -159,6 +159,23 @@ export default function Faq() {
       className="bg-gradient-to-b from-[#F8FAFC] to-[#EFF6FF] py-24 border-b border-slate-100"
       aria-labelledby="faq-heading"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": FAQ_ITEMS.map((item) => ({
+              "@type": "Question",
+              "name": item.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer,
+              },
+            })),
+          }),
+        }}
+      />
       <div className="mx-auto max-w-[800px] px-6">
         {/* Section header */}
         <motion.div

@@ -27,7 +27,7 @@ const CATEGORIES: TechCategory[] = [
     colorClass: "from-blue-500/10 to-cyan-500/10 text-blue-600 border-blue-100",
     tools: [
       { name: "React", icon: "/svg/React.svg" },
-      { name: "Next.js", icon: "/svg/Next.js.svg" },
+      { name: "Next.js", icon: "/svg/NextJS.svg" },
       { name: "TypeScript", icon: "/svg/TypeScript.svg" },
       { name: "Tailwind CSS", icon: "/svg/Tailwind-CSS.svg" },
       { name: "HTML5", icon: "/svg/HTML5.svg" },
@@ -40,7 +40,7 @@ const CATEGORIES: TechCategory[] = [
     icon: Server,
     colorClass: "from-violet-500/10 to-purple-500/10 text-violet-600 border-violet-100",
     tools: [
-      { name: "Node.js", icon: "/svg/Node.js.svg" },
+      { name: "Node.js", icon: "/svg/NodeJS.svg" },
       { name: "Express.js", icon: "/svg/Express.svg" },
       { name: "Java", icon: "/svg/Java.svg" },
       { name: "Python", icon: "/svg/Python.svg" },

@@ -78,7 +78,7 @@ const COURSES: Course[] = [
     badge: "Best Seller",
     liveClasses: "Daily Live",
     mentor: "Google & Meta Alumni",
-    tools: ["React.svg", "Next.js.svg", "Node.js.svg", "Express.svg", "MongoDB.svg", "Git.svg"],
+    tools: ["React.svg", "NextJS.svg", "NodeJS.svg", "Express.svg", "MongoDB.svg", "Git.svg"],
     image: "from-blue-600 to-indigo-700",
     bannerImage: "/banners/mern.webp",
     slug: "mern-stack-development"

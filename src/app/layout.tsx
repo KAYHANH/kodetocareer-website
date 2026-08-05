@@ -80,6 +80,47 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" href="/main-logo.png" as="image" type="image/png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "EducationalOrganization",
+                  "@id": "https://kodetocareer.com/#organization",
+                  "name": "KodeToCareer",
+                  "url": "https://kodetocareer.com",
+                  "logo": "https://kodetocareer.com/main-logo.png",
+                  "description": "AI-Powered Software Engineering & Placement Institute offering 100% live cohorts, guaranteed internships, and dedicated career placement support.",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "A-48, Basement, Sector 2",
+                    "addressLocality": "Noida",
+                    "addressRegion": "Uttar Pradesh",
+                    "postalCode": "201301",
+                    "addressCountry": "IN"
+                  },
+                  "telephone": "+919667975616",
+                  "sameAs": [
+                    "https://www.linkedin.com/company/kode2career/",
+                    "https://www.instagram.com/kodetocareer",
+                    "https://www.youtube.com/@KodeToCareer"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://kodetocareer.com/#website",
+                  "url": "https://kodetocareer.com",
+                  "name": "KodeToCareer",
+                  "publisher": {
+                    "@id": "https://kodetocareer.com/#organization"
+                  }
+                }
+              ]
+            })
+          }}
+        />
       </head>
 
       <body className="flex min-h-full flex-col bg-background text-text-primary font-body relative" suppressHydrationWarning>

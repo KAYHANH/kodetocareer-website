@@ -786,7 +786,7 @@ export default function LiveProjects() {
                     <span className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
                   </div>
                   <div className="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-1 text-[10px] text-slate-600 font-mono flex items-center justify-between truncate">
-                    <span>https://localhost:3000/student-apps/{PROJECTS[activeIdx].title.toLowerCase().replace(/ /g, "-")}</span>
+                    <span>https://kodetocareer.com/projects/{PROJECTS[activeIdx].title.toLowerCase().replace(/ /g, "-")}</span>
                     <Layout className="w-3 h-3 text-slate-300" />
                   </div>
                 </div>

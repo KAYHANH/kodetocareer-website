@@ -28,7 +28,7 @@ const TECH_STACK: TechItem[] = [
   },
   {
     name: "Next.js",
-    icon: "/svg/Next.js.svg",
+    icon: "/svg/NextJS.svg",
     duration: "6 Months",
     projects: 15,
     roles: "Full Stack Engineer",
@@ -37,7 +37,7 @@ const TECH_STACK: TechItem[] = [
   },
   {
     name: "Node.js",
-    icon: "/svg/Node.js.svg",
+    icon: "/svg/NodeJS.svg",
     duration: "6 Months",
     projects: 15,
     roles: "Backend Developer",
@@ -315,20 +315,22 @@ export default function TechStackCircle() {
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
             <style dangerouslySetInnerHTML={{__html: `
               @keyframes tech-orbit {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
+                0% { transform: rotate3d(0, 0, 1, 0deg); }
+                100% { transform: rotate3d(0, 0, 1, 360deg); }
               }
               @keyframes tech-counter-orbit {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(-360deg); }
+                0% { transform: rotate3d(0, 0, 1, 0deg); }
+                100% { transform: rotate3d(0, 0, 1, -360deg); }
               }
               .tech-orbit-active {
                 animation: tech-orbit 45s linear infinite;
                 will-change: transform;
+                transform: translateZ(0);
               }
               .tech-counter-active {
                 animation: tech-counter-orbit 45s linear infinite;
                 will-change: transform;
+                transform: translateZ(0);
               }
               .tech-paused, .tech-paused .tech-counter-active {
                 animation-play-state: paused !important;
@@ -418,9 +420,9 @@ export default function TechStackCircle() {
                   className="counter-rotate-icon tech-counter-active relative flex items-center justify-center"
                 >
                   <div
-                    className={`group flex items-center justify-center w-22 h-22 rounded-full border bg-white/95 shadow-md transition-all duration-300 cursor-pointer ${
+                    className={`group flex items-center justify-center w-[88px] h-[88px] rounded-full border bg-white/95 shadow-md transition-all duration-300 cursor-pointer ${
                       isCurrentHovered
-                        ? "scale-115 border-primary shadow-lg shadow-primary/20 bg-white"
+                        ? "scale-[1.15] border-primary shadow-lg shadow-primary/20 bg-white"
                         : "border-black/[0.08] hover:border-primary/50"
                     }`}
                   >
