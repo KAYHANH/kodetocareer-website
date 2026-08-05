@@ -31,6 +31,35 @@ export const metadata: Metadata = {
   title: "KodeToCareer | Live Coding & AI Placement Institute",
   description:
     "Master Full Stack, Data Science, AI & DevOps with 100% live cohorts, guaranteed paid internships, and dedicated placement support in Noida & online.",
+  applicationName: 'KodeToCareer',
+  authors: [{ name: 'KodeToCareer Team', url: 'https://kodetocareer.com' }],
+  generator: 'Next.js',
+  keywords: [
+    'MERN Stack Course Noida',
+    'Data Science Institute Noida',
+    'AI Coding Bootcamp',
+    'Full Stack Placement Support',
+    'Python Training Noida',
+    'Java Full Stack Course'
+  ],
+  referrer: 'origin-when-cross-origin',
+  creator: 'KodeToCareer Educational Institute',
+  publisher: 'KodeToCareer Educational Institute',
+  category: 'education',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: '/icon.png',
+    apple: '/main-logo.png',
+  },
+  appleWebApp: {
+    title: 'KodeToCareer',
+    statusBarStyle: 'default',
+    capable: true,
+  },
   openGraph: {
     title: "KodeToCareer | Live Coding & AI Placement Institute",
     description:
@@ -57,6 +86,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   alternates: {
     canonical: 'https://kodetocareer.com',
