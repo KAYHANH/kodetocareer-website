@@ -79,25 +79,37 @@ filesToSanitize.forEach(filePath => {
 
 console.log('✅ cpanel-deploy folder created and sanitized for Linux!');
 
-// 3. Zip for cPanel upload using native tar
+// 3. Zip for cPanel upload using standard .NET ZipFile
+const zipPath = path.join(__dirname, '../cpanel-deploy.zip');
+const desktopDir = path.join(process.env.USERPROFILE || 'C:\\Users\\Asus', 'Desktop');
+const desktopZip = path.join(desktopDir, 'kodetocareer-deploy.zip');
+
+console.log('🤐 Step 3: Compressing into standard cpanel-deploy.zip via .NET ZipFile...');
+
+if (fs.existsSync(zipPath)) {
+  try { fs.unlinkSync(zipPath); } catch (e) {}
+}
+if (fs.existsSync(desktopZip)) {
+  try { fs.unlinkSync(desktopZip); } catch (e) {}
+}
+
+const psScript = `
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::CreateFromDirectory('${distDir.replace(/\\/g, '\\\\')}', '${desktopZip.replace(/\\/g, '\\\\')}')
+Copy-Item -Path '${desktopZip.replace(/\\/g, '\\\\')}' -Destination '${zipPath.replace(/\\/g, '\\\\')}' -Force
+`;
+
+const tempPsFile = path.join(__dirname, 'zip-helper.ps1');
+fs.writeFileSync(tempPsFile, psScript, 'utf8');
+
 try {
-  const zipPath = path.join(__dirname, '../cpanel-deploy.zip');
-  console.log('🤐 Step 3: Compressing into cpanel-deploy.zip...');
-  if (fs.existsSync(zipPath)) {
-    fs.unlinkSync(zipPath);
-  }
-  execSync(`tar -a -cf "${zipPath}" -C "${distDir}" .`, { stdio: 'inherit' });
-  const desktopDir = path.join(process.env.USERPROFILE || 'C:\\Users\\Asus', 'Desktop');
-  const desktopZip = path.join(desktopDir, 'kodetocareer-deploy.zip');
-  if (fs.existsSync(desktopZip)) {
-    fs.unlinkSync(desktopZip);
-  }
-  fs.copyFileSync(zipPath, desktopZip);
+  execSync(`powershell -ExecutionPolicy Bypass -File "${tempPsFile}"`, { stdio: 'inherit' });
   const stats = fs.statSync(desktopZip);
   const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);
   console.log(`\n🎉 SUCCESS! Deploy Zip created (${sizeMB} MB) at: ${desktopZip}`);
   console.log('👉 Upload kodetocareer-deploy.zip to your cPanel File Manager & Extract!');
-} catch (err) {
-  console.error('Packaging error:', err.message);
-  console.log('Folder cpanel-deploy ready for manual upload.');
+} finally {
+  if (fs.existsSync(tempPsFile)) {
+    try { fs.unlinkSync(tempPsFile); } catch (e) {}
+  }
 }
