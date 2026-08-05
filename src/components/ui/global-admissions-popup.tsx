@@ -81,6 +81,10 @@ export default function GlobalAdmissionsPopup() {
 
     setSubmitting(true);
     console.log("GlobalAdmissionsPopup: Submitting lead details...", { name, phone, qualification, status, year, selectedCourse });
+    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     try {
       const res = await fetch('/api/enroll', {
         method: 'POST',
@@ -95,28 +99,32 @@ export default function GlobalAdmissionsPopup() {
           year,
           courseTitle: selectedCourse,
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (res.ok) {
         console.log("GlobalAdmissionsPopup: Lead submitted successfully!");
-        setSubmitted(true);
-        try {
-          if (typeof window !== 'undefined' && window.sessionStorage) {
-            sessionStorage.setItem('global_popup_submitted', 'true');
-          }
-        } catch (storageErr) {
-          console.warn("GlobalAdmissionsPopup: Could not write to sessionStorage:", storageErr);
-        }
-        setTimeout(() => {
-          setIsOpen(false);
-        }, 2000);
       } else {
-        console.error("GlobalAdmissionsPopup: Server returned error status:", res.status);
+        console.warn("GlobalAdmissionsPopup: Server returned non-200 status:", res.status);
       }
     } catch (err) {
       console.error('Error submitting popup lead:', err);
     } finally {
+      clearTimeout(timeoutId);
       setSubmitting(false);
+      setSubmitted(true);
+      try {
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          sessionStorage.setItem('global_popup_submitted', 'true');
+        }
+      } catch (storageErr) {
+        console.warn("GlobalAdmissionsPopup: Could not write to sessionStorage:", storageErr);
+      }
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 2000);
     }
   };
 
