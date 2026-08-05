@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
 import TrustStrip from '@/components/sections/trust-strip';
@@ -115,16 +116,17 @@ export default function Home() {
       <TrustStrip />
       <HiringPartners />
       <TechnologyStack />
-      <WhyChooseUs />
-      <FeaturedPrograms />
-      <LiveProjects />
-      <CareerRoadmap />
-      <FreeResources />
-      <Founder />
-      <LiveCounter />
-
-      <FAQ />
-      <Newsletter />
+      <Suspense fallback={<div className="h-40 bg-slate-50 animate-pulse" />}>
+        <WhyChooseUs />
+        <FeaturedPrograms />
+        <LiveProjects />
+        <CareerRoadmap />
+        <FreeResources />
+        <Founder />
+        <LiveCounter />
+        <FAQ />
+        <Newsletter />
+      </Suspense>
     </>
   );
 }
