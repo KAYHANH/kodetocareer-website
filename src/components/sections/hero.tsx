@@ -225,8 +225,8 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
             >
-              <span className="block text-slate-900">AI-Powered </span>
-              <span className="block gradient-text">Software Engineering </span>
+              <span className="block text-slate-900">AI-Powered{'\u00A0'}</span>
+              <span className="block gradient-text">Software Engineering{'\u00A0'}</span>
               <span className="block text-slate-900">Bootcamp</span>
             </motion.h1>
 
