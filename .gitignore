@@ -42,4 +42,5 @@ next-env.d.ts
 
 # cPanel build output
 /cpanel-deploy/
-cpanel-deploy.zip
+*.zip
+
