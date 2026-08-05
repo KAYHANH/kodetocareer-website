@@ -79,26 +79,21 @@ filesToSanitize.forEach(filePath => {
 
 console.log('✅ cpanel-deploy folder created and sanitized for Linux!');
 
-// 3. Zip for cPanel upload using native tar (handles Windows long paths cleanly)
+// 3. Zip for cPanel upload using native tar / Compress-Archive
 try {
-  const zipPath = path.join(__dirname, '../cpanel-deploy.zip');
+  const zipPath = path.join(__dirname, '../kodetocareer-cpanel-deploy.zip');
   if (fs.existsSync(zipPath)) {
     try {
       fs.unlinkSync(zipPath);
     } catch (e) {
-      console.warn('Existing zip locked, attempting overwrite:', e.message);
+      console.warn('Existing zip locked:', e.message);
     }
   }
-  console.log('🤐 Step 3: Compressing into cpanel-deploy.zip...');
-  try {
-    execSync(`tar -a -cf "${zipPath}" -C "${distDir}" .`, { stdio: 'inherit' });
-  } catch (tarErr) {
-    console.warn('Tar failed, falling back to Compress-Archive:', tarErr.message);
-    const psCmd = `powershell -Command "Compress-Archive -Path '${distDir}\\*' -DestinationPath '${zipPath}' -Force"`;
-    execSync(psCmd, { stdio: 'inherit' });
-  }
-  console.log('\n🎉 SUCCESS! Standard PKZIP cpanel-deploy.zip created in project root!');
-  console.log('👉 Upload cpanel-deploy.zip to your cPanel File Manager & Extract!');
+  console.log('🤐 Step 3: Compressing into kodetocareer-cpanel-deploy.zip...');
+  const psCmd = `powershell -Command "Compress-Archive -Path '${distDir}\\*' -DestinationPath '${zipPath}' -Force"`;
+  execSync(psCmd, { stdio: 'inherit' });
+  console.log('\n🎉 SUCCESS! Full 37MB Zip created at: kodetocareer-cpanel-deploy.zip');
+  console.log('👉 Upload kodetocareer-cpanel-deploy.zip to your cPanel File Manager & Extract!');
 } catch (err) {
   console.error('Packaging error:', err);
   console.log('Folder cpanel-deploy ready for manual zip upload.');
