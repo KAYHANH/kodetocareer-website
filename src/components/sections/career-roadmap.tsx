@@ -136,41 +136,18 @@ function TimelineStep({
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
       transition={{ delay: index * 0.12 }}
-      className="relative flex items-center"
+      className="relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-12"
     >
-      {/* ── Desktop layout ── */}
-      <div className="hidden w-full md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-12">
-        {/* Left content */}
-        <div className={isEven ? 'order-1' : 'order-1 flex justify-end'}>
-          {!isEven && <StepCard step={step} />}
-        </div>
-
-        {/* Center Number Dot */}
-        <div className="relative z-10 order-2 flex items-center justify-center">
-          <div className="h-10 w-10 rounded-full border-4 border-white bg-primary text-white font-heading font-extrabold text-sm flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:scale-110 transition-transform cursor-pointer">
-            {index + 1}
-          </div>
-        </div>
-
-        {/* Right content */}
-        <div className={isEven ? 'order-3' : 'order-3'}>
-          {isEven && <StepCard step={step} />}
+      {/* Number Dot */}
+      <div className="relative z-10 flex shrink-0 items-center justify-center md:order-2 md:mx-auto">
+        <div className="h-10 w-10 rounded-full border-4 border-white bg-primary text-white font-heading font-extrabold text-sm flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.35)]">
+          {index + 1}
         </div>
       </div>
 
-      {/* ── Mobile layout ── */}
-      <div className="flex w-full items-start gap-4 md:hidden">
-        {/* Number Dot */}
-        <div className="relative z-10 mt-6 flex shrink-0 items-center justify-center">
-          <div className="h-10 w-10 rounded-full border-4 border-white bg-primary text-white font-heading font-extrabold text-sm flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.35)]">
-            {index + 1}
-          </div>
-        </div>
-
-        {/* Card */}
-        <div className="flex-1">
-          <StepCard step={step} />
-        </div>
+      {/* Unified Step Card container */}
+      <div className={`w-full flex-1 ${isEven ? 'md:order-3' : 'md:order-1 md:justify-end flex'}`}>
+        <StepCard step={step} />
       </div>
     </motion.div>
   );
