@@ -42,7 +42,10 @@ export default function Home() {
       'https://www.linkedin.com/company/kodetocareer',
       'https://www.instagram.com/kodetocareer',
       'https://www.youtube.com/@KodeToCareer',
-      'https://www.facebook.com/kodetocareer'
+      'https://www.facebook.com/kodetocareer',
+      'https://github.com/KAYHANH',
+      'https://www.wikidata.org/wiki/Q11023',
+      'https://en.wikipedia.org/wiki/Software_engineering_education'
     ],
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -62,7 +65,11 @@ export default function Home() {
       '@type': 'Organization',
       name: 'KodeToCareer'
     },
-    url: 'https://kodetocareer.com/about'
+    url: 'https://kodetocareer.com/about',
+    sameAs: [
+      'https://www.linkedin.com/in/md-arbaaz-kodetocareer',
+      'https://github.com/KAYHANH'
+    ]
   };
 
   const websiteSchema = {
@@ -78,6 +85,11 @@ export default function Home() {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.faq-question', '.faq-answer', 'h2'],
+      xpath: ['/html/head/title']
+    },
     mainEntity: [
       {
         '@type': 'Question',

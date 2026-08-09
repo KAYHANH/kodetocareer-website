@@ -64,5 +64,42 @@ export default async function Page({ params }: PageProps) {
   const posts = getMergedPostsServer();
   const post = posts.find((p) => p.slug === resolvedParams.slug);
 
-  return <BlogDetailsClient slug={resolvedParams.slug} initialPost={post} />;
+  const articleSchema = post ? {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.desc,
+    image: post.image?.startsWith('http') ? post.image : `https://kodetocareer.com${post.image}`,
+    url: `https://kodetocareer.com/blog/${post.slug}`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'KodeToCareer',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://kodetocareer.com/main-logo.png'
+      }
+    },
+    author: {
+      '@type': 'Person',
+      name: post.author || 'Md Arbaaz',
+      jobTitle: 'Founder & Lead Tech Instructor',
+      url: 'https://kodetocareer.com/about'
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://kodetocareer.com/blog/${post.slug}`
+    }
+  } : null;
+
+  return (
+    <>
+      {articleSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+      )}
+      <BlogDetailsClient slug={resolvedParams.slug} initialPost={post} />
+    </>
+  );
 }
