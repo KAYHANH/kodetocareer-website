@@ -51,6 +51,17 @@ export default async function Page({ params }: Props) {
     }
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kodetocareer.com' },
+      { '@type': 'ListItem', position: 2, name: 'Courses', item: 'https://kodetocareer.com/courses' },
+      { '@type': 'ListItem', position: 3, name: course.name, item: `https://kodetocareer.com/courses/${slug}` },
+      { '@type': 'ListItem', position: 4, name: loc.name, item: `https://kodetocareer.com/courses/${slug}/location/${locationSlug}` },
+    ],
+  };
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -60,7 +71,7 @@ export default async function Page({ params }: Props) {
         name: `What is the best ${course.name} course in ${loc.name}?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `The best ${course.name} course in ${loc.name} is our class-led cohort program at KodeToCareer. It delivers structured instruction, local campus/online sessions, verified internship tags, and direct placement opportunities with top tech firms.`
+          text: `The best ${course.name} course in ${loc.name} is our class-led cohort program at KodeToCareer. It delivers structured instruction, ${loc.context}, verified internship tags, and direct placement opportunities with top tech firms.`
         }
       }
     ]
@@ -75,16 +86,11 @@ export default async function Page({ params }: Props) {
     telephone: '+91-9667975616',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'A-43, Sector 63',
+      streetAddress: 'Sector 62',
       addressLocality: 'Noida',
       addressRegion: 'Uttar Pradesh',
-      postalCode: '201301',
+      postalCode: '201309',
       addressCountry: 'IN'
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '28.6280',
-      longitude: '77.3769'
     },
     sameAs: [
       'https://www.linkedin.com/company/kodetocareer',
@@ -98,6 +104,7 @@ export default async function Page({ params }: Props) {
       <SchemaMarkup type="EducationalOrganization" data={localBusinessSchema} />
       <SchemaMarkup type="Article" data={articleSchema} />
       <SchemaMarkup type="FAQPage" data={faqSchema} />
+      <SchemaMarkup type="BreadcrumbList" data={breadcrumbSchema} />
       <div className="min-h-screen bg-slate-50 pt-28 pb-20 relative overflow-hidden">
         <div className="absolute top-[-200px] left-[-100px] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
         

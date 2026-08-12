@@ -185,14 +185,48 @@ export const PRICE_INTENTS = {
 };
 
 export const LOCATIONS = {
-  'noida': { name: 'Noida', context: 'our Noida campus' },
-  'delhi': { name: 'Delhi', context: 'our Delhi learning tracks' },
-  'greater-noida': { name: 'Greater Noida', context: 'our Greater Noida campus networks' },
-  'ghaziabad': { name: 'Ghaziabad', context: 'our Ghaziabad student networks' },
-  'gurgaon': { name: 'Gurgaon', context: 'our Gurgaon corporate networks' },
-  'faridabad': { name: 'Faridabad', context: 'our Faridabad developer hubs' },
-  'online': { name: 'Online', context: 'our interactive online classrooms' },
-  'india': { name: 'India', context: 'our India-wide placement network' }
+  // North Region
+  'delhi': { name: 'Delhi', region: 'North', context: 'our NCR tech learning hubs and corporate placement drives in Delhi NCR' },
+  'noida': { name: 'Noida', region: 'North', context: 'our Noida Sector 62 flagship campus and IT park networks' },
+  'greater-noida': { name: 'Greater Noida', region: 'North', context: 'our Knowledge Park student ecosystem in Greater Noida' },
+  'gurgaon': { name: 'Gurgaon', region: 'North', context: 'our Cyber City corporate hiring networks in Gurgaon' },
+  'ghaziabad': { name: 'Ghaziabad', region: 'North', context: 'our Ghaziabad developer hubs and college networks' },
+  'faridabad': { name: 'Faridabad', region: 'North', context: 'our Faridabad industrial & software hiring networks' },
+  'lucknow': { name: 'Lucknow', region: 'North', context: 'our Lucknow student guidance centers and online live cohorts' },
+  'chandigarh': { name: 'Chandigarh', region: 'North', context: 'our IT Park Chandigarh and Tricity tech student networks' },
+  'jaipur': { name: 'Jaipur', region: 'North', context: 'our Jaipur tech ecosystem and college placement guidance' },
+  'dehradun': { name: 'Dehradun', region: 'North', context: 'our Uttarakhand student learning hubs and online cohorts' },
+
+  // West Region
+  'mumbai': { name: 'Mumbai', region: 'West', context: 'our Mumbai fintech & enterprise software hiring networks' },
+  'pune': { name: 'Pune', region: 'West', context: 'our Hinjewadi & Kharadi Pune IT cluster networks' },
+  'ahmedabad': { name: 'Ahmedabad', region: 'West', context: 'our GIFT City & Ahmedabad startup hiring ecosystem' },
+  'surat': { name: 'Surat', region: 'West', context: 'our Gujarat software development and analytics hubs' },
+  'vadodara': { name: 'Vadodara', region: 'West', context: 'our Vadodara engineering student placement network' },
+  'indore': { name: 'Indore', region: 'West', context: 'our Super Corridor Indore tech talent network' },
+  'nagpur': { name: 'Nagpur', region: 'West', context: 'our MIHAN Nagpur technology student ecosystem' },
+
+  // South Region
+  'bangalore': { name: 'Bangalore', region: 'South', context: 'our Electronic City & Manyata Tech Park Bangalore hiring channels' },
+  'hyderabad': { name: 'Hyderabad', region: 'South', context: 'our HITEC City & Gachibowli Hyderabad tech employer networks' },
+  'chennai': { name: 'Chennai', region: 'South', context: 'our OMR IT Corridor Chennai placement network' },
+  'kochi': { name: 'Kochi', region: 'South', context: 'our Infopark Kochi Kerala software talent network' },
+  'coimbatore': { name: 'Coimbatore', region: 'South', context: 'our Coimbatore engineering student development hubs' },
+  'mysore': { name: 'Mysore', region: 'South', context: 'our Mysore tech learning tracks and college networks' },
+
+  // East Region
+  'kolkata': { name: 'Kolkata', region: 'East', context: 'our Salt Lake Sector V Kolkata IT hub networks' },
+  'bhubaneswar': { name: 'Bhubaneswar', region: 'East', context: 'our Infocity Bhubaneswar technology student ecosystem' },
+  'patna': { name: 'Patna', region: 'East', context: 'our Bihar student mentorship centers and online live cohorts' },
+  'ranchi': { name: 'Ranchi', region: 'East', context: 'our Jharkhand engineering & BCA career guidance hubs' },
+
+  // Central Region
+  'bhopal': { name: 'Bhopal', region: 'Central', context: 'our MP student learning tracks and university placement drives' },
+  'raipur': { name: 'Raipur', region: 'Central', context: 'our Chhattisgarh tech student placement channels' },
+
+  // National & Online
+  'online': { name: 'Online', region: 'National', context: 'our 100% interactive live online classrooms across India' },
+  'india': { name: 'India', region: 'National', context: 'our India-wide 300+ corporate hiring partner network' }
 };
 
 export const CAREER_PERSONAS = {

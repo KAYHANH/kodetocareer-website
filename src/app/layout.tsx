@@ -35,19 +35,23 @@ import JsonLdSchema from "@/components/layout/json-ld";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kodetocareer.com'),
-  title: "KodeToCareer | Live Coding & AI Placement Institute",
+  title: "KodeToCareer | Career-Focused Tech Courses, Internships & Placement Support",
   description:
-    "Master Full Stack, Data Science, AI & DevOps with 100% live cohorts, guaranteed paid internships, and dedicated placement support in Noida & online.",
+    "Learn MERN Stack, Python, Data Science, Data Analytics, Java, AI, Cloud, DevOps and Digital Marketing through practical training, projects, internships and career support. Online programs available across India.",
   applicationName: 'KodeToCareer',
   authors: [{ name: 'KodeToCareer Team', url: 'https://kodetocareer.com' }],
   generator: 'Next.js',
   keywords: [
-    'MERN Stack Course Noida',
-    'Data Science Institute Noida',
-    'AI Coding Bootcamp',
-    'Full Stack Placement Support',
-    'Python Training Noida',
-    'Java Full Stack Course'
+    'KodeToCareer',
+    'Career Tech Courses India',
+    'Full Stack Web Development Course',
+    'Data Science AI Masterclass',
+    'Data Analytics Course India',
+    'Java Spring Boot Full Stack',
+    'Cloud DevOps Certification',
+    'Tech Internships with Placement Support',
+    'Online Coding Bootcamp India',
+    'Best Tech Courses After BCA BTech'
   ],
   referrer: 'origin-when-cross-origin',
   creator: 'KodeToCareer Educational Institute',
