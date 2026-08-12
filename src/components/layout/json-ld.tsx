@@ -18,6 +18,12 @@ export default function JsonLdSchema() {
           "addressCountry": "IN"
         },
         "telephone": "+919667975616",
+        "hasMap": "https://maps.app.goo.gl/bfGjKfn5kQwnZUCt8?g_st=ac",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 28.585943,
+          "longitude": 77.312582
+        },
         "sameAs": [
           "https://www.linkedin.com/company/kode2career/",
           "https://www.instagram.com/kodetocareer",

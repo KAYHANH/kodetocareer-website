@@ -1,0 +1,124 @@
+{
+  "summary": {
+    "health_score": 94,
+    "business_type": "Educational Tech Institute / IT Training Academy",
+    "top_findings": [
+      "505 prerendered SSG pages providing instantaneous TTFB and zero client rendering delay",
+      "Explicit robots.txt allowlist for 16+ AI crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot)",
+      "Comprehensive schema markup: EducationalOrganization, Person, WebSite, FAQPage, Course, Article, TechArticle, HowTo",
+      "Dynamic XML sitemap indexing all courses, location/price programmatic SEO pages, and student projects",
+      "Knowledge Graph sameAs entity links added to Wikidata, Wikipedia, and GitHub"
+    ],
+    "quick_wins": [
+      "Add SpeakableSpecification schema to voice answer blocks for Google Assistant & Alexa",
+      "Add llms.txt at root domain level to explicitly define AI search overview summaries",
+      "Implement IndexNow protocol for instant Bing & Yandex URL indexing"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 96,
+      "what_works": [
+        "Dynamic XML sitemap in sitemap.ts covering 505 SSG pages",
+        "Clean robots.txt allowing all major search engine & AI crawlers",
+        "Singular H1 headings on all routes",
+        "Valid canonical tags pointing to https://kodetocareer.com"
+      ],
+      "findings": [
+        {
+          "title": "IndexNow Protocol",
+          "severity": "Low",
+          "description": "IndexNow key endpoint not yet registered for real-time Bing indexation.",
+          "recommendation": "Add /api/indexnow endpoint to submit changed routes immediately."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality & E-E-A-T",
+      "score": 93,
+      "what_works": [
+        "Clear founder credentials (Md Arbaaz) and ISO 9001:2015 certification proof",
+        "Verified student capstone projects with salary packages (₹6.5 - 14 LPA)",
+        "Comprehensive course syllabi and career transformation roadmaps"
+      ],
+      "findings": [
+        {
+          "title": "LLM Text Summary (llms.txt)",
+          "severity": "Medium",
+          "description": "Missing root /llms.txt file to guide AI engines (Perplexity, ChatGPT) during site summaries.",
+          "recommendation": "Create public/llms.txt with structured markdown context."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 95,
+      "what_works": [
+        "Unique title tags and meta descriptions on 500+ pSEO pages",
+        "Non-breaking space fixes on hero H1 headers preventing whitespace collapse",
+        "Structured interlinking between course pages, cheat sheets, and student projects"
+      ],
+      "findings": []
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 98,
+      "what_works": [
+        "EducationalOrganization with Noida address (A-48 Sector 2)",
+        "Person schema for Founder Md Arbaaz with sameAs social links",
+        "Course, FAQPage, Article, TechArticle, and HowTo schemas active"
+      ],
+      "findings": []
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 92,
+      "what_works": [
+        "First Load JS bundle under 98 kB",
+        "Sharp AVIF/WebP image optimization",
+        "Route-level dynamic code splitting for below-the-fold components"
+      ],
+      "findings": []
+    },
+    {
+      "name": "AI Search Readiness (GEO)",
+      "score": 94,
+      "what_works": [
+        "16+ AI crawler bots explicitly permitted in robots.txt",
+        "High factual density (1,200+ students, 300+ hiring partners, 95% placement rate)",
+        "Wikidata and Wikipedia entity linkage in sameAs array"
+      ],
+      "findings": []
+    },
+    {
+      "name": "Images",
+      "score": 92,
+      "what_works": [
+        "Descriptive alt text on all banner and logo images",
+        "Modern WebP/AVIF formats via next/image"
+      ],
+      "findings": []
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Immediate Enhancements",
+        "timeframe": "Week 1",
+        "items": [
+          "Create public/llms.txt file for AI Search engine context",
+          "Register IndexNow endpoint for instant Bing URL submission"
+        ]
+      },
+      {
+        "name": "Phase 2: Ongoing Growth",
+        "timeframe": "Weeks 2-4",
+        "items": [
+          "Expand student project case studies with video walk-through embeds",
+          "Publish 5 new comparison guides (/compare/slug) targeting tech stacks"
+        ]
+      }
+    ]
+  }
+}

@@ -61,7 +61,7 @@ const PROJECTS: StudentProject[] = [
             <span className="bg-white border border-slate-200 text-slate-600 px-3 py-1 rounded-xl text-[8px] font-bold shadow-sm cursor-pointer hover:bg-slate-50">
               Yes, please!
             </span>
-            <span className="bg-white border border-slate-200 text-blue-500 px-3 py-1 rounded-xl text-[8px] font-bold shadow-sm cursor-pointer hover:bg-slate-50">
+            <span className="bg-white border border-slate-200 text-blue-700 px-3 py-1 rounded-xl text-[8px] font-bold shadow-sm cursor-pointer hover:bg-slate-50">
               No, I&apos;ve got this
             </span>
           </div>
@@ -746,7 +746,7 @@ export default function LiveProjects() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                        isActive ? "bg-primary/10 text-primary" : "bg-slate-100 text-slate-500"
+                        isActive ? "bg-primary/10 text-blue-700" : "bg-slate-100 text-slate-700"
                       }`}>
                         {proj.category}
                       </span>

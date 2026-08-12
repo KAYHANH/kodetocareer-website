@@ -206,3 +206,54 @@ body {
   }
 }
 
+/* ── Tech Stack Orbit Animations (moved from inline JS for bundle size reduction) ── */
+@keyframes tech-orbit {
+  0% { transform: rotate3d(0, 0, 1, 0deg); }
+  100% { transform: rotate3d(0, 0, 1, 360deg); }
+}
+
+@keyframes tech-counter-orbit {
+  0% { transform: rotate3d(0, 0, 1, 0deg); }
+  100% { transform: rotate3d(0, 0, 1, -360deg); }
+}
+
+.tech-orbit-active {
+  animation: tech-orbit 45s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.tech-counter-active {
+  animation: tech-counter-orbit 45s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.tech-paused,
+.tech-paused .tech-counter-active {
+  animation-play-state: paused !important;
+}
+
+@keyframes line-dash-anim-sub {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -100; }
+}
+
+.animate-line-dash-sub {
+  animation: line-dash-anim-sub 8s linear infinite;
+}
+
+/* Counter-rotate utility for orbit icons (keeps them upright) */
+.counter-rotate-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── content-visibility: below-fold sections defer paint work ── */
+/* Applied to major sections that are always below the fold */
+.below-fold-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+

@@ -201,7 +201,26 @@ export function AICareerCounselorWidget() {
                         : 'bg-slate-900 border border-slate-800 text-slate-100 rounded-tl-none shadow-sm'
                     }`}
                   >
-                    <div className="whitespace-pre-line font-body leading-relaxed">{msg.content}</div>
+                    <div className="font-body leading-relaxed text-xs">
+                      {msg.content.split('\n').map((line, lineIdx, arr) => {
+                        const parts = line.split(/(\*\*.*?\*\*)/g);
+                        return (
+                          <React.Fragment key={lineIdx}>
+                            {parts.map((part, partIdx) => {
+                              if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
+                                return (
+                                  <strong key={partIdx} className="font-extrabold text-white">
+                                    {part.slice(2, -2)}
+                                  </strong>
+                                );
+                              }
+                              return part;
+                            })}
+                            {lineIdx < arr.length - 1 && <br />}
+                          </React.Fragment>
+                        );
+                      })}
+                    </div>
 
                     {/* Course Recommendation Cards */}
                     {msg.recommendations && msg.recommendations.length > 0 && (
@@ -254,29 +273,47 @@ export function AICareerCounselorWidget() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Suggested Prompts */}
-            {messages.length < 3 && (
-              <div className="px-3.5 py-2.5 border-t border-slate-800 bg-slate-900 shrink-0">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-cyan-400" /> Suggested Questions:
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {quickPrompts.map((prompt, i) => {
-                    const IconComp = prompt.icon;
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => handleSend(prompt.text)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold rounded-xl bg-slate-950 hover:bg-blue-600/20 border border-slate-800 hover:border-blue-500/50 text-slate-200 hover:text-cyan-300 transition-all text-left"
-                      >
-                        <IconComp className="w-3 h-3 text-cyan-400 shrink-0" />
-                        <span>{prompt.text}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+            {/* Quick Action Chips */}
+            <div className="px-3 py-2 border-t border-slate-800 bg-slate-950 shrink-0">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                <button
+                  type="button"
+                  onClick={() => handleSend("I don't know what to do, help me choose a course")}
+                  className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-lg bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-cyan-300 whitespace-nowrap transition-all"
+                >
+                  <Sparkles className="w-3 h-3 text-cyan-400" />
+                  <span>Help Me Choose</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend("Tell me about Full Stack MERN Development")}
+                  className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 whitespace-nowrap transition-all"
+                >
+                  🚀 MERN Stack
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend("Tell me about Data Analytics & Business Intelligence")}
+                  className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 whitespace-nowrap transition-all"
+                >
+                  📊 Data Analytics
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend("Tell me about Data Science & AI Masterclass")}
+                  className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 whitespace-nowrap transition-all"
+                >
+                  🤖 Data Science & AI
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSend("Tell me about Java Full Stack")}
+                  className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 whitespace-nowrap transition-all"
+                >
+                  ☕ Java Backend
+                </button>
               </div>
-            )}
+            </div>
 
             {/* Input Bar */}
             <form

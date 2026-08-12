@@ -164,7 +164,7 @@ function ProgramCard({ program }: { program: Program }) {
             alt={program.title}
             width={400}
             height={160}
-            unoptimized
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="absolute inset-0 w-full h-full object-cover transition-all duration-300 group-hover:scale-105 group-hover:translate-y-[-2px] pointer-events-none"
           />

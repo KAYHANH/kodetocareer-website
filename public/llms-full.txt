@@ -1,58 +1,59 @@
-# KodeToCareer — Complete Academy Documentation & Program Syllabus
+# KodeToCareer — Complete AI Knowledge Base & Documentation
 
-## About KodeToCareer
-KodeToCareer is a premier technology career academy based in Noida, Uttar Pradesh, India. We bridge the gap between academic education and real-world tech employment through 100% live interactive cohorts led by senior industry engineers, hands-on capstone project building, guaranteed live internships, and 1-on-1 career placement auditing.
+> Premier AI-powered software training institute specializing in Full Stack Web Development, Data Science, AI Engineering, and Cloud DevOps with 100% placement support.
 
-## Programs Offered
+## Institute Overview
+- **Name**: KodeToCareer Educational Institute
+- **Website**: https://kodetocareer.com
+- **Founder & Chief Mentor**: Md Arbaaz (B.Tech CSE, 8+ Years Enterprise Development & Technical Mentorship)
+- **Campus Address**: A-48 Basement, Sector 2, Near Sector 15 Metro Station, Noida, UP 201301, India
+- **Google Maps Location**: https://maps.app.goo.gl/bfGjKfn5kQwnZUCt8?g_st=ac (Coordinates: 28.585943, 77.312582)
+- **Certifications**: ISO 9001:2015 Certified Educational Institute
+- **Helpline**: +91 96679 75616 / +91 96679 15616
+- **Support Email**: info@kodetocareer.com / kodetocareer@gmail.com
+
+## Placement Metrics & Career Outcomes
+- **Total Students Enrolled**: 1,200+
+- **Career Placements**: 500+
+- **Placement Rate**: 95%
+- **Hiring Partner Network**: 300+ Tech Companies & Startups across India & Remote
+- **Salary Packages**: ₹6.5 LPA Average, up to ₹14 LPA Highest Package
+- **Guaranteed Internships**: 3-Month Paid/Stipend Internship with live project delivery
+
+## Detailed Program Directory
 
 ### 1. MERN Stack Development + AI Integration
-- Duration: 6 Months (24 Weeks)
-- Format: Live Online & In-Person Cohorts (Max 25 Students per Batch)
-- Curriculum: HTML5, CSS3, JavaScript (ES6+), React 19, Next.js, Node.js, Express.js, MongoDB, REST APIs, GraphQL, TailwindCSS, WebSockets, OpenAI API Integration, Git/GitHub, Vercel & Docker Deployment.
-- Projects: 15+ Capstone Applications including E-Commerce SaaS, Real-Time Chat Engine, and AI Technical Interviewer.
-- Outcomes: Target Salaries ₹4.5 - 12 LPA. 100% Placement Assistance.
+- **Duration**: 4–6 Months
+- **Format**: Live Hybrid / Offline Noida Campus
+- **Key Modules**: HTML5/CSS3, Modern JavaScript ES6+, React 19, Node.js, Express.js, MongoDB, Next.js App Router, Tailwind CSS, TypeScript, OpenAI/Gemini API integration.
+- **URL**: https://kodetocareer.com/courses/mern-stack-development
 
 ### 2. Data Science & Machine Learning Core
-- Duration: 6 Months
-- Format: Live Online & In-Person Cohorts
-- Curriculum: Python, NumPy, Pandas, Matplotlib, Seaborn, SQL Data Extraction, Machine Learning Algorithms (Regression, Classification, Clustering, Random Forests, XGBoost), Deep Learning (TensorFlow, PyTorch, CNNs, RNNs), Power BI, LLMs & LangChain.
-- Projects: 20+ Capstone Projects including Pneumonia Detection from X-Rays and Customer Retention Modeling.
-- Outcomes: Target Salaries ₹6 - 18 LPA. 100% Placement Assistance.
+- **Duration**: 5–6 Months
+- **Format**: Live Hybrid / Offline Noida Campus
+- **Key Modules**: Python, Data Wrangling, Pandas, NumPy, Scikit-Learn, TensorFlow, PyTorch, Deep Learning, Natural Language Processing, Computer Vision, MLOps deployment.
+- **URL**: https://kodetocareer.com/courses/data-science-machine-learning
 
-### 3. Data Analytics & Business Intelligence
-- Duration: 4 Months
-- Format: Live Online & In-Person Cohorts
-- Curriculum: Advanced Excel, SQL Queries, Joins, Aggregations, Window Functions, Tableau Desktop, Power BI DAX Formulas, Python Data Wrangling, Descriptive & Inferential Statistics.
-- Projects: 10+ Capstone Dashboards.
-- Outcomes: Target Salaries ₹4 - 9 LPA. 100% Placement Assistance.
+### 3. Java Full Stack Developer Program
+- **Duration**: 4–6 Months
+- **Format**: Live Hybrid / Offline Noida Campus
+- **Key Modules**: Java 21 Core, OOPs, Data Structures & Algorithms, Spring Boot 3, Microservices Architecture, Hibernate/JPA, PostgreSQL, Docker, React frontend.
+- **URL**: https://kodetocareer.com/courses/java-full-stack
 
-### 4. Java Full Stack Developer Program
-- Duration: 6 Months
-- Format: Live Online & In-Person Cohorts
-- Curriculum: Core Java 21, Object-Oriented Programming, Spring Framework, Spring Boot 3, Hibernate ORM, Relational SQL (PostgreSQL, MySQL), RESTful Microservices, Docker, React / Angular Frontend Integration.
-- Projects: Enterprise Banking Ledger, Fraud Detection Engine.
-- Outcomes: Target Salaries ₹5 - 15 LPA. 100% Placement Assistance.
+### 4. Cloud Computing & DevOps Infrastructure
+- **Duration**: 4–5 Months
+- **Format**: Live Hybrid / Offline Noida Campus
+- **Key Modules**: Linux Administration, AWS Services (EC2, S3, RDS, IAM, ECS), Docker Containerization, Kubernetes Orchestration, Terraform Infrastructure as Code, CI/CD with Jenkins & GitHub Actions.
+- **URL**: https://kodetocareer.com/courses/cloud-devops
 
-### 5. Cloud Computing & DevOps Infrastructure
-- Duration: 6 Months
-- Format: Live Online & In-Person Cohorts
-- Curriculum: Linux System Administration, Bash Scripting, Networking, AWS Core (EC2, S3, RDS, VPC, IAM), Docker Containerization, Kubernetes Orchestration, Jenkins CI/CD Pipelines, HashiCorp Terraform Infrastructure as Code.
-- Projects: Multi-Node Microservice Cloud Deployment with Monitoring.
-- Outcomes: Target Salaries ₹5.5 - 14 LPA. 100% Placement Assistance.
+### 5. Data Analytics & Business Intelligence
+- **Duration**: 3–4 Months
+- **Format**: Live Hybrid / Offline Noida Campus
+- **Key Modules**: Advanced SQL, PostgreSQL, Python for Analytics, Power BI Dashboarding, Tableau, Advanced Excel, ETL Data Pipelines, Business Storytelling.
+- **URL**: https://kodetocareer.com/courses/data-analytics
 
-### 6. Graphic Design + UI/UX Product Design Systems
-- Duration: 4 Months
-- Format: Live Online & In-Person Cohorts
-- Curriculum: Design Principles, Color Theory, Typography, Adobe Illustrator, Adobe Photoshop, Figma Prototyping, Wireframing, User Research, Usability Testing, Design Systems, Design Tokens.
-- Projects: 8+ High-Fidelity Mobile App & Web Interfaces.
-- Outcomes: Target Salaries ₹4 - 10 LPA. Portfolio & Placement Support.
-
-## Free Developer Tools & Utilities
-- AI Resume Grader: Upload your resume PDF for an instant AI score, ATS compatibility check, and action-oriented improvement recommendations.
-- AI Technical Mock Interview Simulator: Practice live technical interview questions with instant AI feedback on code clarity, speed, and accuracy.
-
-## Contact Information
-- Address: A-48 Basement, Sector 2, Near Sector 15 Metro Station, Noida, Uttar Pradesh 201301, India.
-- Email: admissions@kodetocareer.com
-- Phone: +91 9667975616
-- Official Website: https://kodetocareer.com
+## Free AI Tools & Practice Resources
+- **AI Resume Grader**: https://kodetocareer.com/free-tools/resume-grader
+- **AI Mock Interview Simulator**: https://kodetocareer.com/free-tools/mock-interview
+- **Certificate Verification System**: https://kodetocareer.com/verify
+- **Developer Cheat Sheets & Tutorials**: https://kodetocareer.com/learn/react

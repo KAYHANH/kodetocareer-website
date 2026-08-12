@@ -2,6 +2,13 @@
   "name": "kodetocareer",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "chrome >= 93",
+    "edge >= 93",
+    "firefox >= 92",
+    "safari >= 15.4",
+    "ios_saf >= 15.4"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -38,6 +45,7 @@
     "@types/three": "^0.185.1",
     "adm-zip": "^0.6.0",
     "archiver": "^8.0.0",
+    "docx": "^9.7.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",

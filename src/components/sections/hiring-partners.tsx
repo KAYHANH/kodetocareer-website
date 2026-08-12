@@ -122,7 +122,7 @@ export default function HiringPartners() {
                     height={24}
                     alt={item.name}
                     className="object-contain w-full h-full transition-transform duration-200 group-hover:rotate-6"
-                    unoptimized
+                    loading="lazy"
                   />
                 </span>
                 <span className="text-xs font-bold text-slate-800 group-hover:text-primary transition-colors">
@@ -148,7 +148,7 @@ export default function HiringPartners() {
                     height={24}
                     alt={item.name}
                     className="object-contain w-full h-full transition-transform duration-200 group-hover:rotate-6"
-                    unoptimized
+                    loading="lazy"
                   />
                 </span>
                 <span className="text-xs font-bold text-slate-800 group-hover:text-primary transition-colors">

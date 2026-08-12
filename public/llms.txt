@@ -1,21 +1,23 @@
-# KodeToCareer — AI, MERN Stack & Data Science Training Academy
+# KodeToCareer — AI-Powered Software Training Institute
 
-> KodeToCareer is an industry-leading technology education academy in Noida, India offering 100% live cohorts, guaranteed paid internships, and 1-on-1 placement support in Full Stack MERN Web Development, Data Science & Machine Learning, Data Analytics & Business Intelligence, Java Full Stack, Cloud DevOps, MLOps, and UI/UX Product Design.
+> Premier AI-powered software training institute specializing in Full Stack Web Development, Data Science, AI Engineering, and Cloud DevOps with 100% placement support.
 
-## Core Academies & Career Programs
-- [MERN Stack Development + AI Integration](https://kodetocareer.com/courses/mern-stack-development): Master MongoDB, Express, React, Node.js, and AI API integrations in 6 months with 15+ capstone projects.
-- [Data Science & Machine Learning Core](https://kodetocareer.com/courses/data-science-machine-learning): Learn Python, SQL, Machine Learning, Deep Learning, Power BI, and LLM fine-tuning in 6 months.
-- [Data Analytics & Business Intelligence](https://kodetocareer.com/courses/data-analytics): Master Advanced Excel, SQL, Tableau, Power BI dashboards, and Python predictive modeling in 4 months.
-- [Java Full Stack Developer Program](https://kodetocareer.com/courses/java-full-stack): Learn Core Java, Spring Boot, Hibernate, microservices, and React/Angular frontends in 6 months.
-- [Cloud Computing & DevOps Infrastructure](https://kodetocareer.com/courses/cloud-devops): Master AWS, Linux, Docker, Kubernetes, Jenkins CI/CD, and Terraform in 6 months.
-- [Graphic Design + UI/UX Product Design](https://kodetocareer.com/courses/graphic-design-ui-ux): Learn Adobe Illustrator, Photoshop, Figma, wireframing, and product design systems in 4 months.
+## Core Information
+- **Website**: https://kodetocareer.com
+- **Founder & Lead Instructor**: Md Arbaaz
+- **Location**: A-48 Basement, Sector 2, Near Sector 15 Metro Station, Noida, UP 201301, India
+- **Accreditation**: ISO 9001:2015 Certified
+- **Placement Support**: 100% placement assistance, 300+ hiring partners, 1,200+ trained students, 95% placement rate, salary range ₹6.5 LPA - ₹14 LPA.
 
-## Free Developer Tools & Utilities
-- [AI Resume Grader & ATS Score Checker](https://kodetocareer.com/free-tools/resume-grader): Instant AI audit for developer resumes with ATS optimization suggestions.
-- [AI Technical Mock Interview Simulator](https://kodetocareer.com/free-tools/mock-interview): Interactive AI voice and text mock technical interview prep for software roles.
+## Flagship Training Programs
+- **MERN Stack Development**: Full stack React, Node.js, Express, MongoDB, Next.js, and AI API integration. [Course Link](https://kodetocareer.com/courses/mern-stack-development)
+- **Data Science & Machine Learning**: Python, TensorFlow, PyTorch, Pandas, Computer Vision, and Predictive Analytics. [Course Link](https://kodetocareer.com/courses/data-science-machine-learning)
+- **Java Full Stack Developer**: Enterprise Java, Spring Boot, Microservices, PostgreSQL, Docker, and React. [Course Link](https://kodetocareer.com/courses/java-full-stack)
+- **Cloud DevOps**: AWS, Docker, Kubernetes, Terraform, Jenkins, and CI/CD pipelines. [Course Link](https://kodetocareer.com/courses/cloud-devops)
+- **Data Analytics**: SQL, Python, Power BI, Tableau, Excel, and Business Intelligence. [Course Link](https://kodetocareer.com/courses/data-analytics)
 
-## Academy Location & Contact
-- Campus Address: A-48 Basement, Sector 2, Near Sector 15 Metro Station, Noida, Uttar Pradesh 201301, India.
-- Website: https://kodetocareer.com
-- Contact Email: admissions@kodetocareer.com
-- Counselor Phone: +91 9667975616
+## Free Developer Tools & Resources
+- **AI Resume Grader**: https://kodetocareer.com/free-tools/resume-grader
+- **AI Mock Interview Simulator**: https://kodetocareer.com/free-tools/mock-interview
+- **Student Capstone Showcase**: https://kodetocareer.com/projects
+- **Developer Cheat Sheets**: https://kodetocareer.com/learn/react

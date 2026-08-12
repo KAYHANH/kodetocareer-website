@@ -313,36 +313,6 @@ export default function TechStackCircle() {
         >
           {/* Animated Network Connection Lines inside the rotating container */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-            <style dangerouslySetInnerHTML={{__html: `
-              @keyframes tech-orbit {
-                0% { transform: rotate3d(0, 0, 1, 0deg); }
-                100% { transform: rotate3d(0, 0, 1, 360deg); }
-              }
-              @keyframes tech-counter-orbit {
-                0% { transform: rotate3d(0, 0, 1, 0deg); }
-                100% { transform: rotate3d(0, 0, 1, -360deg); }
-              }
-              .tech-orbit-active {
-                animation: tech-orbit 45s linear infinite;
-                will-change: transform;
-                transform: translateZ(0);
-              }
-              .tech-counter-active {
-                animation: tech-counter-orbit 45s linear infinite;
-                will-change: transform;
-                transform: translateZ(0);
-              }
-              .tech-paused, .tech-paused .tech-counter-active {
-                animation-play-state: paused !important;
-              }
-              @keyframes line-dash-anim-sub {
-                0% { stroke-dashoffset: 0; }
-                100% { stroke-dashoffset: -100; }
-              }
-              .animate-line-dash-sub {
-                animation: line-dash-anim-sub 8s linear infinite;
-              }
-            `}} />
             <defs>
               <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#2563EB" stopOpacity="0.25" />
@@ -433,7 +403,7 @@ export default function TechStackCircle() {
                         height={44}
                         alt={tech.name}
                         className="object-contain filter transition-all duration-300"
-                        unoptimized
+                        loading="lazy"
                       />
                     </Link>
 
@@ -451,7 +421,7 @@ export default function TechStackCircle() {
                           {/* Title */}
                           <div className="flex items-center gap-2 mb-3">
                             <span className="w-8 h-8 rounded-lg bg-black/[0.03] border border-black/[0.06] flex items-center justify-center p-1.5">
-                              <Image src={tech.icon} width={20} height={20} alt={tech.name} unoptimized />
+                              <Image src={tech.icon} width={20} height={20} alt={tech.name} loading="lazy" />
                             </span>
                             <div>
                               <h4 className="text-sm font-heading font-bold text-slate-900 leading-none">{tech.name}</h4>

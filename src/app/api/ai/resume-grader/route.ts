@@ -70,10 +70,10 @@ export async function POST(req: Request) {
         targetKey === 'data-science'
           ? 'data-science-machine-learning'
           : targetKey === 'java-enterprise'
-          ? 'java-full-stack-developer'
+          ? 'java-full-stack'
           : targetKey === 'cloud-devops'
-          ? 'cloud-computing-devops'
-          : 'full-stack-web-development',
+          ? 'cloud-devops'
+          : 'mern-stack-development',
     });
   } catch (error) {
     console.error('Resume Grader error:', error);

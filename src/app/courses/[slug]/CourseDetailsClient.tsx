@@ -90,7 +90,7 @@ export const COURSES = [
     category: 'Data & AI',
     duration: '4 Months',
     projects: '10+ Projects',
-    priceUpfront: '₹5,000',
+    priceUpfront: '₹6,000',
     pricePlaced: '₹5,000',
     level: 'Beginner',
     tagline: 'Turn data into business decisions. Master industry-standard tools through a 4-month intensive program designed to prepare you for high-demand analytics careers.',
@@ -180,7 +180,7 @@ export const COURSES = [
     category: 'Software Engineering',
     duration: '6 Months',
     projects: '8+ Projects',
-    priceUpfront: '₹7,000',
+    priceUpfront: '₹6,000',
     pricePlaced: '₹5,000',
     level: 'Beginner to Intermediate',
     tagline: 'Become a professional Python & Automation Engineer with our scripting, web scraping, and Django course.',
@@ -222,7 +222,7 @@ export const COURSES = [
     category: 'Cloud',
     duration: '28 Weeks (6-7 Months)',
     projects: '20+ Production Labs & 4 Capstones',
-    priceUpfront: '₹12,000',
+    priceUpfront: '₹7,000',
     pricePlaced: '₹8,000',
     level: 'Advanced (Coding Prerequisite)',
     tagline: 'Master Docker, Kubernetes, AWS, GitOps pipelines, and GPU infrastructure optimization to engineer production-ready AI systems.',
@@ -1194,6 +1194,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                       </label>
                       <select
                         id="modal-course"
+                        aria-label="Select Preferred Course"
                         required
                         value={selectedCourse}
                         onChange={(e) => setSelectedCourse(e.target.value)}
@@ -1259,6 +1260,7 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
                         </label>
                         <select
                           id="modal-status"
+                          aria-label="Academic Status"
                           required
                           value={status}
                           onChange={(e) => setStatus(e.target.value)}

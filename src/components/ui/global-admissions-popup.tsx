@@ -179,7 +179,7 @@ export default function GlobalAdmissionsPopup() {
               <div className="space-y-6">
                 {/* Header */}
                 <div className="space-y-1.5 pr-6">
-                  <span className="inline-flex items-center gap-1 bg-primary/10 border border-primary/20 text-[9px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded-md text-primary">
+                  <span className="inline-flex items-center gap-1 bg-primary/10 border border-primary/20 text-[9px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded-md text-blue-700">
                     <Sparkles className="w-3.5 h-3.5 animate-pulse" /> FREE COUNSELLING & ROADMAP
                   </span>
                   <h3 className="text-xl font-heading font-black text-slate-900 leading-tight">
@@ -194,10 +194,12 @@ export default function GlobalAdmissionsPopup() {
                 <form onSubmit={handleSubmit} className="space-y-3.5">
                   {/* Select Course Dropdown */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                    <label htmlFor="global-popup-course-select" className="text-[10px] font-bold text-slate-500 uppercase block">
                       Select Preferred Course <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <select
+                      id="global-popup-course-select"
+                      aria-label="Select Preferred Course"
                       required
                       value={selectedCourse}
                       onChange={(e) => setSelectedCourse(e.target.value)}
@@ -211,12 +213,14 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Name Input */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                    <label htmlFor="global-popup-name-input" className="text-[10px] font-bold text-slate-500 uppercase block">
                       Full Name <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
+                        id="global-popup-name-input"
+                        aria-label="Full Name"
                         type="text"
                         required
                         placeholder="e.g. John Doe"
@@ -229,12 +233,14 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Phone Input */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                    <label htmlFor="global-popup-phone-input" className="text-[10px] font-bold text-slate-500 uppercase block">
                       Phone Number <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <div className="relative">
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
+                        id="global-popup-phone-input"
+                        aria-label="Phone Number"
                         type="tel"
                         required
                         maxLength={10}
@@ -249,12 +255,14 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Class / Graduation */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                    <label htmlFor="global-popup-qualification-input" className="text-[10px] font-bold text-slate-500 uppercase block">
                       Class / Graduation degree <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <div className="relative">
                       <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
+                        id="global-popup-qualification-input"
+                        aria-label="Class or Graduation Degree"
                         type="text"
                         required
                         placeholder="e.g. B.Tech / BCA / MCA / 12th"
@@ -267,9 +275,9 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Status Selection (Pursuing / Completed) */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase block">
                       Academic Status <span className="text-rose-500 font-extrabold">*</span>
-                    </label>
+                    </span>
                     <div className="grid grid-cols-2 gap-3">
                       <button
                         type="button"
@@ -298,12 +306,14 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Graduation Year */}
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-450 uppercase block">
+                    <label htmlFor="global-popup-year-input" className="text-[10px] font-bold text-slate-500 uppercase block">
                       Graduation / Passing Year <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
+                        id="global-popup-year-input"
+                        aria-label="Graduation or Passing Year"
                         type="text"
                         required
                         maxLength={4}

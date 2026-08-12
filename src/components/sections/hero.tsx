@@ -178,28 +178,28 @@ export default function Hero() {
 
       {/* Premium blurred light mesh gradient circles */}
       <div
-        className="absolute top-[-250px] left-[-150px] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl transform-gpu animate-float"
+        className="absolute top-[-250px] left-[-150px] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl transform-gpu animate-float pointer-events-none contain-strict"
         aria-hidden="true"
         suppressHydrationWarning
       />
       <div
-        className="absolute top-[20%] right-[-200px] w-[700px] h-[700px] rounded-full bg-sky-100/40 blur-3xl transform-gpu animate-float-delayed"
+        className="absolute top-[20%] right-[-200px] w-[700px] h-[700px] rounded-full bg-sky-100/40 blur-3xl transform-gpu animate-float-delayed pointer-events-none contain-strict"
         aria-hidden="true"
         suppressHydrationWarning
       />
       <div
-        className="absolute bottom-[-250px] left-[20%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl transform-gpu animate-float"
+        className="absolute bottom-[-250px] left-[20%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl transform-gpu animate-float pointer-events-none contain-strict"
         aria-hidden="true"
         suppressHydrationWarning
       />
       <div
-        className="absolute top-[50%] left-[50%] w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-3xl transform-gpu animate-float-delayed"
+        className="absolute top-[50%] left-[50%] w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-3xl transform-gpu animate-float-delayed pointer-events-none contain-strict"
         aria-hidden="true"
         suppressHydrationWarning
       />
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 bg-grid opacity-50" aria-hidden="true" suppressHydrationWarning />
+      <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none contain-strict" aria-hidden="true" suppressHydrationWarning />
 
       {/* ── Content ── */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 w-full" suppressHydrationWarning>
@@ -208,9 +208,8 @@ export default function Hero() {
           <div className="w-full lg:w-[58%] flex flex-col items-center lg:items-start text-center lg:text-left" suppressHydrationWarning>
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: EASE }}
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
@@ -221,9 +220,8 @@ export default function Hero() {
             {/* Headline */}
             <motion.h1
               className="mt-6 font-heading font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
             >
               <span className="block text-slate-900">AI-Powered{'\u00A0'}</span>
               <span className="block gradient-text">Software Engineering{'\u00A0'}</span>
@@ -231,11 +229,8 @@ export default function Hero() {
             </motion.h1>
 
             {/* Typing line */}
-            <motion.p
-              className="mt-6 text-xl md:text-2xl text-slate-600 font-semibold h-9"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
+            <p
+              className="mt-6 text-xl md:text-2xl text-slate-600 font-semibold h-9 min-h-[36px]"
               aria-live="polite"
             >
               Master{' '}
@@ -243,24 +238,20 @@ export default function Hero() {
                 {mounted ? typedWord : ROTATING_WORDS[0]}
                 <span className="animate-pulse ml-0.5 text-primary">|</span>
               </span>
-            </motion.p>
+            </p>
 
-            {/* Description */}
-            <motion.p
-              className="text-lg text-slate-500 max-w-xl mt-6 leading-relaxed font-medium"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
+            {/* Description (LCP Element - Immediate Paint) */}
+            <p
+              className="text-lg text-slate-600 max-w-xl mt-6 leading-relaxed font-medium"
             >
               Master Full Stack Development, Data Science, AI Engineering, and Cloud DevOps with live industry projects, guaranteed internships, and 100% placement support.
-            </motion.p>
+            </p>
 
             {/* CTA buttons */}
             <motion.div
               className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
             >
               <MotionLink
                 href="/contact"
@@ -277,7 +268,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-emerald-600/20 hover:shadow-xl transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-emerald-700/20 hover:shadow-xl transition-all cursor-pointer"
               >
                 <MessageSquare className="w-5 h-5" />
                 Attend Free Demo Class
@@ -298,12 +289,9 @@ export default function Hero() {
               <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-amber-500" /> Starting ₹5,000</span>
             </motion.div>
 
-            {/* Real Stats Grid */}
-            <motion.div
+            {/* Real Stats Grid — no initial transform to prevent CLS */}
+            <div
               className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-12 w-full max-w-4xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.75, ease: EASE }}
             >
               {STATS.map((stat) => (
                 <StatItem
@@ -313,7 +301,7 @@ export default function Hero() {
                   label={stat.label}
                 />
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* ── Right column (circular tech stack + floating cards) ── */}

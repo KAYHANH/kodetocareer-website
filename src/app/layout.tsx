@@ -10,20 +10,25 @@ import "./globals.css";
 const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "600", "700", "800"],
+  display: "optional",
+  preload: true,
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  display: "swap",
+  display: "optional",
+  preload: true,
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "500", "700"],
+  display: "optional",
+  preload: false,
 });
 
 import JsonLdSchema from "@/components/layout/json-ld";
@@ -113,11 +118,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* DNS prefetch for third-party domains */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://script.google.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" href="/main-logo.png" as="image" type="image/png" />
+        {/* Preload actual LCP asset — the central orbit logo visible in viewport */}
+        {/* NOTE: No preconnect to fonts.googleapis.com — next/font/google self-hosts fonts on our domain */}
+        <link rel="preload" href="/logo-icon.png" as="image" type="image/png" fetchPriority="high" />
         <JsonLdSchema />
       </head>
 

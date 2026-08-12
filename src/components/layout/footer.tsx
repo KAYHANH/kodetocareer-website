@@ -1,8 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { Send, MapPin, Phone, Mail, Award, ShieldCheck, Map } from "lucide-react";
+import FooterNewsletter from "./footer-newsletter";
+import { MapPin, Phone, Mail, Map } from "lucide-react";
 import type { SVGProps } from "react";
 
 /* ------------------------------------------------------------------ */
@@ -137,7 +136,7 @@ function FooterColumn({
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-100 bg-white relative overflow-hidden" role="contentinfo" suppressHydrationWarning>
+    <footer className="border-t border-slate-100 bg-white relative overflow-hidden" role="contentinfo">
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
       <div className="mx-auto max-w-[1440px] px-6 relative z-10">
@@ -154,6 +153,7 @@ export default function Footer() {
                 height={50}
                 alt="KodeToCareer Logo"
                 sizes="200px"
+                loading="lazy"
                 className="h-10 w-auto object-contain"
               />
             </Link>
@@ -223,7 +223,7 @@ export default function Footer() {
 
             {/* Campus Map Mini Placeholder */}
             <a 
-              href="https://maps.google.com/?q=A-48+Basement+Sector+2+Noida+Near+Sector+15+Metro"
+              href="https://maps.app.goo.gl/bfGjKfn5kQwnZUCt8?g_st=ac"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full h-24 rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden relative flex items-center justify-center shadow-inner group cursor-pointer hover:border-primary/20 transition-colors"
@@ -239,28 +239,12 @@ export default function Footer() {
         </div>
 
         {/* ── Newsletter Section ── */}
-        <div className="py-8 border-b border-slate-100 flex items-center justify-end">
-          <form className="flex items-center gap-2 max-w-sm w-full" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="footer-newsletter-email" className="sr-only">Newsletter email</label>
-            <input
-              id="footer-newsletter-email"
-              type="email"
-              placeholder="Newsletter email"
-              className="h-10 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3.5 text-xs text-slate-800 placeholder:text-slate-400 outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/30"
-            />
-            <button
-              type="submit"
-              className="h-10 bg-slate-900 text-white rounded-xl px-4 text-xs font-bold flex items-center justify-center gap-1 hover:bg-slate-800 transition-colors"
-            >
-              Join <Send className="w-3 h-3" />
-            </button>
-          </form>
-        </div>
+        <FooterNewsletter />
 
         {/* ── Bottom Section ── */}
         <div className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row text-xs font-semibold text-slate-400">
           <p>
-            &copy; {new Date().getFullYear()} KodeToCareer. All rights reserved.
+            &copy; 2026 KodeToCareer. All rights reserved.
           </p>
 
           <div className="flex items-center gap-6">
