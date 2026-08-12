@@ -125,17 +125,22 @@ export default function CoursesInIndiaPage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {locationEntries.map(([slug, loc]) => (
+            {locationEntries.map(([slug, loc]: [string, any]) => (
               <Link
                 key={slug}
                 href={`/courses/mern-stack-development/location/${slug}`}
-                className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-cyan-500/50 text-center transition-all group hover:bg-slate-900"
+                className="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-cyan-500/50 text-center transition-all group hover:bg-slate-900 flex flex-col justify-between"
               >
                 <div className="text-sm font-bold text-slate-200 group-hover:text-cyan-300 transition-colors">
                   {loc.name}
                 </div>
-                <div className="text-[10px] text-slate-500 font-medium mt-0.5">
-                  {loc.region} India
+                <div className="flex items-center justify-center gap-1 mt-1">
+                  <span className="text-[9px] font-mono text-cyan-400 bg-cyan-950 px-1.5 py-0.5 rounded border border-cyan-800/40">
+                    {loc.tier || 'Tier 2'}
+                  </span>
+                  <span className="text-[9px] text-slate-500 font-medium">
+                    {loc.region}
+                  </span>
                 </div>
               </Link>
             ))}
