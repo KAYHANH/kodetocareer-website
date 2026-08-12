@@ -19,7 +19,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: process.env.VERCEL ? undefined : "standalone",
   compress: true,
   poweredByHeader: false,
   experimental: {
