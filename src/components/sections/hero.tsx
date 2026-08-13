@@ -224,13 +224,13 @@ export default function Hero() {
 
             {/* Typing line */}
             <p
-              className="mt-6 text-xl md:text-2xl text-slate-600 font-semibold h-9 min-h-[36px]"
+              className="mt-6 text-xl md:text-2xl text-slate-600 font-semibold h-10 min-h-[40px] flex items-center justify-center lg:justify-start"
               aria-live="polite"
             >
-              Master{' '}
-              <span className="text-primary font-bold" suppressHydrationWarning>
+              <span className="mr-2">Master</span>
+              <span className="text-primary font-bold inline-flex items-center relative" suppressHydrationWarning>
                 {mounted ? typedWord : ROTATING_WORDS[0]}
-                <span className="animate-pulse ml-0.5 text-primary">|</span>
+                <span className="animate-pulse ml-0.5 text-primary select-none" aria-hidden="true">|</span>
               </span>
             </p>
 
