@@ -14,21 +14,19 @@ export default function GoogleAnalytics() {
       cleanup();
     };
 
-    const timer = setTimeout(() => {
-      setLoadGA(true);
-      cleanup();
-    }, 4500);
-
     const cleanup = () => {
-      clearTimeout(timer);
       window.removeEventListener('scroll', handleInteraction);
       window.removeEventListener('pointermove', handleInteraction);
       window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+      window.removeEventListener('click', handleInteraction);
     };
 
     window.addEventListener('scroll', handleInteraction, { passive: true });
     window.addEventListener('pointermove', handleInteraction, { passive: true });
     window.addEventListener('touchstart', handleInteraction, { passive: true });
+    window.addEventListener('keydown', handleInteraction, { passive: true });
+    window.addEventListener('click', handleInteraction, { passive: true });
 
     return cleanup;
   }, []);
