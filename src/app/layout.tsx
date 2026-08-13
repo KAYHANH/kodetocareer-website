@@ -105,6 +105,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    other: {
+      'msvalidate.01': '5C51AF66E37595BD309DE4C2B307A3DC',
+    },
+  },
   alternates: {
     canonical: 'https://kodetocareer.com',
   },
@@ -122,6 +127,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Bing Webmaster Verification */}
+        <meta name="msvalidate.01" content="5C51AF66E37595BD309DE4C2B307A3DC" />
         {/* DNS prefetch for third-party domains */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://script.google.com" />
