@@ -1,21 +1,19 @@
 import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
 import TrustStrip from '@/components/sections/trust-strip';
 import HiringPartners from '@/components/sections/hiring-partners';
 import TechnologyStack from '@/components/sections/technology-stack';
 import SchemaMarkup from '@/components/seo/schema-markup';
 
-// Below-the-fold dynamic imports for route-level code splitting & optimal LCP/INP
-const WhyChooseUs = dynamic(() => import('@/components/sections/why-choose-us'));
-const FeaturedPrograms = dynamic(() => import('@/components/sections/featured-programs'));
-const LiveProjects = dynamic(() => import('@/components/sections/live-projects'));
-const CareerRoadmap = dynamic(() => import('@/components/sections/career-roadmap'));
-const FreeResources = dynamic(() => import('@/components/sections/free-resources'));
-const Founder = dynamic(() => import('@/components/sections/founder'));
-const LiveCounter = dynamic(() => import('@/components/sections/live-counter'));
-const FAQ = dynamic(() => import('@/components/sections/faq'));
-const Newsletter = dynamic(() => import('@/components/sections/newsletter'));
+import WhyChooseUs from '@/components/sections/why-choose-us';
+import FeaturedPrograms from '@/components/sections/featured-programs';
+import LiveProjects from '@/components/sections/live-projects';
+import CareerRoadmap from '@/components/sections/career-roadmap';
+import FreeResources from '@/components/sections/free-resources';
+import Founder from '@/components/sections/founder';
+import LiveCounter from '@/components/sections/live-counter';
+import FAQ from '@/components/sections/faq';
+import Newsletter from '@/components/sections/newsletter';
 
 export const metadata = {
   title: 'AI-Powered Software Training Institute | Full Stack, Data Science & Placement | KodeToCareer',
