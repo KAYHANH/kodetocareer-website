@@ -173,33 +173,27 @@ export default function Hero() {
       className="min-h-screen flex items-center relative overflow-hidden -mt-20 pt-24 pb-16"
       aria-label="Hero"
     >
-      {/* ── Background layers ── */}
-      <div className="absolute inset-0 bg-background" aria-hidden="true" suppressHydrationWarning />
-
-      {/* Premium blurred light mesh gradient circles */}
-      <div
-        className="absolute top-[-250px] left-[-150px] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl transform-gpu animate-float pointer-events-none contain-strict"
-        aria-hidden="true"
-        suppressHydrationWarning
-      />
-      <div
-        className="absolute top-[20%] right-[-200px] w-[700px] h-[700px] rounded-full bg-sky-100/40 blur-3xl transform-gpu animate-float-delayed pointer-events-none contain-strict"
-        aria-hidden="true"
-        suppressHydrationWarning
-      />
-      <div
-        className="absolute bottom-[-250px] left-[20%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl transform-gpu animate-float pointer-events-none contain-strict"
-        aria-hidden="true"
-        suppressHydrationWarning
-      />
-      <div
-        className="absolute top-[50%] left-[50%] w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-3xl transform-gpu animate-float-delayed pointer-events-none contain-strict"
-        aria-hidden="true"
-        suppressHydrationWarning
-      />
-
-      {/* Grid overlay */}
-      <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none contain-strict" aria-hidden="true" suppressHydrationWarning />
+      {/* ── Background decoration layer (isolated from layout recalculations) ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 contain-strict" aria-hidden="true" suppressHydrationWarning>
+        <div className="absolute inset-0 bg-background" suppressHydrationWarning />
+        <div
+          className="absolute top-[-250px] left-[-150px] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl transform-gpu pointer-events-none"
+          suppressHydrationWarning
+        />
+        <div
+          className="absolute top-[180px] right-[-200px] w-[700px] h-[700px] rounded-full bg-sky-100/40 blur-3xl transform-gpu pointer-events-none"
+          suppressHydrationWarning
+        />
+        <div
+          className="absolute bottom-[-250px] left-[20%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl transform-gpu pointer-events-none"
+          suppressHydrationWarning
+        />
+        <div
+          className="absolute top-[450px] left-[50%] w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-3xl transform-gpu pointer-events-none"
+          suppressHydrationWarning
+        />
+        <div className="absolute inset-0 bg-grid opacity-50" suppressHydrationWarning />
+      </div>
 
       {/* ── Content ── */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 w-full" suppressHydrationWarning>

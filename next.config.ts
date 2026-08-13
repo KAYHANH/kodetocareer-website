@@ -31,16 +31,6 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: securityHeaders,
       },
-      // Long-term caching for Next.js versioned static chunks (JS/CSS)
-      {
-        source: "/_next/static/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
       {
         source: "/:path*\\.(pdf|woff2|woff|ttf|eot)",
         headers: [
