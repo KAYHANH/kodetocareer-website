@@ -10,7 +10,14 @@ export type SchemaType =
   | 'Article'
   | 'JobPosting'
   | 'BreadcrumbList'
-  | 'Person';
+  | 'Person'
+  | 'HowTo'
+  | 'ItemList'
+  | 'SoftwareApplication'
+  | 'AboutPage'
+  | 'LearningResource'
+  | 'TechArticle'
+  | 'ContactPage';
 
 interface SchemaMarkupProps {
   type: SchemaType;

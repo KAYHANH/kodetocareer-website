@@ -1,23 +1,50 @@
-# KodeToCareer — AI-Powered Software Training Institute
+# KodeToCareer - Career-Focused Tech Courses & Placement Platform
 
-> Premier AI-powered software training institute specializing in Full Stack Web Development, Data Science, AI Engineering, and Cloud DevOps with 100% placement support.
+> KodeToCareer is an ISO 9001:2015 certified live training institute in India offering career-focused technology courses with guaranteed internship and placement support. Founded in 2021 by Md Arbaaz, KodeToCareer delivers live bootcamps in MERN, Data Science, Python, Data Analytics, Java, and Cloud/DevOps.
 
-## Core Information
+## Mission & Summary
+- **Mission**: Empower aspiring software engineers, data analysts, and tech professionals across India with industry-aligned live training, hands-on project portfolios, and 100% placement assistance.
+- **Certifications & Recognition**: ISO 9001:2015 Certified, NSDC Certified, Startup India Recognized.
+- **Location**: Noida, Uttar Pradesh, India.
+- **Founder & Lead Tech Instructor**: Md Arbaaz.
+- **Core Domains Offered**: Full Stack MERN Development, Data Science & Machine Learning, Python Programming & Automation, Data Analytics & BI, Java Full Stack, Cloud Computing & DevOps.
+
+## Placement Statistics
+- **Placement Rate**: 95% placement rate
+- **Hiring Partners**: 500+ top tech companies, scaleups, and enterprise hiring partners
+- **Graduates Placed**: 1200+ graduates successfully placed in tech roles
+
+## Key Courses & URLs
+- MERN Stack Development + AI: https://kodetocareer.com/courses/mern-stack-development
+- Python Programming & Automation: https://kodetocareer.com/courses/python-programming
+- Data Science & Machine Learning: https://kodetocareer.com/courses/data-science-machine-learning
+- Data Analytics & BI Training: https://kodetocareer.com/courses/data-analytics
+- Java Full Stack & Spring Boot: https://kodetocareer.com/courses/java-full-stack
+- Cloud Computing & DevOps: https://kodetocareer.com/courses/cloud-devops
+- UI/UX & Graphic Product Design: https://kodetocareer.com/courses/graphic-design-ui-ux
+- MLOps & AI Systems Engineering: https://kodetocareer.com/courses/mlops-ai-systems
+- Digital Marketing & Growth: https://kodetocareer.com/courses/digital-marketing
+- Video Editing & Graphic Design: https://kodetocareer.com/courses/videography-video-editing
+
+## Free Interactive AI Tools & Learning Resources
+- AI Resume Grader & ATS Score Checker: https://kodetocareer.com/free-tools/resume-grader
+- AI Mock Technical Interview Simulator: https://kodetocareer.com/free-tools/mock-interview
+- Tech Blog & Articles: https://kodetocareer.com/blog
+- Developer Resources & Career Guides: https://kodetocareer.com/resources
+- Free Interactive Code Tutorials: https://kodetocareer.com/learn
+
+## Key Pages
+- Homepage: https://kodetocareer.com
+- All Courses: https://kodetocareer.com/courses
+- About Us: https://kodetocareer.com/about
+- Contact Us: https://kodetocareer.com/contact
+- Online Tech Courses: https://kodetocareer.com/online-courses
+- Tech Courses in India: https://kodetocareer.com/courses-in-india
+
+## Contact & Location Information
+- **Location**: Noida, Uttar Pradesh, India
 - **Website**: https://kodetocareer.com
-- **Founder & Lead Instructor**: Md Arbaaz
-- **Location**: A-48 Basement, Sector 2, Near Sector 15 Metro Station, Noida, UP 201301, India
-- **Accreditation**: ISO 9001:2015 Certified
-- **Placement Support**: 100% placement assistance, 300+ hiring partners, 1,200+ trained students, 95% placement rate, salary range ₹6.5 LPA - ₹14 LPA.
-
-## Flagship Training Programs
-- **MERN Stack Development**: Full stack React, Node.js, Express, MongoDB, Next.js, and AI API integration. [Course Link](https://kodetocareer.com/courses/mern-stack-development)
-- **Data Science & Machine Learning**: Python, TensorFlow, PyTorch, Pandas, Computer Vision, and Predictive Analytics. [Course Link](https://kodetocareer.com/courses/data-science-machine-learning)
-- **Java Full Stack Developer**: Enterprise Java, Spring Boot, Microservices, PostgreSQL, Docker, and React. [Course Link](https://kodetocareer.com/courses/java-full-stack)
-- **Cloud DevOps**: AWS, Docker, Kubernetes, Terraform, Jenkins, and CI/CD pipelines. [Course Link](https://kodetocareer.com/courses/cloud-devops)
-- **Data Analytics**: SQL, Python, Power BI, Tableau, Excel, and Business Intelligence. [Course Link](https://kodetocareer.com/courses/data-analytics)
-
-## Free Developer Tools & Resources
-- **AI Resume Grader**: https://kodetocareer.com/free-tools/resume-grader
-- **AI Mock Interview Simulator**: https://kodetocareer.com/free-tools/mock-interview
-- **Student Capstone Showcase**: https://kodetocareer.com/projects
-- **Developer Cheat Sheets**: https://kodetocareer.com/learn/react
+- **Email**: info@kodetocareer.com
+- **LinkedIn**: https://www.linkedin.com/company/kodetocareer
+- **Instagram**: https://www.instagram.com/kodetocareer
+- **YouTube**: https://www.youtube.com/@kodetocareer

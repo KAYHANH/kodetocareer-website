@@ -7,6 +7,7 @@ import { COURSES_MAP, LOCATIONS } from '@/data/seo-intents';
 import { companyStats } from '@/data/company-stats';
 import { CheckCircle2, MapPin, Sparkles, Award, ArrowRight, Laptop, Briefcase, GraduationCap, Building } from 'lucide-react';
 import JsonLdSchema from '@/components/layout/json-ld';
+import SchemaMarkup from '@/components/seo/schema-markup';
 
 export const metadata = {
   title: 'Career-Focused Professional Tech Courses in India | KodeToCareer',
@@ -18,9 +19,21 @@ export default function CoursesInIndiaPage() {
   const courseList = Object.values(COURSES_MAP);
   const locationEntries = Object.entries(LOCATIONS).filter(([key]) => key !== 'online' && key !== 'india');
 
+  const itemListSchema = {
+    itemListElement: courseList.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      url: `https://kodetocareer.com/courses/${c.slug}`,
+      description: c.tagline
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
       <Navbar />
+      <JsonLdSchema />
+      <SchemaMarkup type="ItemList" data={itemListSchema} />
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950">

@@ -8,7 +8,7 @@ export default function JsonLdSchema() {
         "name": "KodeToCareer",
         "url": "https://kodetocareer.com",
         "logo": "https://kodetocareer.com/main-logo.png",
-        "description": "AI-Powered Software Engineering & Placement Institute offering 100% live cohorts, guaranteed internships, and dedicated career placement support.",
+        "description": "KodeToCareer is an ISO 9001:2015 certified career-focused tech training institute based in Noida, Uttar Pradesh, India, founded in 2021 by Md Arbaaz. It provides 100% live interactive cohorts, guaranteed internships, and dedicated career placement support across 500+ hiring partners.",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "A-48, Basement, Sector 2",

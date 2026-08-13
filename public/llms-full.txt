@@ -1,59 +1,88 @@
-# KodeToCareer — Complete AI Knowledge Base & Documentation
+# KodeToCareer - Complete System, Course & Program Specifications
 
-> Premier AI-powered software training institute specializing in Full Stack Web Development, Data Science, AI Engineering, and Cloud DevOps with 100% placement support.
+> KodeToCareer is an ISO 9001:2015 certified career-focused tech training institute based in Noida, Uttar Pradesh, India, founded in 2021 by Md Arbaaz. It provides 100% live interactive cohorts, hands-on capstone project portfolios, guaranteed internship opportunities, and dedicated 1-on-1 placement support with 500+ hiring partners.
 
-## Institute Overview
-- **Name**: KodeToCareer Educational Institute
-- **Website**: https://kodetocareer.com
-- **Founder & Chief Mentor**: Md Arbaaz (B.Tech CSE, 8+ Years Enterprise Development & Technical Mentorship)
-- **Campus Address**: A-48 Basement, Sector 2, Near Sector 15 Metro Station, Noida, UP 201301, India
-- **Google Maps Location**: https://maps.app.goo.gl/bfGjKfn5kQwnZUCt8?g_st=ac (Coordinates: 28.585943, 77.312582)
-- **Certifications**: ISO 9001:2015 Certified Educational Institute
-- **Helpline**: +91 96679 75616 / +91 96679 15616
-- **Support Email**: info@kodetocareer.com / kodetocareer@gmail.com
+## Core Information & Identity
+- **Legal Entity**: KodeToCareer (Webot App Pvt Ltd)
+- **Founded**: 2021 by Md Arbaaz (Founder & Lead Tech Instructor)
+- **Accreditation**: ISO 9001:2015 Certified, NSDC Partner, Startup India Recognized
+- **Placement Statistics**: 95% placement rate across 1,200+ trained graduates
+- **Hiring Network**: 500+ corporate hiring partners including top MNCs, tech startups, and IT consultancies
+- **Headquarters**: A-48, Basement, Sector 2, Noida, Uttar Pradesh 201301, India
+- **Coordinates**: Latitude 28.585943, Longitude 77.312582
+- **Contact Phone**: +91 93117 24200 / +91 96679 75616
+- **Contact Email**: info@kodetocareer.com
 
-## Placement Metrics & Career Outcomes
-- **Total Students Enrolled**: 1,200+
-- **Career Placements**: 500+
-- **Placement Rate**: 95%
-- **Hiring Partner Network**: 300+ Tech Companies & Startups across India & Remote
-- **Salary Packages**: ₹6.5 LPA Average, up to ₹14 LPA Highest Package
-- **Guaranteed Internships**: 3-Month Paid/Stipend Internship with live project delivery
+---
 
-## Detailed Program Directory
+## Complete Course Catalog & Technical Syllabi
 
-### 1. MERN Stack Development + AI Integration
-- **Duration**: 4–6 Months
-- **Format**: Live Hybrid / Offline Noida Campus
-- **Key Modules**: HTML5/CSS3, Modern JavaScript ES6+, React 19, Node.js, Express.js, MongoDB, Next.js App Router, Tailwind CSS, TypeScript, OpenAI/Gemini API integration.
+### 1. MERN Stack Development + AI Course
 - **URL**: https://kodetocareer.com/courses/mern-stack-development
+- **Duration**: 4 to 6 Months (Live Cohort + 15+ Capstones)
+- **Credential**: ISO 9001:2015 Training Certificate
+- **Core Modules**: HTML5/CSS3, JavaScript ES6+, React 19, Node.js, Express.js, MongoDB, RESTful APIs, Git/GitHub, AI API Integration (OpenAI/Gemini), Docker Basics, AWS Deployment, System Design.
+- **Career Roles**: Full Stack Developer, Frontend Engineer, MERN Developer, React Developer.
 
-### 2. Data Science & Machine Learning Core
-- **Duration**: 5–6 Months
-- **Format**: Live Hybrid / Offline Noida Campus
-- **Key Modules**: Python, Data Wrangling, Pandas, NumPy, Scikit-Learn, TensorFlow, PyTorch, Deep Learning, Natural Language Processing, Computer Vision, MLOps deployment.
+### 2. Python Programming & Automation Course
+- **URL**: https://kodetocareer.com/courses/python-programming
+- **Duration**: 3 to 4 Months (Live Cohort)
+- **Core Modules**: Core Python 3, Object-Oriented Programming, Data Structures & Algorithms, File I/O, Web Scraping (BeautifulSoup/Selenium), Django REST Framework, PostgreSQL, Automated Scripts.
+- **Career Roles**: Python Developer, Backend Developer, Automation Engineer.
+
+### 3. Data Science & Machine Learning Course
 - **URL**: https://kodetocareer.com/courses/data-science-machine-learning
+- **Duration**: 6 Months (Live Cohort + Capstone Projects)
+- **Core Modules**: Python for Data Science, NumPy, Pandas, SQL & Database Querying, Data Visualization (Matplotlib, Seaborn), Machine Learning Algorithms (Scikit-Learn), Deep Learning (TensorFlow/PyTorch), Power BI, Generative AI & Prompt Engineering.
+- **Career Roles**: Data Scientist, ML Engineer, Data Analyst, AI Specialist.
 
-### 3. Java Full Stack Developer Program
-- **Duration**: 4–6 Months
-- **Format**: Live Hybrid / Offline Noida Campus
-- **Key Modules**: Java 21 Core, OOPs, Data Structures & Algorithms, Spring Boot 3, Microservices Architecture, Hibernate/JPA, PostgreSQL, Docker, React frontend.
-- **URL**: https://kodetocareer.com/courses/java-full-stack
-
-### 4. Cloud Computing & DevOps Infrastructure
-- **Duration**: 4–5 Months
-- **Format**: Live Hybrid / Offline Noida Campus
-- **Key Modules**: Linux Administration, AWS Services (EC2, S3, RDS, IAM, ECS), Docker Containerization, Kubernetes Orchestration, Terraform Infrastructure as Code, CI/CD with Jenkins & GitHub Actions.
-- **URL**: https://kodetocareer.com/courses/cloud-devops
-
-### 5. Data Analytics & Business Intelligence
-- **Duration**: 3–4 Months
-- **Format**: Live Hybrid / Offline Noida Campus
-- **Key Modules**: Advanced SQL, PostgreSQL, Python for Analytics, Power BI Dashboarding, Tableau, Advanced Excel, ETL Data Pipelines, Business Storytelling.
+### 4. Data Analytics & BI Training Program
 - **URL**: https://kodetocareer.com/courses/data-analytics
+- **Duration**: 3 to 4 Months (Live Cohort)
+- **Core Modules**: Advanced Excel (VBA, Power Query), Complex SQL Queries, Power BI Dashboarding, Tableau Visualization, Python Predictive Analytics, Business Intelligence Workflows.
+- **Career Roles**: Data Analyst, Business Intelligence Analyst, Reporting Engineer.
 
-## Free AI Tools & Practice Resources
-- **AI Resume Grader**: https://kodetocareer.com/free-tools/resume-grader
-- **AI Mock Interview Simulator**: https://kodetocareer.com/free-tools/mock-interview
-- **Certificate Verification System**: https://kodetocareer.com/verify
-- **Developer Cheat Sheets & Tutorials**: https://kodetocareer.com/learn/react
+### 5. Java Full Stack & Spring Boot Course
+- **URL**: https://kodetocareer.com/courses/java-full-stack
+- **Duration**: 5 to 6 Months (Live Cohort)
+- **Core Modules**: Core Java 21, Data Structures, Spring Boot 3, Hibernate ORM, Microservices Architecture, PostgreSQL, React Frontend Integration, Maven, Docker.
+- **Career Roles**: Java Developer, Backend Software Engineer, Java Full Stack Developer.
+
+### 6. Cloud Computing & DevOps Engineering
+- **URL**: https://kodetocareer.com/courses/cloud-devops
+- **Duration**: 4 to 5 Months (Live Cohort)
+- **Core Modules**: Linux Administration, AWS Core Services (EC2, S3, IAM, VPC), Docker Containerization, Kubernetes Orchestration, Jenkins CI/CD Pipelines, Terraform Infrastructure as Code.
+- **Career Roles**: DevOps Engineer, Cloud Engineer, Infrastructure Specialist.
+
+### 7. UI/UX & Graphic Product Design Course
+- **URL**: https://kodetocareer.com/courses/graphic-design-ui-ux
+- **Duration**: 3 to 4 Months (Live Cohort)
+- **Core Modules**: Figma Prototyping, Wireframing, User Research, Design Systems, Adobe Photoshop, Adobe Illustrator, Visual Hierarchy, Micro-interactions.
+- **Career Roles**: UI/UX Designer, Product Designer, Graphic Designer.
+
+### 8. MLOps & AI Systems Engineering Course
+- **URL**: https://kodetocareer.com/courses/mlops-ai-systems
+- **Duration**: 4 Months (Live Cohort)
+- **Core Modules**: Triton Inference Server, vLLM Optimization, MLflow Pipelines, Model Monitoring & Drift Detection, GPU Cluster Management, Docker & Kubernetes for ML.
+- **Career Roles**: MLOps Engineer, AI Systems Architect, LLM Infrastructure Engineer.
+
+---
+
+## Free Interactive AI Tools & Learning Hubs
+- **AI Resume Grader**: https://kodetocareer.com/free-tools/resume-grader — Analyzes tech resumes for ATS compatibility, keyword match, and structural scores.
+- **AI Mock Interview Simulator**: https://kodetocareer.com/free-tools/mock-interview — Conducts live technical interviews with instant feedback.
+- **Free Tutorial Hub**: https://kodetocareer.com/learn — Step-by-step guides on React, Python, SQL, Java, Docker, and Node.js.
+- **Interview Question Bank**: https://kodetocareer.com/resources — Curated question sets for tech interviews.
+
+---
+
+## Key Frequently Asked Questions (FAQ)
+
+### What makes KodeToCareer different from traditional coding bootcamps?
+KodeToCareer offers 100% live interactive cohorts led by senior tech mentors, hands-on capstone projects integrated with AI toolsets, guaranteed internship opportunities, ISO 9001:2015 certification, and a 95% placement rate across 500+ hiring partners.
+
+### Are KodeToCareer certificates ISO accredited?
+Yes, all certificates issued by KodeToCareer are accredited under ISO 9001:2015 quality standards and can be verified online instantly.
+
+### Does KodeToCareer offer online classes across India?
+Yes, KodeToCareer provides 100% live online interactive cohorts accessible from anywhere in India, as well as physical training centers in Noida, Uttar Pradesh.

@@ -44,8 +44,8 @@ if (fs.existsSync(standaloneDir)) {
     fs.copyFileSync(blogJsonSrc, blogJsonDest);
   }
 } else {
-  // Standard copy
-  ['.next', 'public', 'package.json', 'server.js', '.htaccess'].forEach(item => {
+  // Standard copy fallback
+  ['.next', 'public', 'package.json'].forEach(item => {
     const src = path.join(__dirname, '..', item);
     const dest = path.join(distDir, item);
     if (fs.existsSync(src)) {
@@ -54,9 +54,15 @@ if (fs.existsSync(standaloneDir)) {
   });
 }
 
+// Always copy server.js and .htaccess to distDir root
 const serverSrc = path.join(__dirname, '../server.js');
 if (fs.existsSync(serverSrc)) {
   fs.copyFileSync(serverSrc, path.join(distDir, 'server.js'));
+}
+
+const htaccessSrc = path.join(__dirname, '../.htaccess');
+if (fs.existsSync(htaccessSrc)) {
+  fs.copyFileSync(htaccessSrc, path.join(distDir, '.htaccess'));
 }
 
 // Sanitize hardcoded Windows paths in server.js and configuration files for Linux cPanel compatibility
@@ -69,6 +75,9 @@ const filesToSanitize = [
 filesToSanitize.forEach(filePath => {
   if (fs.existsSync(filePath)) {
     let content = fs.readFileSync(filePath, 'utf8');
+    // Replace drive letters and Windows paths with relative Linux paths
+    content = content.replace(/[a-zA-Z]:\\\\.*?\\\\kodetocareer/gi, '.');
+    content = content.replace(/[a-zA-Z]:\\.*?\\kodetocareer/gi, '.');
     content = content.replace(/C:\\\\KodeToCareer/gi, '.');
     content = content.replace(/C:\\\\kodetocareer/gi, '.');
     content = content.replace(/C:\\KodeToCareer/gi, '.');

@@ -59,5 +59,49 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: PageProps) {
   const resolvedParams = await params;
-  return <LearnHubClient slug={resolvedParams.slug} />;
+  const hub = LEARN_HUBS[resolvedParams.slug];
+
+  if (!hub) {
+    return <LearnHubClient slug={resolvedParams.slug} />;
+  }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["TechArticle", "LearningResource"],
+        "@id": `https://kodetocareer.com/learn/${hub.slug}/#article`,
+        "url": `https://kodetocareer.com/learn/${hub.slug}`,
+        "headline": `Learn ${hub.title} — Free Tutorials & Project Guide`,
+        "description": hub.tagline || hub.overview,
+        "educationalLevel": "Beginner to Advanced",
+        "programmingLanguage": hub.title,
+        "isAccessibleForFree": true,
+        "publisher": {
+          "@type": "EducationalOrganization",
+          "@id": "https://kodetocareer.com/#organization",
+          "name": "KodeToCareer",
+          "url": "https://kodetocareer.com",
+          "logo": "https://kodetocareer.com/main-logo.png"
+        },
+        "author": {
+          "@type": "EducationalOrganization",
+          "name": "KodeToCareer Team",
+          "url": "https://kodetocareer.com"
+        },
+        "inLanguage": "en-US"
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <LearnHubClient slug={resolvedParams.slug} />
+    </>
+  );
 }
+

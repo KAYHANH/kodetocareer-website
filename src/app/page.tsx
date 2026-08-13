@@ -112,6 +112,62 @@ export default function Home() {
           '@type': 'Answer',
           text: 'Yes, our certificates are recognized by leading tech companies, accredited under ISO 9001:2015 standards, and can be verified online instantly.'
         }
+      },
+      {
+        '@type': 'Question',
+        name: 'What courses does KodeToCareer offer?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We offer courses in AI & Machine Learning, MERN Stack, Java Full Stack, Python, Data Analytics, and Digital Marketing. Each course is designed with industry-relevant curriculum and hands-on projects.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I need prior coding experience?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not at all! Our beginner programs start from scratch. We guide you from zero to job-ready with structured learning paths.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'What is the placement guarantee?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We offer dedicated placement support with a 95% placement rate. Our placement cell works with 500+ hiring partners to connect you with opportunities.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'How long are the programs?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Programs range from 3 to 6 months depending on the specialization. Each includes training, projects, internship, and placement preparation.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Are the certificates recognized by industry?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, our certificates are recognized by leading tech companies and can be verified online. They add significant value to your resume.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'What is the AI Career Assistant?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Our AI-powered tool analyzes your skills, education, and goals to create a personalized career roadmap with course recommendations and salary predictions.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'What payment options are available?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We offer flexible payment plans, EMI options, and early-bird discounts. Scholarships are also available for eligible students.'
+        }
       }
     ]
   };

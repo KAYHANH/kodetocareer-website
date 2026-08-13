@@ -556,15 +556,31 @@ Accredited by: ISO 9001:2015, Skill India Partners, NSDC
       url: `https://kodetocareer.com/courses/${course.slug}`
     },
     educationalCredentialAwarded: 'ISO 9001:2015 Training Certificate',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '185',
+      bestRating: '5',
+      worstRating: '1'
+    },
     hasCourseInstance: {
       '@type': 'CourseInstance',
       courseMode: 'Blended',
       duration: course.duration,
       courseWorkload: 'PT15H'
-    }
+    },
+    syllabus: (course.modules || []).map((mod, idx) => ({
+      '@type': 'Syllabus',
+      name: `Module ${idx + 1}: ${mod}`,
+      description: `Comprehensive training covering ${mod}`
+    }))
   };
 
   const faqSchema = {
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.faq-question', '.faq-answer', 'h2', 'h3']
+    },
     mainEntity: getCourseFAQs(course).map(faq => ({
       '@type': 'Question',
       name: faq.q,

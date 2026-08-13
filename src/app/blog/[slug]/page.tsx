@@ -64,6 +64,24 @@ export default async function Page({ params }: PageProps) {
   const posts = getMergedPostsServer();
   const post = posts.find((p) => p.slug === resolvedParams.slug);
 
+  const postDateRaw = post ? ((post as any).publishedAt || (post as any).datePublished || post.date) : null;
+  let datePublished = '2025-01-15T08:00:00+05:30';
+  if (postDateRaw) {
+    const parsedDate = new Date(postDateRaw);
+    if (!isNaN(parsedDate.getTime())) {
+      datePublished = parsedDate.toISOString();
+    }
+  }
+
+  const postModifiedRaw = post ? ((post as any).dateModified || (post as any).updatedAt) : null;
+  let dateModified = new Date().toISOString();
+  if (postModifiedRaw) {
+    const parsedModified = new Date(postModifiedRaw);
+    if (!isNaN(parsedModified.getTime())) {
+      dateModified = parsedModified.toISOString();
+    }
+  }
+
   const articleSchema = post ? {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -71,6 +89,15 @@ export default async function Page({ params }: PageProps) {
     description: post.desc,
     image: post.image?.startsWith('http') ? post.image : `https://kodetocareer.com${post.image}`,
     url: `https://kodetocareer.com/blog/${post.slug}`,
+    datePublished,
+    dateModified,
+    wordCount: post.content ? post.content.split(/\s+/).length : undefined,
+    articleSection: post.category,
+    keywords: post.tags?.join(', '),
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.blog-intro', 'article p:first-of-type']
+    },
     publisher: {
       '@type': 'Organization',
       name: 'KodeToCareer',

@@ -110,7 +110,7 @@ function AccordionItem({
         className="flex w-full cursor-pointer items-center justify-between p-6 text-left"
         aria-expanded={isOpen}
       >
-        <span className="pr-4 text-lg font-bold text-slate-900 transition-colors duration-300 group-hover:text-primary">
+        <span className="faq-question pr-4 text-lg font-bold text-slate-900 transition-colors duration-300 group-hover:text-primary">
           {item.question}
         </span>
         <motion.span
@@ -133,7 +133,7 @@ function AccordionItem({
             transition={{ duration: 0.35, ease: EASE }}
             className="overflow-hidden bg-slate-50/50"
           >
-            <p className="px-6 pb-6 pt-2 leading-relaxed text-slate-600 text-sm font-medium">
+            <p className="faq-answer px-6 pb-6 pt-2 leading-relaxed text-slate-600 text-sm font-medium">
               {item.answer}
             </p>
           </motion.div>
@@ -159,23 +159,6 @@ export default function Faq() {
       className="bg-gradient-to-b from-[#F8FAFC] to-[#EFF6FF] py-24 border-b border-slate-100"
       aria-labelledby="faq-heading"
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": FAQ_ITEMS.map((item) => ({
-              "@type": "Question",
-              "name": item.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.answer,
-              },
-            })),
-          }),
-        }}
-      />
       <div className="mx-auto max-w-[800px] px-6">
         {/* Section header */}
         <motion.div

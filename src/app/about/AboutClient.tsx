@@ -180,7 +180,7 @@ export default function AboutPage() {
               <span className="gradient-text">Transforming Futures.</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed font-medium max-w-xl">
-              KodeToCareer is a premium engineering academy designed to turn career aspirations into global realities. We equip students with direct hands-on coding, live enterprise product assignments, and unmatched corporate hiring connections.
+              KodeToCareer is an ISO 9001:2015 certified career-focused tech training institute based in Noida, Uttar Pradesh, India, founded in 2021 by Md Arbaaz. We equip students with direct hands-on coding, live enterprise product assignments, and unmatched corporate hiring connections across 500+ partners.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link href="/courses" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-[14px] font-bold text-base shadow-lg shadow-primary/10 hover:opacity-95 transition-all">

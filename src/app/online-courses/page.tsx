@@ -16,8 +16,57 @@ export const metadata = {
 export default function OnlineCoursesPage() {
   const courseList = Object.values(COURSES_MAP);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Are the online classes recorded or live?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "All classes are 100% live and interactive with real industry instructors. Every session is recorded in HD and uploaded to your personal student LMS portal within 2 hours for lifetime replay."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the guaranteed internship work for online students?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Upon completing course capstone projects, online students are assigned to live remote internship projects under senior tech leads, receiving verified experience certificates and stipends."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can working professionals and college students manage the timings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! We offer flexible Evening Batches (8:00 PM - 10:00 PM) and Weekend Batches (Sat-Sun) specifically designed for working professionals and university students."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "Online Tech Training Programs",
+        "itemListElement": courseList.map((course, idx) => ({
+          "@type": "ListItem",
+          "position": idx + 1,
+          "name": course.name,
+          "url": `https://kodetocareer.com/courses/${course.slug}`
+        }))
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       
       {/* Hero Section */}

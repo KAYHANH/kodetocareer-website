@@ -25,7 +25,13 @@ export default function robots(): MetadataRoute.Robots {
           'Facebookbot',
           'Amazonbot',
           'Bytespider',
-          'CCBot'
+          'CCBot',
+          'YouBot',
+          'Cohere-AI',
+          'AI2Bot',
+          'DeepCrawl',
+          'anthropic-ai',
+          'Deepseek-ai'
         ],
         allow: '/',
       }
