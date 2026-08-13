@@ -126,34 +126,17 @@ export default function Home() {
       <TrustStrip />
       <HiringPartners />
       <TechnologyStack />
-      {/* Individual Suspense per section: allows independent streaming & reserves space to prevent CLS */}
-      <Suspense fallback={<div className="h-[600px] bg-slate-50/50" />}>
+      <div className="cv-auto">
         <WhyChooseUs />
-      </Suspense>
-      <Suspense fallback={<div className="h-[500px] bg-white/50" />}>
         <FeaturedPrograms />
-      </Suspense>
-      <Suspense fallback={<div className="h-[600px] bg-slate-50/50" />}>
         <LiveProjects />
-      </Suspense>
-      <Suspense fallback={<div className="h-[500px] bg-white/50" />}>
         <CareerRoadmap />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px] bg-slate-50/50" />}>
         <FreeResources />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px] bg-white/50" />}>
         <Founder />
-      </Suspense>
-      <Suspense fallback={<div className="h-[200px] bg-slate-50/50" />}>
         <LiveCounter />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px] bg-white/50" />}>
         <FAQ />
-      </Suspense>
-      <Suspense fallback={<div className="h-[300px] bg-slate-50/50" />}>
         <Newsletter />
-      </Suspense>
+      </div>
     </>
   );
 }

@@ -28,6 +28,12 @@ body {
   max-width: 100%;
 }
 
+/* ── Performance: Below-the-fold rendering optimization ── */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
+}
+
 /* ── Gradient Text Utility ── */
 .gradient-text {
   background: linear-gradient(135deg, #2563EB, #7C3AED, #06B6D4);
