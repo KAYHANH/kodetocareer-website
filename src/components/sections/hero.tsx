@@ -209,7 +209,7 @@ export default function Hero() {
             </div>
 
             {/* Headline (LCP Element - Immediate Native Paint) */}
-            <h1 className="mt-6 font-heading font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight">
+            <h1 className="mt-6 font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight">
               <span className="block text-slate-900">AI-Powered{'\u00A0'}</span>
               <span className="block gradient-text">Software Engineering{'\u00A0'}</span>
               <span className="block text-slate-900">Bootcamp</span>
