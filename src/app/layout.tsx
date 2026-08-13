@@ -11,7 +11,7 @@ const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
   weight: ["400", "600", "700", "800"],
-  display: "optional",
+  display: "swap",
   preload: true,
 });
 
@@ -19,7 +19,7 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  display: "optional",
+  display: "swap",
   preload: true,
 });
 
@@ -27,8 +27,8 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  display: "optional",
-  preload: false,
+  display: "swap",
+  preload: true,
 });
 
 import JsonLdSchema from "@/components/layout/json-ld";

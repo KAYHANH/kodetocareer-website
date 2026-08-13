@@ -2,7 +2,7 @@ import React from "react";
 
 export default function BackgroundOrbs() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" suppressHydrationWarning>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 contain-strict" suppressHydrationWarning>
       {/* Cool Slate Light Grid overlay */}
       <div className="absolute inset-0 bg-grid opacity-80" suppressHydrationWarning />
 

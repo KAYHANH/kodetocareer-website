@@ -37,7 +37,7 @@ const EASE: [number, number, number, number] = [0.21, 0.47, 0.32, 0.98];
 /* ------------------------------------------------------------------ */
 
 function useTypingEffect(words: string[], typingSpeed = 80, deletingSpeed = 50, pauseMs = 1800) {
-  const [displayed, setDisplayed] = useState('');
+  const [displayed, setDisplayed] = useState(words[0] || '');
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
