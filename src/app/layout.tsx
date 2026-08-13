@@ -31,6 +31,7 @@ const spaceGrotesk = Space_Grotesk({
   preload: true,
 });
 
+import { Suspense } from 'react';
 import JsonLdSchema from "@/components/layout/json-ld";
 
 export const metadata: Metadata = {
@@ -140,7 +141,9 @@ export default function RootLayout({
 
       <body className="flex min-h-full flex-col bg-background text-text-primary font-body relative" suppressHydrationWarning>
         <BackgroundOrbs />
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
         <Navbar />
         <main className="flex-1 pt-20 pb-20 md:pb-0 relative z-10" suppressHydrationWarning>{children}</main>
         <Footer />

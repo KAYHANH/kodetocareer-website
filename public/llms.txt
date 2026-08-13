@@ -10,7 +10,7 @@
 - **Core Domains Offered**: Full Stack MERN Development, Data Science & Machine Learning, Python Programming & Automation, Data Analytics & BI, Java Full Stack, Cloud Computing & DevOps.
 
 ## Placement Statistics
-- **Placement Rate**: 95% placement rate
+- **Placement Rate**: 94% placement rate
 - **Hiring Partners**: 500+ top tech companies, scaleups, and enterprise hiring partners
 - **Graduates Placed**: 1200+ graduates successfully placed in tech roles
 
