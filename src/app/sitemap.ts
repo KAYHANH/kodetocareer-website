@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getMergedPostsServer } from './blog/posts-loader'
+import { getPosts } from '@/lib/blog/repository'
 import { LEARN_HUBS } from './learn/learn-data'
 import { STUDENT_PROJECTS } from '@/data/projects-data'
 import { INTERVIEW_RESOURCES, CAREER_GUIDES, SALARY_GUIDES } from '@/data/resources-data'
@@ -53,10 +53,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  const blogPosts = getMergedPostsServer()
-  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+  const { posts: publishedBlogPosts } = getPosts({ status: 'published', limit: 500 })
+  const blogRoutes: MetadataRoute.Sitemap = publishedBlogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(),
+    lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.publishedAt || Date.now()),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }))

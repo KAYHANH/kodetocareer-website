@@ -1,132 +1,77 @@
-import type { Metadata } from 'next';
+import { notFound, redirect } from 'next/navigation';
+import { getPostBySlug, getRelatedPosts, getPosts } from '@/lib/blog/repository';
 import BlogDetailsClient from './BlogDetailsClient';
-import { getMergedPostsServer } from '../posts-loader';
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
+export const revalidate = 60; // Revalidate dynamic blog posts
+
+export async function generateStaticParams() {
+  const { posts } = getPosts({ status: 'published', limit: 50 });
+  return posts.map((post) => ({
+    slug: post.slug
+  }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const posts = getMergedPostsServer();
-  const post = posts.find((p) => p.slug === resolvedParams.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const { post, redirectTo } = getPostBySlug(slug, { allowDrafts: true });
+
+  if (redirectTo) {
+    redirect(`/blog/${redirectTo}`);
+  }
 
   if (!post) {
     return {
-      title: 'Article Not Found | KodeToCareer',
-      description: 'The requested blog publication could not be found.'
+      title: 'Publication Not Found | KodeToCareer Blog',
+      description: 'The requested article could not be found.'
     };
   }
 
-  const titleText = `${post.title} | KodeToCareer Blog`;
-  const descText = post.desc;
-
   return {
-    title: titleText,
-    description: descText,
+    title: post.seoTitle || `${post.title} | KodeToCareer`,
+    description: post.seoDescription || post.excerpt,
+    alternates: {
+      canonical: post.canonicalUrl || `https://kodetocareer.com/blog/${post.slug}`
+    },
     openGraph: {
-      title: titleText,
-      description: descText,
+      title: post.seoTitle || post.title,
+      description: post.seoDescription || post.excerpt,
       url: `https://kodetocareer.com/blog/${post.slug}`,
       siteName: 'KodeToCareer',
       images: [
         {
-          url: post.image,
+          url: post.ogImage || post.featuredImage,
           width: 1200,
           height: 630,
-          alt: post.title,
+          alt: post.imageAlt || post.title
         }
       ],
-      locale: 'en_US',
       type: 'article',
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
+      authors: [post.authorName]
     },
     twitter: {
       card: 'summary_large_image',
-      title: titleText,
-      description: descText,
-      images: [post.image],
-    },
-    alternates: {
-      canonical: `https://kodetocareer.com/blog/${post.slug}`,
+      title: post.seoTitle || post.title,
+      description: post.seoDescription || post.excerpt,
+      images: [post.ogImage || post.featuredImage]
     }
   };
 }
 
-export async function generateStaticParams() {
-  const posts = getMergedPostsServer();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+export default async function BlogDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const { post, redirectTo } = getPostBySlug(slug, { allowDrafts: true });
 
-export default async function Page({ params }: PageProps) {
-  const resolvedParams = await params;
-  const posts = getMergedPostsServer();
-  const post = posts.find((p) => p.slug === resolvedParams.slug);
-
-  const postDateRaw = post ? ((post as any).publishedAt || (post as any).datePublished || post.date) : null;
-  let datePublished = '2025-01-15T08:00:00+05:30';
-  if (postDateRaw) {
-    const parsedDate = new Date(postDateRaw);
-    if (!isNaN(parsedDate.getTime())) {
-      datePublished = parsedDate.toISOString();
-    }
+  if (redirectTo) {
+    redirect(`/blog/${redirectTo}`);
   }
 
-  const postModifiedRaw = post ? ((post as any).dateModified || (post as any).updatedAt) : null;
-  let dateModified = new Date().toISOString();
-  if (postModifiedRaw) {
-    const parsedModified = new Date(postModifiedRaw);
-    if (!isNaN(parsedModified.getTime())) {
-      dateModified = parsedModified.toISOString();
-    }
+  if (!post) {
+    notFound();
   }
 
-  const articleSchema = post ? {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.desc,
-    image: post.image?.startsWith('http') ? post.image : `https://kodetocareer.com${post.image}`,
-    url: `https://kodetocareer.com/blog/${post.slug}`,
-    datePublished,
-    dateModified,
-    wordCount: post.content ? post.content.split(/\s+/).length : undefined,
-    articleSection: post.category,
-    keywords: post.tags?.join(', '),
-    speakable: {
-      '@type': 'SpeakableSpecification',
-      cssSelector: ['h1', '.blog-intro', 'article p:first-of-type']
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'KodeToCareer',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://kodetocareer.com/main-logo.png'
-      }
-    },
-    author: {
-      '@type': 'Person',
-      name: post.author || 'Md Arbaaz',
-      jobTitle: 'Founder & Lead Tech Instructor',
-      url: 'https://kodetocareer.com/about'
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://kodetocareer.com/blog/${post.slug}`
-    }
-  } : null;
+  const relatedPosts = getRelatedPosts(post, 3);
 
-  return (
-    <>
-      {articleSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-        />
-      )}
-      <BlogDetailsClient slug={resolvedParams.slug} initialPost={post} />
-    </>
-  );
+  return <BlogDetailsClient post={post} relatedPosts={relatedPosts} />;
 }

@@ -4,92 +4,132 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, Calendar, User, Clock, ArrowRight, Sparkles, 
-  TrendingUp, Award, Bookmark, ArrowUpRight, HelpCircle, CheckCircle, RefreshCw 
+  TrendingUp, Bookmark, ArrowUpRight, CheckCircle, RefreshCw 
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { POSTS, BlogPost } from './posts';
+import { BlogPost, BlogQueryResult } from '@/lib/blog/types';
 
-const CATEGORIES = [
-  'All', 
-  'AI', 
-  'Programming', 
-  'Career', 
-  'Interview', 
-  'Data Science', 
-  'Web Development', 
-  'Placement'
-];
+interface BlogClientProps {
+  initialData: BlogQueryResult;
+}
 
-const POPULAR_TAGS = ['React', 'Next.js', 'Python', 'Docker', 'AWS', 'Prompt Engineering', 'Figma', 'System Design'];
+export default function BlogClient({ initialData }: BlogClientProps) {
+  const [posts, setPosts] = useState<BlogPost[]>(initialData.posts);
+  const [categories, setCategories] = useState<string[]>(initialData.categories);
+  const [popularTags, setPopularTags] = useState<string[]>(initialData.popularTags);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(initialData.totalPages);
+  const [subscribeEmail, setSubscribeEmail] = useState<string>('');
+  const [subscribed, setSubscribed] = useState<boolean>(false);
+  const [submittingEmail, setSubmittingEmail] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [lastRefreshed, setLastRefreshed] = useState<string | null>(null);
 
-export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>(POSTS);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [subscribeEmail, setSubscribeEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-  const [syncing, setSyncing] = useState(false);
-  const [lastSynced, setLastSynced] = useState<string | null>(null);
-
+  // Read URL search params on mount
   useEffect(() => {
-    const loadMergedPosts = async () => {
-      try {
-        const res = await fetch(`/api/blog/posts?t=${Date.now()}`);
-        const data = await res.json();
-        if (data.success && data.posts) {
-          setPosts(data.posts);
-        }
-      } catch (err) {
-        console.error('Failed to load merged posts:', err);
-      }
-    };
-
-    loadMergedPosts();
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get('category');
+      const qParam = params.get('q');
+      if (catParam) setSelectedCategory(catParam);
+      if (qParam) setSearchQuery(qParam);
+    }
   }, []);
 
-  const handleManualSync = async () => {
-    if (syncing) return;
-    setSyncing(true);
+  // Fetch updated posts when category, search query, or page changes
+  const fetchFilteredPosts = async (cat: string, q: string, pageNum: number) => {
     try {
-      await fetch(`/api/blog/sync?t=${Date.now()}`);
-      const res = await fetch(`/api/blog/posts?t=${Date.now()}`);
+      const url = `/api/blog/posts?category=${encodeURIComponent(cat)}&q=${encodeURIComponent(q)}&page=${pageNum}&limit=12&t=${Date.now()}`;
+      const res = await fetch(url);
       const data = await res.json();
-      if (data.success && data.posts) {
-        setPosts(data.posts);
+      if (data.success) {
+        if (pageNum === 1) {
+          setPosts(data.posts);
+        } else {
+          setPosts((prev) => [...prev, ...data.posts]);
+        }
+        setTotalPages(data.totalPages);
+        if (data.categories) setCategories(data.categories);
+        if (data.popularTags) setPopularTags(data.popularTags);
       }
-      setLastSynced(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
     } catch (err) {
-      console.error('Manual sync failed:', err);
-    } finally {
-      setSyncing(false);
+      console.error('Failed to filter blog posts:', err);
     }
   };
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!subscribeEmail) return;
-    setSubscribed(true);
-    setTimeout(() => {
-      setSubscribed(false);
-      setSubscribeEmail('');
-    }, 3000);
+  const handleCategorySelect = (cat: string) => {
+    setSelectedCategory(cat);
+    setSearchQuery('');
+    setPage(1);
+    fetchFilteredPosts(cat, '', 1);
+
+    if (typeof window !== 'undefined') {
+      const url = cat === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat)}`;
+      window.history.pushState({}, '', url);
+    }
   };
 
-  const filteredPosts = posts.filter((post) => {
-    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (post.content && post.content.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (post.tags && post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())));
-    return matchesCategory && matchesSearch;
-  });
+  const handleSearchChange = (q: string) => {
+    setSearchQuery(q);
+    setPage(1);
+    fetchFilteredPosts(selectedCategory, q, 1);
 
-  const featuredPost = filteredPosts[0] || POSTS[0];
-  const recentPosts = filteredPosts.slice(1);
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams();
+      if (selectedCategory !== 'All') params.set('category', selectedCategory);
+      if (q) params.set('q', q);
+      const url = params.toString() ? `/blog?${params.toString()}` : '/blog';
+      window.history.pushState({}, '', url);
+    }
+  };
+
+  const handleRefresh = async () => {
+    if (refreshing) return;
+    setRefreshing(true);
+    await fetchFilteredPosts(selectedCategory, searchQuery, 1);
+    setLastRefreshed(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+    setRefreshing(false);
+  };
+
+  const handleLoadMore = () => {
+    if (page < totalPages) {
+      const nextPage = page + 1;
+      setPage(nextPage);
+      fetchFilteredPosts(selectedCategory, searchQuery, nextPage);
+    }
+  };
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!subscribeEmail || submittingEmail) return;
+
+    setSubmittingEmail(true);
+    try {
+      const res = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: subscribeEmail })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubscribed(true);
+        setTimeout(() => {
+          setSubscribed(false);
+          setSubscribeEmail('');
+        }, 4000);
+      }
+    } catch (err) {
+      console.error('Subscription error:', err);
+    } finally {
+      setSubmittingEmail(false);
+    }
+  };
+
+  const featuredPost = posts.find(p => p.isFeatured) || posts[0];
+  const recentPosts = posts.filter(p => p.id !== featuredPost?.id);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 pt-10 pb-24 relative overflow-hidden">
@@ -98,13 +138,13 @@ export default function BlogPage() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-100/30 blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[20%] left-0 w-[500px] h-[500px] rounded-full bg-indigo-100/30 blur-[130px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-6 relative z-10 space-y-20">
+      <div className="max-w-[1440px] mx-auto px-6 relative z-10 space-y-16">
 
         {/* ── 1. Hero Header Section ── */}
         <section className="text-center max-w-3xl mx-auto space-y-6 pt-4">
           <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider">
             <Bookmark className="w-4 h-4" />
-            LATEST INSIGHTS
+            OFFICIAL KODETOCAREER PUBLICATIONS
           </span>
           <h1 className="font-heading font-extrabold text-4xl md:text-6xl text-slate-900 leading-tight">
             Learn Technology <br />
@@ -119,34 +159,25 @@ export default function BlogPage() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
             <input
               type="text"
-              placeholder="Search articles, tags, authors..."
+              placeholder="Search articles, topics, authors..."
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                if (selectedCategory !== 'All') {
-                  setSelectedCategory('All');
-                }
-              }}
-              className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50"
+              onChange={(e) => handleSearchChange(e.target.value)}
+              className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary/50 shadow-sm"
             />
           </div>
-
         </section>
 
         {/* ── 2. Category Filters ── */}
         <section className="space-y-4">
           <div className="flex flex-wrap justify-center gap-2">
-            {CATEGORIES.map((category) => (
+            {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => {
-                  setSelectedCategory(category);
-                  setSearchQuery('');
-                }}
-                className={`px-4.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                onClick={() => handleCategorySelect(category)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   selectedCategory === category
                     ? 'bg-primary text-white shadow-md shadow-primary/10'
-                    : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-850 hover:bg-slate-50'
+                    : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
                 {category}
@@ -156,15 +187,15 @@ export default function BlogPage() {
         </section>
 
         {/* ── 3. Featured Article Banner ── */}
-        {selectedCategory === 'All' && searchQuery === '' && (
+        {featuredPost && selectedCategory === 'All' && !searchQuery && (
           <section className="space-y-6">
             <h2 className="text-xl font-heading font-extrabold text-slate-900 flex items-center gap-2 leading-none">
-              <TrendingUp className="w-5 h-5 text-primary animate-pulse" /> Featured Article
+              <TrendingUp className="w-5 h-5 text-primary animate-pulse" /> Featured Publication
             </h2>
 
             <div className="bg-white border border-slate-150 rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-shadow grid grid-cols-1 lg:grid-cols-12 gap-0">
               <div className="lg:col-span-7 h-64 lg:h-96 relative bg-slate-100">
-                <Image src={featuredPost.image} alt={featuredPost.title} fill className="object-cover" unoptimized />
+                <Image src={featuredPost.featuredImage} alt={featuredPost.imageAlt || featuredPost.title} fill className="object-cover" unoptimized />
                 <span className="absolute top-4 left-4 bg-primary text-white text-[9px] uppercase tracking-wider font-extrabold px-3 py-1 rounded-md">
                   {featuredPost.category}
                 </span>
@@ -173,25 +204,28 @@ export default function BlogPage() {
               <div className="lg:col-span-5 p-8 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center gap-4 text-xs font-semibold text-slate-400 font-mono">
-                    <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {featuredPost.date}</span>
-                    <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}</span>
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5" /> 
+                      {featuredPost.publishedAt ? new Date(featuredPost.publishedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : 'Recent'}
+                    </span>
+                    <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {featuredPost.readingTime}</span>
                   </div>
                   <h3 className="text-xl lg:text-2xl font-heading font-black text-slate-900 leading-snug">
                     {featuredPost.title}
                   </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                    {featuredPost.desc}
+                  <p className="text-xs text-slate-500 leading-relaxed font-semibold line-clamp-3">
+                    {featuredPost.excerpt}
                   </p>
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary text-xs">
-                      {featuredPost.author.split(' ').map(n => n[0]).join('')}
+                      {featuredPost.authorName.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-800 leading-none">{featuredPost.author}</h4>
-                      <span className="text-[9px] text-slate-400 font-bold block mt-0.5">Author</span>
+                      <h4 className="text-xs font-bold text-slate-800 leading-none">{featuredPost.authorName}</h4>
+                      <span className="text-[9px] text-slate-400 font-bold block mt-0.5">{featuredPost.authorRole || 'Author'}</span>
                     </div>
                   </div>
                   <Link href={`/blog/${featuredPost.slug}`} className="text-primary hover:underline font-bold text-xs flex items-center gap-0.5">
@@ -203,23 +237,24 @@ export default function BlogPage() {
           </section>
         )}
 
-        {/* ── New Blog / Sync Button ── */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleManualSync}
-            disabled={syncing}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-sm ${
-              syncing
-                ? 'bg-primary/10 text-primary border border-primary/20'
-                : 'bg-primary text-white hover:bg-blue-700 shadow-md shadow-primary/20'
-            }`}
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${syncing ? 'animate-spin' : ''}`} />
-            {syncing ? 'Fetching New Blogs...' : 'New Blogs'}
-          </button>
-          {lastSynced && (
-            <span className="text-[10px] text-slate-400 font-semibold">Last updated: {lastSynced}</span>
-          )}
+        {/* ── Server Refresh Button ── */}
+        <div className="flex items-center justify-between border-t border-slate-200/60 pt-6">
+          <h2 className="text-xl font-heading font-extrabold text-slate-900 flex items-center gap-2 leading-none">
+            <Clock className="w-5 h-5 text-primary" /> All Articles
+          </h2>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors shadow-sm cursor-pointer"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+              {refreshing ? 'Refreshing...' : 'Refresh'}
+            </button>
+            {lastRefreshed && (
+              <span className="text-[10px] text-slate-400 font-semibold">Refreshed: {lastRefreshed}</span>
+            )}
+          </div>
         </div>
 
         {/* ── 4. Main Articles Grid & Sidebar ── */}
@@ -227,16 +262,12 @@ export default function BlogPage() {
           
           {/* Recent Articles (Spans 8) */}
           <div className="lg:col-span-8 space-y-6">
-            <h2 className="text-xl font-heading font-extrabold text-slate-900 flex items-center gap-2 leading-none">
-              <Clock className="w-5 h-5 text-primary" /> Recent Publications
-            </h2>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {recentPosts.map((post) => (
                 <div key={post.id} className="bg-white border border-slate-150 rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col justify-between">
                   <div>
                     <div className="h-44 relative bg-slate-100 overflow-hidden shrink-0">
-                      <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-102 transition-transform duration-355" unoptimized />
+                      <Image src={post.featuredImage} alt={post.imageAlt || post.title} fill className="object-cover group-hover:scale-102 transition-transform duration-355" unoptimized />
                       <span className="absolute top-3 left-3 bg-slate-900/80 text-white text-[8px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded backdrop-blur-sm">
                         {post.category}
                       </span>
@@ -244,15 +275,15 @@ export default function BlogPage() {
                     
                     <div className="p-5 space-y-3">
                       <div className="flex items-center gap-3 text-[10px] font-semibold text-slate-400 font-mono">
-                        <span>{post.date}</span>
+                        <span>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : 'Recent'}</span>
                         <span>•</span>
-                        <span>{post.readTime}</span>
+                        <span>{post.readingTime}</span>
                       </div>
                       <h3 className="text-base font-heading font-extrabold text-slate-900 leading-snug group-hover:text-primary transition-colors">
                         {post.title}
                       </h3>
                       <p className="text-xs text-slate-500 leading-relaxed font-semibold line-clamp-3">
-                        {post.desc}
+                        {post.excerpt}
                       </p>
                     </div>
                   </div>
@@ -260,9 +291,9 @@ export default function BlogPage() {
                   <div className="px-5 pb-5 pt-3 border-t border-slate-50 flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
                       <div className="w-6.5 h-6.5 rounded-full bg-secondary/15 flex items-center justify-center font-bold text-secondary text-[9px]">
-                        {post.author.split(' ').map(n => n[0]).join('')}
+                        {post.authorName.split(' ').map(n => n[0]).join('')}
                       </div>
-                      <span className="text-[10px] font-bold text-slate-700">{post.author}</span>
+                      <span className="text-[10px] font-bold text-slate-700">{post.authorName}</span>
                     </div>
                     <Link href={`/blog/${post.slug}`} className="text-primary hover:underline font-bold text-[10px] flex items-center gap-0.5">
                       Read <ArrowRight className="w-3.5 h-3.5" />
@@ -273,8 +304,23 @@ export default function BlogPage() {
             </div>
 
             {recentPosts.length === 0 && (
-              <div className="bg-white border border-slate-150 p-8 rounded-[24px] text-center text-slate-400 font-semibold">
-                No recent publications found matching your selection.
+              <div className="bg-white border border-slate-150 p-8 rounded-[24px] text-center text-slate-400 font-semibold space-y-3">
+                <p>No publications found matching your selection.</p>
+                <button onClick={() => handleCategorySelect('All')} className="text-primary hover:underline text-xs font-bold">
+                  View All Publications
+                </button>
+              </div>
+            )}
+
+            {/* Pagination Load More Button */}
+            {page < totalPages && (
+              <div className="text-center pt-6">
+                <button
+                  onClick={handleLoadMore}
+                  className="px-6 py-3 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-800 hover:bg-slate-100 shadow-sm cursor-pointer transition-colors"
+                >
+                  Load More Publications
+                </button>
               </div>
             )}
           </div>
@@ -287,17 +333,17 @@ export default function BlogPage() {
                 Popular Tags
               </h4>
               <div className="flex flex-wrap gap-1.5">
-                {POPULAR_TAGS.map((t) => (
-                  <span
+                {popularTags.map((t) => (
+                  <button
                     key={t}
                     onClick={() => {
                       setSelectedCategory('All');
-                      setSearchQuery(t);
+                      handleSearchChange(t);
                     }}
-                    className="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[9px] text-slate-600 font-bold px-2.5 py-1 rounded-lg cursor-pointer"
+                    className="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[9px] text-slate-600 font-bold px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
                   >
                     #{t}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -324,8 +370,12 @@ export default function BlogPage() {
                     placeholder="name@example.com"
                     className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none"
                   />
-                  <button type="submit" className="w-full py-2.5 bg-primary hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer transition-colors">
-                    Subscribe
+                  <button
+                    type="submit"
+                    disabled={submittingEmail}
+                    className="w-full py-2.5 bg-primary hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer transition-colors"
+                  >
+                    {submittingEmail ? 'Subscribing...' : 'Subscribe'}
                   </button>
                 </form>
               )}

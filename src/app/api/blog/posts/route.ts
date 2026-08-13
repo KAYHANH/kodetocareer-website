@@ -1,31 +1,29 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import { POSTS, BlogPost } from '@/app/blog/posts';
+import { NextRequest, NextResponse } from 'next/server';
+import { getPosts, getPostBySlug } from '@/lib/blog/repository';
 
 export const dynamic = 'force-dynamic';
 
-const DYNAMIC_POSTS_PATH = path.join(process.cwd(), 'src/app/blog/dynamic_posts.json');
-
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    let dynamicPosts: BlogPost[] = [];
-    if (fs.existsSync(DYNAMIC_POSTS_PATH)) {
-      try {
-        const fileContent = fs.readFileSync(DYNAMIC_POSTS_PATH, 'utf8');
-        dynamicPosts = JSON.parse(fileContent);
-      } catch (err) {
-        console.error('Error reading dynamic_posts.json:', err);
-      }
-    }
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category') || 'All';
+    const tag = searchParams.get('tag') || undefined;
+    const search = searchParams.get('q') || searchParams.get('search') || undefined;
+    const page = parseInt(searchParams.get('page') || '1', 10);
+    const limit = parseInt(searchParams.get('limit') || '20', 10);
 
-    // Merge static posts and dynamic posts
-    // We put dynamic posts first so new tech news items appear at the very top of the list!
-    const merged = [...dynamicPosts, ...POSTS];
+    const result = getPosts({
+      status: 'published',
+      category,
+      tag,
+      search,
+      page,
+      limit
+    });
 
     return NextResponse.json({
       success: true,
-      posts: merged
+      ...result
     });
   } catch (err: any) {
     return NextResponse.json({
