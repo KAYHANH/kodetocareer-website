@@ -34,6 +34,10 @@ body {
   contain-intrinsic-size: 1px 800px;
 }
 
+.contain-strict {
+  contain: strict;
+}
+
 /* ── Gradient Text Utility ── */
 .gradient-text {
   background: linear-gradient(135deg, #2563EB, #7C3AED, #06B6D4);

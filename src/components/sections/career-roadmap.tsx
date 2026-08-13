@@ -8,6 +8,9 @@ import {
   Zap,
   Briefcase,
   Trophy,
+  CheckCircle2,
+  Clock,
+  Sparkles,
 } from 'lucide-react';
 import {
   motion,
@@ -16,54 +19,66 @@ import {
   type Variants,
 } from 'framer-motion';
 
-interface RoadmapStep {
+export interface RoadmapStep {
   icon: LucideIcon;
   stage: string;
   title: string;
   description: string;
   duration: string;
+  highlights: string[];
+  badge: string;
 }
 
-const STEPS: RoadmapStep[] = [
+export const STEPS: RoadmapStep[] = [
   {
     icon: BookOpen,
-    stage: '1. Join',
+    stage: '1. Onboarding',
     title: 'Admission & Career Alignment',
     description:
-      'Enroll in your career academy, get matched with an AI-driven learning roadmap, and set up your development sandbox.',
+      'Enroll in your career academy, get matched with an AI-driven learning roadmap, and set up your local and cloud development sandbox.',
     duration: 'Week 1',
+    highlights: ['Skill Gap Audit', 'AI Learning Matrix', 'Dev Sandbox Setup'],
+    badge: 'Kickoff',
   },
   {
     icon: Code,
     stage: '2. Training',
     title: 'Rigorous Technical Training',
     description:
-      'Learn the core concepts, data structures, backend frameworks, and engineering best practices from industry practitioners.',
+      'Master core concepts, data structures, backend frameworks, clean code standards, and engineering best practices from industry practitioners.',
     duration: '2-3 Months',
+    highlights: ['Live Cohorts', '1-on-1 Code Reviews', 'DSA & System Design'],
+    badge: 'Core Skills',
   },
   {
     icon: Zap,
     stage: '3. Projects',
     title: 'Production Product Builds',
     description:
-      'Develop real, deployed web systems in teams. Write clean code, run test pipelines, and configure DB migrations.',
+      'Develop real, deployed full-stack web and AI systems in agile teams. Write clean code, run test pipelines, and configure DB migrations.',
     duration: '1-2 Months',
+    highlights: ['Commercial Apps', 'CI/CD Pipelines', 'GitHub Portfolio'],
+    badge: 'Hands-On',
   },
   {
     icon: Briefcase,
     stage: '4. Internship',
-    title: 'Paid Corporate Internship',
+    title: 'Corporate Internship Experience',
     description:
-      'Work on live commercial codebases at high-growth startups and partner tech companies to earn valuable experience.',
+      'Work on live commercial codebases at high-growth tech partners to gain real industrial experience and verified references.',
     duration: '2-3 Months',
+    highlights: ['Real Industry Code', 'Scrum Sprints', 'Verified Experience'],
+    badge: 'Experience',
   },
   {
     icon: Trophy,
     stage: '5. Placement',
     title: 'Direct Placement Drives',
     description:
-      'Attend daily placement drives, reference interviews, and lock down high-paying software jobs with placement support.',
+      'Attend daily placement drives, mock interview drills, ATS resume audits, and secure high-paying software engineering offers.',
     duration: 'Ongoing',
+    highlights: ['100% Placement Cell', 'Mock Interviews', 'Salary Negotiations'],
+    badge: 'Career Success',
   },
 ];
 
@@ -91,19 +106,25 @@ function StepCard({ step }: { step: RoadmapStep }) {
   const Icon = step.icon;
 
   return (
-    <div className="max-w-md w-full rounded-[24px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-350 hover:border-primary/20 hover:shadow-[0_16px_40px_rgba(37,99,235,0.06)] text-left group">
-      {/* Icon + Stage */}
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-          <Icon className="h-5 w-5 text-primary group-hover:scale-115 transition-transform duration-200" />
+    <div className="max-w-md w-full rounded-[24px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-350 hover:border-primary/20 hover:shadow-[0_16px_40px_rgba(37,99,235,0.06)] text-left group relative overflow-hidden">
+      {/* Top Badge & Duration */}
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center gap-2">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+            <Icon className="h-4.5 w-4.5 text-primary group-hover:scale-110 transition-transform duration-200" />
+          </div>
+          <span className="font-heading text-xs font-extrabold uppercase tracking-wider text-primary">
+            {step.stage}
+          </span>
         </div>
-        <span className="font-heading text-xs font-extrabold uppercase tracking-wider text-primary">
-          {step.stage}
+        <span className="inline-flex items-center gap-1 rounded-full bg-slate-50 border border-slate-100 px-2.5 py-0.5 font-heading text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+          <Clock className="w-3 h-3 text-primary/70" />
+          {step.duration}
         </span>
       </div>
 
       {/* Title */}
-      <h3 className="mt-4 font-heading text-lg font-extrabold text-slate-900 group-hover:text-primary transition-colors">
+      <h3 className="mt-2 font-heading text-lg font-extrabold text-slate-900 group-hover:text-primary transition-colors">
         {step.title}
       </h3>
 
@@ -112,10 +133,15 @@ function StepCard({ step }: { step: RoadmapStep }) {
         {step.description}
       </p>
 
-      {/* Duration badge */}
-      <span className="mt-4 inline-block rounded-full bg-slate-50 border border-slate-100 px-3 py-1 font-heading text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-        {step.duration}
-      </span>
+      {/* Highlights */}
+      <div className="mt-4 pt-3 border-t border-slate-50 flex flex-wrap gap-1.5">
+        {step.highlights.map((h, i) => (
+          <span key={i} className="text-[10px] font-semibold text-slate-600 bg-slate-50/80 border border-slate-150 px-2 py-0.5 rounded-md flex items-center gap-1">
+            <CheckCircle2 className="w-2.5 h-2.5 text-emerald-500 shrink-0" />
+            {h}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -136,10 +162,10 @@ function TimelineStep({
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
       transition={{ delay: index * 0.12 }}
-      className="relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-12"
+      className="relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 pl-12 md:pl-0"
     >
       {/* Number Dot */}
-      <div className="relative z-10 flex shrink-0 items-center justify-center md:order-2 md:mx-auto">
+      <div className="absolute left-0 md:relative md:left-auto z-10 flex shrink-0 items-center justify-center md:order-2 md:mx-auto">
         <div className="h-10 w-10 rounded-full border-4 border-white bg-primary text-white font-heading font-extrabold text-sm flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.35)]">
           {index + 1}
         </div>
@@ -177,8 +203,8 @@ export default function CareerRoadmap() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          <p className="mb-3 text-xs uppercase tracking-widest text-primary font-bold">
-            YOUR PLACEMENT PATH
+          <p className="mb-3 text-xs uppercase tracking-widest text-primary font-bold inline-flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5" /> YOUR PLACEMENT PATH
           </p>
           <h2
             id="career-roadmap-heading"
@@ -187,7 +213,7 @@ export default function CareerRoadmap() {
             The Student Placement Journey
           </h2>
           <p className="mx-auto max-w-2xl text-slate-500 text-sm md:text-base font-medium">
-            From the classroom to your corporate onboarding. Follow our structured, step-by-step career path.
+            From classroom onboarding to your corporate offer letter. Follow our structured, step-by-step career path.
           </p>
         </motion.div>
 
@@ -207,7 +233,7 @@ export default function CareerRoadmap() {
           />
 
           {/* Timeline steps */}
-          <div className="relative flex flex-col gap-12 md:gap-16">
+          <div className="relative flex flex-col gap-10 md:gap-16">
             {STEPS.map((step, index) => (
               <TimelineStep key={step.title} step={step} index={index} />
             ))}

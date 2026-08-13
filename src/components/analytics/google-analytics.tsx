@@ -1,54 +1,48 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
-
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+import { GA_ID, sendGAEvent } from '@/lib/analytics';
 
 export default function GoogleAnalytics() {
-  const [loadGA, setLoadGA] = useState(false);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
+  // Track page views on route changes
   useEffect(() => {
-    const handleInteraction = () => {
-      setLoadGA(true);
-      cleanup();
-    };
+    if (!pathname || !GA_ID) return;
 
-    const cleanup = () => {
-      window.removeEventListener('scroll', handleInteraction);
-      window.removeEventListener('pointermove', handleInteraction);
-      window.removeEventListener('touchstart', handleInteraction);
-      window.removeEventListener('keydown', handleInteraction);
-      window.removeEventListener('click', handleInteraction);
-    };
+    const url = searchParams?.toString()
+      ? `${pathname}?${searchParams.toString()}`
+      : pathname;
 
-    window.addEventListener('scroll', handleInteraction, { passive: true });
-    window.addEventListener('pointermove', handleInteraction, { passive: true });
-    window.addEventListener('touchstart', handleInteraction, { passive: true });
-    window.addEventListener('keydown', handleInteraction, { passive: true });
-    window.addEventListener('click', handleInteraction, { passive: true });
+    sendGAEvent('page_view', {
+      page_path: url,
+      page_title: document.title,
+    });
+  }, [pathname, searchParams]);
 
-    return cleanup;
-  }, []);
-
-  if (!GA_ID || !loadGA) return null;
+  if (!GA_ID) return null;
 
   return (
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="lazyOnload"
+        strategy="afterInteractive"
       />
-      <Script id="google-analytics" strategy="lazyOnload">
+      <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('consent', 'default', {
-            'analytics_storage': 'granted'
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted'
           });
           gtag('config', '${GA_ID}', {
             page_path: window.location.pathname,
+            send_page_view: true
           });
         `}
       </Script>

@@ -6,7 +6,14 @@ import { Sparkles, Award, Trophy, Phone, Shield, GraduationCap, CheckCircle2, Me
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
-const TechStackCircle = dynamic(() => import('@/components/ui/tech-stack-circle'), { ssr: false });
+const TechStackCircle = dynamic(() => import('@/components/ui/tech-stack-circle'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] flex items-center justify-center relative pointer-events-none" aria-hidden="true">
+      <div className="w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] lg:w-[440px] lg:h-[440px] rounded-full border border-primary/20 bg-primary/5 animate-pulse" />
+    </div>
+  ),
+});
 
 const MotionLink = motion(Link);
 
@@ -24,10 +31,10 @@ const ROTATING_WORDS = [
 
 const STATS = [
   { value: 1200, suffix: '+', label: 'Students Enrolled' },
-  { value: 500, suffix: '+', label: 'Career Placements' },
-  { value: 95, suffix: '%', label: 'Success Rate' },
+  { value: 500, suffix: '+', label: 'Hiring Partners' },
+  { value: 94, suffix: '%', label: 'Placement Rate' },
   { value: 10, suffix: '+', label: 'Career Programs' },
-  { value: 300, suffix: '+', label: 'Hiring Partners' },
+  { value: 95, suffix: '%', label: 'Success Rate' },
 ] as const;
 
 const EASE: [number, number, number, number] = [0.21, 0.47, 0.32, 0.98];
@@ -235,32 +242,35 @@ export default function Hero() {
             </p>
 
             {/* CTA buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto"
-              initial={{ opacity: 1, y: 0 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <MotionLink
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
+              <Link
+                href="/courses"
+                className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/35 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+              >
+                <GraduationCap className="w-5 h-5" />
+                Explore Courses
+              </Link>
+              <Link
                 href="/contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/35 transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-slate-900/20 hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
               >
                 <Phone className="w-5 h-5" />
-                Book Free Career Counselling
-              </MotionLink>
-              <motion.a
+                Free Career Counseling
+              </Link>
+            </div>
+
+            {/* Secondary WhatsApp Demo Class Link */}
+            <div className="mt-3">
+              <a
                 href="https://wa.me/919667975616?text=Hi%2C%20I%20want%20to%20attend%20a%20free%20demo%20class"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-[14px] font-bold text-lg shadow-lg shadow-emerald-700/20 hover:shadow-xl transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-bold hover:underline transition-colors"
               >
-                <MessageSquare className="w-5 h-5" />
-                Attend Free Demo Class
-              </motion.a>
-            </motion.div>
+                <MessageSquare className="w-4 h-4 text-emerald-600" />
+                Want to test before enrolling? Attend Free Demo Class on WhatsApp →
+              </a>
+            </div>
 
             {/* Small trust badges */}
             <motion.div

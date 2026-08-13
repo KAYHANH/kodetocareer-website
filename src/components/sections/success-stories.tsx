@@ -123,9 +123,13 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           <div className="absolute inset-0 bg-grid opacity-15" />
           
           {/* Play Button Overlay */}
-          <div className="relative z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 backdrop-blur-md flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 cursor-pointer">
-            <Play className="w-4.5 h-4.5 text-white fill-white translate-x-0.5" />
-          </div>
+          <button
+            type="button"
+            className="relative z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 backdrop-blur-md flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 cursor-pointer"
+            aria-label={`Play video review from ${testimonial.name}`}
+          >
+            <Play className="w-4.5 h-4.5 text-white fill-white translate-x-0.5" aria-hidden="true" />
+          </button>
           
           <span className="absolute bottom-2.5 left-3 text-[9px] font-bold text-white/70 uppercase tracking-widest bg-black/35 px-2 py-0.5 rounded-md">
             VIDEO REVIEW • {testimonial.videoDuration}
@@ -227,6 +231,8 @@ export default function SuccessStories() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
+          role="region"
+          aria-label="Student success testimonial stories"
         >
           {TESTIMONIALS.map((testimonial) => (
             <TestimonialCard key={testimonial.name} testimonial={testimonial} />

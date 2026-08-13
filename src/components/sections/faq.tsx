@@ -92,13 +92,18 @@ const itemVariants: Variants = {
 
 function AccordionItem({
   item,
+  index,
   isOpen,
   onToggle,
 }: {
   item: FaqItem;
+  index: number;
   isOpen: boolean;
   onToggle: () => void;
 }) {
+  const triggerId = `faq-trigger-${index}`;
+  const panelId = `faq-panel-${index}`;
+
   return (
     <motion.div
       variants={itemVariants}
@@ -106,9 +111,12 @@ function AccordionItem({
     >
       {/* Trigger */}
       <button
+        id={triggerId}
+        type="button"
         onClick={onToggle}
-        className="flex w-full cursor-pointer items-center justify-between p-6 text-left"
+        className="flex w-full cursor-pointer items-center justify-between p-6 text-left group"
         aria-expanded={isOpen}
+        aria-controls={panelId}
       >
         <span className="faq-question pr-4 text-lg font-bold text-slate-900 transition-colors duration-300 group-hover:text-primary">
           {item.question}
@@ -116,7 +124,7 @@ function AccordionItem({
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3, ease: EASE }}
-          className="shrink-0 text-slate-400"
+          className="shrink-0 text-slate-400 group-hover:text-primary"
         >
           <ChevronDown className="h-5 w-5" aria-hidden="true" />
         </motion.span>
@@ -126,7 +134,10 @@ function AccordionItem({
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            id={panelId}
             key="content"
+            role="region"
+            aria-labelledby={triggerId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -154,11 +165,30 @@ export default function Faq() {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <section
       className="bg-gradient-to-b from-[#F8FAFC] to-[#EFF6FF] py-24 border-b border-slate-100"
       aria-labelledby="faq-heading"
     >
+      {/* FAQPage JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div className="mx-auto max-w-[800px] px-6">
         {/* Section header */}
         <motion.div
@@ -189,12 +219,13 @@ export default function Faq() {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
           role="region"
-          aria-label="Frequently asked questions"
+          aria-label="Frequently asked questions list"
         >
           {FAQ_ITEMS.map((item, index) => (
             <AccordionItem
               key={item.question}
               item={item}
+              index={index}
               isOpen={openIndex === index}
               onToggle={() => handleToggle(index)}
             />

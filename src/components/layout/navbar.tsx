@@ -5,20 +5,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Menu, X, ChevronDown, ChevronRight, ArrowRight, BookOpen, User } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, ArrowRight, User, ExternalLink } from "lucide-react";
 
 interface NavLink {
   label: string;
   href: string;
   id: string;
   hasDropdown?: boolean;
+  isExternal?: boolean;
 }
 
 const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/", id: "home" },
   { label: "About", href: "/about", id: "about" },
   { label: "Courses", href: "/courses", id: "courses", hasDropdown: true },
-  { label: "Placements", href: "https://devsunite.com/jobs", id: "placements" },
+  { label: "Placements", href: "https://devsunite.com/jobs", id: "placements", isExternal: true },
   { label: "Career Solutions", href: "/career-services", id: "career-services", hasDropdown: true },
   { label: "Blog", href: "/blog", id: "blog" },
   { label: "Free Tools", href: "/free-tools", id: "free-tools" },
@@ -67,7 +68,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   
-  // Track separate hover states for desktop dropdowns
+  // Track separate hover/focus states for desktop dropdowns
   const [coursesHovered, setCoursesHovered] = useState(false);
   const [solutionsHovered, setSolutionsHovered] = useState(false);
 
@@ -89,11 +90,22 @@ export default function Navbar() {
     };
   }, [handleScroll]);
 
-  /* ── lock body scroll when mobile menu is open ── */
+  /* ── lock body scroll & listen to Escape key ── */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        setCoursesHovered(false);
+        setSolutionsHovered(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [mobileOpen]);
 
@@ -103,7 +115,9 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-out bg-white border-b border-slate-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)]"
+        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-out bg-white border-b border-slate-100 ${
+          scrolled ? "shadow-md bg-white/95 backdrop-blur-md" : "shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)]"
+        }`}
         role="banner"
         suppressHydrationWarning
       >
@@ -115,7 +129,7 @@ export default function Navbar() {
           {/* ── Logo ── */}
           <Link
             href="/"
-            className="flex items-center"
+            className="flex items-center rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
             aria-label="KodeToCareer – Home"
           >
             <Image
@@ -131,7 +145,7 @@ export default function Navbar() {
 
           {/* ── Desktop Links ── */}
           <ul className="hidden items-center gap-0.5 xl:gap-1 lg:flex h-full">
-            {NAV_LINKS.map(({ label, href, id, hasDropdown }) => {
+            {NAV_LINKS.map(({ label, href, id, hasDropdown, isExternal }) => {
               const isCourses = id === "courses";
               const isSolutions = id === "career-services";
               const currentHoverState = isCourses ? coursesHovered : isSolutions ? solutionsHovered : false;
@@ -144,30 +158,64 @@ export default function Navbar() {
                   suppressHydrationWarning
                   onMouseEnter={hasDropdown ? () => setHoverState(true) : undefined}
                   onMouseLeave={hasDropdown ? () => setHoverState(false) : undefined}
+                  onFocus={hasDropdown ? () => setHoverState(true) : undefined}
+                  onBlur={
+                    hasDropdown
+                      ? (e) => {
+                          if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                            setHoverState(false);
+                          }
+                        }
+                      : undefined
+                  }
                 >
                   {hasDropdown ? (
                     <div className="py-5" suppressHydrationWarning>
                       <button
                         type="button"
+                        id={`${id}-menu-button`}
                         aria-expanded={currentHoverState}
                         aria-haspopup="true"
-                        className={`relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors flex items-center gap-1 cursor-pointer outline-none ${
+                        aria-controls={`${id}-mega-menu`}
+                        onClick={() => setHoverState(!currentHoverState)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                            e.preventDefault();
+                            setHoverState(!currentHoverState);
+                          }
+                        }}
+                        className={`relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors flex items-center gap-1 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
                           isActive(href)
                             ? "text-primary font-bold"
                             : "text-text-secondary hover:text-slate-900"
                         }`}
                       >
                         {label}
-                        <ChevronDown aria-hidden="true" className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${currentHoverState ? "rotate-180" : ""}`} />
+                        <ChevronDown
+                          aria-hidden="true"
+                          className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                            currentHoverState ? "rotate-180" : ""
+                          }`}
+                        />
                         {isActive(href) && (
                           <span className="absolute inset-x-2.5 xl:inset-x-3 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-primary to-secondary" />
                         )}
                       </button>
                     </div>
+                  ) : isExternal ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors text-text-secondary hover:text-slate-900 flex items-center gap-1 outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                    >
+                      <span>{label}</span>
+                      <ExternalLink className="w-3 h-3 text-slate-400" aria-hidden="true" />
+                    </a>
                   ) : (
                     <Link
                       href={href}
-                      className={`relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors ${
+                      className={`relative rounded-[10px] px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
                         isActive(href)
                           ? "text-primary font-bold"
                           : "text-text-secondary hover:text-slate-900"
@@ -185,6 +233,9 @@ export default function Navbar() {
                     <AnimatePresence>
                       {coursesHovered && (
                         <motion.div
+                          id="courses-mega-menu"
+                          role="region"
+                          aria-label="Courses menu"
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -196,15 +247,15 @@ export default function Navbar() {
                             <div className="space-y-3">
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Software Engineering</h4>
                               <div className="space-y-2">
-                                <Link href="/courses/mern-stack-development" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/mern-stack-development" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">MERN Stack</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months + AI Integration</span>
                                 </Link>
-                                <Link href="/courses/java-full-stack" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/java-full-stack" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Java Full Stack</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Live Classes</span>
                                 </Link>
-                                <Link href="/courses/python-programming" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/python-programming" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Python & Automation</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Scripting</span>
                                 </Link>
@@ -215,11 +266,11 @@ export default function Navbar() {
                             <div className="space-y-3">
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Data & AI</h4>
                               <div className="space-y-2">
-                                <Link href="/courses/data-science-machine-learning" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/data-science-machine-learning" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Science & ML</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months Live Training</span>
                                 </Link>
-                                <Link href="/courses/data-analytics" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/data-analytics" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Analytics</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months BI Tools</span>
                                 </Link>
@@ -230,11 +281,11 @@ export default function Navbar() {
                             <div className="space-y-3">
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud & MLOps</h4>
                               <div className="space-y-2">
-                                <Link href="/courses/cloud-devops" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/cloud-devops" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cloud & DevOps</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months DevOps/CI/CD</span>
                                 </Link>
-                                <Link href="/courses/mlops-ai-systems" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/mlops-ai-systems" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Industry MLOps</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">28 Weeks AI Platforms</span>
                                 </Link>
@@ -245,15 +296,15 @@ export default function Navbar() {
                             <div className="space-y-3">
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Creative & Growth</h4>
                               <div className="space-y-2">
-                                <Link href="/courses/graphic-design-ui-ux" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/graphic-design-ui-ux" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">UI/UX Product Design</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Design System</span>
                                 </Link>
-                                <Link href="/courses/digital-marketing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/digital-marketing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Digital Marketing</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">3 Months Growth Hacking</span>
                                 </Link>
-                                <Link href="/courses/videography-video-editing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50">
+                                <Link href="/courses/videography-video-editing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
                                   <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Graphic & Video Editing</span>
                                   <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Live Studio</span>
                                 </Link>
@@ -265,10 +316,10 @@ export default function Navbar() {
                             <span className="text-[10px] text-slate-450 font-bold">Ready to check all programs?</span>
                             <Link
                               href="/courses"
-                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5"
+                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
                               onClick={() => setCoursesHovered(false)}
                             >
-                              Explore All 10 Courses <ArrowRight className="w-3.5 h-3.5" />
+                              Explore All 10 Courses <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                             </Link>
                           </div>
                         </motion.div>
@@ -281,6 +332,9 @@ export default function Navbar() {
                     <AnimatePresence>
                       {solutionsHovered && (
                         <motion.div
+                          id="career-services-mega-menu"
+                          role="region"
+                          aria-label="Career Solutions menu"
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -292,12 +346,12 @@ export default function Navbar() {
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Career Growth</h4>
                               <Link
                                 href="/career-services/placements"
-                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                                 onClick={() => setSolutionsHovered(false)}
                               >
                                 <div>
                                   <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
-                                    Placement Outcomes <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                                    Placement Outcomes <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" aria-hidden="true" />
                                   </h5>
                                   <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
                                     Resume audits, mock interviews, and direct hiring partner referrals.
@@ -305,9 +359,9 @@ export default function Navbar() {
                                 </div>
                               </Link>
                               <div className="pl-2 space-y-1.5">
-                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Resume & ATS Review</Link>
-                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Mock Interviews</Link>
-                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Mentorship Support</Link>
+                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Resume & ATS Review</Link>
+                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Mock Interviews</Link>
+                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Mentorship Support</Link>
                               </div>
                             </div>
 
@@ -315,12 +369,12 @@ export default function Navbar() {
                               <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Academics</h4>
                               <Link
                                 href="/career-services/admissions"
-                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                                 onClick={() => setSolutionsHovered(false)}
                               >
                                 <div>
                                   <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
-                                    College Admissions <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                                    College Admissions <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" aria-hidden="true" />
                                   </h5>
                                   <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
                                     Accredited Regular, Online, and Distance degrees from top universities.
@@ -328,9 +382,9 @@ export default function Navbar() {
                                 </div>
                               </Link>
                               <div className="pl-2 space-y-1.5">
-                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Career Counselling</Link>
-                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• UGC Approved Programs</Link>
-                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors">• Career Gap Support</Link>
+                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Career Counselling</Link>
+                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• UGC Approved Programs</Link>
+                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Career Gap Support</Link>
                               </div>
                             </div>
                           </div>
@@ -339,10 +393,10 @@ export default function Navbar() {
                             <span className="text-[10px] text-slate-450 font-bold">Confused about your path?</span>
                             <Link
                               href="/contact"
-                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5"
+                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
                               onClick={() => setSolutionsHovered(false)}
                             >
-                              Book counselling session <ArrowRight className="w-3.5 h-3.5" />
+                              Book counselling session <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                             </Link>
                           </div>
                         </motion.div>
@@ -359,17 +413,17 @@ export default function Navbar() {
             {/* Sign In Button - ALWAYS VISIBLE across desktop, tablet, and mobile */}
             <Link
               href="/login"
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-extrabold text-white bg-slate-900 hover:bg-slate-800 border border-slate-900 rounded-xl transition-all shrink-0 shadow-md hover:shadow-lg"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-extrabold text-white bg-slate-900 hover:bg-slate-800 border border-slate-900 rounded-xl transition-all shrink-0 shadow-md hover:shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-slate-900/50"
               title="Sign In to Student, Trainer, or Admin Portal"
             >
-              <User className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+              <User className="w-3.5 h-3.5 text-blue-400 shrink-0" aria-hidden="true" />
               <span>Sign In</span>
             </Link>
 
             {/* Enroll Now Button - Desktop & Tablet */}
             <Link
               href="/start"
-              className="btn-primary-gradient hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shrink-0 shadow-md shadow-primary/20"
+              className="btn-primary-gradient hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shrink-0 shadow-md shadow-primary/20 outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
             >
               Enroll Now
             </Link>
@@ -377,12 +431,13 @@ export default function Navbar() {
             {/* Mobile Hamburger Menu */}
             <button
               type="button"
-              className="flex items-center justify-center rounded-[10px] p-2 text-text-secondary transition-colors hover:text-slate-900 lg:hidden shrink-0"
+              className="flex items-center justify-center rounded-[10px] p-2 text-text-secondary transition-colors hover:text-slate-900 lg:hidden shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               onClick={() => setMobileOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation-drawer"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
         </nav>
@@ -408,6 +463,7 @@ export default function Navbar() {
             {/* Drawer Panel */}
             <motion.div
               key="mobile-drawer"
+              id="mobile-navigation-drawer"
               className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-white border-l border-slate-100 shadow-2xl lg:hidden"
               variants={drawerVariants}
               initial="hidden"
@@ -418,10 +474,10 @@ export default function Navbar() {
               aria-label="Mobile navigation"
             >
               {/* Drawer Header */}
-              <div className="flex h-20 items-center justify-between px-6">
+              <div className="flex h-20 items-center justify-between px-6 border-b border-slate-100">
                 <Link
                   href="/"
-                  className="flex items-center"
+                  className="flex items-center rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                   onClick={() => setMobileOpen(false)}
                 >
                   <Image
@@ -434,11 +490,11 @@ export default function Navbar() {
                 </Link>
                 <button
                   type="button"
-                  className="flex items-center justify-center rounded-[10px] p-2 text-text-secondary transition-colors hover:text-slate-900"
+                  className="flex items-center justify-center rounded-[10px] p-2 text-text-secondary transition-colors hover:text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close navigation menu"
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
 
@@ -449,7 +505,7 @@ export default function Navbar() {
                 initial="hidden"
                 animate="visible"
               >
-                {NAV_LINKS.map(({ label, href, id, hasDropdown }) => {
+                {NAV_LINKS.map(({ label, href, id, hasDropdown, isExternal }) => {
                   const isCourses = id === "courses";
                   const isSolutions = id === "career-services";
                   const currentMobileOpen = isCourses ? mobileCoursesOpen : isSolutions ? mobileSolutionsOpen : false;
@@ -462,8 +518,9 @@ export default function Navbar() {
                           <button
                             type="button"
                             aria-expanded={currentMobileOpen}
+                            aria-controls={`mobile-${id}-dropdown`}
                             onClick={() => setMobileOpenState(!currentMobileOpen)}
-                            className="flex w-full items-center justify-between rounded-[10px] px-4 py-3 text-base font-medium transition-colors text-text-secondary hover:bg-black/[0.02] hover:text-slate-900 outline-none"
+                            className="flex w-full items-center justify-between rounded-[10px] px-4 py-3 text-base font-medium transition-colors text-text-secondary hover:bg-black/[0.02] hover:text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                           >
                             <span>{label}</span>
                             <ChevronDown aria-hidden="true" className={`w-4 h-4 transition-transform duration-200 ${currentMobileOpen ? "rotate-180" : ""}`} />
@@ -471,44 +528,57 @@ export default function Navbar() {
                           <AnimatePresence>
                             {currentMobileOpen && (
                               <motion.div
+                                id={`mobile-${id}-dropdown`}
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: "auto", opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
                                 className="pl-6 space-y-1 overflow-hidden"
                               >
                                 {isCourses ? (
                                    <>
-                                     <Link href="/courses/mern-stack-development" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">MERN Stack</Link>
-                                     <Link href="/courses/java-full-stack" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Java Full Stack</Link>
-                                     <Link href="/courses/python-programming" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Python & Automation</Link>
-                                     <Link href="/courses/data-science-machine-learning" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Data Science & ML</Link>
-                                     <Link href="/courses/data-analytics" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Data Analytics</Link>
-                                     <Link href="/courses/cloud-devops" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Cloud & DevOps</Link>
-                                     <Link href="/courses/mlops-ai-systems" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Industry MLOps</Link>
-                                     <Link href="/courses/graphic-design-ui-ux" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">UI/UX Product Design</Link>
-                                     <Link href="/courses/digital-marketing" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Digital Marketing</Link>
-                                     <Link href="/courses/videography-video-editing" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary">Graphic & Video Editing</Link>
-                                     <Link href="/courses" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-primary hover:underline">Explore All 10 Courses →</Link>
+                                     <Link href="/courses/mern-stack-development" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">MERN Stack</Link>
+                                     <Link href="/courses/java-full-stack" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Java Full Stack</Link>
+                                     <Link href="/courses/python-programming" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Python & Automation</Link>
+                                     <Link href="/courses/data-science-machine-learning" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Data Science & ML</Link>
+                                     <Link href="/courses/data-analytics" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Data Analytics</Link>
+                                     <Link href="/courses/cloud-devops" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Cloud & DevOps</Link>
+                                     <Link href="/courses/mlops-ai-systems" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Industry MLOps</Link>
+                                     <Link href="/courses/graphic-design-ui-ux" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">UI/UX Product Design</Link>
+                                     <Link href="/courses/digital-marketing" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Digital Marketing</Link>
+                                     <Link href="/courses/videography-video-editing" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-1.5 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Graphic & Video Editing</Link>
+                                     <Link href="/courses" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-primary hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Explore All 10 Courses →</Link>
                                    </>
                                 ) : (
                                   <>
-                                    <Link href="/career-services/placements" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Placement Outcomes</Link>
-                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">College Admissions</Link>
-                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Career Gap Support</Link>
-                                    <Link href="/contact" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary">Career Counselling</Link>
+                                    <Link href="/career-services/placements" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Placement Outcomes</Link>
+                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">College Admissions</Link>
+                                    <Link href="/career-services/admissions" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Career Gap Support</Link>
+                                    <Link href="/contact" onClick={() => setMobileOpen(false)} className="flex rounded-[10px] px-4 py-2 text-sm font-bold text-slate-500 hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/50">Career Counselling</Link>
                                   </>
                                 )}
                               </motion.div>
                             )}
                           </AnimatePresence>
                         </>
+                      ) : isExternal ? (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center justify-between rounded-[10px] px-4 py-3 text-base font-medium transition-colors text-text-secondary hover:bg-black/[0.02] hover:text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                        >
+                          <span>{label}</span>
+                          <ExternalLink className="w-4 h-4 text-slate-400" aria-hidden="true" />
+                        </a>
                       ) : (
                         <Link
                           href={href}
                           onClick={() => setMobileOpen(false)}
-                          className={`flex rounded-[10px] px-4 py-3 text-base font-medium transition-colors ${
+                          className={`flex rounded-[10px] px-4 py-3 text-base font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
                             isActive(href)
-                              ? "bg-black/[0.04] text-primary"
+                              ? "bg-black/[0.04] text-primary font-bold"
                               : "text-text-secondary hover:bg-black/[0.02] hover:text-slate-900"
                           }`}
                         >
@@ -525,15 +595,15 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => setMobileOpen(false)}
-                  className="flex w-full items-center justify-center gap-2 py-3 text-sm font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition-colors shadow-md"
+                  className="flex w-full items-center justify-center gap-2 py-3 text-sm font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition-colors shadow-md outline-none focus-visible:ring-2 focus-visible:ring-slate-900/50"
                 >
-                  <User className="w-4 h-4 text-blue-400" />
+                  <User className="w-4 h-4 text-blue-400" aria-hidden="true" />
                   <span>Portal Sign In</span>
                 </Link>
                 <Link
                   href="/start"
                   onClick={() => setMobileOpen(false)}
-                  className="btn-primary-gradient flex w-full items-center justify-center py-3 text-sm font-semibold text-white"
+                  className="btn-primary-gradient flex w-full items-center justify-center py-3 text-sm font-semibold text-white outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                 >
                   Enroll Now
                 </Link>

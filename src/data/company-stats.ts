@@ -1,8 +1,8 @@
 // Single Source of Truth for verified company stats across KodeToCareer
 export const companyStats = {
   studentsEnrolled: '1,200+',
-  placementsRate: '95%',
-  hiringPartners: '300+',
+  placementsRate: '94%',
+  hiringPartners: '500+',
   partnerColleges: '50+',
   activeCourses: '10+',
   projectsCompleted: '150+',
