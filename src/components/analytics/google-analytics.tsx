@@ -1,11 +1,39 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Script from 'next/script';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function GoogleAnalytics() {
-  if (!GA_ID) return null;
+  const [loadGA, setLoadGA] = useState(false);
+
+  useEffect(() => {
+    const handleInteraction = () => {
+      setLoadGA(true);
+      cleanup();
+    };
+
+    const timer = setTimeout(() => {
+      setLoadGA(true);
+      cleanup();
+    }, 4500);
+
+    const cleanup = () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleInteraction);
+      window.removeEventListener('pointermove', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+    };
+
+    window.addEventListener('scroll', handleInteraction, { passive: true });
+    window.addEventListener('pointermove', handleInteraction, { passive: true });
+    window.addEventListener('touchstart', handleInteraction, { passive: true });
+
+    return cleanup;
+  }, []);
+
+  if (!GA_ID || !loadGA) return null;
 
   return (
     <>
