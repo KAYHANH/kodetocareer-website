@@ -85,7 +85,7 @@ export default function CourseQuizModal({ isOpen, onClose }: CourseQuizModalProp
 
   return (
     <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full relative shadow-2xl space-y-6">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 max-w-lg w-full relative shadow-2xl space-y-5">
         
         {/* Close Button */}
         <button 
@@ -101,13 +101,13 @@ export default function CourseQuizModal({ isOpen, onClose }: CourseQuizModalProp
             <Sparkles className="w-3.5 h-3.5" /> Interactive Career Quiz
           </div>
           <h2 className="text-xl font-heading font-black text-white">Which Program Fits You Best?</h2>
-          <p className="text-xs text-slate-400">Answer 3 quick questions to discover your ideal tech career path.</p>
+          <p className="text-xs text-slate-300 font-medium">Answer 3 quick questions to discover your ideal tech career path.</p>
         </div>
 
         {/* Quiz Steps */}
         {step < QUESTIONS.length ? (
           <div className="space-y-4">
-            <div className="flex justify-between items-center text-[10px] font-mono text-slate-500">
+            <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 font-bold">
               <span>Question {step + 1} of {QUESTIONS.length}</span>
               <span>{Math.round(((step + 1) / QUESTIONS.length) * 100)}% Completed</span>
             </div>
@@ -122,15 +122,15 @@ export default function CourseQuizModal({ isOpen, onClose }: CourseQuizModalProp
 
             <h3 className="text-sm font-bold text-slate-100">{QUESTIONS[step].title}</h3>
 
-            <div className="space-y-2.5">
+            <div className="space-y-3">
               {QUESTIONS[step].options.map((opt, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSelectOption(QUESTIONS[step].id, opt)}
-                  className="w-full text-left p-3.5 rounded-2xl bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-primary/50 text-xs text-slate-200 font-semibold transition-all flex items-center justify-between group cursor-pointer"
+                  className="w-full text-left px-4 h-[50px] rounded-xl bg-slate-950 hover:bg-slate-800/90 border border-slate-800 hover:border-primary/50 text-xs sm:text-sm text-slate-200 font-bold transition-all flex items-center justify-between group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30"
                 >
                   <span>{opt.label}</span>
-                  <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-primary transition-colors" />
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors shrink-0" />
                 </button>
               ))}
             </div>
@@ -151,7 +151,7 @@ export default function CourseQuizModal({ isOpen, onClose }: CourseQuizModalProp
               </h3>
             </div>
 
-            <ul className="text-xs text-slate-400 space-y-2 text-left bg-slate-900/60 p-4 rounded-xl border border-slate-800 font-medium">
+            <ul className="text-xs text-slate-300 space-y-2.5 text-left bg-slate-900/60 p-4 rounded-xl border border-slate-800 font-semibold">
               {recommendedCourse?.perks.map((perk: string, idx: number) => (
                 <li key={idx} className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -160,17 +160,17 @@ export default function CourseQuizModal({ isOpen, onClose }: CourseQuizModalProp
               ))}
             </ul>
 
-            <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
+            <div className="pt-2 flex flex-col sm:flex-row gap-3">
               <Link
                 href={`/courses/${recommendedCourse?.courseSlug}`}
                 onClick={onClose}
-                className="w-full py-3 bg-primary hover:bg-blue-600 text-white font-extrabold text-xs rounded-xl shadow-lg transition-colors flex items-center justify-center gap-1.5"
+                className="w-full h-[50px] bg-primary hover:bg-blue-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg transition-colors flex items-center justify-center gap-1.5"
               >
                 View Course Syllabus <ArrowRight className="w-4 h-4" />
               </Link>
               <button
                 onClick={handleReset}
-                className="py-3 px-4 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1"
+                className="h-[50px] px-5 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-200 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1 shrink-0"
               >
                 <RotateCcw className="w-3.5 h-3.5" /> Retake Quiz
               </button>

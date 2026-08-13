@@ -177,10 +177,10 @@ export default function Hero() {
   return (
     <section
       suppressHydrationWarning
-      className="min-h-[680px] sm:min-h-[760px] lg:min-h-screen flex items-center relative overflow-hidden -mt-20 pt-28 sm:pt-32 lg:pt-24 pb-16"
+      className="min-h-[680px] sm:min-h-[740px] lg:min-h-screen flex items-center relative overflow-hidden -mt-20 pt-28 sm:pt-36 pb-16"
       aria-label="Hero"
     >
-      {/* ── Background decoration layer (lowered overlay opacity to 0.24-0.32 for maximum contrast & visibility) ── */}
+      {/* ── Background decoration layer (reduced opacity 0.25 to prevent mobile dark screen obstruction) ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 contain-strict" aria-hidden="true" suppressHydrationWarning>
         <div className="absolute inset-0 bg-background" suppressHydrationWarning />
         <div
@@ -198,8 +198,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-grid opacity-30" suppressHydrationWarning />
       </div>
 
-      {/* ── Content (positioned cleanly within top 560px on mobile) ── */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 w-full" suppressHydrationWarning>
+      {/* ── Content ── */}
+      <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-6 w-full" suppressHydrationWarning>
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-8" suppressHydrationWarning>
           {/* ── Left column ── */}
           <div className="w-full lg:w-[58%] flex flex-col items-center lg:items-start text-center lg:text-left" suppressHydrationWarning>
@@ -211,46 +211,46 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Headline (LCP Element - High Contrast Native Typography) */}
-            <h1 className="mt-5 font-heading font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight">
-              <span className="block text-slate-900">AI-Powered{'\u00A0'}</span>
+            {/* Headline (High Contrast & Clear Hierarchy) */}
+            <h1 className="mt-5 font-heading font-black text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight">
+              <span className="block text-slate-950">AI-Powered{'\u00A0'}</span>
               <span className="block gradient-text">Software Engineering{'\u00A0'}</span>
-              <span className="block text-slate-900">Bootcamp</span>
+              <span className="block text-slate-950">Bootcamp</span>
             </h1>
 
             {/* Typing line */}
             <p
-              className="mt-5 text-xl md:text-2xl text-slate-800 font-bold h-10 min-h-[40px] flex items-center justify-center lg:justify-start"
+              className="mt-5 text-lg sm:text-xl md:text-2xl text-slate-700 font-extrabold h-10 min-h-[40px] flex items-center justify-center lg:justify-start"
               aria-live="polite"
             >
-              <span className="mr-2 text-slate-700">Master</span>
+              <span className="mr-2">Master</span>
               <span className="text-primary font-black inline-flex items-center relative" suppressHydrationWarning>
                 {mounted ? typedWord : ROTATING_WORDS[0]}
                 <span className="animate-pulse ml-0.5 text-primary select-none" aria-hidden="true">|</span>
               </span>
             </p>
 
-            {/* Description (Boosted font contrast for WCAG AA 39/100 -> 95/100 score improvement) */}
+            {/* Description (Enhanced Contrast text-slate-700) */}
             <p
-              className="text-base sm:text-lg text-slate-700 max-w-xl mt-4 leading-relaxed font-semibold"
+              className="text-base sm:text-lg text-slate-700 max-w-xl mt-5 leading-relaxed font-semibold"
             >
               Master Full Stack Development, Data Science, AI Engineering, and Cloud DevOps with live industry projects, guaranteed internships, and 100% placement support.
             </p>
 
-            {/* CTA buttons (Enforced 48-52px touch target height & WCAG compliance for Fix #2) */}
+            {/* CTA buttons (Fix #2: Mobile Button Height 50px min, 14px field gap) */}
             <div className="flex flex-col sm:flex-row gap-3.5 mt-7 w-full sm:w-auto">
               <Link
                 href="/courses"
-                className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-primary to-secondary text-white px-8 min-h-[50px] sm:min-h-[52px] rounded-[14px] font-extrabold text-base sm:text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-primary to-secondary text-white px-8 h-[50px] sm:h-14 rounded-[14px] font-black text-base sm:text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-primary/30"
               >
-                <GraduationCap className="w-5 h-5" />
+                <GraduationCap className="w-5 h-5 shrink-0" />
                 Explore Courses
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2.5 bg-slate-900 hover:bg-slate-800 text-white px-8 min-h-[50px] sm:min-h-[52px] rounded-[14px] font-extrabold text-base sm:text-lg shadow-lg shadow-slate-900/25 hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 bg-slate-950 hover:bg-slate-900 text-white px-8 h-[50px] sm:h-14 rounded-[14px] font-black text-base sm:text-lg shadow-lg shadow-slate-950/20 hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-slate-400/30"
               >
-                <Phone className="w-5 h-5" />
+                <Phone className="w-5 h-5 shrink-0" />
                 Free Career Counseling
               </Link>
             </div>
@@ -261,7 +261,7 @@ export default function Hero() {
                 href="https://wa.me/919667975616?text=Hi%2C%20I%20want%20to%20attend%20a%20free%20demo%20class"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-emerald-800 font-extrabold hover:underline transition-colors bg-emerald-50/80 px-3 py-1.5 rounded-lg border border-emerald-200/60"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-emerald-700 font-extrabold hover:underline transition-colors p-1"
               >
                 <MessageSquare className="w-4 h-4 text-emerald-600 shrink-0" />
                 Want to test before enrolling? Attend Free Demo Class on WhatsApp →
@@ -270,16 +270,16 @@ export default function Hero() {
 
             {/* Small trust badges */}
             <motion.div
-              className="flex flex-wrap gap-5 mt-6 justify-center lg:justify-start text-xs text-slate-500 font-bold uppercase tracking-wider"
+              className="flex flex-wrap gap-4 mt-6 justify-center lg:justify-start text-xs text-slate-700 font-extrabold uppercase tracking-wider"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> Live Projects</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Live Projects</span>
               <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-secondary" /> Internship Included</span>
               <span className="flex items-center gap-1.5"><Trophy className="w-3.5 h-3.5 text-primary" /> Placement Assistance</span>
-              <span className="flex items-center gap-1.5"><GraduationCap className="w-3.5 h-3.5 text-indigo-500" /> Career Mentorship</span>
-              <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-amber-500" /> Starting ₹5,000</span>
+              <span className="flex items-center gap-1.5"><GraduationCap className="w-3.5 h-3.5 text-indigo-600" /> Career Mentorship</span>
+              <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-amber-600" /> Starting ₹5,000</span>
             </motion.div>
 
             {/* Real Stats Grid — no initial transform to prevent CLS */}
