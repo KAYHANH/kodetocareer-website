@@ -201,26 +201,19 @@ export default function Hero() {
           {/* ── Left column ── */}
           <div className="w-full lg:w-[58%] flex flex-col items-center lg:items-start text-center lg:text-left" suppressHydrationWarning>
             {/* Badge */}
-            <motion.div
-              initial={{ opacity: 1, y: 0 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            <div>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-bold uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
                 AI-Powered Software Training Institute
               </span>
-            </motion.div>
+            </div>
 
-            {/* Headline */}
-            <motion.h1
-              className="mt-6 font-heading font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight"
-              initial={{ opacity: 1, y: 0 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            {/* Headline (LCP Element - Immediate Native Paint) */}
+            <h1 className="mt-6 font-heading font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight">
               <span className="block text-slate-900">AI-Powered{'\u00A0'}</span>
               <span className="block gradient-text">Software Engineering{'\u00A0'}</span>
               <span className="block text-slate-900">Bootcamp</span>
-            </motion.h1>
+            </h1>
 
             {/* Typing line */}
             <p
