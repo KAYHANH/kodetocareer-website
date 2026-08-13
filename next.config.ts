@@ -73,11 +73,9 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    // NOTE: unoptimized REMOVED — Next.js now serves WebP/AVIF automatically
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
-    deviceSizes: [375, 640, 768, 1024, 1280, 1440, 1920],
-    imageSizes: [16, 32, 48, 64, 88, 96, 128, 256],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
