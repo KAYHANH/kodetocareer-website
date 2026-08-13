@@ -21,20 +21,33 @@ fs.mkdirSync(distDir, { recursive: true });
 
 console.log('\n📂 Step 2: Copying deployment files to cpanel-deploy/...');
 
+function safeCopySync(src, dest) {
+  try {
+    fs.cpSync(src, dest, { 
+      recursive: true, 
+      dereference: true,
+      errorOnExist: false,
+      filter: (source) => !source.includes('.segments')
+    });
+  } catch (err) {
+    console.warn(`[Copy Notice] Non-critical warning copying ${src}: ${err.message}`);
+  }
+}
+
 // Copy standalone files if output: standalone is enabled
 const standaloneDir = path.join(__dirname, '../.next/standalone');
 if (fs.existsSync(standaloneDir)) {
-  fs.cpSync(standaloneDir, distDir, { recursive: true });
+  safeCopySync(standaloneDir, distDir);
   
   // Copy static assets into .next/static inside standalone
   const staticSrc = path.join(__dirname, '../.next/static');
   const staticDest = path.join(distDir, '.next/static');
-  fs.cpSync(staticSrc, staticDest, { recursive: true });
+  safeCopySync(staticSrc, staticDest);
   
   // Copy public folder
   const publicSrc = path.join(__dirname, '../public');
   const publicDest = path.join(distDir, 'public');
-  fs.cpSync(publicSrc, publicDest, { recursive: true });
+  safeCopySync(publicSrc, publicDest);
 
   // Copy dynamic_posts.json
   const blogJsonSrc = path.join(__dirname, '../src/app/blog/dynamic_posts.json');
