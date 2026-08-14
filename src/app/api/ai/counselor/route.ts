@@ -274,8 +274,8 @@ export async function POST(req: Request) {
 Courses offered:
 - Full Stack MERN Development (4 Months, ₹6,000 Upfront + ₹5,000 If Placed, slug: mern-stack-development)
 - Data Analytics & Business Intelligence (4 Months, ₹6,000 Upfront + ₹5,000 If Placed, slug: data-analytics)
-- Data Science & Generative AI (6 Months, ₹6,000 Upfront + ₹6,000 If Placed, slug: data-science-machine-learning)
-- Industry-Ready MLOps & AI Systems (6 Months, ₹7,000 Upfront + ₹7,000 If Placed, slug: mlops-ai-systems)
+- Data Science & Generative AI (6 Months, ₹7,000 Upfront + ₹5,000 If Placed, slug: data-science-machine-learning)
+- Industry-Ready MLOps & AI Systems (6 Months, ₹12,000 Upfront + ₹8,000 If Placed, slug: mlops-ai-systems)
 - Enterprise Java & Spring Boot (5 Months, ₹6,000 Upfront + ₹5,000 If Placed, slug: java-full-stack)
 - Cloud Computing & DevOps (4 Months, ₹6,000 Upfront + ₹5,000 If Placed, slug: cloud-devops)
 - Graphic Design + UI/UX Product Design (4 Months, ₹6,000 Upfront + ₹5,000 If Placed, slug: graphic-design-ui-ux)

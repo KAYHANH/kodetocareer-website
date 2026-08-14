@@ -109,6 +109,33 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
+  // Auto-expand active section in mobile drawer when opened on /courses
+  useEffect(() => {
+    if (mobileOpen && pathname.startsWith("/courses")) {
+      setMobileCoursesOpen(true);
+    }
+  }, [mobileOpen, pathname]);
+
+  // Close dropdowns on route changes
+  useEffect(() => {
+    setMobileOpen(false);
+    setCoursesHovered(false);
+    setSolutionsHovered(false);
+  }, [pathname]);
+
+  // Global click outside listener to close dropdowns
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target?.closest("header")) {
+        setCoursesHovered(false);
+        setSolutionsHovered(false);
+      }
+    };
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, []);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -232,97 +259,103 @@ export default function Navbar() {
                   {hasDropdown && isCourses && (
                     <AnimatePresence>
                       {coursesHovered && (
-                        <motion.div
-                          id="courses-mega-menu"
-                          role="region"
-                          aria-label="Courses menu"
-                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          transition={{ duration: 0.2, ease: "easeOut" }}
-                          className="absolute top-[80%] left-0 mt-1 w-[720px] rounded-2xl border border-slate-150 bg-white p-6 shadow-2xl z-50 text-slate-800 text-left pointer-events-auto"
+                        <div
+                          className="absolute top-full left-0 pt-2 z-50 pointer-events-auto"
+                          onMouseEnter={() => setCoursesHovered(true)}
+                          onMouseLeave={() => setCoursesHovered(false)}
                         >
-                          <div className="grid grid-cols-4 gap-6">
-                            {/* Column 1: Tech & Dev */}
-                            <div className="space-y-3">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Software Engineering</h4>
-                              <div className="space-y-2">
-                                <Link href="/courses/mern-stack-development" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">MERN Stack</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months + AI Integration</span>
-                                </Link>
-                                <Link href="/courses/java-full-stack" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Java Full Stack</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Live Classes</span>
-                                </Link>
-                                <Link href="/courses/python-programming" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Python & Automation</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Scripting</span>
-                                </Link>
+                          <motion.div
+                            id="courses-mega-menu"
+                            role="region"
+                            aria-label="Courses menu"
+                            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                            transition={{ duration: 0.18, ease: "easeOut" }}
+                            className="w-[720px] max-w-[92vw] rounded-2xl border border-slate-150 bg-white p-6 shadow-2xl text-slate-800 text-left"
+                          >
+                            <div className="grid grid-cols-4 gap-6">
+                              {/* Column 1: Tech & Dev */}
+                              <div className="space-y-3">
+                                <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Software Engineering</h4>
+                                <div className="space-y-2">
+                                  <Link href="/courses/mern-stack-development" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">MERN Stack</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months + AI Integration</span>
+                                  </Link>
+                                  <Link href="/courses/java-full-stack" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Java Full Stack</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">5 Months Live Classes</span>
+                                  </Link>
+                                  <Link href="/courses/python-programming" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Python & Automation</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Scripting</span>
+                                  </Link>
+                                </div>
+                              </div>
+
+                              {/* Column 2: Data & AI */}
+                              <div className="space-y-3">
+                                <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Data & AI</h4>
+                                <div className="space-y-2">
+                                  <Link href="/courses/data-science-machine-learning" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Science & ML</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months Live Training</span>
+                                  </Link>
+                                  <Link href="/courses/data-analytics" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Analytics</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months BI Tools</span>
+                                  </Link>
+                                </div>
+                              </div>
+
+                              {/* Column 3: Cloud & MLOps */}
+                              <div className="space-y-3">
+                                <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud & MLOps</h4>
+                                <div className="space-y-2">
+                                  <Link href="/courses/cloud-devops" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cloud & DevOps</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months DevOps/CI/CD</span>
+                                  </Link>
+                                  <Link href="/courses/mlops-ai-systems" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Industry MLOps</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">28 Weeks AI Platforms</span>
+                                  </Link>
+                                </div>
+                              </div>
+
+                              {/* Column 4: Creative & Growth */}
+                              <div className="space-y-3">
+                                <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Creative & Growth</h4>
+                                <div className="space-y-2">
+                                  <Link href="/courses/graphic-design-ui-ux" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">UI/UX Product Design</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Design System</span>
+                                  </Link>
+                                  <Link href="/courses/digital-marketing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Digital Marketing</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">3 Months Growth Hacking</span>
+                                  </Link>
+                                  <Link href="/courses/videography-video-editing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                                    <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Graphic & Video Editing</span>
+                                    <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Live Studio</span>
+                                  </Link>
+                                </div>
                               </div>
                             </div>
 
-                            {/* Column 2: Data & AI */}
-                            <div className="space-y-3">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Data & AI</h4>
-                              <div className="space-y-2">
-                                <Link href="/courses/data-science-machine-learning" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Science & ML</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months Live Training</span>
-                                </Link>
-                                <Link href="/courses/data-analytics" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Data Analytics</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months BI Tools</span>
-                                </Link>
-                              </div>
+                            <div className="border-t border-slate-100 mt-6 pt-4 flex items-center justify-between bg-slate-50/50 -mx-6 -mb-6 p-4 rounded-b-2xl">
+                              <span className="text-[10px] text-slate-450 font-bold">Ready to check all programs?</span>
+                              <Link
+                                href="/courses"
+                                className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
+                                onClick={() => setCoursesHovered(false)}
+                              >
+                                Explore All 10 Courses <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                              </Link>
                             </div>
-
-                            {/* Column 3: Cloud & MLOps */}
-                            <div className="space-y-3">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Cloud & MLOps</h4>
-                              <div className="space-y-2">
-                                <Link href="/courses/cloud-devops" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Cloud & DevOps</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">6 Months DevOps/CI/CD</span>
-                                </Link>
-                                <Link href="/courses/mlops-ai-systems" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Industry MLOps</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">28 Weeks AI Platforms</span>
-                                </Link>
-                              </div>
-                            </div>
-
-                            {/* Column 4: Creative & Growth */}
-                            <div className="space-y-3">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Creative & Growth</h4>
-                              <div className="space-y-2">
-                                <Link href="/courses/graphic-design-ui-ux" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">UI/UX Product Design</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Design System</span>
-                                </Link>
-                                <Link href="/courses/digital-marketing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Digital Marketing</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">3 Months Growth Hacking</span>
-                                </Link>
-                                <Link href="/courses/videography-video-editing" onClick={() => setCoursesHovered(false)} className="group/item block p-1.5 rounded-lg hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                                  <span className="block text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors">Graphic & Video Editing</span>
-                                  <span className="block text-[9px] text-slate-450 mt-0.5 font-semibold">4 Months Live Studio</span>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="border-t border-slate-100 mt-6 pt-4 flex items-center justify-between bg-slate-50/50 -mx-6 -mb-6 p-4 rounded-b-2xl">
-                            <span className="text-[10px] text-slate-450 font-bold">Ready to check all programs?</span>
-                            <Link
-                              href="/courses"
-                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
-                              onClick={() => setCoursesHovered(false)}
-                            >
-                              Explore All 10 Courses <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                            </Link>
-                          </div>
-                        </motion.div>
+                          </motion.div>
+                        </div>
                       )}
                     </AnimatePresence>
                   )}
@@ -331,75 +364,81 @@ export default function Navbar() {
                   {hasDropdown && isSolutions && (
                     <AnimatePresence>
                       {solutionsHovered && (
-                        <motion.div
-                          id="career-services-mega-menu"
-                          role="region"
-                          aria-label="Career Solutions menu"
-                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          transition={{ duration: 0.2, ease: "easeOut" }}
-                          className="absolute top-[80%] left-1/2 -translate-x-1/2 mt-1 w-[580px] rounded-2xl border border-slate-150 bg-white p-6 shadow-2xl z-50 text-slate-800 text-left pointer-events-auto"
+                        <div
+                          className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 pointer-events-auto"
+                          onMouseEnter={() => setSolutionsHovered(true)}
+                          onMouseLeave={() => setSolutionsHovered(false)}
                         >
-                          <div className="grid grid-cols-2 gap-6">
-                            <div className="space-y-4">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Career Growth</h4>
-                              <Link
-                                href="/career-services/placements"
-                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                                onClick={() => setSolutionsHovered(false)}
-                              >
-                                <div>
-                                  <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
-                                    Placement Outcomes <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" aria-hidden="true" />
-                                  </h5>
-                                  <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
-                                    Resume audits, mock interviews, and direct hiring partner referrals.
-                                  </p>
+                          <motion.div
+                            id="career-services-mega-menu"
+                            role="region"
+                            aria-label="Career Solutions menu"
+                            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                            transition={{ duration: 0.18, ease: "easeOut" }}
+                            className="w-[580px] max-w-[92vw] rounded-2xl border border-slate-150 bg-white p-6 shadow-2xl text-slate-800 text-left"
+                          >
+                            <div className="grid grid-cols-2 gap-6">
+                              <div className="space-y-4">
+                                <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Career Growth</h4>
+                                <Link
+                                  href="/career-services/placements"
+                                  className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                                  onClick={() => setSolutionsHovered(false)}
+                                >
+                                  <div>
+                                    <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
+                                      Placement Outcomes <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" aria-hidden="true" />
+                                    </h5>
+                                    <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
+                                      Resume audits, mock interviews, and direct hiring partner referrals.
+                                    </p>
+                                  </div>
+                                </Link>
+                                <div className="pl-2 space-y-1.5">
+                                  <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Resume & ATS Review</Link>
+                                  <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Mock Interviews</Link>
+                                  <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Mentorship Support</Link>
                                 </div>
-                              </Link>
-                              <div className="pl-2 space-y-1.5">
-                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Resume & ATS Review</Link>
-                                <Link href="/career-services/placements" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Mock Interviews</Link>
-                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Mentorship Support</Link>
+                              </div>
+
+                              <div className="space-y-4">
+                                <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Academics</h4>
+                                <Link
+                                  href="/career-services/admissions"
+                                  className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                                  onClick={() => setSolutionsHovered(false)}
+                                >
+                                  <div>
+                                    <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
+                                      College Admissions <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" aria-hidden="true" />
+                                    </h5>
+                                    <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
+                                      Accredited Regular, Online, and Distance degrees from top universities.
+                                    </p>
+                                  </div>
+                                </Link>
+                                <div className="pl-2 space-y-1.5">
+                                  <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Career Counselling</Link>
+                                  <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• UGC Approved Programs</Link>
+                                  <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Career Gap Support</Link>
+                                </div>
                               </div>
                             </div>
 
-                            <div className="space-y-4">
-                              <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Academics</h4>
+                            <div className="border-t border-slate-100 mt-6 pt-4 flex items-center justify-between bg-slate-50/50 -mx-6 -mb-6 p-4 rounded-b-2xl">
+                              <span className="text-[10px] text-slate-450 font-bold">Confused about your path?</span>
                               <Link
-                                href="/career-services/admissions"
-                                className="group/item flex gap-1 p-2.5 rounded-xl hover:bg-slate-50 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                                href="/contact"
+                                className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
                                 onClick={() => setSolutionsHovered(false)}
                               >
-                                <div>
-                                  <h5 className="text-xs font-extrabold text-slate-900 group-hover/item:text-primary transition-colors flex items-center gap-1">
-                                    College Admissions <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" aria-hidden="true" />
-                                  </h5>
-                                  <p className="text-[10px] text-slate-550 mt-0.5 leading-normal font-semibold">
-                                    Accredited Regular, Online, and Distance degrees from top universities.
-                                  </p>
-                                </div>
+                                Book counselling session <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                               </Link>
-                              <div className="pl-2 space-y-1.5">
-                                <Link href="/contact" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Career Counselling</Link>
-                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• UGC Approved Programs</Link>
-                                <Link href="/career-services/admissions" onClick={() => setSolutionsHovered(false)} className="block text-[10px] font-bold text-slate-500 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">• Career Gap Support</Link>
-                              </div>
                             </div>
-                          </div>
-
-                          <div className="border-t border-slate-100 mt-6 pt-4 flex items-center justify-between bg-slate-50/50 -mx-6 -mb-6 p-4 rounded-b-2xl">
-                            <span className="text-[10px] text-slate-450 font-bold">Confused about your path?</span>
-                            <Link
-                              href="/contact"
-                              className="text-[10px] font-black text-primary hover:underline flex items-center gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
-                              onClick={() => setSolutionsHovered(false)}
-                            >
-                              Book counselling session <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                            </Link>
-                          </div>
-                        </motion.div>
+                          </motion.div>
+                        </div>
                       )}
                     </AnimatePresence>
                   )}
