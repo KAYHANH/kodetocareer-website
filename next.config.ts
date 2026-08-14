@@ -64,6 +64,9 @@ const nextConfig: NextConfig = {
   },
   images: {
     unoptimized: false,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
     remotePatterns: [

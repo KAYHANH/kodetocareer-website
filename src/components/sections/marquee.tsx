@@ -130,6 +130,7 @@ export default function Marquee() {
                     width={24}
                     height={24}
                     alt={`${partner.name} logo`}
+                    unoptimized
                     className="object-contain w-full h-full transition-transform duration-200 group-hover:scale-110"
                     loading="lazy"
                   />
@@ -161,6 +162,7 @@ export default function Marquee() {
                     width={24}
                     height={24}
                     alt={`${partner.name} logo`}
+                    unoptimized
                     className="object-contain w-full h-full transition-transform duration-200 group-hover:scale-110"
                     loading="lazy"
                   />

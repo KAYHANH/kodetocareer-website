@@ -188,6 +188,7 @@ export default function TechnologyStack() {
                             width={20}
                             height={20}
                             alt={tool.name}
+                            unoptimized
                             className="object-contain w-full h-full transition-transform duration-200 group-hover:scale-105"
                             loading="lazy"
                           />

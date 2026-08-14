@@ -402,6 +402,7 @@ export default function TechStackCircle() {
                         width={44}
                         height={44}
                         alt={tech.name}
+                        unoptimized
                         className="object-contain filter transition-all duration-300"
                         loading="lazy"
                       />
@@ -421,7 +422,7 @@ export default function TechStackCircle() {
                           {/* Title */}
                           <div className="flex items-center gap-2 mb-3">
                             <span className="w-8 h-8 rounded-lg bg-black/[0.03] border border-black/[0.06] flex items-center justify-center p-1.5">
-                              <Image src={tech.icon} width={20} height={20} alt={tech.name} loading="lazy" />
+                              <Image src={tech.icon} width={20} height={20} alt={tech.name} unoptimized loading="lazy" />
                             </span>
                             <div>
                               <h4 className="text-sm font-heading font-bold text-slate-900 leading-none">{tech.name}</h4>

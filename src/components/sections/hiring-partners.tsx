@@ -121,6 +121,7 @@ export default function HiringPartners() {
                     width={24}
                     height={24}
                     alt={item.name}
+                    unoptimized
                     className="object-contain w-full h-full transition-transform duration-200 group-hover:rotate-6"
                     loading="lazy"
                   />
@@ -147,6 +148,7 @@ export default function HiringPartners() {
                     width={24}
                     height={24}
                     alt={item.name}
+                    unoptimized
                     className="object-contain w-full h-full transition-transform duration-200 group-hover:rotate-6"
                     loading="lazy"
                   />
