@@ -180,22 +180,19 @@ export default function Hero() {
       className="min-h-[740px] lg:min-h-screen flex items-center relative overflow-hidden -mt-20 pt-28 sm:pt-36 pb-16"
       aria-label="Hero"
     >
-      {/* ── Background decoration layer (reduced opacity 0.25 to prevent mobile dark screen obstruction) ── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 contain-strict" aria-hidden="true" suppressHydrationWarning>
-        <div className="absolute inset-0 bg-background" suppressHydrationWarning />
+      {/* ── Background decoration layer ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 contain-strict select-none" aria-hidden="true" suppressHydrationWarning>
+        <div className="absolute inset-0 bg-background" />
         <div
-          className="absolute top-[-250px] left-[-150px] w-[700px] h-[700px] rounded-full bg-blue-100/25 blur-3xl transform-gpu pointer-events-none"
-          suppressHydrationWarning
+          className="absolute -top-40 -left-20 w-[500px] h-[500px] max-w-[80vw] rounded-full bg-blue-100/25 blur-3xl transform-gpu pointer-events-none"
         />
         <div
-          className="absolute top-[180px] right-[-200px] w-[700px] h-[700px] rounded-full bg-sky-100/25 blur-3xl transform-gpu pointer-events-none"
-          suppressHydrationWarning
+          className="absolute top-40 -right-20 w-[500px] h-[500px] max-w-[80vw] rounded-full bg-sky-100/25 blur-3xl transform-gpu pointer-events-none"
         />
         <div
-          className="absolute bottom-[-250px] left-[20%] w-[600px] h-[600px] rounded-full bg-indigo-100/20 blur-3xl transform-gpu pointer-events-none"
-          suppressHydrationWarning
+          className="absolute -bottom-40 left-[20%] w-[450px] h-[450px] max-w-[80vw] rounded-full bg-indigo-100/20 blur-3xl transform-gpu pointer-events-none"
         />
-        <div className="absolute inset-0 bg-grid opacity-30" suppressHydrationWarning />
+        <div className="absolute inset-0 bg-grid opacity-30" />
       </div>
 
       {/* ── Content ── */}

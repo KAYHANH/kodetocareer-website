@@ -119,7 +119,7 @@ const psScript = `
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 if (Test-Path '${desktopZip.replace(/\\/g, '\\\\')}') { Remove-Item -Path '${desktopZip.replace(/\\/g, '\\\\')}' -Force }
 if (Test-Path '${zipPath.replace(/\\/g, '\\\\')}') { Remove-Item -Path '${zipPath.replace(/\\/g, '\\\\')}' -Force }
-[System.IO.Compression.ZipFile]::CreateFromDirectory('${distDir.replace(/\\/g, '\\\\')}', '${desktopZip.replace(/\\/g, '\\\\')}')
+[System.IO.Compression.ZipFile]::CreateFromDirectory('${distDir.replace(/\\/g, '\\\\')}', '${desktopZip.replace(/\\/g, '\\\\')}', [System.IO.Compression.CompressionLevel]::Fastest, $false)
 Copy-Item -Path '${desktopZip.replace(/\\/g, '\\\\')}' -Destination '${zipPath.replace(/\\/g, '\\\\')}' -Force
 `;
 
