@@ -250,10 +250,31 @@ export default function Footer() {
         {/* ── Newsletter Section ── */}
         <FooterNewsletter />
 
+        {/* ── Legal & Business Information Section ── */}
+        <div className="py-6 border-t border-slate-100 text-xs text-slate-500">
+          <h3 className="mb-3 text-[11px] font-extrabold uppercase tracking-wider text-slate-900">
+            Legal & Business Information
+          </h3>
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-6 font-medium">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span className="font-semibold text-slate-700 shrink-0">Company Registration No.</span>
+              <span className="font-mono text-slate-600 break-all select-text">IN-UP48967679168206Y</span>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span className="font-semibold text-slate-700 shrink-0">GSTIN</span>
+              <span className="font-mono text-slate-600 break-all select-text">09ABFFK9368K1ZJ</span>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span className="font-semibold text-slate-700 shrink-0">Udyam/MSME Registration No.</span>
+              <span className="font-mono text-slate-600 break-all select-text">UDYAM-UP-28-0229837</span>
+            </div>
+          </div>
+        </div>
+
         {/* ── Bottom Section ── */}
-        <div className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row text-xs font-semibold text-slate-400">
+        <div className="flex flex-col items-center justify-between gap-4 py-8 border-t border-slate-100 sm:flex-row text-xs font-semibold text-slate-400">
           <p>
-            &copy; 2026 KodeToCareer. All rights reserved.
+            &copy; 2026 KodeToCareer. All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-6">
