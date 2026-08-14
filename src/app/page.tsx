@@ -182,17 +182,15 @@ export default function Home() {
       <TrustStrip />
       <HiringPartners />
       <TechnologyStack />
-      <div className="cv-auto">
-        <WhyChooseUs />
-        <FeaturedPrograms />
-        <LiveProjects />
-        <CareerRoadmap />
-        <FreeResources />
-        <Founder />
-        <LiveCounter />
-        <FAQ />
-        <Newsletter />
-      </div>
+      <WhyChooseUs />
+      <FeaturedPrograms />
+      <LiveProjects />
+      <CareerRoadmap />
+      <FreeResources />
+      <Founder />
+      <LiveCounter />
+      <FAQ />
+      <Newsletter />
     </>
   );
 }

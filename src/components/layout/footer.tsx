@@ -210,21 +210,19 @@ export default function Footer() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-secondary shrink-0" aria-hidden="true" />
-                <div className="flex flex-wrap gap-x-1">
-                  <a href="tel:+919667975616" className="hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">+91 96679 75616</a>
-                  <span>/</span>
-                  <a href="tel:+919667915616" className="hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">+91 96679 15616</a>
+              <div className="flex items-start gap-2.5">
+                <Phone className="w-4 h-4 text-secondary shrink-0 mt-0.5" aria-hidden="true" />
+                <div className="flex flex-col gap-1">
+                  <a href="tel:+919667975616" className="py-0.5 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded inline-block">+91 96679 75616</a>
+                  <a href="tel:+919667915616" className="py-0.5 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded inline-block">+91 96679 15616</a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-emerald-600 shrink-0" aria-hidden="true" />
-                <div className="flex flex-wrap gap-x-1">
-                  <a href="mailto:info@kodetocareer.com" className="hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">info@kodetocareer.com</a>
-                  <span>/</span>
-                  <a href="mailto:kodetocareer@gmail.com" className="hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded">kodetocareer@gmail.com</a>
+              <div className="flex items-start gap-2.5">
+                <Mail className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
+                <div className="flex flex-col gap-1">
+                  <a href="mailto:info@kodetocareer.com" className="py-0.5 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded inline-block">info@kodetocareer.com</a>
+                  <a href="mailto:kodetocareer@gmail.com" className="py-0.5 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded inline-block">kodetocareer@gmail.com</a>
                 </div>
               </div>
             </div>

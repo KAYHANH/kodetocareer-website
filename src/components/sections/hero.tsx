@@ -223,8 +223,8 @@ export default function Hero() {
               className="mt-5 text-lg sm:text-xl md:text-2xl text-slate-700 font-extrabold h-10 min-h-[40px] flex items-center justify-center lg:justify-start"
               aria-live="polite"
             >
-              <span className="mr-2">Master</span>
-              <span className="text-primary font-black inline-flex items-center relative" suppressHydrationWarning>
+              <span className="mr-2 shrink-0">Master</span>
+              <span className="text-primary font-black inline-flex items-center relative text-left min-w-[240px] sm:min-w-[280px]" suppressHydrationWarning>
                 {mounted ? typedWord : ROTATING_WORDS[0]}
                 <span className="animate-pulse ml-0.5 text-primary select-none" aria-hidden="true">|</span>
               </span>

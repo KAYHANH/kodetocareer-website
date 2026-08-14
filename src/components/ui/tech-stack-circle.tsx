@@ -348,9 +348,9 @@ export default function TechStackCircle() {
                     x2={x2}
                     y2={y2}
                     stroke="#2563EB"
-                    strokeWidth="1.5"
-                    strokeDasharray="6 24"
-                    className="animate-line-dash-sub"
+                    strokeWidth="1.2"
+                    strokeOpacity="0.4"
+                    strokeDasharray="4 12"
                   />
                 </g>
               );

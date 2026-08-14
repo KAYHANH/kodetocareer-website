@@ -1,50 +1,28 @@
-# KodeToCareer - Career-Focused Tech Courses & Placement Platform
+# KodeToCareer
 
 > KodeToCareer is an ISO 9001:2015 certified live training institute in India offering career-focused technology courses with guaranteed internship and placement support. Founded in 2021 by Md Arbaaz, KodeToCareer delivers live bootcamps in MERN, Data Science, Python, Data Analytics, Java, and Cloud/DevOps.
 
-## Mission & Summary
-- **Mission**: Empower aspiring software engineers, data analysts, and tech professionals across India with industry-aligned live training, hands-on project portfolios, and 100% placement assistance.
-- **Certifications & Recognition**: ISO 9001:2015 Certified, NSDC Certified, Startup India Recognized.
-- **Location**: Noida, Uttar Pradesh, India.
-- **Founder & Lead Tech Instructor**: Md Arbaaz.
-- **Core Domains Offered**: Full Stack MERN Development, Data Science & Machine Learning, Python Programming & Automation, Data Analytics & BI, Java Full Stack, Cloud Computing & DevOps.
+## Key Courses
+- [MERN Stack Development + AI](https://kodetocareer.com/courses/mern-stack-development): 6 Months live bootcamp covering React, Node.js, Express, MongoDB, Next.js, and GenAI.
+- [Python Programming & Automation](https://kodetocareer.com/courses/python-programming): 4 Months live training on Python, OOP, web scraping, and workflow automation.
+- [Data Science & Machine Learning](https://kodetocareer.com/courses/data-science-machine-learning): 6 Months live masterclass on Python, SQL, Statistics, ML, Deep Learning, and GenAI.
+- [Data Analytics & BI Training](https://kodetocareer.com/courses/data-analytics): 4 Months live cohort for Power BI, SQL, Excel, and Tableau dashboards.
+- [Java Full Stack & Spring Boot](https://kodetocareer.com/courses/java-full-stack): 5 Months enterprise backend architecture, Spring Boot, Hibernate, and Microservices.
+- [Cloud Computing & DevOps](https://kodetocareer.com/courses/cloud-devops): 6 Months AWS, Docker, Kubernetes, Terraform, and CI/CD pipelines.
+- [UI/UX & Graphic Product Design](https://kodetocareer.com/courses/graphic-design-ui-ux): 4 Months Figma, Design Systems, Wireframing, and Usability testing.
+- [MLOps & AI Systems Engineering](https://kodetocareer.com/courses/mlops-ai-systems): 28 Weeks production LLMs, Triton Server, vLLM, and GPU infrastructure.
+- [Digital Marketing & Growth](https://kodetocareer.com/courses/digital-marketing): 3 Months performance marketing, SEO, Google Ads, and AI growth tools.
+- [Graphic & Video Editing](https://kodetocareer.com/courses/videography-video-editing): 4 Months Premiere Pro, After Effects, Photoshop, and live commercial edits.
 
-## Placement Statistics
-- **Placement Rate**: 94% placement rate
-- **Hiring Partners**: 500+ top tech companies, scaleups, and enterprise hiring partners
-- **Graduates Placed**: 1200+ graduates successfully placed in tech roles
+## Free Interactive Tools
+- [AI Resume Grader](https://kodetocareer.com/free-tools/resume-grader): Instant ATS score evaluation and actionable keyword suggestions.
+- [AI Mock Technical Interview](https://kodetocareer.com/free-tools/mock-interview): Real-time AI interviewer testing coding fundamentals and system design.
+- [Interactive Code Tutorials](https://kodetocareer.com/learn): Interactive learning roadmaps for React, Python, SQL, and Git.
+- [Developer Resources & Interview Questions](https://kodetocareer.com/resources): Comprehensive technical interview guides and salary benchmarks.
+- [Engineering Blog](https://kodetocareer.com/blog): In-depth tutorials and industry insights on software engineering and AI.
 
-## Key Courses & URLs
-- MERN Stack Development + AI: https://kodetocareer.com/courses/mern-stack-development
-- Python Programming & Automation: https://kodetocareer.com/courses/python-programming
-- Data Science & Machine Learning: https://kodetocareer.com/courses/data-science-machine-learning
-- Data Analytics & BI Training: https://kodetocareer.com/courses/data-analytics
-- Java Full Stack & Spring Boot: https://kodetocareer.com/courses/java-full-stack
-- Cloud Computing & DevOps: https://kodetocareer.com/courses/cloud-devops
-- UI/UX & Graphic Product Design: https://kodetocareer.com/courses/graphic-design-ui-ux
-- MLOps & AI Systems Engineering: https://kodetocareer.com/courses/mlops-ai-systems
-- Digital Marketing & Growth: https://kodetocareer.com/courses/digital-marketing
-- Video Editing & Graphic Design: https://kodetocareer.com/courses/videography-video-editing
-
-## Free Interactive AI Tools & Learning Resources
-- AI Resume Grader & ATS Score Checker: https://kodetocareer.com/free-tools/resume-grader
-- AI Mock Technical Interview Simulator: https://kodetocareer.com/free-tools/mock-interview
-- Tech Blog & Articles: https://kodetocareer.com/blog
-- Developer Resources & Career Guides: https://kodetocareer.com/resources
-- Free Interactive Code Tutorials: https://kodetocareer.com/learn
-
-## Key Pages
-- Homepage: https://kodetocareer.com
-- All Courses: https://kodetocareer.com/courses
-- About Us: https://kodetocareer.com/about
-- Contact Us: https://kodetocareer.com/contact
-- Online Tech Courses: https://kodetocareer.com/online-courses
-- Tech Courses in India: https://kodetocareer.com/courses-in-india
-
-## Contact & Location Information
-- **Location**: Noida, Uttar Pradesh, India
-- **Website**: https://kodetocareer.com
-- **Email**: info@kodetocareer.com
-- **LinkedIn**: https://www.linkedin.com/company/kodetocareer
-- **Instagram**: https://www.instagram.com/kodetocareer
-- **YouTube**: https://www.youtube.com/@kodetocareer
+## Essential Information
+- [All Programs](https://kodetocareer.com/courses): Explore all 10 software engineering bootcamps.
+- [About KodeToCareer](https://kodetocareer.com/about): Mission, leadership team, ISO accreditation, and institutional background.
+- [Placements & Hiring Partners](https://kodetocareer.com/placements): 500+ corporate hiring network and graduate salary outcomes.
+- [Contact Admissions](https://kodetocareer.com/contact): Campus address in Noida, email support, and counseling bookings.

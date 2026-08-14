@@ -44,12 +44,6 @@ body {
   max-width: 100%;
 }
 
-/* ── Performance: Below-the-fold rendering optimization ── */
-.cv-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 800px;
-}
-
 .contain-strict {
   contain: strict;
 }
@@ -177,32 +171,21 @@ body {
   transform: translateZ(0);
 }
 
-/* ── Premium Border Glow & Particle Keyframes ── */
-@keyframes border-glow {
-  0%, 100% { border-color: rgba(37, 99, 235, 0.1); box-shadow: 0 0 15px rgba(37, 99, 235, 0.02); }
-  50% { border-color: rgba(37, 99, 235, 0.35); box-shadow: 0 0 25px rgba(37, 99, 235, 0.08); }
-}
-
-@keyframes border-glow-light {
-  0%, 100% { border-color: rgba(37, 99, 235, 0.08); box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.04); }
-  50% { border-color: rgba(124, 58, 237, 0.22); box-shadow: 0 15px 40px -10px rgba(124, 58, 237, 0.08); }
-}
-
+/* ── Premium Card Hover & Shadows ── */
 .border-glow-animate {
-  animation: border-glow 4s ease-in-out infinite;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.border-glow-animate:hover {
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.08);
 }
 
 .border-glow-animate-light {
-  animation: border-glow-light 4s ease-in-out infinite;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
-@keyframes grid-drift {
-  0% { background-position: 0 0; }
-  100% { background-position: 60px 60px; }
-}
-
-.animate-grid-drift {
-  animation: grid-drift 20s linear infinite;
+.border-glow-animate-light:hover {
+  border-color: rgba(124, 58, 237, 0.22);
+  box-shadow: 0 15px 40px -10px rgba(124, 58, 237, 0.08);
 }
 
 /* ── Custom Utilities ── */
@@ -232,7 +215,7 @@ body {
   }
 }
 
-/* ── Tech Stack Orbit Animations (moved from inline JS for bundle size reduction) ── */
+/* ── Tech Stack Orbit Animations (GPU Accelerated) ── */
 @keyframes tech-orbit {
   0% { transform: rotate3d(0, 0, 1, 0deg); }
   100% { transform: rotate3d(0, 0, 1, 360deg); }
@@ -258,15 +241,6 @@ body {
 .tech-paused,
 .tech-paused .tech-counter-active {
   animation-play-state: paused !important;
-}
-
-@keyframes line-dash-anim-sub {
-  0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -100; }
-}
-
-.animate-line-dash-sub {
-  animation: line-dash-anim-sub 8s linear infinite;
 }
 
 /* Counter-rotate utility for orbit icons (keeps them upright) */
