@@ -29,15 +29,15 @@ const COURSE_CTA_MAP: Record<string, { title: string; desc: string; link: string
     desc: 'Master Python, SQL, Machine Learning, Deep Learning, and AI model deployments with guaranteed placement support.',
     link: '/courses/data-science-machine-learning'
   },
-  'python-full-stack-development': {
+  'python-programming': {
     title: 'Become a Python Full Stack Developer',
     desc: 'Learn Django, FastAPI, React, PostgreSQL, and Cloud Engineering with guaranteed internships.',
-    link: '/courses/python-full-stack-development'
+    link: '/courses/python-programming'
   },
-  'ui-ux-design-course': {
+  'graphic-design-ui-ux': {
     title: 'Master Product Design & UI/UX Systems',
     desc: 'Learn Figma, User Research, Design Systems, and Prototyping for high-paying design roles.',
-    link: '/courses/ui-ux-design-course'
+    link: '/courses/graphic-design-ui-ux'
   }
 };
 

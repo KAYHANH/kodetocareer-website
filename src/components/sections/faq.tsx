@@ -18,7 +18,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'What courses does KodeToCareer offer?',
     answer:
-      'We offer courses in AI & Machine Learning, MERN Stack, Java Full Stack, Python, Data Analytics, and Digital Marketing. Each course is designed with industry-relevant curriculum and hands-on projects.',
+      'We offer 10 industry-focused programs: MERN Stack Development + AI Integration, Python Programming & Automation, Data Science & Machine Learning Core, Data Analytics & Business Intelligence, Java Full Stack Developer Program, Cloud Computing & DevOps Infrastructure, Digital Marketing with AI & Growth Hacking, Graphic Design + UI/UX Product Design Systems, Graphic Designing + Videography/Video Editing, and Industry-Ready MLOps & AI Systems Engineering. Each is built around live cohorts, real projects, and placement support.',
   },
   {
     question: 'Do I need prior coding experience?',
@@ -48,7 +48,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'What payment options are available?',
     answer:
-      'We offer flexible payment plans, EMI options, and early-bird discounts. Scholarships are also available for eligible students.',
+      'We offer a split fee structure: a portion is paid upfront at enrollment, and the remainder is due upon successful placement. EMI options and early-bird discounts are also available. Contact our counsellors for a personalised fee breakdown.',
   },
 ];
 

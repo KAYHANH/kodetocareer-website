@@ -194,7 +194,7 @@ export default function GlobalAdmissionsPopup() {
                 <form onSubmit={handleSubmit} className="space-y-3.5">
                   {/* Select Course Dropdown */}
                   <div className="space-y-1">
-                    <label htmlFor="global-popup-course-select" className="text-[10px] font-bold text-slate-500 uppercase block">
+                    <label htmlFor="global-popup-course-select" className="text-[10px] font-bold text-slate-700 uppercase block">
                       Select Preferred Course <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <select
@@ -213,7 +213,7 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Name Input */}
                   <div className="space-y-1">
-                    <label htmlFor="global-popup-name-input" className="text-[10px] font-bold text-slate-500 uppercase block">
+                    <label htmlFor="global-popup-name-input" className="text-[10px] font-bold text-slate-700 uppercase block">
                       Full Name <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <div className="relative">
@@ -233,7 +233,7 @@ export default function GlobalAdmissionsPopup() {
 
                   {/* Phone Input */}
                   <div className="space-y-1">
-                    <label htmlFor="global-popup-phone-input" className="text-[10px] font-bold text-slate-500 uppercase block">
+                    <label htmlFor="global-popup-phone-input" className="text-[10px] font-bold text-slate-700 uppercase block">
                       Phone Number <span className="text-rose-500 font-extrabold">*</span>
                     </label>
                     <div className="relative">
