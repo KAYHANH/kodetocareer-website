@@ -234,13 +234,12 @@ export default function TechStackCircle() {
     isHoveredRef.current = false;
     setHoveredTech(null);
   };
-
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative flex items-center justify-center w-full h-full min-h-[320px] sm:min-h-[480px] lg:min-h-[640px] overflow-visible select-none"
+      className="relative flex items-center justify-center w-full h-full min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] overflow-visible select-none"
     >
       {/* ── Background Moving Particles / Stars ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
@@ -370,23 +369,20 @@ export default function TechStackCircle() {
             return (
               <div
                 key={tech.name}
-                className="absolute flex items-center justify-center"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 style={{
-                  left: `calc(50% + ${x}px - 44px)`,
-                  top: `calc(50% + ${y}px - 44px)`,
-                  zIndex: isCurrentHovered ? 50 : 1,
-                  opacity: isCollapsed ? 0 : 1,
-                  transform: `scale(${isCollapsed ? 0 : 1})`,
-                  transition: "left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease, transform 0.5s ease",
+                  transform: `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`,
+                  transition: "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                  zIndex: isCurrentHovered ? 40 : 10,
                 }}
+                onMouseEnter={() => setHoveredTech(tech)}
+                onMouseLeave={() => setHoveredTech(null)}
               >
                 {/* 
                   Counter rotate container 
                   Applying transform style via class counter-rotate-icon to keep it upright.
                 */}
                 <div
-                  onMouseEnter={() => onIconHoverStart(tech)}
-                  onMouseLeave={onIconHoverEnd}
                   className="counter-rotate-icon tech-counter-active relative flex items-center justify-center"
                 >
                   <div
@@ -404,6 +400,7 @@ export default function TechStackCircle() {
                         alt={tech.name}
                         unoptimized
                         className="w-11 h-11 object-contain filter transition-all duration-300"
+                        style={{ width: 44, height: 44, aspectRatio: '1/1' }}
                         loading="lazy"
                       />
                     </Link>
@@ -422,7 +419,7 @@ export default function TechStackCircle() {
                           {/* Title */}
                           <div className="flex items-center gap-2 mb-3">
                             <span className="w-8 h-8 rounded-lg bg-black/[0.03] border border-black/[0.06] flex items-center justify-center p-1.5">
-                              <Image src={tech.icon} width={20} height={20} alt={tech.name} unoptimized loading="lazy" />
+                              <Image src={tech.icon} width={20} height={20} alt={tech.name} unoptimized loading="lazy" style={{ width: 20, height: 20 }} />
                             </span>
                             <div>
                               <h4 className="text-sm font-heading font-bold text-slate-900 leading-none">{tech.name}</h4>
@@ -487,7 +484,8 @@ export default function TechStackCircle() {
             width={110}
             height={110}
             alt="KodeToCareer"
-            className="object-contain relative z-10"
+            className="object-contain relative z-10 w-[110px] h-[110px]"
+            style={{ width: 110, height: 110, aspectRatio: '1/1' }}
             priority
           />
         </div>

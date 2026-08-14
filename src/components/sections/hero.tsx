@@ -221,9 +221,9 @@ export default function Hero() {
               aria-live="polite"
             >
               <span className="mr-2 shrink-0">Master</span>
-              <span className="text-primary font-black inline-flex items-center relative text-left min-w-[240px] sm:min-w-[280px]" suppressHydrationWarning>
-                {mounted ? typedWord : ROTATING_WORDS[0]}
-                <span className="animate-pulse ml-0.5 text-primary select-none" aria-hidden="true">|</span>
+              <span className="text-primary font-black inline-flex items-center relative text-left min-w-[280px] sm:min-w-[340px]" suppressHydrationWarning>
+                <span>{mounted ? typedWord : ROTATING_WORDS[0]}</span>
+                <span className="animate-pulse ml-0.5 text-primary select-none w-2 inline-block text-left shrink-0" aria-hidden="true">|</span>
               </span>
             </p>
 
