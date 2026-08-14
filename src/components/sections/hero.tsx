@@ -149,7 +149,7 @@ function StatItem({
       <span
         ref={ref}
         suppressHydrationWarning
-        className="text-2xl md:text-3xl font-extrabold font-heading text-slate-900 tracking-tight"
+        className="text-2xl md:text-3xl font-extrabold font-heading text-slate-900 tracking-tight tabular-nums min-w-[72px] inline-block"
       >
         {mounted ? formatted : value.toLocaleString()}
         {suffix}

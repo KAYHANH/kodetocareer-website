@@ -396,14 +396,14 @@ export default function TechStackCircle() {
                         : "border-black/[0.08] hover:border-primary/50"
                     }`}
                   >
-                    <Link href={tech.link} className="flex items-center justify-center w-full h-full">
+                    <Link href={tech.link} className="flex items-center justify-center w-full h-full p-5">
                       <Image
                         src={tech.icon}
                         width={44}
                         height={44}
                         alt={tech.name}
                         unoptimized
-                        className="object-contain filter transition-all duration-300"
+                        className="w-11 h-11 object-contain filter transition-all duration-300"
                         loading="lazy"
                       />
                     </Link>

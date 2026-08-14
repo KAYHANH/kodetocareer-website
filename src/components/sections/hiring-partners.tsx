@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -28,25 +27,6 @@ const FEATURED_TECH = [
 ];
 
 export default function HiringPartners() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(t);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <section className="py-20 bg-[#EFF6FF] border-y border-blue-100 overflow-hidden relative min-h-[400px]">
-        <div className="max-w-[1440px] mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 mb-4">
-            Master High-Demand Tech Stacks
-          </h2>
-        </div>
-      </section>
-    );
-  }
-
   // Split into 2 rows of 9 items each
   const row1 = FEATURED_TECH.slice(0, 9);
   const row2 = FEATURED_TECH.slice(9, 18);

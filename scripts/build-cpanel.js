@@ -106,7 +106,7 @@ const zipPath = path.join(__dirname, '../cpanel-deploy.zip');
 const desktopDir = path.join(process.env.USERPROFILE || 'C:\\Users\\Asus', 'Desktop');
 const desktopZip = path.join(desktopDir, 'kodetocareer-deploy.zip');
 
-console.log('🤐 Step 3: Compressing into standard cpanel-deploy.zip via .NET ZipFile...');
+console.log('🤐 Step 3: Compressing into standard kodetocareer-deploy.zip via native tar...');
 
 if (fs.existsSync(zipPath)) {
   try { fs.unlinkSync(zipPath); } catch (e) {}
@@ -115,25 +115,11 @@ if (fs.existsSync(desktopZip)) {
   try { fs.unlinkSync(desktopZip); } catch (e) {}
 }
 
-const psScript = `
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-if (Test-Path '${desktopZip.replace(/\\/g, '\\\\')}') { Remove-Item -Path '${desktopZip.replace(/\\/g, '\\\\')}' -Force }
-if (Test-Path '${zipPath.replace(/\\/g, '\\\\')}') { Remove-Item -Path '${zipPath.replace(/\\/g, '\\\\')}' -Force }
-[System.IO.Compression.ZipFile]::CreateFromDirectory('${distDir.replace(/\\/g, '\\\\')}', '${desktopZip.replace(/\\/g, '\\\\')}', [System.IO.Compression.CompressionLevel]::Fastest, $false)
-Copy-Item -Path '${desktopZip.replace(/\\/g, '\\\\')}' -Destination '${zipPath.replace(/\\/g, '\\\\')}' -Force
-`;
+execSync(`tar -a -c -f "${desktopZip}" -C "${distDir}" .`, { stdio: 'inherit' });
+fs.copyFileSync(desktopZip, zipPath);
 
-const tempPsFile = path.join(__dirname, 'zip-helper.ps1');
-fs.writeFileSync(tempPsFile, psScript, 'utf8');
-
-try {
-  execSync(`powershell -ExecutionPolicy Bypass -File "${tempPsFile}"`, { stdio: 'inherit' });
-  const stats = fs.statSync(desktopZip);
-  const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);
-  console.log(`\n🎉 SUCCESS! Deploy Zip created (${sizeMB} MB) at: ${desktopZip}`);
-  console.log('👉 Upload kodetocareer-deploy.zip to your cPanel File Manager & Extract!');
-} finally {
-  if (fs.existsSync(tempPsFile)) {
-    try { fs.unlinkSync(tempPsFile); } catch (e) {}
-  }
-}
+const stats = fs.statSync(desktopZip);
+const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);
+console.log(`\n🎉 SUCCESS! Deploy Zip created (${sizeMB} MB) at: ${desktopZip}`);
+console.log(`👉 Also available at: ${zipPath}`);
+console.log('👉 Upload kodetocareer-deploy.zip to your cPanel File Manager & Extract!');
