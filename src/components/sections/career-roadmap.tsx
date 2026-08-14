@@ -106,7 +106,7 @@ function StepCard({ step }: { step: RoadmapStep }) {
   const Icon = step.icon;
 
   return (
-    <div className="max-w-md w-full rounded-[24px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-350 hover:border-primary/20 hover:shadow-[0_16px_40px_rgba(37,99,235,0.06)] text-left group relative overflow-hidden">
+    <div className="max-w-md w-full rounded-[24px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-primary/20 hover:shadow-[0_16px_40px_rgba(37,99,235,0.06)] text-left group relative overflow-hidden">
       {/* Top Badge & Duration */}
       <div className="flex items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ function StepCard({ step }: { step: RoadmapStep }) {
       {/* Highlights */}
       <div className="mt-4 pt-3 border-t border-slate-50 flex flex-wrap gap-1.5">
         {step.highlights.map((h, i) => (
-          <span key={i} className="text-[10px] font-semibold text-slate-600 bg-slate-50/80 border border-slate-150 px-2 py-0.5 rounded-md flex items-center gap-1">
+          <span key={i} className="text-[10px] font-semibold text-slate-600 bg-slate-50/80 border border-slate-200/80 px-2 py-0.5 rounded-md flex items-center gap-1">
             <CheckCircle2 className="w-2.5 h-2.5 text-emerald-500 shrink-0" />
             {h}
           </span>
@@ -191,8 +191,7 @@ export default function CareerRoadmap() {
 
   return (
     <section className="py-24 bg-white relative overflow-hidden" aria-labelledby="career-roadmap-heading">
-      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-50/20 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-50/30 blur-[120px] pointer-events-none" />
 
       <div className="mx-auto max-w-[1440px] px-6 relative z-10">
         {/* Section header */}

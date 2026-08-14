@@ -18,7 +18,7 @@ export default function FooterNewsletter() {
         />
         <button
           type="submit"
-          className="h-10 bg-slate-900 text-white rounded-xl px-4 text-xs font-bold flex items-center justify-center gap-1 hover:bg-slate-800 transition-colors"
+          className="h-10 bg-slate-900 text-white rounded-xl px-4 text-xs font-bold flex items-center justify-center gap-1 hover:bg-slate-800 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-slate-900/50"
         >
           Join{" "}
           <svg

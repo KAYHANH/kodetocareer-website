@@ -3,6 +3,7 @@
 import { Check } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { companyStats } from '@/data/company-stats';
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                                */
@@ -201,7 +202,7 @@ export default function Pricing() {
             Invest in Your Future
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-slate-600">
-            Choose the plan that fits your career goals
+            Choose the plan that fits your career goals. Backed by our {companyStats.placementsRate} placement rate and {companyStats.hiringPartners} hiring partners.
           </p>
         </motion.div>
 

@@ -134,7 +134,7 @@ export default function Home() {
         name: 'What is the placement guarantee?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'We offer dedicated placement support with a 95% placement rate. Our placement cell works with 500+ hiring partners to connect you with opportunities.'
+          text: 'We offer dedicated placement support with a 94% placement rate. Our placement cell works with 500+ hiring partners to connect you with opportunities.'
         }
       },
       {

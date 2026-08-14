@@ -21,6 +21,12 @@ export default function ResumeGraderClient() {
   const [result, setResult] = useState<GradingResult | null>(null);
   const [error, setError] = useState('');
 
+  // Lead capture state
+  const [leadName, setLeadName] = useState('');
+  const [leadPhone, setLeadPhone] = useState('');
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
+
   const roles = [
     { id: 'fullstack-mern', label: 'Full Stack MERN Developer' },
     { id: 'data-science', label: 'Data Science & AI Engineer' },
@@ -28,6 +34,30 @@ export default function ResumeGraderClient() {
     { id: 'cloud-devops', label: 'Cloud DevOps & AWS' },
     { id: 'ui-ux-design', label: 'UI/UX Product Designer' },
   ];
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!leadName.trim() || !leadPhone.trim()) return;
+
+    setLeadSubmitting(true);
+    try {
+      await fetch('/api/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: leadName,
+          phone: leadPhone,
+          courseTitle: `Resume Grader Lead (${targetRole})`,
+          message: `ATS Score: ${result?.score}/100 for target track ${targetRole}`,
+        }),
+      });
+      setLeadSubmitted(true);
+    } catch (err) {
+      console.error('Lead tracking error:', err);
+    } finally {
+      setLeadSubmitting(false);
+    }
+  };
 
   const handleGrade = async () => {
     if (!resumeText.trim() || resumeText.length < 20) {
@@ -285,6 +315,53 @@ Education: BCA 2025. Certifications: AWS Certified Developer Associate.`,
                     ))}
                   </ul>
                 </div>
+              </div>
+
+              {/* Lead Capture Trigger Card */}
+              <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-950 via-blue-950/40 to-slate-950 border border-blue-500/30 space-y-4">
+                <div className="flex items-center gap-3">
+                  <Sparkles className="w-5 h-5 text-cyan-400" />
+                  <h4 className="text-sm font-bold text-white font-heading">
+                    Request Free 1-on-1 Resume Re-writing Session with Placement Mentor
+                  </h4>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Want our senior HR resume expert to optimize your bullet points and boost your ATS score to 90+? Enter your contact info below.
+                </p>
+
+                {leadSubmitted ? (
+                  <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                    <span>Lead registered! A Senior Tech Resume Specialist will call you shortly.</span>
+                  </div>
+                ) : (
+                  <form onSubmit={handleLeadSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      required
+                      placeholder="Your Full Name"
+                      value={leadName}
+                      onChange={(e) => setLeadName(e.target.value)}
+                      className="bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                    />
+                    <input
+                      type="tel"
+                      required
+                      placeholder="WhatsApp Phone Number"
+                      value={leadPhone}
+                      onChange={(e) => setLeadPhone(e.target.value)}
+                      className="bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                    />
+                    <button
+                      type="submit"
+                      disabled={leadSubmitting}
+                      className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {leadSubmitting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
+                      <span>Book Free Callback</span>
+                    </button>
+                  </form>
+                )}
               </div>
             </motion.div>
           )}

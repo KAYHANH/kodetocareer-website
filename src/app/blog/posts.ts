@@ -229,7 +229,7 @@ Traditional computer science degrees focus heavily on academic theory. Modern so
 
 ### Key Placement Statistics Highlights (KodeToCareer 2026 Audit)
 
-- **95% Placement Rate**: 95 out of 100 job-seeking graduates secure verified technical offers within 180 days of course completion.
+- **94% Placement Rate**: 94 out of 100 job-seeking graduates secure verified technical offers within 180 days of course completion.
 - **500+ Partner Companies**: Over 500 hiring partners actively recruit KodeToCareer graduates across India.
 - **ISO 9001:2015 Quality Accreditation**: Standardized curriculum alignment ensuring rigorous project evaluations.
 

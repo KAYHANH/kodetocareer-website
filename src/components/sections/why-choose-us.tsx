@@ -62,7 +62,6 @@ export default function WhyChooseUs() {
       aria-labelledby="why-choose-us-heading"
       suppressHydrationWarning
     >
-      <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
       <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] rounded-full bg-blue-300/5 blur-[100px] pointer-events-none" />
 
       <div className="mx-auto max-w-[1440px] px-6 relative z-10">
@@ -157,8 +156,8 @@ export default function WhyChooseUs() {
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              <span className="text-[10px] bg-slate-50 border border-slate-150 font-bold text-slate-700 px-2.5 py-1 rounded-full uppercase">Google Devs</span>
-              <span className="text-[10px] bg-slate-50 border border-slate-150 font-bold text-slate-700 px-2.5 py-1 rounded-full uppercase">AWS Architects</span>
+              <span className="text-[10px] bg-slate-50 border border-slate-200 font-bold text-slate-700 px-2.5 py-1 rounded-full uppercase">Google Devs</span>
+              <span className="text-[10px] bg-slate-50 border border-slate-200 font-bold text-slate-700 px-2.5 py-1 rounded-full uppercase">AWS Architects</span>
             </div>
           </motion.div>
 

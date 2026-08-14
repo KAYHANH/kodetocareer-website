@@ -177,7 +177,7 @@ export default function Hero() {
   return (
     <section
       suppressHydrationWarning
-      className="min-h-[680px] sm:min-h-[740px] lg:min-h-screen flex items-center relative overflow-hidden -mt-20 pt-28 sm:pt-36 pb-16"
+      className="min-h-[740px] lg:min-h-screen flex items-center relative overflow-hidden -mt-20 pt-28 sm:pt-36 pb-16"
       aria-label="Hero"
     >
       {/* ── Background decoration layer (reduced opacity 0.25 to prevent mobile dark screen obstruction) ── */}
@@ -237,18 +237,18 @@ export default function Hero() {
               Master Full Stack Development, Data Science, AI Engineering, and Cloud DevOps with live industry projects, guaranteed internships, and 100% placement support.
             </p>
 
-            {/* CTA buttons (Fix #2: Mobile Button Height 50px min, 14px field gap) */}
-            <div className="flex flex-col sm:flex-row gap-3.5 mt-7 w-full sm:w-auto">
+            {/* CTA buttons (Fix: Mobile Button Height 50px min, 16px field gap) */}
+            <div className="flex flex-col sm:flex-row gap-4 mt-7 w-full sm:w-auto">
               <Link
                 href="/courses"
-                className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-primary to-secondary text-white px-8 h-[50px] sm:h-14 rounded-[14px] font-black text-base sm:text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-primary/30"
+                className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-primary to-secondary text-white px-8 h-[50px] min-h-[50px] sm:h-14 rounded-[14px] font-black text-base sm:text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-primary/30"
               >
                 <GraduationCap className="w-5 h-5 shrink-0" />
                 Explore Courses
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2.5 bg-slate-950 hover:bg-slate-900 text-white px-8 h-[50px] sm:h-14 rounded-[14px] font-black text-base sm:text-lg shadow-lg shadow-slate-950/20 hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-slate-400/30"
+                className="inline-flex items-center justify-center gap-2.5 bg-slate-950 hover:bg-slate-900 text-white px-8 h-[50px] min-h-[50px] sm:h-14 rounded-[14px] font-black text-base sm:text-lg shadow-lg shadow-slate-950/20 hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-slate-400/30"
               >
                 <Phone className="w-5 h-5 shrink-0" />
                 Free Career Counseling

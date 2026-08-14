@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Suspense } from 'react';
 import { Sora, Inter, Space_Grotesk } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
 import BackgroundOrbs from "@/components/ui/background-orbs";
 import ClientWidgets from "@/components/layout/client-widgets";
+import JsonLdSchema from "@/components/layout/json-ld";
 import "./globals.css";
 
 const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   preload: true,
 });
@@ -18,7 +20,7 @@ const sora = Sora({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   preload: true,
 });
@@ -26,13 +28,17 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
   preload: true,
 });
 
-import { Suspense } from 'react';
-import JsonLdSchema from "@/components/layout/json-ld";
+export const viewport: Viewport = {
+  themeColor: "#fafbfe",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kodetocareer.com'),

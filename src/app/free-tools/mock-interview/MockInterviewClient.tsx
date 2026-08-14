@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, Send, RefreshCw, Award, CheckCircle, HelpCircle, ArrowRight, Play, Trophy, Sparkles } from 'lucide-react';
+import { Mic, Send, RefreshCw, Award, CheckCircle, HelpCircle, ArrowRight, Play, Trophy, Sparkles, UserCheck, Phone } from 'lucide-react';
 import Link from 'next/link';
 
 interface Question {
@@ -22,10 +22,25 @@ export default function MockInterviewClient() {
   const [scores, setScores] = useState<{ id: number; score: number; feedback: string; question: string }[]>([]);
   const [completed, setCompleted] = useState(false);
 
+  // Lead capture state
+  const [leadName, setLeadName] = useState('');
+  const [leadPhone, setLeadPhone] = useState('');
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
+
+  const roles = [
+    { id: 'fullstack-mern', label: 'Full Stack MERN Developer', desc: 'React 19, Node.js, Express, MongoDB & Microservices' },
+    { id: 'data-science', label: 'Data Science & AI Engineer', desc: 'Python, Pandas, ML, Deep Learning & LLMs' },
+    { id: 'java-enterprise', label: 'Java Enterprise Backend', desc: 'Java 21, Spring Boot 3, Hibernate & Microservices' },
+    { id: 'cloud-devops', label: 'Cloud DevOps & AWS', desc: 'AWS, Docker, Kubernetes, Terraform & CI/CD' },
+    { id: 'ui-ux-design', label: 'UI/UX Product Designer', desc: 'Figma, Wireframing, Prototyping & Design Systems' },
+  ];
+
   const startInterview = async () => {
     setLoading(true);
     setScores([]);
     setCompleted(false);
+    setLeadSubmitted(false);
     setCurrentQIndex(1);
 
     try {
@@ -89,6 +104,30 @@ export default function MockInterviewClient() {
     }
   };
 
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!leadName.trim() || !leadPhone.trim()) return;
+
+    setLeadSubmitting(true);
+    try {
+      await fetch('/api/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: leadName,
+          phone: leadPhone,
+          courseTitle: `Mock Interview Lead (${targetRole})`,
+          message: `Mock Interview Score: ${avgScore}/100 for track ${targetRole}`,
+        }),
+      });
+      setLeadSubmitted(true);
+    } catch (err) {
+      console.error('Lead tracking error:', err);
+    } finally {
+      setLeadSubmitting(false);
+    }
+  };
+
   const avgScore = scores.length
     ? Math.round(scores.reduce((acc, curr) => acc + curr.score, 0) / scores.length)
     : 0;
@@ -120,30 +159,21 @@ export default function MockInterviewClient() {
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
                 Select Your Desired Technical Role:
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button
-                  onClick={() => setTargetRole('fullstack-mern')}
-                  className={`p-4 rounded-2xl border text-left transition-all ${
-                    targetRole === 'fullstack-mern'
-                      ? 'bg-blue-600/20 border-blue-500 text-cyan-300 shadow-[0_0_20px_rgba(37,99,235,0.3)]'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700'
-                  }`}
-                >
-                  <div className="font-bold text-sm text-white font-heading">Full Stack MERN Developer</div>
-                  <div className="text-xs text-slate-400 mt-1">React 19, Node.js, Express, MongoDB & Microservices</div>
-                </button>
-
-                <button
-                  onClick={() => setTargetRole('data-science')}
-                  className={`p-4 rounded-2xl border text-left transition-all ${
-                    targetRole === 'data-science'
-                      ? 'bg-blue-600/20 border-blue-500 text-cyan-300 shadow-[0_0_20px_rgba(37,99,235,0.3)]'
-                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700'
-                  }`}
-                >
-                  <div className="font-bold text-sm text-white font-heading">Data Science & AI Engineer</div>
-                  <div className="text-xs text-slate-400 mt-1">Python, Pandas, ML, Deep Learning & LLMs</div>
-                </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {roles.map((r) => (
+                  <button
+                    key={r.id}
+                    onClick={() => setTargetRole(r.id)}
+                    className={`p-4 rounded-2xl border text-left transition-all ${
+                      targetRole === r.id
+                        ? 'bg-blue-600/20 border-blue-500 text-cyan-300 shadow-[0_0_20px_rgba(37,99,235,0.3)]'
+                        : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="font-bold text-sm text-white font-heading">{r.label}</div>
+                    <div className="text-xs text-slate-400 mt-1">{r.desc}</div>
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -244,7 +274,7 @@ export default function MockInterviewClient() {
                 Interview Completed!
               </h2>
               <p className="text-slate-400 text-sm">
-                Here is your detailed performance analysis for {targetRole === 'fullstack-mern' ? 'Full Stack MERN' : 'Data Science & AI'}.
+                Here is your detailed performance analysis for target role: <span className="text-cyan-300 font-bold uppercase">{targetRole}</span>.
               </p>
             </div>
 
@@ -274,6 +304,53 @@ export default function MockInterviewClient() {
               ))}
             </div>
 
+            {/* Lead Capture Trigger Card */}
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-950 via-indigo-950/40 to-slate-950 border border-indigo-500/30 space-y-4">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-5 h-5 text-cyan-400" />
+                <h4 className="text-sm font-bold text-white font-heading">
+                  Get 1-on-1 Expert Interview Coaching & Full Report
+                </h4>
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Want an Indian tech industry mentor to review your mock answers line-by-line? Request a free 15-minute callback.
+              </p>
+
+              {leadSubmitted ? (
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs flex items-center gap-2">
+                  <UserCheck className="w-4 h-4 shrink-0" />
+                  <span>Request received! A Senior Tech Counselor will reach out to you shortly.</span>
+                </div>
+              ) : (
+                <form onSubmit={handleLeadSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your Full Name"
+                    value={leadName}
+                    onChange={(e) => setLeadName(e.target.value)}
+                    className="bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  />
+                  <input
+                    type="tel"
+                    required
+                    placeholder="WhatsApp Phone Number"
+                    value={leadPhone}
+                    onChange={(e) => setLeadPhone(e.target.value)}
+                    className="bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  />
+                  <button
+                    type="submit"
+                    disabled={leadSubmitting}
+                    className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {leadSubmitting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Phone className="w-3.5 h-3.5" />}
+                    <span>Request Callback</span>
+                  </button>
+                </form>
+              )}
+            </div>
+
             {/* Actions */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <button
@@ -295,3 +372,4 @@ export default function MockInterviewClient() {
     </div>
   );
 }
+

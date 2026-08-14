@@ -203,8 +203,8 @@ Every program includes live mentor sessions, guaranteed internship certification
     keywords: ['salary', 'placement', 'placements', 'job', 'jobs', 'hired', 'hiring', 'company', 'companies', 'guarantee', 'counselor', 'lpa', 'ctc', 'resume'],
     weights: { placement: 5, placements: 5, salary: 5, job: 4, hired: 4 },
     reply: `At KodeToCareer, our focus is 100% placement-first:
-• **95% Success Rate** across 1,200+ graduates.
-• **300+ Hiring Partners** including Amazon, Microsoft, TCS, Infosys, Deloitte, Wipro, and high-growth startups.
+• **94% Placement Rate** across 1,200+ graduates.
+• **500+ Hiring Partners** including Amazon, Microsoft, TCS, Infosys, Deloitte, Wipro, and high-growth startups.
 • **1-on-1 Career Mentorship**, resume polishing, GitHub portfolio reviews, and unlimited mock interviews.
 • **2-Month Internship Certificate** included on real-world industry projects.
 

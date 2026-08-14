@@ -59,7 +59,7 @@ export const PROGRAMS: Program[] = [
     salary: '₹6 - 18 LPA',
     price: '₹6,000',
     rating: 5,
-    placement: 'Guaranteed Research Internship',
+    placement: '100% Placement Support',
     gradient: 'from-rose-400 to-red-500',
     hiringCompanies: ['Amazon', 'Microsoft', 'EY', 'Fractal Analytics'],
     link: '/courses/data-science-machine-learning',
@@ -77,7 +77,7 @@ export const PROGRAMS: Program[] = [
     salary: '₹4 - 10 LPA',
     price: '₹5,000',
     rating: 5,
-    placement: 'Placement Auditing',
+    placement: '100% Placement Support',
     gradient: 'from-amber-400 to-orange-500',
     hiringCompanies: ['Adobe', 'Framer', 'Razorpay', 'Infosys'],
     link: '/courses/graphic-design-ui-ux',
@@ -112,7 +112,7 @@ export const PROGRAMS: Program[] = [
     projects: 10,
     salary: '₹5 - 15 LPA',
     price: '₹6,000',
-    rating: 4,
+    rating: 5,
     placement: '100% Placement Support',
     gradient: 'from-red-400 to-orange-600',
     hiringCompanies: ['Capgemini', 'IBM', 'Accenture', 'Oracle'],
@@ -174,7 +174,7 @@ function ProgramCard({ program }: { program: Program }) {
       href={program.link}
       variants={cardVariants}
       whileHover={{ y: -8, scale: 1.015 }}
-      className="group relative rounded-[28px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-350 hover:shadow-[0_24px_60px_rgba(37,99,235,0.08)] hover:border-primary/20 flex flex-col justify-between cursor-pointer overflow-hidden"
+      className="group relative rounded-[28px] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:shadow-[0_24px_60px_rgba(37,99,235,0.08)] hover:border-primary/20 flex flex-col justify-between cursor-pointer overflow-hidden"
     >
       <div>
         {/* Course Abstract Cover Image */}
@@ -213,12 +213,12 @@ function ProgramCard({ program }: { program: Program }) {
                 <Star
                   key={i}
                   className={`w-3.5 h-3.5 ${
-                    i < program.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-200'
+                    i < Math.floor(program.rating) ? 'fill-amber-400 text-amber-400' : 'text-slate-200'
                   }`}
                 />
               ))}
             </div>
-            <span className="text-xs font-bold text-slate-700">{program.rating}.0</span>
+            <span className="text-xs font-bold text-slate-700">{program.rating.toFixed(1)}</span>
           </div>
           <span className="inline-flex items-center gap-1 text-[10px] font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-100/80 px-2.5 py-0.5 rounded-full">
             <Trophy className="w-3 h-3 text-emerald-500" /> {program.placement}
@@ -283,11 +283,11 @@ function ProgramCard({ program }: { program: Program }) {
 
       {/* Card Footer CTA */}
       <div className="mt-5 border-t border-slate-100 pt-3.5 flex items-center justify-between">
-        <span className="text-xs font-bold text-primary group-hover:underline flex items-center gap-1">
-          Explore Syllabus & Cohort <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+        <span className="text-xs font-bold text-primary group-hover:underline">
+          Explore Syllabus & Cohort
         </span>
         <div className="flex items-center justify-center h-8 w-8 rounded-xl border border-slate-200 text-slate-400 group-hover:border-primary group-hover:text-primary group-hover:bg-primary/5 transition-all shadow-sm">
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </div>
       </div>
     </MotionLink>

@@ -2,6 +2,7 @@
 
 import { Star, Building2, Quote, Play, ExternalLink } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import { companyStats } from '@/data/company-stats';
 
 interface Testimonial {
   name: string;
@@ -220,7 +221,7 @@ export default function SuccessStories() {
             Real Stories, Proven Placements
           </h2>
           <p className="max-w-2xl text-slate-500 text-sm md:text-base font-medium mx-auto">
-            Discover how KodeToCareer students from non-tech backgrounds transitioned into high-growth software engineering roles at global organizations.
+            Discover how over {companyStats.studentsEnrolled} KodeToCareer students transformed their careers, achieving a {companyStats.placementsRate} placement rate across {companyStats.hiringPartners} hiring partners.
           </p>
         </motion.div>
 

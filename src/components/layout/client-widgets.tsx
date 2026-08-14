@@ -11,10 +11,8 @@ export default function ClientWidgets() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Delay non-critical widgets until after page is fully interactive
-    // This prevents them from competing with LCP and reducing TBT score
-    const timer = setTimeout(() => setMounted(true), 3000);
-    return () => clearTimeout(timer);
+    // Mount widgets on initial client render so interactive triggers and popup listeners are immediately active
+    setMounted(true);
   }, []);
 
   if (!mounted) return null;

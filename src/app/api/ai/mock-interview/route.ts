@@ -72,6 +72,102 @@ const interviewQuestionsBank: Record<string, InterviewQuestion[]> = {
       sampleAnswerHint: 'Discuss PARTITION BY, ROW_NUMBER(), DENSE_RANK(), and avoiding correlated subqueries.',
     },
   ],
+  'java-enterprise': [
+    {
+      id: 1,
+      question: 'Explain the Spring Boot auto-configuration mechanism and how @EnableAutoConfiguration works under the hood.',
+      category: 'Java Core & Spring',
+      sampleAnswerHint: 'Mention spring.factories, AutoConfigurationImportSelector, conditional annotations like @ConditionalOnClass.',
+    },
+    {
+      id: 2,
+      question: 'What is the difference between Hibernate session get() and load() methods, and how do you prevent N+1 query issues?',
+      category: 'ORM & Database',
+      sampleAnswerHint: 'Discuss proxy objects, lazy loading, JOIN FETCH in JPQL, and EntityGraph to eliminate N+1 queries.',
+    },
+    {
+      id: 3,
+      question: 'How do microservices communicate using REST vs Apache Kafka, and how do you implement circuit breakers with Resilience4j?',
+      category: 'Microservices & Messaging',
+      sampleAnswerHint: 'Explain synchronous vs event-driven asynchronous messaging, fault tolerance, fallback methods, and state transitions.',
+    },
+    {
+      id: 4,
+      question: 'Explain Java memory management: Heap vs Stack, Metaspace, and Garbage Collection algorithms like G1GC.',
+      category: 'JVM Internals',
+      sampleAnswerHint: 'Cover Eden, Survivor space, Tenured generation, G1GC pause time targets, and memory leak diagnosis.',
+    },
+    {
+      id: 5,
+      question: 'Describe how you design secure Spring Security JWT filter chains and role-based access control (RBAC).',
+      category: 'Security & Enterprise Architecture',
+      sampleAnswerHint: 'Discuss OncePerRequestFilter, SecurityContextHolder, BCrypt, and method-level security with @PreAuthorize.',
+    },
+  ],
+  'cloud-devops': [
+    {
+      id: 1,
+      question: 'How do Docker image layers work, and how do multi-stage builds optimize production container size?',
+      category: 'Containerization & Docker',
+      sampleAnswerHint: 'Mention layer caching, Copy-on-Write, slim base images, and separating build-time dependencies from runtime.',
+    },
+    {
+      id: 2,
+      question: 'Explain Kubernetes Pod lifecycle, ReplicaSets, and how Deployment rolling updates prevent downtime.',
+      category: 'Orchestration & Kubernetes',
+      sampleAnswerHint: 'Discuss readiness vs liveness probes, maxSurge, maxUnavailable, and kubectl rollout undo.',
+    },
+    {
+      id: 3,
+      question: 'What is Infrastructure as Code (IaC)? Compare Terraform state management with AWS CloudFormation.',
+      category: 'IaC & Automation',
+      sampleAnswerHint: 'Cover remote state locking (S3/DynamoDB), plan/apply execution lifecycle, and declarative modules.',
+    },
+    {
+      id: 4,
+      question: 'How do you set up a zero-downtime CI/CD pipeline using GitHub Actions or Jenkins with automated testing?',
+      category: 'CI/CD Pipelines',
+      sampleAnswerHint: 'Discuss feature branch workflows, secret management, automated staging deployments, and Blue/Green strategies.',
+    },
+    {
+      id: 5,
+      question: 'How do Prometheus and Grafana collect and visualize metrics from distributed microservices?',
+      category: 'Observability & Monitoring',
+      sampleAnswerHint: 'Explain pull-based metric scraping, PromQL, Alertmanager rules, and key RED/USE metrics.',
+    },
+  ],
+  'ui-ux-design': [
+    {
+      id: 1,
+      question: 'Explain your step-by-step user research and persona creation process before designing wireframes.',
+      category: 'UX Research & Discovery',
+      sampleAnswerHint: 'Mention user interviews, empathy maps, job-to-be-done framework, and synthesizing pain points into personas.',
+    },
+    {
+      id: 2,
+      question: 'How do you create fluid Design Systems in Figma using Auto-Layout, tokens, and component variants?',
+      category: 'Design Systems & Figma',
+      sampleAnswerHint: 'Discuss design tokens (colors/typography/spacing), component properties, variants, and responsive constraints.',
+    },
+    {
+      id: 3,
+      question: 'What is Usability Testing, and how do you iterate designs based on quantitative heatmaps and session recordings?',
+      category: 'Usability & Analytics',
+      sampleAnswerHint: 'Explain unmoderated vs moderated testing, task success rate, net promoter score, and Hotjar/FullStory analysis.',
+    },
+    {
+      id: 4,
+      question: 'Explain the difference between Low-Fidelity Wireframes and High-Fidelity Interactive Prototypes.',
+      category: 'Prototyping & Flow',
+      sampleAnswerHint: 'Discuss paper sketches vs interactive micro-animations, component states, and usability validation checkpoints.',
+    },
+    {
+      id: 5,
+      question: 'How do you collaborate with frontend developers to hand off design specs cleanly?',
+      category: 'Developer Hand-off',
+      sampleAnswerHint: 'Mention redlines, token exports, asset compression, accessibility (WCAG) contrast checks, and design QA.',
+    },
+  ],
 };
 
 export async function POST(req: Request) {

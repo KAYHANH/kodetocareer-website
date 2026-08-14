@@ -32,6 +32,10 @@ export const VERIFIED_HIRING_PARTNERS: HiringPartnerItem[] = [
   { name: "Redis", logo: "/svg/Redis.svg", category: "In-Memory Store" },
   { name: "TypeScript", logo: "/svg/TypeScript.svg", category: "Type-Safe JS" },
   { name: "Tailwind CSS", logo: "/svg/Tailwind-CSS.svg", category: "UI System" },
+  { name: "Google Cloud", logo: "/svg/Google-Cloud.svg", category: "Cloud Platform" },
+  { name: "DigitalOcean", logo: "/svg/Digital-Ocean.svg", category: "Cloud Hosting" },
+  { name: "Vercel", logo: "/svg/Vercel.svg", category: "Deployment Platform" },
+  { name: "Red Hat", logo: "/svg/Red-Hat.svg", category: "Enterprise Linux" },
 ];
 
 export default function Marquee() {
@@ -42,8 +46,8 @@ export default function Marquee() {
     return () => clearTimeout(t);
   }, []);
 
-  const row1 = VERIFIED_HIRING_PARTNERS.slice(0, 10);
-  const row2 = VERIFIED_HIRING_PARTNERS.slice(10, 20);
+  const row1 = VERIFIED_HIRING_PARTNERS.slice(0, 12);
+  const row2 = VERIFIED_HIRING_PARTNERS.slice(12, 24);
 
   if (!mounted) {
     return (

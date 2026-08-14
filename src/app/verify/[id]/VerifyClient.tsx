@@ -19,8 +19,19 @@ import {
 } from "lucide-react";
 import { StoredCertificate } from "@/lib/certificates-store";
 
+import { useRouter } from "next/navigation";
+
 export default function VerifyClient({ cert }: { cert: StoredCertificate | null }) {
+  const router = useRouter();
+  const [searchId, setSearchId] = useState("");
   const [copied, setCopied] = useState(false);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchId.trim()) {
+      router.push(`/verify/${encodeURIComponent(searchId.trim())}`);
+    }
+  };
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -72,28 +83,46 @@ export default function VerifyClient({ cert }: { cert: StoredCertificate | null 
     return (
       <div className="min-h-[80vh] flex items-center justify-center px-4 py-20 bg-slate-50">
         <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 p-8 shadow-xl text-center">
-          <div className="w-16 h-16 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center mx-auto mb-6">
-            <ShieldAlert className="w-8 h-8 text-rose-600" />
+          <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-6">
+            <ShieldCheck className="w-8 h-8 text-primary" />
           </div>
-          <span className="inline-block px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold uppercase tracking-wider mb-3">
-            Credential Not Found
+          <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-primary text-xs font-extrabold uppercase tracking-wider mb-3">
+            Credential Verification Portal
           </span>
           <h1 className="font-heading text-2xl font-extrabold text-slate-900 mb-3">
-            Invalid Certificate ID
+            Verify Certificate
           </h1>
           <p className="text-slate-500 text-sm mb-6 leading-relaxed">
-            We could not locate any active credential record matching this ID in our cryptographically verified database.
+            Enter the unique Certificate ID printed on your KodeToCareer credential or PDF to verify its authenticity.
           </p>
-          <div className="flex gap-3 justify-center">
+
+          <form onSubmit={handleSearch} className="space-y-3 mb-6">
+            <input
+              type="text"
+              value={searchId}
+              onChange={(e) => setSearchId(e.target.value)}
+              placeholder="e.g. K2C-2026-MERN-101"
+              className="w-full h-11 rounded-xl border border-slate-200 px-4 text-sm font-mono text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-primary/50"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full h-11 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-colors shadow-md"
+            >
+              Verify Credential
+            </button>
+          </form>
+
+          <div className="flex gap-3 justify-center border-t border-slate-100 pt-6">
             <Link
               href="/"
-              className="px-6 py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-colors"
+              className="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 transition-colors"
             >
               Return Home
             </Link>
             <Link
               href="/courses"
-              className="px-6 py-3 rounded-xl bg-slate-100 text-slate-700 font-bold text-sm hover:bg-slate-200 transition-colors"
+              className="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 transition-colors"
             >
               Explore Courses
             </Link>

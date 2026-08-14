@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { companyStats } from '@/data/company-stats';
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                                */
@@ -27,7 +28,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'What is the placement guarantee?',
     answer:
-      'We offer dedicated placement support with a 95% placement rate. Our placement cell works with 500+ hiring partners to connect you with opportunities.',
+      `We offer dedicated placement support with a ${companyStats.placementsRate} placement rate. Our placement cell works with ${companyStats.hiringPartners} hiring partners to connect you with opportunities.`,
   },
   {
     question: 'How long are the programs?',
@@ -114,7 +115,7 @@ function AccordionItem({
         id={triggerId}
         type="button"
         onClick={onToggle}
-        className="flex w-full cursor-pointer items-center justify-between p-6 text-left group"
+        className="flex w-full cursor-pointer items-center justify-between p-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-[20px]"
         aria-expanded={isOpen}
         aria-controls={panelId}
       >
