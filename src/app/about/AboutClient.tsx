@@ -81,25 +81,10 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 /*  Main Component                                                     */
 /* ------------------------------------------------------------------ */
 export default function AboutPage() {
-  const [mounted, setMounted] = useState(false);
-  const [activeStoryIdx, setActiveStoryIdx] = useState(0);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const stats = [
     { value: 1200, suffix: "+", label: "Students Trained" },
     { value: 500, suffix: "+", label: "Careers Placed" },
     { value: 95, suffix: "%", label: "Placement Rate" }
-  ];
-
-  const timeline = [
-    { year: "2021", title: "Academy Founded", desc: "Started with a vision to make technology education practical, job-aligned, and affordable." },
-    { year: "2022", title: "First Cohort Graduated", desc: "Achieved a 92% placement rate within 3 months, placing students at major MNCs." },
-    { year: "2023", title: "College Collaborations", desc: "Partnered with 15+ affiliated universities to deliver integrated job-readiness tracks." },
-    { year: "2024", title: "AI-Powered Curriculum", desc: "Integrated LLM agent programming, prompt engineering, and copilot tools into all courses." },
-    { year: "2025", title: "National Recognition", desc: "Certified by NSDC and Startup India, expanding online access to 1,200+ students annually." }
   ];
 
   const values = [
@@ -266,49 +251,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── 4. Story Timeline ── */}
-        <section className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <span className="text-primary text-sm font-semibold uppercase tracking-wider">OUR JOURNEY</span>
-            <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900">How We Built KodeToCareer</h2>
-            <p className="text-slate-500 font-medium">The milestones that define our commitment to engineering education excellence.</p>
-          </div>
-
-          <div className="bg-white border border-slate-100 rounded-[24px] p-6 md:p-10 shadow-sm">
-            {/* Timeline Tab Indicators */}
-            <div className="flex overflow-x-auto gap-2 pb-4 mb-8 border-b border-slate-100 scrollbar-hide">
-              {timeline.map((t, idx) => (
-                <button
-                  key={t.year}
-                  onClick={() => setActiveStoryIdx(idx)}
-                  className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all shrink-0 cursor-pointer ${
-                    activeStoryIdx === idx
-                      ? "bg-primary text-white shadow-md shadow-primary/10"
-                      : "bg-slate-50 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  {t.year}
-                </button>
-              ))}
-            </div>
-
-            {/* Timeline Active Content */}
-            <motion.div
-              key={activeStoryIdx}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="space-y-4 max-w-2xl"
-            >
-              <h3 className="text-xl font-heading font-extrabold text-slate-900">
-                {timeline[activeStoryIdx].title}
-              </h3>
-              <p className="text-slate-500 leading-relaxed font-medium">
-                {timeline[activeStoryIdx].desc}
-              </p>
-            </motion.div>
-          </div>
-        </section>
 
         {/* ── 5. Core Values Bento Grid ── */}
         <section className="space-y-12">
